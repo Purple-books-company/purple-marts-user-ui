@@ -1,3 +1,3 @@
 
 // Include styled component
-const  color = "red"
+const color = "purple"
