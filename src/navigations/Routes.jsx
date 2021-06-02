@@ -1,7 +1,7 @@
 import Login from "../components/authentication/login";
 import Register from "../components/authentication/register";
 import Home from "../components/pages/home";
-import Category from "./components/pages/Category";
+import Category from "../components/pages/Category";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function Routes() {
@@ -20,7 +20,7 @@ function Routes() {
               <Login />
             </Route>
             <Route path="/category">
-              <Login />
+              <Category />
             </Route>
           </Switch>
         </div>
