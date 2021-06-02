@@ -1,3 +1,5 @@
+//  Color Theme
 
-// Include styled component
-const color = "purple"
+export const LightShade = "#b097bd";
+
+export const DarkShade = "#4b3049";
