@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 import { LightShade, DarkShade } from "./color-theme";
 
 // Contains widgets like Button, Text box etc.
-// Darker color code: #8c49ad
 export const Button = styled.button`
   background: ${LightShade};
   border-radius: 5px;
