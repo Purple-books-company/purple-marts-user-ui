@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components";
+import { LightShade, DarkShade } from "./color-theme";
 
 // Contains widgets like Button, Text box etc.
 // Darker color code: #8c49ad
 export const Button = styled.button`
-  background: #b097bd;
+  background: ${LightShade};
   border-radius: 5px;
-  border: 2px solid #b097bd;
+  border: 2px solid ${LightShade};
   color: white;
   margin: 0 1em;
   font-family: Helvetica, sans-serif;
@@ -18,6 +19,6 @@ export const Button = styled.button`
 
   &:hover {
     background: transparent;
-    color: #b097bd;
+    color: ${LightShade};
   }
 `;
