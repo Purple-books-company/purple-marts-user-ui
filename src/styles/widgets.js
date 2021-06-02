@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // Contains widgets like Button, Text box etc.
 // Darker color code: #8c49ad
