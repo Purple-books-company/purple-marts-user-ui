@@ -15,6 +15,7 @@ export const Button = styled.button`
   height: 50px;
   margin-top: 40px;
   padding: 0.25em 1em;
+  transition: 0.3s;
 
   &:hover {
     background: transparent;
