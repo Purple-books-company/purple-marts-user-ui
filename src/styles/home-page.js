@@ -73,6 +73,7 @@ export const Block = styled.div`
     display:flex;
     height: 150px;
     border: 2px solid ${Silver};
+  
     @media screen and (max-width: 450px) {
       height: 80px;
     }

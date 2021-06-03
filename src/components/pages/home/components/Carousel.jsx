@@ -1,7 +1,7 @@
-import { Promotion, Box, Text } from "../../../styles/home-page";
-import Sale1 from "../../../assets/images/Sale1.png";
-import Sale2 from "../../../assets/images/Sale2.png";
-import Sale3 from "../../../assets/images/Sale3.png";
+import { Promotion, Box, Text } from "../../../../styles/home-page";
+import Sale1 from "../../../../assets/images/Sale1.png";
+import Sale2 from "../../../../assets/images/Sale2.png";
+import Sale3 from "../../../../assets/images/Sale3.png";
 const Carousel = () => {
   return (
     <div>
