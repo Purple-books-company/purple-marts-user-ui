@@ -1,4 +1,7 @@
-import { Promotion, Box, Text } from "../../../styles/carousel";
+import { Promotion, Box, Text } from "../../../styles/home-page";
+import Sale1 from "../../../assets/images/Sale1.png";
+import Sale2 from "../../../assets/images/Sale2.png";
+import Sale3 from "../../../assets/images/Sale3.png";
 const Carousel = () => {
   return (
     <div>
@@ -31,34 +34,29 @@ const Carousel = () => {
         </div>
         <Promotion className="carousel-inner">
           <Promotion className="carousel-item active">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0437/0454/9536/files/slider-2-bg_2000x.png?v=1597041044"
-              className="d-block w-100"
-              alt="..."
-            />
+            <img src={Sale3} className="d-block w-100" alt="..." />
 
             <Box>
-              <Text>FLAT 80% OFF ON PHONE <br/> ACCESORIES</Text>
+              <Text>
+                FLAT 80% OFF ON PHONE <br /> ACCESORIES
+              </Text>
             </Box>
           </Promotion>
           <Promotion className="carousel-item">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0437/0454/9536/files/slider-3-bg_2000x.png?v=1597041084"
-              className="d-block w-100"
-              alt="..."
-            />
+            <img src={Sale2} className="d-block w-100" alt="..." />
             <Box>
-              <Text>FREE SHIPPING ON FIRST <br/> ORDER</Text>
+              <Text>
+                FREE SHIPPING ON FIRST <br /> ORDER
+              </Text>
             </Box>
           </Promotion>
           <Promotion className="carousel-item">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0437/0454/9536/files/slider-3-bg_2000x.png?v=1597041084"
-              className="d-block w-100"
-              alt="..."
-            />
+            <img src={Sale1} className="d-block w-100" alt="..." />
             <Box>
-              <Text>FLAT 80% OFF ON  <br/>AIRPODS</Text>
+              <Text>
+                FLAT 80% OFF ON <br />
+                AIRPODS
+              </Text>
             </Box>
           </Promotion>
         </Promotion>
