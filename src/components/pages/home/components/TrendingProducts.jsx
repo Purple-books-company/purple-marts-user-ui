@@ -1,6 +1,6 @@
 import Slider from "react-slick";
-import { Block, Image, Text } from "../../../styles/home-page";
-import data from "../../../api/TrendingProducts.json";
+import { Block, Image, Text } from "../../../../styles/home-page";
+import data from "../../../../api/TrendingProducts.json";
 import { useEffect, useState } from "react";
 
 export default function TrendingProducts() {

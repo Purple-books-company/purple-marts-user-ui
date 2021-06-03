@@ -1,6 +1,6 @@
 import Carousel from "./Carousel";
-import Grid from "./Grid";
-import TrendingProducts from "./TrendingProducts";
+import Grid from "./components/Grid";
+import TrendingProducts from "./components/TrendingProducts";
 
 export default function CarouselComponent() {
   return (
