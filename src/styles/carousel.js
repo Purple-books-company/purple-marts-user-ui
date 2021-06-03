@@ -14,13 +14,13 @@ export const Box = styled.div`
   background: ${LightShade};
   top: 10%;
   height: auto;
-  width: auto;
+  width: 35%;
   left: 10%;
   margin: 5%;
   padding: 20px;
   @media screen and (max-width: 450px) {
-    height: 25%;
-    width: auto;
+    height: auto;
+    width: 40%;
     margin-bottom: 10%;
   }
 `;

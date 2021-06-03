@@ -1,4 +1,4 @@
-import { Promotion, Box, Text } from "../../../styles/carousels";
+import { Promotion, Box, Text } from "../../../styles/carousel";
 const Carousel = () => {
   return (
     <div>
@@ -38,7 +38,7 @@ const Carousel = () => {
             />
 
             <Box>
-              <Text>FLAT 80% OFF ON PHONE ACCESORIES</Text>
+              <Text>FLAT 80% OFF ON PHONE <br/> ACCESORIES</Text>
             </Box>
           </Promotion>
           <Promotion className="carousel-item">
@@ -48,7 +48,7 @@ const Carousel = () => {
               alt="..."
             />
             <Box>
-              <Text>FREE SHIPPING ON FIRST ORDER</Text>
+              <Text>FREE SHIPPING ON FIRST <br/> ORDER</Text>
             </Box>
           </Promotion>
           <Promotion className="carousel-item">
@@ -58,7 +58,7 @@ const Carousel = () => {
               alt="..."
             />
             <Box>
-              <Text>FLAT 80% OFF ON AIRPODS</Text>
+              <Text>FLAT 80% OFF ON  <br/>AIRPODS</Text>
             </Box>
           </Promotion>
         </Promotion>
