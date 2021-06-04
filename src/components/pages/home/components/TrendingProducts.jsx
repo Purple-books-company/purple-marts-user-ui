@@ -11,6 +11,7 @@ export default function TrendingProducts() {
     slidesToShow: 5,
     slidesToScroll: 1,
     swipeToSlide: true,
+    fade: true,
   };
 
   const [urls, setUrls] = useState([]);
