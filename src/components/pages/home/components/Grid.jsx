@@ -14,7 +14,7 @@ const Grid = () => {
       <div className="container">
         <div className="row">
           {gridImg.map((img, index) => (
-            <div className="col-md-3 mt-4">
+            <div className="col-md-3 mt-4" key={index}>
               <Block
                 style={{
                   backgroundImage: `url(${img})`,
