@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { DarkShade, LightShade, Silver } from "./color-theme";
-import { lora } from "./font-styles";
+import { lora, slab } from "./font-styles";
 
 // Home page carousel styling
 
@@ -61,7 +61,7 @@ export const Caption = styled.div`
   display: block;
   margin: auto;
   font-size: 20px;
-  font-family: ${lora};
+  font-family: ${slab};
   color: white;
 
   @media screen and (max-width: 450px) {
