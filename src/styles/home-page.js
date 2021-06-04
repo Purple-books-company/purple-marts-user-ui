@@ -5,13 +5,12 @@ import { lora, slab } from "./font-styles";
 // Home page carousel styling
 
 export const Promotion = styled.div`
-    position: relative;
-    height: 500px;
-    margin-bottom: 40px;
-    @media screen and (max-width: 450px) {
-      height: auto;
-      margin-bottom: 20px;
-    }
+  position: relative;
+  height: 500px;
+  margin-bottom: 40px;
+  @media screen and (max-width: 450px) {
+    height: auto;
+    margin-bottom: 20px;
   }
 `;
 
@@ -20,7 +19,7 @@ export const Box = styled.div`
   background: ${LightShade};
   top: 10%;
   height: auto;
-  width: 35%;
+  width: 40%;
   left: 10%;
   margin: 5%;
   padding: 20px;
