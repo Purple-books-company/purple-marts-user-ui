@@ -4,10 +4,12 @@ import Home from "../components/pages/home";
 import Cart from "../components/pages/cart";
 import Category from "../components/pages/Category";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Search from "../components/common/Search";
 
 function Routes() {
   return (
     <div>
+      <Search />
       <Router>
         <div>
           <Switch>

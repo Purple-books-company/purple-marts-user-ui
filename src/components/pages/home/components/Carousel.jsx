@@ -3,8 +3,14 @@ import Sale1 from "../../../../assets/images/Sale1.png";
 import Sale2 from "../../../../assets/images/Sale2.png";
 import Sale3 from "../../../../assets/images/Sale3.png";
 const Carousel = () => {
+  let promotions = [Sale2, Sale3];
+  let promoteTexts = [
+    " FREE SHIPPING ON FIRST ORDER",
+    " FLAT 80% OFF ON AIRPODS & BUDS",
+  ];
+
   return (
-    <div>
+    <div style={{ marginTop: "5%" }}>
       <Promotion
         id="carouselExampleIndicators"
         className="carousel slide carousel-fade"
@@ -34,7 +40,7 @@ const Carousel = () => {
         </div>
         <Promotion className="carousel-inner">
           <Promotion className="carousel-item active">
-            <img src={Sale3} className="d-block w-100" alt="..." />
+            <img src={Sale1} className="d-block w-100" alt="..." />
 
             <Box>
               <Text>
@@ -42,23 +48,14 @@ const Carousel = () => {
               </Text>
             </Box>
           </Promotion>
-          <Promotion className="carousel-item">
-            <img src={Sale2} className="d-block w-100" alt="..." />
-            <Box>
-              <Text>
-                FREE SHIPPING ON FIRST <br /> ORDER
-              </Text>
-            </Box>
-          </Promotion>
-          <Promotion className="carousel-item">
-            <img src={Sale1} className="d-block w-100" alt="..." />
-            <Box>
-              <Text>
-                FLAT 80% OFF ON <br />
-                AIRPODS
-              </Text>
-            </Box>
-          </Promotion>
+          {promotions.map((img, index) => (
+            <Promotion className="carousel-item" key={index}>
+              <img src={img} className="d-block w-100" alt="..." />
+              <Box>
+                <Text>{promoteTexts[index]}</Text>
+              </Box>
+            </Promotion>
+          ))}
         </Promotion>
         <button
           className="carousel-control-prev"

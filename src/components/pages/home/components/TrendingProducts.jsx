@@ -10,6 +10,8 @@ export default function TrendingProducts() {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
+    swipeToSlide: true,
+    
   };
 
   const [urls, setUrls] = useState([]);
@@ -22,7 +24,7 @@ export default function TrendingProducts() {
     <>
       <center>
         <Text primary>TRENDING PRODUCTS ARE HERE</Text>
-        <div className="container" style={{ marginTop: "30px" }}>
+        <div className="container" style={{ marginTop: "10px" }}>
           <div className="row">
             <Slider {...settings}>
               {urls.map((url) => (
