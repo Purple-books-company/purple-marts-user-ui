@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { DarkShade, LightShade, Silver } from "./color-theme";
-import { lora, slab } from "./font-styles";
+import { DarkShade, LightShade, Silver } from "../themes/color-theme";
+import { Lora, Slab } from "../themes/font-styles";
 
 // Home page carousel styling
 
@@ -35,7 +35,7 @@ export const Box = styled.div`
 
 export const Text = styled.div`
   color: white;
-  font-family: ${lora};
+  font-family: ${Lora};
   text-align: center;
   letter-spacing: 3px;
   line-height: 1.6;
@@ -60,7 +60,7 @@ export const Caption = styled.div`
   display: block;
   margin: auto;
   font-size: 20px;
-  font-family: ${slab};
+  font-family: ${Slab};
   color: white;
 
   @media screen and (max-width: 450px) {

@@ -1,4 +1,4 @@
-import { Button } from "../../../styles/widgets";
+import { Button } from "../../../styles/widgets/widgets";
 const Login = () => {
   return (
     <div>
