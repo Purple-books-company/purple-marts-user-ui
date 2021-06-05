@@ -13,7 +13,7 @@ export const Button = styled.button`
   font-weight: bold;
   width: auto;
   height: 40px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   padding: 0.25em 1em;
   font-family: ${lora}
   transition: 0.3s;
