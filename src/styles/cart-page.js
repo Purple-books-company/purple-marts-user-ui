@@ -1,27 +1,31 @@
 import styled, { css } from 'styled-components'
-import { lora, slab } from '../../../styles/font-styles'
-import { DarkShade, LightShade } from '../../../styles/color-theme'
+import { Lora, Slab } from './themes/font-styles'
+import { DarkShade, LightShade } from './themes/color-theme'
 
 export const CartTitle = styled.h1`
     font-weight: bold;
-    font-family: ${lora};
+    font-family: ${Lora};
     margin-left: 40px;
     color: ${DarkShade};
+    @media (min-width:0px) and (max-width:568px){
+        width: 100%;
+    }
 `;
 
-export const CartItemBox = styled.div`
+export const CartItemBox = styled.tr`
     margin: 3px;
     border-radius: 40px;
 `;
 
-export const CartTitleInfo = styled.div`
-    color: ${LightShade};
-    font-weight:bolder;
+export const CartTitleInfo = styled.td`
+    color: ${DarkShade};
     margin: 5px;
-    font-family: ${lora};
+    margin-left:45px;
+    font-family: ${Lora};
     text-align: center;
+    text-transform: uppercase;
     ${props => props.align === "right" && css`
-        text-align: end;
+        text-align: right;
         padding-right: 100px;
         @media (min-width:0px) and (max-width:568px){
         text-align: end !important;
@@ -34,6 +38,8 @@ export const CartTitleInfo = styled.div`
         margin: 0px;
         padding-right: 0px;
         margin-left: 5px;
+        font-weight: bolder;
+        font-size: small;
         }
 `;
 
@@ -43,45 +49,48 @@ export const ContinueBtn = styled.button`
     width: 250px;
     background-color: #EDF0F3;
     border-radius: 10px;
-    font-family: ${lora};
+    font-family: ${Lora};
     text-align: center;
     :hover{
         color:${LightShade};
         background-color:  ${DarkShade};
     }
     @media (min-width:0px) and (max-width:568px){
-        width: 100%;
-        align-items: flex-end;
+        font-size: smaller;
+        width:200px;
     }
 `;
 
 export const Image = styled.img`
-    
+object-fit: contain;
     @media (min-width:0px) and (max-width:568px){
-        width: 75px;
+        width: 50px;
+        height: 70px;    
     }
     @media (min-width:560px){
-        width:175px;
+        width:100px;
+        height: 150px;
     }
     
 `;
 
-export const CartDetail = styled.p`
+export const CartDetail = styled.td`
     color:${DarkShade} ;
     align-items: flex-start;
-    font-family: ${lora};
+    font-family: ${Lora};
     text-align: center;
     font-weight: bold;
     margin-left: 5px;
     @media (min-width:0px) and (max-width:568px){
         font-size: 12px;
-        margin-right: 5px;
+        margin-left: 2px;
         width: fit-content;
-        
-
-        ${props => props.type === "Quatity" && css` font-size:18px; `}
+        ${props => props.type === "Quantity" && css`
+         letter-spacing: 2px;
+        `}
     }
     ${props => props.align === "left" && css`
+        width:20%;
         text-align: left;
     `}
 `;
@@ -89,10 +98,10 @@ export const CartDetail = styled.p`
 export const CheckoutBox = styled.div`
     margin:50px;
     border-radius:30px;
-    background-color:#EDF0F3;
-    font-family:${lora};
+    background-color:#F4DFFA;
+    font-family:${Lora};
     @media (min-width:0px) and (max-width:568px){
-        margin: 5px;
+        margin-top: 20px;
         margin-left: 2px;
         margin-right: 2px;
         font-size: small;
@@ -105,7 +114,32 @@ export const CheckOutBtn = styled.button`
     color:white;
     border-radius: 5px;
     width: 80%;
-    font-family: ${slab};
+    font-family: ${Slab};
     text-align: center;
-    
+    height: 40px;
+    @media (min-width:0px) and (max-width:568px){
+        width: 100%;
+    }
+    :hover{
+        background-color: ${DarkShade};
+    }
+`;
+
+export const QtyBtn = styled.button`
+    border: none;
+    background: none;
+    :hover{
+        color:red;
+    }
+    @media (min-width:0px) and (max-width:568px){
+        width: 100%;
+    }
+`;
+
+export const EmptyImg = styled.img`
+    /* display: flex;
+  justify-content: center;
+  align-items: center; */
+
+  
 `;
