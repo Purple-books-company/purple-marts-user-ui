@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { Button, SearchContainer, SearchText } from "../../styles/widgets";
+import {
+  Button,
+  SearchContainer,
+  SearchText,
+} from "../../styles/widgets/widgets";
 
 const Search = () => {
   const [users, setUsers] = useState([]);

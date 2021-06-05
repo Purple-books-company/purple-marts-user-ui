@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Lora, Slab } from './themes/font-styles'
-import { DarkShade, LightShade } from './themes/color-theme'
+import { Lora, Slab } from '../themes/font-styles'
+import { DarkShade, LightShade } from '../themes/color-theme'
 
 export const CartTitle = styled.h1`
     font-weight: bold;

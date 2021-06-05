@@ -1,5 +1,5 @@
 import Slider from "react-slick";
-import { Block, Image, Text } from "../../../../styles/home-page";
+import { Block, Image, Text } from "../../../../styles/pages/home-page";
 import data from "../../../../api/TrendingProducts.json";
 import { useEffect, useState } from "react";
 
@@ -11,7 +11,6 @@ export default function TrendingProducts() {
     slidesToShow: 5,
     slidesToScroll: 1,
     swipeToSlide: true,
-    
   };
 
   const [urls, setUrls] = useState([]);

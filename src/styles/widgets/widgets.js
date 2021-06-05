@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { LightShade, DarkShade } from "./color-theme";
-import { lora } from "./font-styles";
+import { LightShade, DarkShade } from "../themes/color-theme";
+import { Lora } from "../themes/font-styles";
 
 // Contains widgets like Button, Text box etc.
 export const Button = styled.button`
@@ -13,9 +13,9 @@ export const Button = styled.button`
   font-weight: bold;
   width: auto;
   height: 40px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   padding: 0.25em 1em;
-  font-family: ${lora}
+  font-family: ${Lora}
   transition: 0.3s;
 
   &:hover {

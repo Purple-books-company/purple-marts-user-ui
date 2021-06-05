@@ -3,7 +3,7 @@ import { ImCross } from "react-icons/im"
 import { BiCircle } from "react-icons/bi";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi"
-import { CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn, QtyBtn, CartTitleInfo, EmptyImg } from "../../../styles/cart-page"
+import { CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn, QtyBtn, CartTitleInfo, EmptyImg } from "../../../styles/pages/cart-page"
 import CartHead from "./CartHead";
 import data from '../../../api/CartProducts.json'
 import empty_cart from '../../../assets/images/empty_cart.png'
