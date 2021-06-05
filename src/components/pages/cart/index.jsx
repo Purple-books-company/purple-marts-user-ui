@@ -1,58 +1,149 @@
-import { BsArrowLeftShort } from "react-icons/bs";
+import React, { useState, useEffect } from 'react'
+import { ImCross } from "react-icons/im"
 import { BiCircle } from "react-icons/bi";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi"
-import { CartTitleInfo, ContinueBtn, CartTitle, CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn } from "./styled"
+import { CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn, QtyBtn, CartTitleInfo, EmptyImg } from "../../../styles/cart-page"
+import CartHead from "./CartHead";
+import data from '../../../api/CartProducts.json'
+import empty_cart from '../../../assets/images/empty_cart.png'
 
 const Cart = () => {
+    const [item, setItem] = useState(data)
+    const [total, setTotal] = useState(0)
+    const [shipping, setShipping] = useState(0)
+    const [empty, setEmpty] = useState(0)
+    const [cod, setCod] = useState(false)
+
+    useEffect(() => {
+        setItem(item)
+        calcTotal()
+        setShipping(50)
+        setEmpty(item.length)
+    }, [item])
+
+    const calcTotal = () => {
+        let tempTotal = 0;
+        item.forEach((e) => {
+            let temp = tempTotal + (e.price * e.quantity)
+            tempTotal = temp
+            console.log(total)
+        })
+        setTotal(tempTotal)
+    }
+
+    const payMethod = () => {
+        setCod(!cod)
+    }
 
     return (
-        <div>
-            <div className="row m-3 ">
-                <CartTitle className="col-9">My Cart</CartTitle>
-                <ContinueBtn className="col-3" aln="true" >
-                    <span className=""><BsArrowLeftShort className="mx-2" />Continue shopping</span>
-                </ContinueBtn>
-            </div>
-            <div className="mt-5">
-                <CartItemBox className="row border-bottom">
 
-                    <CartTitleInfo className="col-5" align="right">Product</CartTitleInfo>
-                    <CartTitleInfo className="col">Price</CartTitleInfo>
-                    <CartTitleInfo className="col">Quantity</CartTitleInfo>
-                    <CartTitleInfo className="col">Total</CartTitleInfo>
-                </CartItemBox>
+        <div className="container mt-5">
 
-                <CartItemBox className="row mt-3 pl-5 border-bottom">
-                    <CartDetail className="col-3"><Image src="https://rukminim1.flixcart.com/image/880/1056/koad9jk0/shoe/a/v/v/6-hkk43-adidas-creblu-conavy-scrora-original-imag2sd2zecjdzkr.jpeg?q=50" /></CartDetail>
-                    <CartDetail className="col" align="left">ADIDAS Adigram M Running Shoes For Men (Blue)</CartDetail>
-                    <CartDetail className="col">₹2,203</CartDetail>
-                    <CartDetail className="col" type="Quatity"><FiPlusCircle className="mx-2" />1<FiMinusCircle className="mx-2" /></CartDetail>
-                    <CartDetail className="col">₹2,203</CartDetail>
-                </CartItemBox>
+            <CartHead />
+            {empty !== 0
+                ? <>
+                    <table className="w-100" style={{ margin: '50px', marginLeft: '0px' }}>
+                        <thead>
+                            <CartItemBox className="border-bottom">
+                                <CartTitleInfo className="text-light">Pic</CartTitleInfo>
+                                <CartTitleInfo align="">Product</CartTitleInfo>
+                                <CartTitleInfo className="">Price</CartTitleInfo>
+                                <CartTitleInfo className="">Quantity</CartTitleInfo>
+                                <CartTitleInfo className="">Total</CartTitleInfo>
+                                <CartTitleInfo className="text-light">rem</CartTitleInfo>
+                            </CartItemBox>
+                        </thead>
+                        <tbody>
+                            {
+                                item.map((product, index) => {
+                                    // setTotal(total + (product.price * product.quantity))
+                                    return (
+                                        <CartItemBox className="mt-3 pl-5 border-bottom" key={product.id}>
+                                            <CartDetail ><Image src={product.url} /></CartDetail>
+                                            <CartDetail align="left">{product.productName}</CartDetail>
+                                            <CartDetail >₹{product.price}</CartDetail>
+                                            <CartDetail className="form-inline" type="Quantity">
+                                                <QtyBtn
+                                                    onClick={() => {
+                                                        if (product.quantity !== 1) {
+                                                            let newItem = [...item]
+                                                            newItem[index].quantity -= 1
+                                                            setItem(newItem)
+                                                            // setItem(items => [...items])
+                                                        }
+                                                    }}
+                                                >
+                                                    <FiMinusCircle className="mx-2" />
+                                                </QtyBtn>
+                                                {product.quantity}
+                                                <QtyBtn onClick={() => {
+                                                    let newItem = [...item]
+                                                    newItem[index].quantity += 1
+                                                    setItem(newItem)
+                                                }}>
+                                                    <FiPlusCircle className="mx-2" />
+                                                </QtyBtn>
+                                            </CartDetail>
+                                            <CartDetail className="col">₹{product.price * product.quantity}</CartDetail>
+                                            <CartDetail className="col">
+                                                <ImCross onClick={() => {
+                                                    let newItem = [...item]
+                                                    // newItem[index].remove()
+                                                    newItem.splice(index, 1)
+                                                    setItem(newItem)
+                                                }} />
+                                            </CartDetail>
+                                        </CartItemBox>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
 
-            </div>
-            <CheckoutBox className="row p-3">
-                <div className="col" >
-                    <p style={{ alignContent: 'left', fontWeight: 'bolder' }}>Choose Payment Mode:</p>
-                    <span className="m-3 "> <FaCheckCircle color="red" className="mx-2" /> Pay By Online</span>
-                    <br /><br />
-                    <span className="m-3 mt-5"><BiCircle color="gray" className="mx-2" />Cash on delivery</span>
-                </div>
-                <div className="col-5 ml-5" style={{ alignContent: 'right' }}>
-                    <span className="row"><b className="col">Subtotal:</b><p className="col">₹2,203</p></span>
-                    <span className="row"><b className="col">Shipping:</b><p className="col">₹50</p></span>
 
-                    <div className="border-bottom border-top">
-                        <span className="row "><b className="col">Total:</b><p className="col">₹2,253</p></span>
+                    <CheckoutBox className="row p-3 sticky-bottom">
+                        <div className="col" >
+                            <p style={{ alignContent: 'left', fontWeight: 'bolder' }}>Choose Payment Mode:</p>
+                            <span className="m-3 ">
+                                {
+                                    cod ?
+                                        <BiCircle color="gray" className="mx-2" onClick={payMethod} />
+                                        :
+                                        <FaCheckCircle color="red" className="mx-2" onClick={payMethod} />
+                                }
+                        Pay By Online</span>
+                            <br /><br />
+                            <span className="m-3 mt-5">
+                                {
+                                    cod ? <FaCheckCircle color="red" className="mx-2" onClick={payMethod} />
+                                        : <BiCircle color="gray" className="mx-2" onClick={payMethod} />
+
+                                }
+                        Cash on delivery
+                    </span>
+                        </div>
+                        <div className="col-5 ml-5" style={{ alignContent: 'right' }}>
+                            <span className="row"><b className="col">Subtotal:</b><p className="col">₹{total}</p></span>
+                            <span className="row"><b className="col">Shipping:</b><p className="col">₹{shipping}</p></span>
+
+                            <div className="border-bottom border-top">
+                                <span className="row "><b className="col">Total:</b><p className="col">₹{total + shipping}</p></span>
+                            </div>
+                            <CheckOutBtn>Checkout ₹{total + shipping}</CheckOutBtn>
+                        </div>
+                    </CheckoutBox>
+                </>
+                :
+                <div className="justify-content-center text-center">
+                    <div className="container justify-content-center d-flex">
+                        <EmptyImg src={empty_cart} alt="" srcset="" />
 
                     </div>
-                    <CheckOutBtn>Checkout ₹2,253</CheckOutBtn>
+                    <h4>your cart is empty</h4>
+                    <p>Looks like you have not added <br />any product to your cart yet</p>
                 </div>
-
-            </CheckoutBox>
-
-
+            }
         </div>
     )
 }
