@@ -4,6 +4,7 @@
         "url": "https://rukminim1.flixcart.com/image/880/1056/koad9jk0/shoe/a/v/v/6-hkk43-adidas-creblu-conavy-scrora-original-imag2sd2zecjdzkr.jpeg?q=50",
         "productName": "ADIDAS Adigram M Running Shoes For Men  (Blue)",
         "price": 2203,
+        "originalPrice": 4000,
         "quantity": 1
     },
     {
@@ -11,6 +12,15 @@
         "url": "https://rukminim1.flixcart.com/image/416/416/jxz0brk0/mobile/q/z/8/redmi-k20-pro-na-original-imafgb4ys5unqagx.jpeg?q=70",
         "productName": "Redmi K20 Pro (Carbon Black, 256 GB)  (8 GB RAM)",
         "price": 29999,
-        "quantity": 2
+        "quantity": 2,
+        "originalPrice": 35000
+    },
+    {
+        "id": 3,
+        "url": "https://rukminim1.flixcart.com/image/312/312/jnj7iq80/t-shirt/g/m/w/m-gd00546-gdshop-original-imaf9f7qr9qncnpa.jpeg?q=70",
+        "productName": "Superhero Men Round or Crew Reversible White T-Shirt",
+        "price": 299,
+        "quantity": 2,
+        "originalPrice": 400
     }
 ]

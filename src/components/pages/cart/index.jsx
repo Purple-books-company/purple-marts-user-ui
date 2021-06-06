@@ -3,7 +3,7 @@ import { ImCross } from "react-icons/im"
 import { BiCircle } from "react-icons/bi";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi"
-import { CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn, QtyBtn, CartTitleInfo, EmptyImg } from "../../../styles/pages/cart-page"
+import { CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn, QtyBtn, CartTitleInfo, EmptyImg, CartEmpty } from "../../../styles/pages/cart-page"
 import CartHead from "./CartHead";
 import data from '../../../api/CartProducts.json'
 import empty_cart from '../../../assets/images/empty_cart.png'
@@ -57,7 +57,6 @@ const Cart = () => {
                         <tbody>
                             {
                                 item.map((product, index) => {
-                                    // setTotal(total + (product.price * product.quantity))
                                     return (
                                         <CartItemBox className="mt-3 pl-5 border-bottom" key={product.id}>
                                             <CartDetail ><Image src={product.url} /></CartDetail>
@@ -86,10 +85,9 @@ const Cart = () => {
                                                 </QtyBtn>
                                             </CartDetail>
                                             <CartDetail className="col">₹{product.price * product.quantity}</CartDetail>
-                                            <CartDetail className="col">
+                                            <CartDetail className="col" hover="true">
                                                 <ImCross onClick={() => {
                                                     let newItem = [...item]
-                                                    // newItem[index].remove()
                                                     newItem.splice(index, 1)
                                                     setItem(newItem)
                                                 }} />
@@ -124,11 +122,20 @@ const Cart = () => {
                     </span>
                         </div>
                         <div className="col-5 ml-5" style={{ alignContent: 'right' }}>
-                            <span className="row"><b className="col">Subtotal:</b><p className="col">₹{total}</p></span>
-                            <span className="row"><b className="col">Shipping:</b><p className="col">₹{shipping}</p></span>
+                            <span className="row">
+                                <b className="col">Subtotal:</b>
+                                <p className="col">₹{total}</p>
+                            </span>
+                            <span className="row">
+                                <b className="col">Shipping:</b>
+                                <p className="col">₹{shipping}</p>
+                            </span>
 
                             <div className="border-bottom border-top">
-                                <span className="row "><b className="col">Total:</b><p className="col">₹{total + shipping}</p></span>
+                                <span className="row ">
+                                    <b className="col">Total:</b>
+                                    <p className="col">₹{total + shipping}</p>
+                                </span>
                             </div>
                             <CheckOutBtn>Checkout ₹{total + shipping}</CheckOutBtn>
                         </div>
@@ -138,10 +145,9 @@ const Cart = () => {
                 <div className="justify-content-center text-center">
                     <div className="container justify-content-center d-flex">
                         <EmptyImg src={empty_cart} alt="" srcset="" />
-
                     </div>
-                    <h4>your cart is empty</h4>
-                    <p>Looks like you have not added <br />any product to your cart yet</p>
+                    <CartEmpty className="h2">your cart is empty</CartEmpty>
+                    <CartEmpty>Looks like you have not added any product to your cart yet</CartEmpty>
                 </div>
             }
         </div>
