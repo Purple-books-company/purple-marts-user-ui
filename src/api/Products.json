@@ -1,0 +1,112 @@
+[
+    {
+        "id":1,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":2,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":3,
+        "badge":"Null",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":4,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":5,
+        "badge":"Null",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":6,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":7,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":8,
+        "badge":"Null",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":9,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    },
+    {
+        "id":10,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300"
+    }
+]
