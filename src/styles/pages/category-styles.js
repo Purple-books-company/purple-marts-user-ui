@@ -1,5 +1,4 @@
 import styled,{css} from "styled-components";
-import { LightShade } from "../themes/color-theme";
 import { Lora, Slab } from "../themes/font-styles";
 
 export const SidebarWrapper = styled.div`
