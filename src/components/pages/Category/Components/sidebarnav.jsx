@@ -2,7 +2,7 @@ import React, { useState,useEffect} from "react";
 import $ from 'jquery';
 import { GoGrabber } from "react-icons/go";
 import {AiFillCaretDown} from 'react-icons/ai';
-import { Links,ListGroup, PageContentWrapper, SidebarHeading, SidebarWrapper, UnorderedList } from "../../../../styles/pages/category-styles";
+import { Links,ListGroup, PageContentWrapper, SidebarHeading, SidebarWrapper, Toggle, UnorderedList } from "../../../../styles/pages/category-styles";
 import { Lora } from "../../../../styles/themes/font-styles";
 
 const SidebarNav = () => {
@@ -87,13 +87,10 @@ const SidebarNav = () => {
                             </nav><nav>Hello</nav>
                               </div>}
           <PageContentWrapper id="page-content-wrapper">
-            <nav className="navbar">
-              <button id="menu-toggle">
-                <a  href="#"
+              <Toggle id="menu-toggle"
                       onClick={() => setShowSidebar(!showSidebar)}>
-                         < GoGrabber/></a>
-              </button>
-            </nav>
+                         < GoGrabber/>
+              </Toggle>
             {/* card */}
           </PageContentWrapper>
         </div>

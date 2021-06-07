@@ -1,4 +1,5 @@
 import styled,{css} from "styled-components";
+import { LightShade } from "../themes/color-theme";
 import { Lora, Slab } from "../themes/font-styles";
 
 export const SidebarWrapper = styled.div`
@@ -17,6 +18,12 @@ export const SidebarHeading = styled.div`
     border-bottom: 1px solid lightgray;
 `;
 
+export const Toggle = styled.button`
+     border: none;
+     font-size: 30px;
+     background-color: white;
+`;
+
 export const ListGroup = styled.div`
      width: 15rem;
      font-family: ${Lora};
@@ -26,7 +33,6 @@ export const ListGroup = styled.div`
 export const PageContentWrapper = styled.div`
      min-width: 0;
      width: 100%;
-     border: none;
 `;
 
 export const UnorderedList = styled.ul`
