@@ -24,11 +24,11 @@ export const Box = styled.div`
   margin: 5%;
   padding: 20px;
   @media screen and (max-width: 450px) {
-    height: auto;
-    width: 40%;
+    height: 100px;
+    width: auto;
     margin-bottom: 10%;
   }
-  &:hover {
+  :hover {
     cursor: pointer;
   }
 `;
@@ -88,7 +88,7 @@ export const Block = styled.div`
       height: 250px;
       border: none;
 
-      &:hover {
+      :hover {
         cursor: pointer;
         border: none;
       }
