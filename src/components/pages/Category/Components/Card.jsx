@@ -5,25 +5,25 @@ import { Displaycard,CardDesign, Linkdec, Procard, Badge, ProductThumb, ProductD
 
 const Card1 = () => {
     const listItems = product_card.map((item) =>
-		<CardDesign class="card">
-    	<Procard class="product_card">
-		<Badge class="badge" Status={item.badge}>{item.badge}</Badge>
-		<ProductThumb class="product_thumb">
+		<CardDesign>
+    	<Procard>
+		<Badge Status={item.badge}>{item.badge}</Badge>
+		<ProductThumb>
 			<img style={{height:'240px',width:'200px',padding:'10px'}} src={item.thumb} alt="img"></img>
 		</ProductThumb>
-		<div class="product_details">
+		<div>
 			{/* <ProductCategory class="product_catagory">{item.category}</ProductCategory> */}
 			<h4><Linkdec href="">{item.product_name}</Linkdec></h4>
 			<ProductDescription>{item.description}</ProductDescription>
-			<ProductBottomDetails class="product_bottom_details">
-			<ProductPrice class="product_price">₹{item.newprice}<PriceSmall>₹{item.oldprice}</PriceSmall><OfferColor>{item.offer}%OFF</OfferColor><ProLink href=""><FiHeart/></ProLink></ProductPrice>
+			<ProductBottomDetails>
+			<ProductPrice>₹{item.newprice}<PriceSmall>₹{item.oldprice}</PriceSmall><OfferColor>{item.offer}%OFF</OfferColor><ProLink href=""><FiHeart/></ProLink></ProductPrice>
 			</ProductBottomDetails>
 		</div>
 	</Procard>
 	</CardDesign>
 );
     return(
-        <Displaycard className="displaycard">
+        <Displaycard>
             {listItems}
         </Displaycard>
     )
