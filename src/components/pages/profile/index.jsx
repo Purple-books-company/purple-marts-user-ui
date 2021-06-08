@@ -29,8 +29,8 @@ const Profile = () => {
 									<tr><TabData></TabData><TabData>Chennai, TamilNadu-600019 </TabData></tr>
 								</table>
 							</Col>
-							<Col>
-							<Img src="https://lh3.googleusercontent.com/a-/AOh14GhwgF6-YeLPhg2KB8rPpU7DxzZXPMZFhuoIq5AIzg=s96-c"></Img>
+							<Col className="p-5">
+								<Img src="https://lh3.googleusercontent.com/a-/AOh14GhwgF6-YeLPhg2KB8rPpU7DxzZXPMZFhuoIq5AIzg=s96-c"></Img>
 							</Col>
 						</Row>
 					</div>

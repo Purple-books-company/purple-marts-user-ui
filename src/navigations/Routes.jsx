@@ -8,6 +8,7 @@ import WishList from "../components/pages/wishList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "../components/common/Search";
 import Profile from "../components/pages/profile";
+import OrderDetails from "../components/pages/profile/orders/details";
 
 function Routes() {
   return (
@@ -39,6 +40,9 @@ function Routes() {
             </Route>
             <Route path="/profile/info">
               <Profile />
+            </Route>
+            <Route path="/details">
+              <OrderDetails />
             </Route>
           </Switch>
         </div>
