@@ -8,6 +8,7 @@ const LogOut = () => {
     localStorage.removeItem("email");
 
     alert("Logged out");
+    window.location = "/";
   };
   return (
     <GoogleLogout
