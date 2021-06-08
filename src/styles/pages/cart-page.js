@@ -52,8 +52,9 @@ export const ContinueBtn = styled.button`
     font-family: ${Lora};
     text-align: center;
     :hover{
-        color:${LightShade};
-        background-color:  ${DarkShade};
+        background-color: ${LightShade};
+        color:#FFFFFF;
+
     }
     @media (min-width:0px) and (max-width:568px){
         font-size: smaller;
@@ -93,6 +94,12 @@ export const CartDetail = styled.td`
         width:20%;
         text-align: left;
     `}
+    ${props => props.hover === "true" && css`
+            :hover{
+                color: red;
+            }
+        `
+    }
 `;
 
 export const CheckoutBox = styled.div`
@@ -140,6 +147,10 @@ export const EmptyImg = styled.img`
     /* display: flex;
   justify-content: center;
   align-items: center; */
+`;
 
-  
+export const CartEmpty = styled.p`
+    font-style: italic oblique;
+    font-family: ${Slab};
+    color: ${DarkShade};
 `;

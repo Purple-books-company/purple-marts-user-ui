@@ -3,6 +3,8 @@ import LogOut from "../components/pages/authentication/components/LogOut";
 import Home from "../components/pages/home";
 import Cart from "../components/pages/cart";
 import Category from "../components/pages/Category";
+import Order from '../components/pages/profile/orders'
+import WishList from "../components/pages/wishList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "../components/utils/Search";
 import Wrapper from "../components/pages/authentication/";
@@ -36,6 +38,12 @@ function Routes() {
             </Route>
             <Route path="/cart">
               <Cart />
+            </Route>
+            <Route path="/wishlist">
+              <WishList />
+            </Route>
+            <Route path="/profile/order">
+              <Order />
             </Route>
           </Switch>
         </div>
