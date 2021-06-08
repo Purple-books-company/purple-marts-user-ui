@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "badge":"New",
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "description":"Hands-free experience",
+        "oldprice": 800,
+        "newprice": 500,
+        "offer":10,
+        "size":["XXL","XL","L","S"],
+        "colors":["red","black","blue","teal"],
+        "count":1,
+        "thumb" : "https://picsum.photos/seed/picsum/200/300",
+        "src":[
+            "https://picsum.photos/seed/picsum/200/300",
+            "https://picsum.photos/seed/picsum/200/300",
+            "https://picsum.photos/seed/picsum/200/300",
+            "https://picsum.photos/seed/picsum/200/300"
+        ]
+
+    }
+]
