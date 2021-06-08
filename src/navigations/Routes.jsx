@@ -3,7 +3,7 @@ import LogOut from "../components/pages/authentication/components/LogOut";
 import Home from "../components/pages/home";
 import Cart from "../components/pages/cart";
 import Category from "../components/pages/Category";
-import Order from '../components/pages/profile/orders'
+import Order from "../components/pages/profile/orders";
 import WishList from "../components/pages/wishList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "../components/utils/Search";
@@ -17,6 +17,7 @@ function Routes() {
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
+
   return (
     <div>
       <Search />
