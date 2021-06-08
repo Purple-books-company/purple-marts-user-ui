@@ -5,15 +5,15 @@ import { Displaycard,CardDesign, Linkdec, Procard, Badge, ProductThumb, ProductD
 
 const Card1 = () => {
     const listItems = product_card.map((item) =>
-		<CardDesign>
+		<CardDesign key={item.id}>
     	<Procard>
 		<Badge Status={item.badge}>{item.badge}</Badge>
 		<ProductThumb>
-			<img style={{height:'240px',width:'200px',padding:'10px'}} src={item.thumb} alt="img"></img>
+			<a href="/products"><img style={{height:'240px',width:'200px',padding:'10px'}} src={item.thumb} alt="img"></img></a>
 		</ProductThumb>
 		<div>
 			{/* <ProductCategory class="product_catagory">{item.category}</ProductCategory> */}
-			<h4><Linkdec href="">{item.product_name}</Linkdec></h4>
+			<h4><Linkdec href="/products">{item.product_name}</Linkdec></h4>
 			<ProductDescription>{item.description}</ProductDescription>
 			<ProductBottomDetails>
 			<ProductPrice>₹{item.newprice}<PriceSmall>₹{item.oldprice}</PriceSmall><OfferColor>{item.offer}%OFF</OfferColor><ProLink href=""><FiHeart/></ProLink></ProductPrice>
