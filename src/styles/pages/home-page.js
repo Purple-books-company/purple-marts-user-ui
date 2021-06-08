@@ -6,7 +6,7 @@ import { Lora, Slab } from "../themes/font-styles";
 
 export const Promotion = styled.div`
   position: relative;
-  height: 500px;
+  height: 400px;
   margin-bottom: 40px;
   @media screen and (max-width: 450px) {
     height: auto;
@@ -19,12 +19,12 @@ export const Box = styled.div`
   background: ${LightShade};
   top: 10%;
   height: auto;
-  width: 40%;
+  width: auto;
   left: 10%;
   margin: 5%;
   padding: 20px;
   @media screen and (max-width: 450px) {
-    height: 100px;
+    height: auto;
     width: auto;
     margin-bottom: 10%;
   }
@@ -59,9 +59,10 @@ export const Text = styled.div`
 export const Caption = styled.div`
   display: block;
   margin: auto;
-  font-size: 20px;
+  font-size: 18px;
   font-family: ${Slab};
   color: white;
+  text-align: center;
 
   @media screen and (max-width: 450px) {
     font-size: 10px;
