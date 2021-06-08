@@ -6,9 +6,11 @@ import Category from "../components/pages/Category";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "../components/utils/Search";
 import Wrapper from "../components/pages/authentication/";
+import { Button } from "../styles/widgets/widgets";
 
 function Routes() {
   const [showModal, setShowModal] = useState(false);
+  let logged = localStorage.getItem("isLogged");
 
   const openModal = () => {
     setShowModal((prev) => !prev);
@@ -16,7 +18,8 @@ function Routes() {
   return (
     <div>
       <Search />
-      <button onClick={openModal}>Login</button>
+      {!logged && <Button onClick={openModal}>Login</Button>}
+
       <LogOut />
       <Wrapper showModal={showModal} setShowModal={setShowModal} />
       <Router>
