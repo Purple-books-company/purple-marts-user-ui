@@ -6,7 +6,7 @@ import { Lora, Slab } from "../themes/font-styles";
 
 export const Promotion = styled.div`
   position: relative;
-  height: 400px;
+  height: 500px;
   margin-bottom: 40px;
   @media screen and (max-width: 450px) {
     height: auto;
