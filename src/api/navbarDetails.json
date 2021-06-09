@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Home",
+        "path": "/"
+    },
+    {
+        "id": 2,
+        "name": "Category",
+        "path": "/category"
+    },
+    {
+        "id": 3,
+        "name": "Custom Products",
+        "path": "/custom"
+    },
+    {
+        "id": 4,
+        "name": "cart",
+        "path": "/cart"
+    },
+    {
+        "id": 5,
+        "name": "wishlist",
+        "path": "/wishlist"
+    },
+    {
+        "id": 6,
+        "name": "login",
+        "path": "/login"
+    },
+    {
+        "id": 7,
+        "name": "profile",
+        "path": "/profile"
+    }
+]
