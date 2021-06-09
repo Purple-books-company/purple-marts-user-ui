@@ -7,6 +7,7 @@ import Order from '../components/pages/profile/orders'
 import WishList from "../components/pages/wishList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "../components/common/Search";
+import Products from "../components/pages/Category/Components/viewproduct";
 import Profile from "../components/pages/profile";
 
 function Routes() {
@@ -27,6 +28,9 @@ function Routes() {
             </Route>
             <Route path="/category">
               <Category />
+            </Route>
+            <Route path="/products">
+              <Products />
             </Route>
             <Route path="/cart">
               <Cart />
