@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import {Lora , Slab} from './themes/font-styles'
-import {LightShade, DarkShade, Silver} from "./themes/color-theme"
+import {Lora , Slab} from '../themes/font-styles'
+import {LightShade, DarkShade, Silver} from "../themes/color-theme"
 
 export const TabHead= styled.thead`
     background-color: ${LightShade};
