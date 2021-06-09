@@ -18,7 +18,7 @@ export const Button = styled.button`
   font-family: ${Lora}
   transition: 0.3s;
 
-  &:hover {
+  :hover {
     background: transparent;
     color: ${LightShade};
     border: 2px solid ${LightShade};
@@ -28,6 +28,7 @@ export const Button = styled.button`
 export const SearchContainer = styled.div`
   margin: 20px;
   width: 35%;
+  float: right;
   @media screen and (max-width: 450px) {
     margin: auto;
     width: 75%;
@@ -38,5 +39,16 @@ export const SearchText = styled.span`
   @media screen and (max-width: 450px) {
     display: none;
     align-items: center;
+  }
+`;
+
+export const Links = styled.div`
+   {
+    margin-top: 5%;
+    color: ${DarkShade};
+    cursor: pointer;
+    :hover {
+      text-decoration: underline;
+    }
   }
 `;

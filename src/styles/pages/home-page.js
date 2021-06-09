@@ -19,16 +19,16 @@ export const Box = styled.div`
   background: ${LightShade};
   top: 10%;
   height: auto;
-  width: 40%;
+  width: auto;
   left: 10%;
   margin: 5%;
   padding: 20px;
   @media screen and (max-width: 450px) {
     height: auto;
-    width: 40%;
+    width: auto;
     margin-bottom: 10%;
   }
-  &:hover {
+  :hover {
     cursor: pointer;
   }
 `;
@@ -59,9 +59,10 @@ export const Text = styled.div`
 export const Caption = styled.div`
   display: block;
   margin: auto;
-  font-size: 20px;
+  font-size: 18px;
   font-family: ${Slab};
   color: white;
+  text-align: center;
 
   @media screen and (max-width: 450px) {
     font-size: 10px;
@@ -88,7 +89,7 @@ export const Block = styled.div`
       height: 250px;
       border: none;
 
-      &:hover {
+      :hover {
         cursor: pointer;
         border: none;
       }
