@@ -40,7 +40,7 @@ const Search = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <datalist id="datalistOptions">
+        <datalist id="datalistOptions" >
           {users.map((val) => (
             <option value={val.name} key={val.email} />
           ))}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {Container, Table, Row, Col, Button, Breadcrumb,} from "react-bootstrap"; 
-import {TabBody, TabHead, Tab, Para, StyleStatus} from '../../../../styles/order-page'
-import { MdPictureAsPdf, MdSearch } from "react-icons/md"
+import {Container, Table, Row, Col } from "react-bootstrap"; 
+import {TabBody, TabHead, Tab, Para, StyleStatus} from '../../../../styles/pages/order-page'
+import { MdPictureAsPdf } from "react-icons/md"
 import { VscSync } from 'react-icons/vsc'
-import data from "../../../../api/OrderDetails.json"
+import data from "../../../../api/Orders.json"
 import { BiSearchAlt2 } from "react-icons/bi";
 import {Lora , Slab} from '../../../../styles/themes/font-styles'
 
@@ -15,9 +15,11 @@ function Order() {
         fontSize:'20px'
     };
     let StatusStyle={
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        textAlign: 'center',
+        verticalAlign: 'middle'
     };
     let IconStyle={
         fontSize:'30px',

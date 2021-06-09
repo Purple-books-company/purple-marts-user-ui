@@ -79,6 +79,7 @@ export const CardDesign = styled.div`
 `;
 
 export const Linkdec = styled.a`
+    text-align: center;
     font-weight: 400;
     font-size: 20px;
     font-family: ${Lora};
@@ -134,6 +135,7 @@ export const ProductThumb = styled.div`
 // `;
 
 export const ProductDescription = styled.p`
+     text-align: center;
      font-size: 15px;
      font-family: ${Slab};
     line-height: 22px;
@@ -187,9 +189,45 @@ export const ProLink = styled.a`
     }
 `;
 
+export const TogglePrice = styled.button`
+     border: none;
+     font-size: 20px;
+     background-color: white;
+`;
 
+export const RadioGroup = styled.div`
+     padding-left: 30px;
+     width: 15rem;
+     font-family: ${Lora};
+`;
 
+export const PriceLink = styled.label`
+    position: relative;
+    color: black;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 300;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-left: 3px solid transparent;
+    :hover{
+        color: purple!important;
+}
+`;
 
+export const SizeLink = styled.label`
+    position: relative;
+    color: black;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 300;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-left: 3px solid transparent;
+    :hover{
+        color: purple!important;
+}
+`;
 
 
 
