@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
+import { Redirect } from "react-router-dom";
 import { LOGIN_URL } from "../../../../config";
 import { ApiPostService } from "../../../../services/ApiServices";
 import { Button } from "../../../../styles/widgets/widgets";
@@ -21,7 +22,10 @@ const LoginForm = ({ setShowModal }) => {
   const handleLogin = async (e) => {
     if (form.email !== "" && form.password !== "") {
       e.preventDefault();
-      if (ApiPostService(LOGIN_URL, form)) setShowModal(false);
+      if (ApiPostService(LOGIN_URL, form)) {
+        setShowModal(false);
+        return <Redirect to="/" />;
+      }
     } else {
       alert("Fill form values..");
     }
