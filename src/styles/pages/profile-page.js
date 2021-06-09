@@ -24,8 +24,8 @@ export const Img = styled.img`
     display: block;
     margin: auto;
     border-radius: 50%;
-    width : 200px;
-    height : 200px;
+    width : 225px;
+    height : 225px;
 `;
 
 export const Para = styled.p`
