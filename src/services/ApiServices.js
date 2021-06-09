@@ -1,5 +1,7 @@
 import axios from "axios";
-import { API, TOKEN } from "../config";
+import { API, TOKEN, SECRET_KEY } from "../config";
+
+var CryptoJS = require("crypto-js");
 
 async function ApiGetService(link) {
   let url = API + link;
@@ -29,10 +31,26 @@ async function ApiPostService(link, data) {
     if (localStorage.getItem("isLogged") !== true) {
       res = await axios.post(url, data);
 
-      console.log(res.data.data);
+      console.log(res.data.data.customerId);
+      var cipherMail = CryptoJS.AES.encrypt(
+        JSON.stringify(data.email),
+        SECRET_KEY
+      ).toString();
+
+      var cipherId = CryptoJS.AES.encrypt(
+        JSON.stringify(res.data.data.customerId),
+        SECRET_KEY
+      ).toString();
+
+      let cipherPhoto = CryptoJS.AES.encrypt(
+        JSON.stringify(res.data.data.photo),
+        SECRET_KEY
+      ).toString();
+
       localStorage.setItem("isLogged", res.data.success);
-      localStorage.setItem("photo", res.data.data.photo);
-      localStorage.setItem("email", data.email);
+      localStorage.setItem("photo", cipherPhoto);
+      localStorage.setItem("email", cipherMail);
+      localStorage.setItem("number", cipherId);
     } else {
       let Token = TOKEN;
       res = await axios.post(url, data, {
