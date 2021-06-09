@@ -1,57 +1,37 @@
-[
-    {
+{
+    "orderId": "JGTBHOYMI",
+    "orderDate": "02/02/2021",
+    "estDelivery": "08/02/2021",
+    "delName": "Bruce Wayne",
+    "payment": "Cash on Delivery",
+    "address": "37/9a, Srinivasa Perumal Koil, 1st Street",
+    "pincode": 600019,
+    "state": "TamilNadu",
+    "city": "Chennai",
+    "subtotal": 62799,
+    "delivery": 40,
+    "products":[{
         "id": 1,
-        "orderRef": "JGTBHOYMI",
-        "orderDate": "02/02/2021",
-        "deliveryDate": "09/02/2021",
-        "total": 1030,
-        "payment": "COD",
-        "status": "Dispatched",
-        "invoice": "http://purplebooks.in/purplemates/dashboard/23c3c204-36cc-4b29-b083-84b884c7f2c4/jquery/show_orders/bill/pay_HIsHRWVkpyboiP/",
-        "noItems": 2
+        "url": "https://rukminim1.flixcart.com/image/880/1056/koad9jk0/shoe/a/v/v/6-hkk43-adidas-creblu-conavy-scrora-original-imag2sd2zecjdzkr.jpeg?q=50",
+        "productName": "ADIDAS Adigram M Running Shoes For Men  (Blue)",
+        "price": 2203,
+        "originalPrice": 4000,
+        "quantity": 1
     },
     {
         "id": 2,
-        "orderRef": "JGTBHOYMI",
-        "orderDate": "05/02/2021",
-        "deliveryDate": "13/02/2021",
-        "total": 1400,
-        "payment": "COD",
-        "status": "Delivered",
-        "invoice": "http://purplebooks.in/purplemates/dashboard/23c3c204-36cc-4b29-b083-84b884c7f2c4/jquery/show_orders/bill/pay_HIsHRWVkpyboiP/",
-        "noItems": 1
+        "url": "https://rukminim1.flixcart.com/image/416/416/jxz0brk0/mobile/q/z/8/redmi-k20-pro-na-original-imafgb4ys5unqagx.jpeg?q=70",
+        "productName": "Redmi K20 Pro (Carbon Black, 256 GB)  (8 GB RAM)",
+        "price": 29999,
+        "quantity": 2,
+        "originalPrice": 35000
     },
     {
         "id": 3,
-        "orderRef": "JGTBHOYMI",
-        "orderDate": "12/02/2021",
-        "deliveryDate": "20/02/2021",
-        "total": 3000,
-        "payment": "COD",
-        "status": "Not Dispatched",
-        "invoice": "http://purplebooks.in/purplemates/dashboard/23c3c204-36cc-4b29-b083-84b884c7f2c4/jquery/show_orders/bill/pay_HIsHRWVkpyboiP/",
-        "noItems": 6
-    },
-    {
-        "id": 4,
-        "orderRef": "JGTBHOYMI",
-        "orderDate": "12/02/2021",
-        "deliveryDate": "20/02/2021",
-        "total": 2090,
-        "payment": "UPI",
-        "status": "Dispatched",
-        "invoice": "http://purplebooks.in/purplemates/dashboard/23c3c204-36cc-4b29-b083-84b884c7f2c4/jquery/show_orders/bill/pay_HIsHRWVkpyboiP/",
-        "noItems": 2
-    },
-    {
-        "id": 5,
-        "orderRef": "JGTBHOYMI",
-        "orderDate": "13/02/2021",
-        "deliveryDate": "24/02/2021",
-        "total": 3100,
-        "payment": "UPI",
-        "status": "Delivered",
-        "invoice": "http://purplebooks.in/purplemates/dashboard/23c3c204-36cc-4b29-b083-84b884c7f2c4/jquery/show_orders/bill/pay_HIsHRWVkpyboiP/",
-        "noItems": 4
-    }
-]
+        "url": "https://rukminim1.flixcart.com/image/312/312/jnj7iq80/t-shirt/g/m/w/m-gd00546-gdshop-original-imaf9f7qr9qncnpa.jpeg?q=70",
+        "productName": "Superhero Men Round or Crew Reversible White T-Shirt",
+        "price": 299,
+        "quantity": 2,
+        "originalPrice": 400
+    }]
+}

@@ -9,6 +9,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Search from "../components/utils/Search";
 import Wrapper from "../components/pages/authentication/";
 import { Button } from "../styles/widgets/widgets";
+import Products from "../components/pages/Category/Components/viewproduct";
+import Profile from "../components/pages/profile";
+import OrderDetails from "../components/pages/profile/orders/details";
 
 function Routes() {
   const [showModal, setShowModal] = useState(false);
@@ -37,6 +40,9 @@ function Routes() {
             <Route path="/category">
               <Category />
             </Route>
+            <Route path="/products">
+              <Products />
+            </Route>
             <Route path="/cart">
               <Cart />
             </Route>
@@ -45,6 +51,12 @@ function Routes() {
             </Route>
             <Route path="/profile/order">
               <Order />
+            </Route>
+            <Route path="/profile/info">
+              <Profile />
+            </Route>
+            <Route path="/details">
+              <OrderDetails />
             </Route>
           </Switch>
         </div>

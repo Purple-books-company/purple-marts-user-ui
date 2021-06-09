@@ -79,6 +79,7 @@ export const CardDesign = styled.div`
 `;
 
 export const Linkdec = styled.a`
+    text-align: center;
     font-weight: 400;
     font-size: 20px;
     font-family: ${Lora};
@@ -134,6 +135,7 @@ export const ProductThumb = styled.div`
 // `;
 
 export const ProductDescription = styled.p`
+     text-align: center;
      font-size: 15px;
      font-family: ${Slab};
     line-height: 22px;
