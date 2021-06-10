@@ -21,6 +21,10 @@ export const Toggle = styled.button`
      border: none;
      font-size: 30px;
      background-color: white;
+     color: white;
+     @media screen and (max-width:600px){
+          color: black;
+    }
 `;
 
 export const ListGroup = styled.div`
@@ -54,139 +58,6 @@ export const Links = styled.a`
     :hover{
         color: purple!important;
 }
-`;
-
-
-export const Displaycard = styled.div`
-    display: flex;
-    position: relative;
-    margin: 10px auto;
-    padding: 10px 0 0;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-    text-align: center;
-`;
-export const CardDesign = styled.div`
-   -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    :hover {
-       border: 1px solid purple;
-       box-shadow: 0px 0px 999px 999px rgba(255, 255, 255, 0.5);
-       z-index: 500;
-     }
-`;
-
-export const Linkdec = styled.a`
-    text-align: center;
-    font-weight: 400;
-    font-size: 20px;
-    font-family: ${Lora};
-    display: block;
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    color:black;
-    text-decoration: none;
-    transition: 0.3s;
-    :hover{
-         color: plum;
-    }
-`;
-
-export const Procard = styled.div`
-     width: 250px;
-     position: relative;
-     box-shadow: 0 2px 7px #dfdfdf;
-     margin: 10px;
-     background-color: white;
-`;
-
- export const Badge =styled.div`
-    position: absolute;
-     left: 0;
-     top: 20px;
-     text-transform: uppercase;
-     font-size: 13px;
-     font-weight: 700;
-     background: purple;
-     color: white;
-     padding: 3px 10px;
-    ${props => props.Status==='Null' && css`
-     display: none;
-  `}
-`;
-
-export const ProductThumb = styled.div`
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     height: 250px;
-     background: white;
-`;
-
-// export const ProductCategory = styled.span`
-//      display: block;
-//      font-size: 12px;
-//      font-weight: 700;
-//      text-transform: uppercase;
-//      color: black;
-//      margin-bottom: 18px;
-// `;
-
-export const ProductDescription = styled.p`
-     text-align: center;
-     font-size: 15px;
-     font-family: ${Slab};
-    line-height: 22px;
-    margin-bottom: 18px;
-    color: gray;
-`;
-
-export const ProductBottomDetails = styled.div`
-     overflow: hidden;
-     border-top: 1px solid #eee;
-     padding-top: 20px;
-`;
-
-export const ProductPrice = styled.div`
-     float: left;
-     width: 50%;
-     font-size:18px;
-     color: black;
-     font-weight: 400;
-     padding-left: 20px;
-     padding-bottom: 10px;
-     display: flex;
-     align-items: center;
-`;
-
-export const PriceSmall = styled.small`
-     font-size: 80%;
-    font-weight: 400;
-    text-decoration: line-through;
-    display: inline-block;
-    margin-right: 5px;
-`;
-
-export const OfferColor = styled.div`
-     color: purple;
-     font-weight: 600;
-`;
-
-
-export const ProLink = styled.a`
-     text-align:center;
-     display: inline-block;
-     padding-left: 40px;
-     padding-bottom: 3px;
-    margin-left: 5px;
-    font-size: 22px;
-    color: purple;
-    transition: 0.3s;
-    :hover{
-         color: plum;
-    }
 `;
 
 export const TogglePrice = styled.button`
@@ -230,4 +101,266 @@ export const SizeLink = styled.label`
 `;
 
 
+// export const Displaycard = styled.div`
+//     display: flex;
+//     position: relative;
+//     margin: 10px auto;
+//     padding: 10px 0 0;
+//     box-sizing: border-box;
+//     flex-wrap: wrap;
+//     text-align: center;
+//     width: 100%;
+// `;
+// export const CardDesign = styled.div`
+//     box-sizing: border-box;
+//     display: flex;
+//     margin: 0;
+//     padding: 0;
+//     :hover {
+//        border: 1px solid purple;
+//        box-shadow: 0px 0px 999px 999px rgba(255, 255, 255, 0.5);
+//        z-index: 500;
+//      }
+//      @media(min-width:0px) and (max-width:568px){
+//           object-fit: contain;
+//           position: absolute;
+//           width: 20%;
+//           margin:5px;
+//      }
+// `;
 
+// export const Linkdec = styled.a`
+//     text-align: center;
+//     font-weight: 400;
+//     font-size: 20px;
+//     font-family: ${Lora};
+//     display: block;
+//     margin-bottom: 2px;
+//     text-transform: uppercase;
+//     color:black;
+//     text-decoration: none;
+//     transition: 0.3s;
+//     :hover{
+//          color: plum;
+//     }
+// `;
+
+// export const Procard = styled.div`
+//      width: 16rem;
+//      height: 95%;
+//      width: 100%;
+//      position: relative;
+//      box-shadow: 0 2px 7px #dfdfdf;
+//      margin: 8px;
+//      background-color: white;
+     
+// `;
+
+//  export const Badge =styled.div`
+//     position: absolute;
+//      left: 0;
+//      top: 20px;
+//      text-transform: uppercase;
+//      font-size: 13px;
+//      font-weight: 700;
+//      background: purple;
+//      color: white;
+//      padding: 3px 10px;
+//     ${props => props.Status==='Null' && css`
+//      display: none;
+//   `}
+// `;
+
+// export const ProductThumb = styled.div`
+//      display: flex;
+//      align-items: center;
+//      justify-content: center;
+//      height: 65%;
+//      object-fit: contain;
+//      background: white;
+// `;
+
+// export const ProductCategory = styled.span`
+//      display: block;
+//      font-size: 12px;
+//      font-weight: 700;
+//      text-transform: uppercase;
+//      color: black;
+//      margin-bottom: 18px;
+// `;
+
+// export const ProductDescription = styled.p`
+//      text-align: center;
+//      font-size: 15px;
+//      font-family: ${Slab};
+//     line-height: 22px;
+//     margin-bottom: 18px;
+//     color: gray;
+// `;
+
+// export const ProductBottomDetails = styled.div`
+//      overflow: hidden;
+//      border-top: 1px solid #eee;
+//      padding-top: 20px;
+// `;
+
+// export const ProductPrice = styled.div`
+//      float: left;
+//      width: 50%;
+//      font-size:18px;
+//      color: black;
+//      font-weight: 400;
+//      padding-left: 20px;
+//      padding-bottom: 10px;
+//      display: flex;
+//      align-items: center;
+// `;
+
+// export const PriceSmall = styled.small`
+//      font-size: 80%;
+//     font-weight: 400;
+//     text-decoration: line-through;
+//     display: inline-block;
+//     margin-right: 5px;
+// `;
+
+// export const OfferColor = styled.div`
+//      color: purple;
+//      font-weight: 600;
+// `;
+
+
+// export const ProLink = styled.a`
+//      text-align:center;
+//      display: inline-block;
+//      padding-left: 30px;
+//      padding-right: 10px;
+//      padding-bottom: 3px;
+//     margin-left: 5px;
+//     font-size: 22px;
+//     color: purple;
+//     transition: 0.3s;
+//     :hover{
+//          color: plum;
+//     }
+// `;
+
+export const Card = styled.div`
+     box-shadow :0 2px 7px #dfdfdf;
+     padding:0px;
+     margin:10px;
+      @media screen and (max-width:568px){
+          margin-right: 10%;
+          width: 30%;
+          justify-content: space-around;
+    }
+`;
+
+export const Badge = styled.h2`
+     background-color:purple;
+     color:white;
+     position:absolute;
+     text-transform:uppercase;
+     padding:4px 8px;
+     margin-top:10px;
+     font-size:13px;
+     font-weight:700;
+     ${props => props.Status==='Null' && css`
+           display: none;
+   `}
+`;
+
+export const CardImg = styled.img`
+     width:100%;
+     height:12vw;
+     object-fit :contain;
+     @media screen and (max-width:568px){
+          height: 30vw;
+          margin-top: 5px;
+    }
+`;
+
+export const CardProductName = styled.a`
+     color:black;
+     text-decoration :none;
+     text-align :center;
+     font-weight :400;
+     font-size :20px;
+     display:block;
+     text-transform:uppercase;
+     transition:0.3s;
+     margin-bottom :2px;
+     cursor: pointer;
+     :hover{
+          color: plum;
+     }
+     @media screen and (max-width:568px){
+          font-size:13px;
+    }
+`;
+
+export const CardProductDescription = styled.p`
+     text-align :center;
+     font-size :15px;
+     line-height :22px;
+      margin-bottom:18px;
+      color:gray;
+`;
+
+export const CardProductBottomDetails = styled.div`
+     border-top :1px solid #eee;
+     padding-top:10px;
+     font-size:1.125rem;
+     color:black;
+     font-weight:400;
+     padding-left:10px;
+     padding-bottom:10px;
+     display:flex;
+     align-items:center;
+     @media screen and (max-width:568px){
+          font-size: 1.3rem;
+          flex-wrap: wrap;
+          text-align: center;
+    }
+`;
+
+export const CardProductOldprice = styled.small`
+     font-size:80%;
+     font-weight:400;
+     text-decoration:line-through;
+     display:inline-block;
+     margin-right:5px;
+     @media screen and (max-width:568px){
+          font-size: 1.3rem;
+          text-align: center;
+    }
+`;
+
+export const CardProductOffer = styled.div`
+     color:purple;
+     font-weight:600;
+     @media screen and (max-width:568px){
+          padding-left: 5px;
+          font-size: 1.3rem;
+          text-align: center;
+    }
+`;
+
+export const CardWishlist = styled.a`
+     text-align:center;
+     display:inline-block;
+     padding-left:13px;
+     padding-bottom:3px;
+     margin-left:5px;
+     font-size:22px;
+     color:purple;
+     transition:0.3s;
+     :hover{
+          color: plum;
+     }
+     @media screen and (max-width:568px){
+          padding-left: 40px;
+          font-size: 1.3rem;
+          text-align: center;
+    }
+`;

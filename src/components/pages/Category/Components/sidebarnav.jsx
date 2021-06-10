@@ -23,7 +23,7 @@ const SidebarNav = () => {
     });
   })
   return (
-      <div class="d-flex">
+      <div className="d-flex">
         { showSidebar &&
         <div>
           <nav>
@@ -97,14 +97,14 @@ const SidebarNav = () => {
                                 </SidebarHeading>   
                                 {showPrice && 
                                 <RadioGroup>
-                                    <input type="radio" class="active" checked={radioPrice === "₹100 - ₹200"} value="₹100 - ₹200" id="₹100 - ₹200" onChange={(e)=>{SetRadioPrice(e.target.value)}}/>
-                                    <PriceLink for="₹100 - ₹200">₹100 - ₹200</PriceLink><br/>
+                                    <input type="radio" className="active" checked={radioPrice === "₹100 - ₹200"} value="₹100 - ₹200" id="₹100 - ₹200" onChange={(e)=>{SetRadioPrice(e.target.value)}}/>
+                                    <PriceLink htmlFor="₹100 - ₹200">₹100 - ₹200</PriceLink><br/>
                                     <input type="radio" checked={radioPrice === "₹200 - ₹300"} value="₹200 - ₹300" id="₹200 - ₹300" onChange={(e)=>{SetRadioPrice(e.target.value)}}/>
-                                    <PriceLink for="₹200 - ₹300">₹200 - ₹300</PriceLink><br/>
+                                    <PriceLink htmlFor="₹200 - ₹300">₹200 - ₹300</PriceLink><br/>
                                     <input type="radio" checked={radioPrice === "₹300 - ₹400"} value="₹300 - ₹400" id="₹300 - ₹400" onChange={(e)=>{SetRadioPrice(e.target.value)}}/>
-                                    <PriceLink for="₹300 - ₹400">₹300 - ₹400</PriceLink><br/>
+                                    <PriceLink htmlFor="₹300 - ₹400">₹300 - ₹400</PriceLink><br/>
                                     <input type="radio" checked={radioPrice === "₹400 - ₹500"} value="₹400 - ₹500" id="₹400 - ₹500" onChange={(e)=>{SetRadioPrice(e.target.value)}}/>
-                                    <PriceLink for="₹400 - ₹500">₹400 - ₹500</PriceLink>
+                                    <PriceLink htmlFor="₹400 - ₹500">₹400 - ₹500</PriceLink>
                                   </RadioGroup>}
                               </SidebarWrapper>
                             </nav>
@@ -118,13 +118,13 @@ const SidebarNav = () => {
                                 {showSize && 
                                   <RadioGroup>
                                   <input type="radio" checked={radioSize === "XXL"} value="XXL" id="XXL" onChange={(e)=>{SetRadioSize(e.target.value)}}/>
-                                  <SizeLink for="XXL">XXL</SizeLink><br/>
+                                  <SizeLink htmlFor="XXL">XXL</SizeLink><br/>
                                   <input type="radio" checked={radioSize === "XL"} value="XL" id="XL" onChange={(e)=>{SetRadioSize(e.target.value)}}/>
-                                  <SizeLink for="XL">XL</SizeLink><br/>
+                                  <SizeLink htmlFor="XL">XL</SizeLink><br/>
                                   <input type="radio" checked={radioSize === "L"} value="L" id="L" onChange={(e)=>{SetRadioSize(e.target.value)}}/>
-                                  <SizeLink for="L">L</SizeLink><br/>
-                                  <input type="radio" class="active" checked={radioSize === "S"} value="S" id="S" onChange={(e)=>{SetRadioSize(e.target.value)}}/>
-                                  <SizeLink for="S">S</SizeLink>
+                                  <SizeLink htmlFor="L">L</SizeLink><br/>
+                                  <input type="radio" className="active" checked={radioSize === "S"} value="S" id="S" onChange={(e)=>{SetRadioSize(e.target.value)}}/>
+                                  <SizeLink htmlFor="S">S</SizeLink>
                                 </RadioGroup>
                                 }
                               </SidebarWrapper>

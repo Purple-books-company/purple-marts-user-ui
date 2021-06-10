@@ -14,7 +14,7 @@ const WishList = () => {
 
     return (
         <div className="container" style={{ backgroundColor: '#F1F3F6' }}>
-            <div className="row">
+            <div className="row container">
                 <WlText className="col-2 m-2 container bg-white" display="none" style={{ height: '100%', width: 'auto', letterSpacing: '1px' }}>
                     <div className="mt-3">
                         <span className="row">
