@@ -27,9 +27,10 @@ export const ModalWrapper = styled.div`
 
   @media screen and (max-width: 540px) {
     grid-template-columns: 0fr 1fr;
-    width: 100%;
+    width: 95%;
     height: 50%;
-    padding: 5%;
+    margin-top: 0%;
+    margin-right: 2%;
   }
 `;
 

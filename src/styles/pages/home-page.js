@@ -88,6 +88,7 @@ export const Block = styled.div`
     css`
       height: 250px;
       border: none;
+      width: 10%;
 
       :hover {
         cursor: pointer;
