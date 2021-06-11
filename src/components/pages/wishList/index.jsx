@@ -16,6 +16,7 @@ const WishList = () => {
         <div className="container" style={{ backgroundColor: '#FFF9FD' }}>
             <div className="row container">
                 <WlText className="col-2 m-2 container bg-white" display="none" >
+
                     <div className="mt-3">
                         <span className="row">
                             <FaUserCircle className="col" style={{ marginRight: '5px', width: '30px', height: '30px' }} />

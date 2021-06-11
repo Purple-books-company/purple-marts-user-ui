@@ -18,20 +18,21 @@ import {
 
 const Card1 = () => {
   const listItems = product_card.map((item) => (
-    <CardDesign key={item.id}>
+    <CardDesign className="d-flex" key={item.id}>
       <Procard>
         <Badge Status={item.badge}>{item.badge}</Badge>
         <ProductThumb>
+          <a href="/products">
           <img
-            style={{ height: "240px", width: "200px", padding: "10px" }}
+            style={{ height: "240px", width: "200px", padding: "10px" }} 
             src={item.thumb}
             alt="img"
-          ></img>
+          ></img></a>
         </ProductThumb>
         <div>
           {/* <ProductCategory class="product_catagory">{item.category}</ProductCategory> */}
           <h4>
-            <Linkdec href="">{item.product_name}</Linkdec>
+            <Linkdec href="/products">{item.product_name}</Linkdec>
           </h4>
           <ProductDescription>{item.description}</ProductDescription>
           <ProductBottomDetails>
