@@ -12,6 +12,7 @@ import { Button } from "../styles/widgets/widgets";
 import Products from "../components/pages/Category/Components/viewproduct";
 import Profile from "../components/pages/profile";
 import OrderDetails from "../components/pages/profile/orders/details";
+import Header from "../components/utils/Header";
 
 function Routes() {
   const [showModal, setShowModal] = useState(false);
@@ -22,46 +23,45 @@ function Routes() {
   };
 
   return (
-    <div>
+    <Router>
+      <Header />
       <Search />
       {!logged && <Button onClick={openModal}>Login</Button>}
 
       <LogOut />
       <Wrapper showModal={showModal} setShowModal={setShowModal} />
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/auth/login">
-              <Wrapper />
-            </Route>
-            <Route path="/category">
-              <Category />
-            </Route>
-            <Route path="/products">
-              <Products />
-            </Route>
-            <Route path="/cart">
-              <Cart />
-            </Route>
-            <Route path="/wishlist">
-              <WishList />
-            </Route>
-            <Route path="/profile/order">
-              <Order />
-            </Route>
-            <Route path="/profile/info">
-              <Profile />
-            </Route>
-            <Route path="/details">
-              <OrderDetails />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </div>
+
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/auth/login">
+          <Wrapper />
+        </Route>
+        <Route path="/category">
+          <Category />
+        </Route>
+        <Route path="/products">
+          <Products />
+        </Route>
+        <Route path="/cart">
+          <Cart />
+        </Route>
+        <Route path="/wishlist">
+          <WishList />
+        </Route>
+        <Route path="/profile/order">
+          <Order />
+        </Route>
+        <Route path="/profile/info">
+          <Profile />
+        </Route>
+        <Route path="/details">
+          <OrderDetails />
+        </Route>
+      </Switch>
+
+    </Router>
   );
 }
 
