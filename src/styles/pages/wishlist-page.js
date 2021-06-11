@@ -12,6 +12,12 @@ export const WlText = styled.div`
             display: none;
         `}
     }
+    ${props => props.display === "none" && css`
+        height: 100%;
+        width: 'auto';
+        letter-Spacing: '1px';
+    `}     
+            
     ${props => props.type === "icon" && css`
         :hover{
             color: red !important;
