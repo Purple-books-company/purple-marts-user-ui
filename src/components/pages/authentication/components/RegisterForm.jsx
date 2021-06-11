@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { LOGIN_URL } from "../../../../config";
-import { ApiPostService } from "../../../../services/ApiServices";
+import { Alert } from "react-bootstrap";
+import { RiCloseFill } from "react-icons/ri";
+import { LOGIN_URL, OTP_URL } from "../../../../config";
+import { ApiPostService } from "../../../../services/api/api-services";
 import { Button, Links } from "../../../../styles/widgets/widgets";
 
 const RegisterForm = ({ setLoginForm, setShowModal }) => {
@@ -14,6 +16,8 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const [cPass, setCPass] = useState("");
 
+  const [pwdMatch, setPwdMatch] = useState("");
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -22,13 +26,21 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
   };
 
   const handleRegister = async (e) => {
-    if (cPass !== form.password) alert("Passphrase mismatch");
     if (form.email !== "" && form.password !== "") {
       e.preventDefault();
       if (ApiPostService(LOGIN_URL, form)) setShowModal(false);
     } else {
       alert("Fill form values..");
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    form.email = form.email.toLowerCase();
+    if (cPass !== form.password) setPwdMatch("Password mismatch!");
+    const email = { email: form.email };
+    let value = await ApiPostService(OTP_URL, email);
+    console.log("Response: ", value);
   };
 
   return (
@@ -61,7 +73,19 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
         />
       </Form.Group>
 
-      <Button type="submit" style={{ width: "100%" }} onClick={handleRegister}>
+      <span>
+        {pwdMatch && (
+          <Alert variant="danger">
+            {pwdMatch}
+            <RiCloseFill
+              style={{ float: "right", fontSize: "auto", marginTop: "5px" }}
+              onClick={() => setPwdMatch("")}
+            />
+          </Alert>
+        )}
+      </span>
+
+      <Button type="submit" style={{ width: "100%" }} onClick={handleSubmit}>
         Register
       </Button>
       <Links onClick={() => setLoginForm(true)}>Back to Login</Links>
