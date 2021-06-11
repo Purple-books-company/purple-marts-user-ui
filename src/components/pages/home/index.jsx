@@ -1,6 +1,6 @@
 import Carousel from "./components/Carousel";
+import Categories from "./components/Categories";
 import Grid from "./components/Grid";
-import TrendingProducts from "./components/TrendingProducts";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       <div>
         <Carousel />
         <Grid />
-        <TrendingProducts />
+        <Categories />
       </div>
     </>
   );
