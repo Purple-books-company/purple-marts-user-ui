@@ -8,7 +8,6 @@ import { REGISTER_URL, OTP_URL } from "../../../../config";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { Button, Links } from "../../../../styles/widgets/widgets";
 import { DarkShade } from "../../../../styles/themes/color-theme";
-import { Seperator } from "../../../../styles/pages/authentication";
 
 const RegisterForm = ({ setLoginForm, setShowModal }) => {
   let initial = {
@@ -20,7 +19,6 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const [cPass, setCPass] = useState("");
   const [error, setError] = useState("");
-  const [variant, setVariant] = useState("");
   const [originalOtp, setoriginalOtp] = useState("");
   const [inputOtp, setInputOtp] = useState(0);
 
@@ -32,17 +30,19 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
   };
 
   const handleSubmit = async (e) => {
+    setError("");
     e.preventDefault();
+
     if (form.email !== "" && form.password !== "") {
       form.email = form.email.toLowerCase();
-
-      const email = { email: form.email };
-      let value = await ApiPostService(OTP_URL, email);
-      setoriginalOtp(value.otp);
-      console.log("Response: ", value.otp);
-    } else {
-      setError("Missing fields!");
-    }
+      if (cPass !== form.password) setError("Oh snap! Password mismatch!");
+      else {
+        const email = { email: form.email };
+        let value = await ApiPostService(OTP_URL, email);
+        setoriginalOtp(value.otp);
+        // console.log("Response: ", value.otp);
+      }
+    } else setError("Missing fields!");
   };
 
   const verifyOtp = async () => {
@@ -50,13 +50,9 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
       const res = await ApiPostService(REGISTER_URL, form);
       if (res) setShowModal(false);
       else {
-        setVariant("danger");
         setError("Registration failed!");
       }
-    } else {
-      setVariant("danger");
-      setError("Invalid otp!");
-    }
+    } else setError("Invalid otp!");
   };
 
   const handleTimer = () => {
@@ -65,22 +61,10 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
     setInputOtp("");
   };
 
-  const checkPassword = (e) => {
-    // setCPass(e.target.value);
-    e.preventDefault();
-    if (cPass !== form.password) {
-      setVariant("danger");
-      setError("Oh snap! Password mismatch!");
-    } else {
-      setVariant("success");
-      setError("Password matches!");
-    }
-  };
-
   const PopError = () => (
     <span>
       {error && (
-        <Alert variant={variant}>
+        <Alert variant="danger">
           {error}
           <RiCloseFill
             style={{ float: "right", fontSize: "auto", marginTop: "5px" }}
@@ -119,8 +103,6 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
               type="password"
               placeholder=" Confirm Password"
               value={cPass}
-              onBlur={checkPassword}
-              onMouseMove={checkPassword}
               onChange={(e) => setCPass(e.target.value)}
             />
           </Form.Group>
@@ -153,7 +135,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
                 setInputOtp(otp);
               }}
               numInputs={6}
-              separator={<Seperator>-</Seperator>}
+              separator={<span>-</span>}
               isInputNum={true}
               isInputSecure={true}
               inputStyle={{
@@ -172,7 +154,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
           {!error ? (
             <>
               <h6 style={{ color: "red" }}>Your time ends in:</h6>
-              <Countdown date={Date.now() + 300000} onComplete={handleTimer} />
+              <Countdown date={Date.now() + 3000} onComplete={handleTimer} />
             </>
           ) : (
             <PopError />
