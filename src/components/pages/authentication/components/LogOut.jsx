@@ -5,7 +5,7 @@ const LogOut = () => {
   const clearStorage = () => {
     localStorage.removeItem("isLogged");
     localStorage.removeItem("photo");
-    localStorage.removeItem("email");
+    localStorage.removeItem("number");
 
     alert("Logged out");
     window.location = "/";
