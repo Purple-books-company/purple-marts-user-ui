@@ -71,7 +71,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
                 alt="camera"
               />
 
-              <ModalContent>
+              <ModalContent className="mx-auto">
                 <h2>Ready for Shopping?</h2>
                 {loginForm ? (
                   <div style={{ width: "80%" }}>
