@@ -154,7 +154,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
           {!error ? (
             <>
               <h6 style={{ color: "red" }}>Your time ends in:</h6>
-              <Countdown date={Date.now() + 3000} onComplete={handleTimer} />
+              <Countdown date={Date.now() + 300000} onComplete={handleTimer} />
             </>
           ) : (
             <PopError />
