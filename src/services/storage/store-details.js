@@ -1,12 +1,8 @@
 import { SECRET_KEY } from "../../config";
 var CryptoJS = require("crypto-js");
 
-const storeDetails = (res, data) => {
+const storeDetails = (res) => {
   console.log(res.data.data.customerId);
-  let cipherMail = CryptoJS.AES.encrypt(
-    JSON.stringify(data.email),
-    SECRET_KEY
-  ).toString();
 
   let cipherId = CryptoJS.AES.encrypt(
     JSON.stringify(res.data.data.customerId),
@@ -20,7 +16,6 @@ const storeDetails = (res, data) => {
 
   localStorage.setItem("isLogged", res.data.success);
   localStorage.setItem("photo", cipherPhoto);
-  localStorage.setItem("email", cipherMail);
   localStorage.setItem("number", cipherId);
 };
 
