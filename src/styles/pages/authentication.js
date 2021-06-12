@@ -11,7 +11,9 @@ export const Background = styled.div`
   align-items: center;
   z-index: 3;
 `;
-
+export const Seperator = styled.span`
+  margin: 0 auto;
+`;
 export const ModalWrapper = styled.div`
   width: 800px;
   height: 500px;
@@ -27,10 +29,10 @@ export const ModalWrapper = styled.div`
 
   @media screen and (max-width: 540px) {
     grid-template-columns: 0fr 1fr;
-    width: 95%;
+    width: 90%;
     height: 50%;
-    margin-top: 0%;
-    margin-right: 2%;
+    margin: 5%;
+    margin-bottom: 30%;
   }
 `;
 
@@ -43,6 +45,7 @@ export const ModalImg = styled.img`
 
 export const ModalContent = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
