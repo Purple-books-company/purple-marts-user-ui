@@ -1,9 +1,8 @@
 import axios from "axios";
 import storeDetails from "../storage/store-details";
-import { API, TOKEN, LOGIN_URL } from "../../config";
+import { API, TOKEN, LOGIN_URL, REGISTER_URL } from "../../config";
 
 async function ApiGetService(link) {
-  
   let url = API + link;
 
   try {
@@ -36,8 +35,11 @@ async function ApiPostService(link, data) {
         Authorization: Token,
       },
     });
-    if (link === LOGIN_URL && localStorage.getItem("isLogged") !== true) {
-      storeDetails(res, data);
+    if (
+      (link === LOGIN_URL || link === REGISTER_URL) &&
+      localStorage.getItem("isLogged") !== true
+    ) {
+      storeDetails(res);
     }
 
     console.log("Full response: ", res);
