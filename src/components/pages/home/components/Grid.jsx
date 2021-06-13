@@ -1,5 +1,5 @@
 import { DarkShade } from "../../../../styles/themes/color-theme";
-import { Block, Caption } from "../../../../styles/pages/home-page";
+import { Block, Caption, Text } from "../../../../styles/pages/home-page";
 
 const Grid = () => {
   const gridImg = [
@@ -11,6 +11,7 @@ const Grid = () => {
   const gridText = ["PHONE ACCESSORIES", "SHOP ESSENTIALS", "SHOP HEAD PHONES"];
   return (
     <>
+      <Text primary>DEALS OF THE DAY</Text>
       <div className="container">
         <div className="row">
           {gridImg.map((img, index) => (

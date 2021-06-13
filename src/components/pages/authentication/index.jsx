@@ -1,7 +1,7 @@
 import { GoogleLogin } from "react-google-login";
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
-import { ApiPostService } from "../../../services/ApiServices";
+import { ApiPostService } from "../../../services/api/api-services";
 import {
   Background,
   ModalWrapper,
@@ -71,7 +71,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
                 alt="camera"
               />
 
-              <ModalContent>
+              <ModalContent className="mx-auto">
                 <h2>Ready for Shopping?</h2>
                 {loginForm ? (
                   <div style={{ width: "80%" }}>
