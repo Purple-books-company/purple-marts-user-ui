@@ -1,5 +1,4 @@
 import { GoogleLogout } from "react-google-login";
-import { CLIENT_ID } from "../../../../config";
 
 const LogOut = () => {
   const clearStorage = () => {
@@ -12,7 +11,7 @@ const LogOut = () => {
   };
   return (
     <GoogleLogout
-      clientId={CLIENT_ID}
+      clientId={process.env.REACT_APP_CLIENT_ID}
       buttonText="Logout"
       onLogoutSuccess={clearStorage}
     ></GoogleLogout>

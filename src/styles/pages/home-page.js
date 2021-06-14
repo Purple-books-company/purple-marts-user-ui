@@ -70,17 +70,16 @@ export const Caption = styled.div`
 `;
 
 export const Block = styled.div`
-    display:flex;
-    height: 150px;
-    border: 2px solid ${Silver};
-  
-    @media screen and (max-width: 450px) {
-      height: 80px;
-    }
-    &:hover {
-      cursor: pointer;
-      border: 2px solid black;
-      }
+  display: flex;
+  height: 150px;
+  border: 2px solid ${Silver};
+
+  @media screen and (max-width: 450px) {
+    height: 80px;
+  }
+  &:hover {
+    cursor: pointer;
+    border: 2px solid black;
   }
 
   ${(props) =>

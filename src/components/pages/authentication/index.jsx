@@ -12,7 +12,6 @@ import {
 import { refreshTokenSetup } from "./components/RefreshTokenSetup";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
-import { CLIENT_ID, GOOGLE_LOGIN } from "../../../config";
 import { Links } from "../../../styles/widgets/widgets";
 
 const Wrapper = ({ showModal, setShowModal }) => {
@@ -51,8 +50,9 @@ const Wrapper = ({ showModal, setShowModal }) => {
       email: res.email,
       name: res.name,
     };
-    console.log(ApiPostService(GOOGLE_LOGIN, payload));
-    if (ApiPostService(GOOGLE_LOGIN, payload)) setShowModal(false);
+    console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
+    if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload))
+      setShowModal(false);
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
                     <center>
                       <br />
                       <GoogleLogin
-                        clientId={CLIENT_ID}
+                        clientId={process.env.REACT_APP_CLIENT_ID}
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         isSignedIn={true}

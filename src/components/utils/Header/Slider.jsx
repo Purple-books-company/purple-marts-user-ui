@@ -10,7 +10,7 @@ import {
 } from "../../../styles/pages/header";
 import { NavLink as Link } from 'react-router-dom';
 import { AiOutlineHeart, AiOutlineRight } from 'react-icons/ai'
-import { RiDashboard2Line, RiDashboardFill, RiHome2Fill, RiHome3Line } from 'react-icons/ri'
+import {  RiDashboardFill, RiHome2Fill, RiHome3Line } from 'react-icons/ri'
 import { FaOpencart, FaUserAlt, FaUserCircle, } from 'react-icons/fa'
 import { useState } from "react";
 import { FiLogOut } from "react-icons/fi";
