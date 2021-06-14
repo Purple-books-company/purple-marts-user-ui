@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Block, Image, Text } from "../../../../styles/pages/home-page";
 import { ApiGetService } from "../../../../services/api/api-services";
-import { CATEGORY_GET_URL } from "../../../../config";
 
 export default function Categories() {
   var settings = {
@@ -17,7 +16,9 @@ export default function Categories() {
   const [urls, setUrls] = useState([]);
 
   useEffect(async () => {
-    const categories = await ApiGetService(CATEGORY_GET_URL);
+    const categories = await ApiGetService(
+      process.env.REACT_APP_CATEGORY_GET_URL
+    );
     let imageUrls = [];
     categories.map((item) => {
       imageUrls.push(item);

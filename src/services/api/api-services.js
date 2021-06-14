@@ -1,14 +1,13 @@
 import axios from "axios";
 import storeDetails from "../storage/store-details";
-import { API, TOKEN, LOGIN_URL, REGISTER_URL } from "../../config";
 
 async function ApiGetService(link) {
-  let url = API + link;
+  let url = process.env.REACT_APP_API + link;
 
   try {
     const res = await axios.get(url, {
       headers: {
-        Authorization: TOKEN,
+        Authorization: process.env.REACT_APP_TOKEN,
       },
     });
     if (res.data.success) {
@@ -23,20 +22,20 @@ async function ApiGetService(link) {
 }
 
 async function ApiPostService(link, data) {
-  let url = API + link;
+  let url = process.env.REACT_APP_API + link;
   let res;
 
   console.log("Link to be sent: ", link);
 
   try {
-    let Token = TOKEN;
+    let Token = process.env.REACT_APP_TOKEN;
     res = await axios.post(url, data, {
       headers: {
         Authorization: Token,
       },
     });
     if (
-      (link === LOGIN_URL || link === REGISTER_URL) &&
+      (link === process.env.REACT_APP_LOGIN_URL || link === process.env.REACT_APP_REGISTER_URL) &&
       localStorage.getItem("isLogged") !== true
     ) {
       storeDetails(res);

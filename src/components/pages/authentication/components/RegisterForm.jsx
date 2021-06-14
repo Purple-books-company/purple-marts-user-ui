@@ -4,7 +4,6 @@ import { Alert } from "react-bootstrap";
 import OtpInput from "react-otp-input";
 import Countdown from "react-countdown";
 import { RiCloseFill } from "react-icons/ri";
-import { REGISTER_URL, OTP_URL } from "../../../../config";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { Button, Links } from "../../../../styles/widgets/widgets";
 import { DarkShade } from "../../../../styles/themes/color-theme";
@@ -38,7 +37,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
       if (cPass !== form.password) setError("Oh snap! Password mismatch!");
       else {
         const email = { email: form.email };
-        let value = await ApiPostService(OTP_URL, email);
+        let value = await ApiPostService(process.env.REACT_APP_OTP_URL, email);
         setoriginalOtp(value.otp);
         // console.log("Response: ", value.otp);
       }
@@ -47,7 +46,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const verifyOtp = async () => {
     if (originalOtp === Number(inputOtp)) {
-      const res = await ApiPostService(REGISTER_URL, form);
+      const res = await ApiPostService(process.env.REACT_APP_REGISTER_URL, form);
       if (res) setShowModal(false);
       else {
         setError("Registration failed!");

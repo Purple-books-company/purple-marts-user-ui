@@ -16,7 +16,8 @@ import Header from "../components/utils/Header";
 
 function Routes() {
   const [showModal, setShowModal] = useState(false);
-  let logged = localStorage.getItem("isLogged");
+  const [logged, setLogged] = useState(localStorage.getItem("isLogged"));
+  console.log(process.env);
 
   const openModal = () => {
     setShowModal((prev) => !prev);
@@ -60,7 +61,6 @@ function Routes() {
           <OrderDetails />
         </Route>
       </Switch>
-
     </Router>
   );
 }
