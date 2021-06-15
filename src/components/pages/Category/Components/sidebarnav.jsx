@@ -28,9 +28,8 @@ const SidebarNav = () => {
         <div>
           <nav>
               <SidebarWrapper>
-                                <SidebarHeading>
-                                  <Lora>Category
-                                  </Lora>
+                                <SidebarHeading style={{fontFamily:`${Lora}`}}>
+                                  Category
                                 </SidebarHeading>
                                 <ListGroup>
                                   <UnorderedList>
@@ -42,8 +41,8 @@ const SidebarNav = () => {
                                         href="#"
                                         onClick={() => setShowGadgets(!showGadgets)}
                                       >
-                                        Gadgets&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <AiOutlinePlus/>
+                                        Gadgets
+                                        <AiOutlinePlus style={{float:'right'}}/>
                                       </Links>
                                       {showGadgets && (
                                         <ul>
@@ -63,8 +62,8 @@ const SidebarNav = () => {
                                         href="#"
                                         onClick={() => setShowGifts(!showGifts)}
                                       >
-                                        Gifts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <AiOutlinePlus/>
+                                        Gifts
+                                        <AiOutlinePlus style={{float:'right'}}/>
                                       </Links>
                                       {showGifts && (
                                         <ul>
@@ -90,10 +89,9 @@ const SidebarNav = () => {
                               </SidebarWrapper>
                             </nav><nav>
               <SidebarWrapper>
-                                <SidebarHeading>
-                                  <TogglePrice  href="#"
-                                        onClick={() => setShowPrice(!showPrice)}><AiFillCaretDown/></TogglePrice>&nbsp;<Lora>Shop By Price
-                                  </Lora>
+                                <SidebarHeading style={{fontFamily:`${Lora}`}} >
+                                  <TogglePrice href="#"
+                                        onClick={() => setShowPrice(!showPrice)}><AiFillCaretDown/></TogglePrice>&nbsp;Shop By Price
                                 </SidebarHeading>   
                                 {showPrice && 
                                 <RadioGroup>
@@ -110,10 +108,9 @@ const SidebarNav = () => {
                             </nav>
                             <nav>
               <SidebarWrapper>
-                                <SidebarHeading>
+                                <SidebarHeading style={{fontFamily:`${Lora}`}}>
                                   <TogglePrice  href="#"
-                                        onClick={() => setShowSize(!showSize)}><AiFillCaretDown/></TogglePrice>&nbsp;<Lora>Shop By Size
-                                  </Lora>
+                                        onClick={() => setShowSize(!showSize)}><AiFillCaretDown/></TogglePrice>&nbsp;Shop By Size
                                 </SidebarHeading>   
                                 {showSize && 
                                   <RadioGroup>
