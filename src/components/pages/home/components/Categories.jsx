@@ -16,15 +16,10 @@ export default function Categories() {
   const [urls, setUrls] = useState([]);
 
   useEffect(async () => {
-    const categories = await ApiGetService(
-      process.env.REACT_APP_CATEGORY_GET_URL
-    );
-    let imageUrls = [];
-    categories.map((item) => {
-      imageUrls.push(item);
-    });
-    console.log(imageUrls);
-    setUrls(imageUrls);
+    let categories = [];
+    categories = await ApiGetService(process.env.REACT_APP_CATEGORY_GET_URL);
+    if (categories === null) categories = [];
+    setUrls(categories);
   }, []);
 
   return (
@@ -49,6 +44,8 @@ export default function Categories() {
             </Slider>
           </div>
         </div>
+        <br />
+        <br />
       </center>
     </>
   );
