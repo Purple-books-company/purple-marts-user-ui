@@ -1,0 +1,26 @@
+[
+    {
+        "id":1,
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "rating":3.5,
+        "review_heading":"Best product best material",
+        "review_description":"Cras sit amet nibh libero in gravida nulla Nulla vel metus scelerisque ante sollicitudin"
+    },
+    {
+        "id":2,
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "rating":4.5,
+        "review_heading":"really nice product value for money",
+        "review_description":"Cras sit amet nibh libero in gravida nulla Nulla vel metus scelerisque ante sollicitudin"
+    },
+    {
+        "id":3,
+        "product_name":"Headphone",
+        "category":"Gadgets",
+        "rating":2,
+        "review_heading":"Bad product dont take this",
+        "review_description":"Cras sit amet nibh libero in gravida nulla Nulla vel metus scelerisque ante sollicitudin"
+    }
+]
