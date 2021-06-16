@@ -15,11 +15,15 @@ export default function Categories() {
 
   const [urls, setUrls] = useState([]);
 
-  useEffect(async () => {
+  const fetchCategories = async () => {
     let categories = [];
     categories = await ApiGetService(process.env.REACT_APP_CATEGORY_GET_URL);
     if (categories === null) categories = [];
     setUrls(categories);
+  };
+
+  useEffect(() => {
+    fetchCategories();
   }, []);
 
   return (
