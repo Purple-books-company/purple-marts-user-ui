@@ -24,7 +24,7 @@ function Routes() {
 
   return (
     <Router>
-      {/* <Header /> */}
+      <Header />
       <Search />
       {!logged && <Button onClick={openModal}>Login</Button>}
 

@@ -3,13 +3,20 @@ import styled, { css } from 'styled-components';
 import { DarkShade, LightShade, Silver } from '../themes/color-theme'
 import { TiThMenu } from 'react-icons/ti'
 import { Lora, Slab } from '../themes/font-styles'
-export const LogoImg = styled.img`
-  display: block;
-  object-fit: contain;
-  overflow: hidden;
-  height: 250px;
-  width:250px;
-  margin: -88px 0px -90px 0px;
+import { Image, Navbar, Nav } from 'react-bootstrap'
+
+// logo styles
+export const LogoImg = styled(Image)`
+  height: 12%;
+  width: 12%;
+  @media (min-width:0px) and (max-width:600px){
+    height: 35%;
+    width: 40%;
+  }
+  @media (min-width:600px) and (max-width:1200px){
+    height: 15%;
+    width: 15%;
+  }
 `;
 
 export const LogoBox = styled.div`
@@ -18,58 +25,63 @@ export const LogoBox = styled.div`
   align-content: center;
 `;
 
-export const Nav = styled.nav`
-  @media (min-width:568px){
-    background: #FFF5F8;
-    margin-top: 20px;
-    height: 55px;
-    display: flex;
-    justify-content: space-around;
-    padding: 0.2rem calc((100vw - 1000px) / 2);
-    z-index: 12;     
-  }
-  @media (min-width:0px) and (max-width:568px){
-    display: none;
+// Nav bar styles 
+export const HeaderNav = styled(Navbar)`
+  justify-content: space-around;
+  @media (min-width:0px) and (max-width:1000px){
+    display:none;
   }
 `;
 
-export const NavLink = styled(Link)`
-  color: ${DarkShade};
+export const CartNum = styled.p`
+  margin-left: -5px;
+  margin-top: -15px;
+  background-color: ${DarkShade};
+  color: white; 
+  font-size: 12px !important;
+  padding: 0px 5px;
+  border-radius: 50%;
+  /* :hover{
+    background-color: #B639FF;
+  } */
+`;
+
+export const NavLink = styled(Nav.Link)`
+  color: ${DarkShade} !important;
+  font-family:${Slab};
   display: flex;
-  margin-left: 50px;
+  margin-left: 5rem;
   align-items: center;
   text-decoration: solid;
-  padding: 0 1rem;
+  padding: .7rem;
   height: 100%;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  &.active {
-    color: purple;
-  }
+  
   :hover{
-    color: red;
+    color: #F88989 !important ;
+    ${CartNum}{
+      background-color: #F88989;
+    }
   }
 `;
 
-export const NavMenu = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
 
+// Slider styles
 export const Menu = styled(TiThMenu)`
   display: none;
-  @media (min-width:0px) and (max-width:568px){
+  @media (min-width:0px) and (max-width:1000px){
         display: flex;
         margin-left: 2px;
     }
 `;
 
 export const SliderBtn = styled.p`
-    @media (min-width:0px) and (max-width:568px){
+    @media (min-width:0px) and (max-width:1000px){
         display: flex;
     }
-    @media (min-width:569px){
+    @media (min-width:1000px){
         display: none;
     }
 `;
