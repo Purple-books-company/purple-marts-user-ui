@@ -7,6 +7,7 @@ import {
   ModalWrapper,
   ModalImg,
   ModalContent,
+  Text,
   CloseModalButton,
 } from "../../../styles/pages/authentication";
 import { refreshTokenSetup } from "./components/RefreshTokenSetup";
@@ -72,7 +73,8 @@ const Wrapper = ({ showModal, setShowModal }) => {
               />
 
               <ModalContent className="mx-auto">
-                <h2>Ready for Shopping?</h2>
+                <Text className="mt-3">Ready for Shopping?</Text>
+
                 {loginForm ? (
                   <div style={{ width: "80%" }}>
                     <LoginForm setShowModal={setShowModal} />

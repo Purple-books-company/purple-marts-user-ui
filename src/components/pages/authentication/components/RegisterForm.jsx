@@ -10,8 +10,10 @@ import { DarkShade } from "../../../../styles/themes/color-theme";
 
 const RegisterForm = ({ setLoginForm, setShowModal }) => {
   let initial = {
+    name: "",
     email: "",
     password: "",
+    photo: "",
   };
 
   const [form, setForm] = useState(initial);
@@ -30,6 +32,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const handleSubmit = async (e) => {
     setError("");
+    // console.log(form);
     e.preventDefault();
 
     if (form.email !== "" && form.password !== "") {
@@ -39,14 +42,17 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
         const email = { email: form.email };
         let value = await ApiPostService(process.env.REACT_APP_OTP_URL, email);
         setoriginalOtp(value.otp);
-        // console.log("Response: ", value.otp);
+        console.log("Response: ", value.otp);
       }
     } else setError("Missing fields!");
   };
 
   const verifyOtp = async () => {
     if (originalOtp === Number(inputOtp)) {
-      const res = await ApiPostService(process.env.REACT_APP_REGISTER_URL, form);
+      const res = await ApiPostService(
+        process.env.REACT_APP_REGISTER_URL,
+        form
+      );
       if (res) setShowModal(false);
       else {
         setError("Registration failed!");
@@ -78,7 +84,15 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
     <>
       {!originalOtp ? (
         <Form style={{ width: "80%" }}>
-          <Form.Group className="mb-3 mt-4" controlId="formBasicEmail">
+          <Form.Control
+            className="mb-3 mt-4"
+            type="text"
+            placeholder="Name"
+            value={form.name}
+            onChange={handleChange}
+            name="name"
+          />
+          <Form.Group className="mb-3 mt-2" controlId="formBasicEmail">
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -88,7 +102,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3 mt-4" controlId="formBasicPassword">
+          <Form.Group className="mb-3 mt-2" controlId="formBasicPassword">
             <Form.Control
               type="password"
               placeholder="Password"
@@ -97,12 +111,31 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3 mt-4" controlId="confirmPassword">
+          <Form.Group className="mb-3 mt-2" controlId="confirmPassword">
             <Form.Control
               type="password"
               placeholder=" Confirm Password"
               value={cPass}
               onChange={(e) => setCPass(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label style={{ color: "grey" }}>
+              Choose Profile pic
+            </Form.Label>
+            <Form.Control
+              type="file"
+              style={{ color: "grey" }}
+              value={form.photo}
+              onChange={
+                (e) => console.log(e.target.files[0])
+                // setForm({
+                //   ...form,
+                //   [e.target.name]: e.target.files[0],
+                // })
+              }
+              name="photo"
             />
           </Form.Group>
 

@@ -79,7 +79,8 @@ export const Block = styled.div`
   }
   &:hover {
     cursor: pointer;
-    border: 2px solid black;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
   ${(props) =>
@@ -91,12 +92,13 @@ export const Block = styled.div`
 
       :hover {
         cursor: pointer;
-        border: none;
+        box-shadow: none;
+        transform: scale(1.1);
       }
     `};
 `;
 
 export const Image = styled.img`
-  object-fit: cover;
-  width: 100%;
+  max-width: 80%;
+  height: 90%;
 `;

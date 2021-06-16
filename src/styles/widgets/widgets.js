@@ -15,7 +15,7 @@ export const Button = styled.button`
   height: 40px;
   letter-spacing: 2px;
   padding: 0.25em 1em;
-  font-family: ${Lora}
+  font-family: ${Lora};
   transition: 0.3s;
 
   :hover {
@@ -43,12 +43,11 @@ export const SearchText = styled.span`
 `;
 
 export const Links = styled.div`
-   {
-    margin-top: 5%;
-    color: ${DarkShade};
-    cursor: pointer;
-    :hover {
-      text-decoration: underline;
-    }
+  margin-top:3%;
+  margin-bottom: 5%;
+  color: ${DarkShade};
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
   }
 `;
