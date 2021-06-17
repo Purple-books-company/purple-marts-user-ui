@@ -8,15 +8,32 @@
         "oldprice": 800,
         "newprice": 500,
         "offer":10,
-        "size":["XXL","XL","L","S"],
+        "rating":2.5,
+        "size":[
+            {
+                "label":"XXL",
+                "value":"XXL"
+            },
+            {
+                "label":"XL",
+                "value":"XL"
+            },
+            {
+                "label":"L",
+                "value":"L"
+            },
+            {
+                "label":"S",
+                "value":"S"
+            }
+        ],
         "colors":["red","black","blue","teal"],
-        "count":1,
         "thumb" : "https://picsum.photos/seed/picsum/200/300",
         "src":[
-            "https://picsum.photos/seed/picsum/200/300",
-            "https://picsum.photos/seed/picsum/200/300",
-            "https://picsum.photos/seed/picsum/200/300",
-            "https://picsum.photos/seed/picsum/200/300"
+            "https://rukminim1.flixcart.com/image/416/416/kfikya80-0/headphone/e/o/j/p47-wireless-headphone-bluetooth-with-mic-fm-green-glink-original-imafvyrvg5hqfghx.jpeg?q=70",
+            "https://rukminim1.flixcart.com/image/416/416/kjom6q80-0/headphone/e/j/g/on-ear-wired-headphones-with-microphone-wired-multicolors-dzk-original-imafz7bhc6jfdnwx.jpeg?q=70",
+            "https://rukminim1.flixcart.com/image/416/416/kjrh2fk0/headphone/d/k/i/moonwalk-m1-in-ear-true-wireless-bluetooth-earbuds-with-mic-original-imafz9gfyh6yxew6.jpeg?q=70",
+            "https://rukminim1.flixcart.com/image/416/416/kdvzwcw0-0/headphone/m/k/2/extra-bass-light-weight-headphones-stereo-wired-headphones-rich-original-imafuzrvkhpadgqe.jpeg?q=70"
         ]
 
     }

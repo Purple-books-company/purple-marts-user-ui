@@ -3,7 +3,7 @@ import { FiHeart } from "react-icons/fi";
 import product_card from "../../../../api/Products.json";
 import { Badge, Card, CardImg, CardProductBottomDetails, CardProductDescription, CardProductName, CardProductOffer, CardProductOldprice, CardWishlist } from "../../../../styles/pages/category-styles";
 const listItems = product_card.map((item) => (
-          <Card className="col-xs-6 col-md-4 col-lg-2">
+          <Card className="col-xs-6 col-md-4 col-lg-2" key={item.id}>
               <Badge Status={item.badge}>{item.badge}</Badge>
               <a href="/products">
               <CardImg alt="Card image" className="card-img-top" variant="top" src={item.thumb} /></a>
