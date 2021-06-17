@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import Empty from '../../../assets/images/emptywishlist.jpg'
 const WishList = () => {
     const [item, setItem] = useState(data)
+    useEffect(() => {
+        document.getElementById('wishlist').setAttribute("style", "color:hsla(328, 75%, 45%, 1) !important;");
+    }, [])
 
     useEffect(() => {
         setItem(item)
