@@ -10,7 +10,7 @@ const Carousel = () => {
   ];
 
   return (
-    <div style={{ marginTop: "5%" }}>
+    <div>
       <Promotion
         id="carouselExampleIndicators"
         className="carousel slide carousel-fade"
