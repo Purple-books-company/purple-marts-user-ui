@@ -1,6 +1,6 @@
 import { useState } from "react";
+import PopError from "./PopError";
 import Form from "react-bootstrap/Form";
-import { Redirect } from "react-router-dom";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { Button } from "../../../../styles/widgets/widgets";
 const LoginForm = ({ setShowModal }) => {
@@ -10,6 +10,7 @@ const LoginForm = ({ setShowModal }) => {
   };
 
   const [form, setForm] = useState(initial);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({
@@ -21,13 +22,13 @@ const LoginForm = ({ setShowModal }) => {
   const handleLogin = async (e) => {
     if (form.email !== "" && form.password !== "") {
       e.preventDefault();
-      if (ApiPostService(process.env.REACT_APP_LOGIN_URL, form)) {
+      let res = await ApiPostService(process.env.REACT_APP_LOGIN_URL, form);
+
+      if (res.success) {
         setShowModal(false);
-        return <Redirect to="/" />;
-      }
-    } else {
-      alert("Fill form values..");
-    }
+        window.location.href = "/";
+      } else setError(res.description);
+    } else setError("Missing Fields..");
   };
 
   return (
@@ -51,6 +52,7 @@ const LoginForm = ({ setShowModal }) => {
           onChange={handleChange}
         />
       </Form.Group>
+      <PopError error={error} setError={setError} />
       <center>
         <Button type="submit" style={{ width: "100%" }} onClick={handleLogin}>
           Login

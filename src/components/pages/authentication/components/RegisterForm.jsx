@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { Alert } from "react-bootstrap";
 import OtpInput from "react-otp-input";
 import Countdown from "react-countdown";
-import { RiCloseFill } from "react-icons/ri";
+import PopError from "./PopError";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { Button, Links } from "../../../../styles/widgets/widgets";
 import { DarkShade } from "../../../../styles/themes/color-theme";
@@ -13,7 +12,9 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
     name: "",
     email: "",
     password: "",
-    photo: "",
+    photo:
+      "https://purple.ai/wp-content/uploads/2021/03/Guest-WiFi-WiFi-analytics-product-page-user-line.png",
+    token: 0,
   };
 
   const [form, setForm] = useState(initial);
@@ -53,7 +54,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
         process.env.REACT_APP_REGISTER_URL,
         form
       );
-      if (res) setShowModal(false);
+      if (res.success) setShowModal(false);
       else {
         setError("Registration failed!");
       }
@@ -65,20 +66,6 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
     setoriginalOtp("");
     setInputOtp("");
   };
-
-  const PopError = () => (
-    <span>
-      {error && (
-        <Alert variant="danger">
-          {error}
-          <RiCloseFill
-            style={{ float: "right", fontSize: "auto", marginTop: "5px" }}
-            onClick={() => setError("")}
-          />
-        </Alert>
-      )}
-    </span>
-  );
 
   return (
     <>
@@ -120,26 +107,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label style={{ color: "grey" }}>
-              Choose Profile pic
-            </Form.Label>
-            <Form.Control
-              type="file"
-              style={{ color: "grey" }}
-              value={form.photo}
-              onChange={
-                (e) => console.log(e.target.files[0])
-                // setForm({
-                //   ...form,
-                //   [e.target.name]: e.target.files[0],
-                // })
-              }
-              name="photo"
-            />
-          </Form.Group>
-
-          <PopError />
+          <PopError error={error} setError={setError} />
           <Button
             type="submit"
             style={{ width: "100%" }}
@@ -189,7 +157,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
               <Countdown date={Date.now() + 300000} onComplete={handleTimer} />
             </>
           ) : (
-            <PopError />
+            <PopError error={error} setError={setError} />
           )}
         </div>
       )}
