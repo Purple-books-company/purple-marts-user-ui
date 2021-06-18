@@ -1,10 +1,10 @@
 import React, { Suspense, useState, lazy } from "react";
-import { Button } from "../styles/widgets/widgets";
+import Loading from "../components/utils/loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Home = lazy(() => import("../components/pages/home"));
-const Search = lazy(() => import("../components/utils/Search"));
-const Wrapper = lazy(() => import("../components/pages/authentication/"));
+const Search = lazy(() => import("../components/utils/search"));
+const Errors = lazy(() => import("../components/utils/errors"));
 const Cart = lazy(() => import("../components/pages/cart"));
 const WishList = lazy(() => import("../components/pages/wishList"));
 const Order = lazy(() => import("../components/pages/profile/orders"));
@@ -20,36 +20,41 @@ const Products = lazy(() =>
 );
 const Category = lazy(() => import("../components/pages/Category"));
 
-
-
 function Routes() {
-  const [showModal, setShowModal] = useState(false);
   const [logged, setLogged] = useState(localStorage.getItem("isLogged"));
-
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
 
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         {/* <Header /> */}
+
         <Search />
-        {!logged && <Button onClick={openModal}>Login</Button>}
-
-        <LogOut />
-        <Wrapper showModal={showModal} setShowModal={setShowModal} />
-
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/category" component={Category} />
           <Route path="/products" component={Products} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/wishlist" component={WishList} />
-          <Route path="/profile/order" component={Order} />
-          <Route path="/profile/info" component={Profile} />
-          <Route path="/details" component={OrderDetails} />
         </Switch>
+        {logged ? (
+          <>
+            <LogOut />
+            <Switch>
+              <Route path="/cart" component={Cart} />
+              <Route path="/wishlist" component={WishList} />
+              <Route path="/profile/order" component={Order} />
+              <Route path="/profile/info" component={Profile} />
+              <Route path="/details" component={OrderDetails} />
+              <Route component={Home} />
+            </Switch>
+          </>
+        ) : (
+          <>
+            <Route path="/cart" component={Errors} />
+            <Route path="/wishlist" component={Errors} />
+            <Route path="/profile/order" component={Errors} />
+            <Route path="/profile/info" component={Errors} />
+            <Route path="/details" component={Errors} />
+          </>
+        )}
       </Suspense>
     </Router>
   );
