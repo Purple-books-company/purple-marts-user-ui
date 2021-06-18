@@ -43,7 +43,6 @@ const Wrapper = ({ showModal, setShowModal }) => {
   );
   const responseGoogle = (response) => {
     let res = response.profileObj;
-    alert(`Logged in successfully welcome ${res.name} 😍. `);
     refreshTokenSetup(response);
     const payload = {
       id: res.googleId,
@@ -52,8 +51,10 @@ const Wrapper = ({ showModal, setShowModal }) => {
       name: res.name,
     };
     console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
-    if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload))
+    if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload)) {
       setShowModal(false);
+      alert(`Logged in successfully welcome ${res.name} 😍. `);
+    }
   };
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
   return (
     <>
       {showModal ? (
-        <Background onClick={closeModal} ref={modalRef}>
+        <Background onClick={closeModal} ref={modalRef} className="mx-2">
           <animated.div style={animation}>
             <ModalWrapper showModal={showModal}>
               <ModalImg
@@ -72,7 +73,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
                 alt="camera"
               />
 
-              <ModalContent className="mx-auto">
+              <ModalContent>
                 <Text className="mt-3">Ready for Shopping?</Text>
 
                 {loginForm ? (
