@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { LightShade, DarkShade } from "../themes/color-theme";
 import { Lora } from "../themes/font-styles";
 
@@ -25,8 +25,9 @@ export const Button = styled.button`
   }
 `;
 
+// Search container
 export const SearchContainer = styled.div`
-  margin: 20px;
+  /* margin: 20px; */
   width: 35%;
   float: right;
   @media screen and (max-width: 450px) {
@@ -43,11 +44,11 @@ export const SearchText = styled.span`
 `;
 
 export const Links = styled.div`
-  margin-top:3%;
+  margin-top: 3%;
   margin-bottom: 5%;
   color: ${DarkShade};
   cursor: pointer;
   :hover {
-    text-decoration: underline;
+    font-weight: 500;
   }
 `;

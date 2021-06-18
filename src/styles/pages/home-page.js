@@ -47,6 +47,7 @@ export const Text = styled.div`
     css`
       color: ${DarkShade};
       border: none;
+      padding: 60px 0px;
     `};
   @media screen and (max-width: 450px) {
     line-height: 1.3;

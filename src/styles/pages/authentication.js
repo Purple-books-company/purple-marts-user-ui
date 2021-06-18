@@ -26,24 +26,23 @@ export const Text = styled.span`
   }
 `;
 export const ModalWrapper = styled.div`
-  width: 900px;
-  height: 600px;
+  width: 800px;
+  height: 550px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: relative;
-  z-index: 10;
+  z-index: 3;
   border-radius: 10px;
-  margin-bottom: 10%;
 
   @media screen and (max-width: 540px) {
     grid-template-columns: 0fr 1fr;
-    width: 83%;
-    height: 60%;
+    width: 85%;
+    height: 90%;
     margin: 5%;
-    margin-bottom: 50%;
+    margin-bottom: 10%;
   }
 `;
 
@@ -77,10 +76,9 @@ export const ModalContent = styled.div`
 export const CloseModalButton = styled(MdClose)`
   cursor: pointer;
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 32px;
-  height: 32px;
-  padding: 0;
+  top: 2%;
+  right: 0.0%;
+  width: 10%;
+  height: 5%;
   z-index: 10;
 `;
