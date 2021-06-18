@@ -35,7 +35,8 @@ async function ApiPostService(link, data) {
       },
     });
     if (
-      (link === process.env.REACT_APP_LOGIN_URL || link === process.env.REACT_APP_REGISTER_URL) &&
+      (link === process.env.REACT_APP_LOGIN_URL ||
+        link === process.env.REACT_APP_REGISTER_URL) &&
       localStorage.getItem("isLogged") !== true
     ) {
       storeDetails(res);
@@ -48,7 +49,7 @@ async function ApiPostService(link, data) {
       return res.data;
     } else {
       console.log("Req is not completed. ", res.data.err);
-      return res.data.err;
+      return res.data;
     }
   } catch (error) {
     console.log("Catch error: ", error);
