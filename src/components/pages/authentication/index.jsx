@@ -78,20 +78,10 @@ const Wrapper = ({ showModal, setShowModal }) => {
 
                 {loginForm ? (
                   <div style={{ width: "80%" }}>
-                    <LoginForm setShowModal={setShowModal} />
-                    <center>
-                      <br />
-                      <GoogleLogin
-                        clientId={process.env.REACT_APP_CLIENT_ID}
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        isSignedIn={true}
-                        cookiePolicy={"single_host_origin"}
-                      />
-                      <Links onClick={() => setLoginForm(false)}>
-                        No account? Create One
-                      </Links>
-                    </center>
+                    <LoginForm
+                      setShowModal={setShowModal}
+                      setLoginForm={setLoginForm}
+                    />
                   </div>
                 ) : (
                   <RegisterForm
@@ -99,6 +89,20 @@ const Wrapper = ({ showModal, setShowModal }) => {
                     setShowModal={setShowModal}
                   />
                 )}
+
+                <center>
+                  <GoogleLogin
+                    clientId={process.env.REACT_APP_CLIENT_ID}
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    isSignedIn={true}
+                    buttonText={
+                      loginForm ? "Sign in Google" : "Sign up with Google"
+                    }
+                    cookiePolicy={"single_host_origin"}
+                    className="mt-2"
+                  />
+                </center>
               </ModalContent>
 
               <CloseModalButton

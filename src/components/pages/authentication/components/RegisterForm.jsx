@@ -18,10 +18,11 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
   };
 
   const [form, setForm] = useState(initial);
+  const [timer, setTimer] = useState(0);
 
   const [cPass, setCPass] = useState("");
   const [error, setError] = useState("");
-  const [originalOtp, setoriginalOtp] = useState("");
+  const [originalOtp, setOriginalOtp] = useState("");
   const [inputOtp, setInputOtp] = useState(0);
 
   const handleChange = (e) => {
@@ -33,7 +34,6 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const handleSubmit = async (e) => {
     setError("");
-    // console.log(form);
     e.preventDefault();
 
     if (form.email !== "" && form.password !== "") {
@@ -42,13 +42,15 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
       else {
         const email = { email: form.email };
         let value = await ApiPostService(process.env.REACT_APP_OTP_URL, email);
-        setoriginalOtp(value.otp);
-        console.log("Response: ", value.otp);
+        setTimer(Date.now() + 300000);
+        setOriginalOtp(value.otp);
+        // console.log("Response: ", value.otp);
       }
     } else setError("Missing fields!");
   };
 
-  const verifyOtp = async () => {
+  const verifyOtp = async (e) => {
+    e.preventDefault();
     if (originalOtp === Number(inputOtp)) {
       const res = await ApiPostService(
         process.env.REACT_APP_REGISTER_URL,
@@ -56,14 +58,17 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
       );
       if (res.success) setShowModal(false);
       else {
-        setError("Registration failed!");
+        setError("User already exists.");
+        setInputOtp("");
+        setOriginalOtp("");
       }
     } else setError("Invalid otp!");
   };
 
-  const handleTimer = () => {
+  const handleTimer = (e) => {
+    e.preventDefault();
     setError("Time's Up!!");
-    setoriginalOtp("");
+    setOriginalOtp("");
     setInputOtp("");
   };
 
@@ -96,6 +101,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
               name="password"
               value={form.password}
               onChange={handleChange}
+              minLength="8"
             />
           </Form.Group>
           <Form.Group className="mb-3 mt-2" controlId="confirmPassword">
@@ -107,7 +113,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
             />
           </Form.Group>
 
-          <PopError error={error} setError={setError} />
+          <PopError error={error} setError={setError} color="danger" />
           <Button
             type="submit"
             style={{ width: "100%" }}
@@ -154,10 +160,10 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
           {!error ? (
             <>
               <h6 style={{ color: "red" }}>Your time ends in:</h6>
-              <Countdown date={Date.now() + 300000} onComplete={handleTimer} />
+              <Countdown date={timer} onComplete={handleTimer} />
             </>
           ) : (
-            <PopError error={error} setError={setError} />
+            <PopError error={error} setError={setError} color="danger" />
           )}
         </div>
       )}

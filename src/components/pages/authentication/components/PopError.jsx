@@ -1,12 +1,12 @@
 import { Alert } from "react-bootstrap";
 import { RiCloseFill } from "react-icons/ri";
-const PopError = ({error, setError}) => (
+const PopError = ({ error, setError, color }) => (
   <span>
     {error && (
-      <Alert variant="danger">
+      <Alert variant={color}>
         {error}
         <RiCloseFill
-          style={{ float: "right", fontSize: "auto", marginTop: "5px" }}
+          style={{ float: "right", marginTop: "5px" }}
           onClick={() => setError("")}
         />
       </Alert>
