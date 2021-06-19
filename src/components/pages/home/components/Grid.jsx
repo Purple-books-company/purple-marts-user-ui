@@ -1,5 +1,6 @@
 import { DarkShade } from "../../../../styles/themes/color-theme";
-import { Block, Caption, Text } from "../../../../styles/pages/home-page";
+import { Text } from "../../../../styles/widgets/widgets";
+import { Block, Caption } from "../../../../styles/pages/home-page";
 
 const Grid = () => {
   const gridImg = [

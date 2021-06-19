@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { Block, Image, Text } from "../../../../styles/pages/home-page";
+import { Block, Image } from "../../../../styles/pages/home-page";
+import { Text } from "../../../../styles/widgets/widgets";
 import { ApiGetService } from "../../../../services/api/api-services";
 
 export default function Categories() {

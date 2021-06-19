@@ -1,4 +1,5 @@
-import { Promotion, Box, Text } from "../../../../styles/pages/home-page";
+import { Promotion, Box } from "../../../../styles/pages/home-page";
+import { Text } from "../../../../styles/widgets/widgets";
 import Sale1 from "../../../../assets/images/Sale1.png";
 import Sale2 from "../../../../assets/images/Sale2.png";
 import Sale3 from "../../../../assets/images/Sale3.png";
