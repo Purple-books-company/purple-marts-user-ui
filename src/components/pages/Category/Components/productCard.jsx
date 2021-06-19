@@ -1,13 +1,15 @@
 import React,{useState,useEffect} from 'react';
 import { GrFormPreviousLink,GrFormNextLink } from 'react-icons/gr';
-import {Carousel} from "react-bootstrap";
+import {Carousel,Form} from "react-bootstrap";
 import { FiHeart } from "react-icons/fi";
+import { FaStar,FaRegStar } from "react-icons/fa";
 import product from "../../../../api/SingleProduct.json";
-import similarproduct from "../../../../api/SimilarProducts.json";
+import product_card from "../../../../api/Products.json";
 import Ratingreview from "../../../../api/RatingReview.json";
-import {Badge, Card, CardImg, CardProductBottomDetails, CardProductDescription, CardProductName, CardProductOffer, CardProductOldprice, CardWishlist,ProductNameDetail,ProductPriceDetail,ProductOldPriceDetail, ProductOfferDetail,ProductColorDetail,QtyBtn} from '../../../../styles/pages/category-styles';
+import {Badge, Card, CardImg, CardProductBottomDetails, CardProductDescription, CardProductName, CardProductOffer, CardProductOldprice, CardWishlist,ProductNameDetail,ProductPriceDetail,ProductOldPriceDetail, ProductOfferDetail,ProductColorDetail,QtyBtn, ProductSubDetail, ProductWriteReview,FormControl,Caro, CartButton, WishlistButton,Similar} from '../../../../styles/pages/category-styles';
 import { Button } from '../../../../styles/widgets/widgets';
 import StarRatings from 'react-star-ratings';
+import Rating from "react-rating";
 import { Lora } from '../../../../styles/themes/font-styles';
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { LightShade } from '../../../../styles/themes/color-theme';
@@ -16,24 +18,25 @@ const Card2 = () => {
 	const [selectedOption, setSelectedOption] = useState('XXL');
 	const [selectedColor, setSelectedColor] = useState('');
 	const [Quantity, setQuantity] = useState(1);
+	const [rating, setRating] = useState(0);
 	console.log(selectedOption);
 	console.log(selectedColor);
 	console.log(Quantity);
+	console.log(rating);
 	function handleColor(e){
 			setSelectedColor(e.target.style.background);		
 	}
 	const RatingReviewlist = Ratingreview.map((item) => (
 		<div className="row mb-4">
 			<div className="media">
-			<div className="media-body">
-				<h5 className="mt-1">{item.review_heading}
-				<StarRatings rating={item.rating} starDimension="25px" starSpacing="2px" starRatedColor="gold" starEmptyColor="gray"/>
-				</h5>
-				{item.review_description}</div>
+			<div className="d-lg-flex">
+				<h5 className="mt-1" style={{marginRight:'20px'}}>{item.review_heading}</h5>
+				<StarRatings rating={item.rating} starDimension="25px" starSpacing="2px" starRatedColor="gold" starEmptyColor="gray"/></div>
+				{item.review_description}
 			</div>
   		</div>
 	));
-	const Similarlist = similarproduct.map((item) => (
+	const Similarlist = product_card.slice(0,5).map((item) => (
 		<Card className="col-xs-6 col-md-4 col-lg-2" key={item.id}>
 			<Badge Status={item.badge}>{item.badge}</Badge>
 			<a href="/products">
@@ -54,7 +57,7 @@ const Card2 = () => {
 		<div className="container">
 			<div className="row">
 		 		<div className="col-xs-6 col-md-6 col-lg-6" style={{marginTop:'8%'}}>
-          			<Carousel prevLabel='' nextLabel='' nextIcon={<GrFormNextLink style={{fontSize:'30px',fontWeight:'bolder',backgroundColor:`${LightShade}`,borderRadius:'50%',padding:'2px'}}/>} 
+          			<Caro prevLabel='' nextLabel='' nextIcon={<GrFormNextLink style={{fontSize:'30px',fontWeight:'bolder',backgroundColor:`${LightShade}`,borderRadius:'50%',padding:'2px'}}/>} 
 						prevIcon={<GrFormPreviousLink style={{fontSize:'30px',fontWeight:'bolder',backgroundColor:`${LightShade}`,borderRadius:'50%',padding:'2px'}}/>}>
 						{
 							item.src.map(img => (
@@ -63,7 +66,7 @@ const Card2 = () => {
 								</Carousel.Item>	
 							))
 						}
-            		</Carousel>
+            		</Caro>
 		  		</div>
 		  		<div className="col-xs-6 col-md-6 col-lg-6">
 					<div className="row">
@@ -141,26 +144,62 @@ const Card2 = () => {
 				</div>
 			</div>
 			<div className="row mt-2">
-				<Button style={{marginLeft:'125px'}}>Add to Cart</Button>
-				<Button style={{marginLeft:'30px'}}>Add to Wishlist</Button>
+				<CartButton style={{paddingLeft:'25%'}} className="col-xs-12 col-md-6">
+				<Button>Add to Cart</Button>
+				</CartButton><br/>
+				<WishlistButton className="col-xs-12 col-md-6">
+				<Button>Add to Wishlist</Button>
+				</WishlistButton>
 			</div>
 		  </div>
 		</div>
 	  </div>
 	  <div className="container">
-		<div className="row mt-5">
-			<ProductNameDetail>Similar Products</ProductNameDetail>
+		<div className="row mt-2">
+			<ProductSubDetail>Similar Products</ProductSubDetail>
+		</div>
+		<Similar className="row d-flex">
+			{Similarlist}
+		</Similar>
+	  </div>
+	  <div className="container">
+		<div className="row">
+			<ProductSubDetail>Reviews And Ratings</ProductSubDetail>
 		</div>
 		<div className="row d-flex">
-			{Similarlist}
+			{RatingReviewlist}
 		</div>
 	  </div>
 	  <div className="container">
 		<div className="row">
-			<ProductNameDetail>Reviews And Ratings</ProductNameDetail>
+			<ProductWriteReview>Give Review & Rating</ProductWriteReview>
 		</div>
 		<div className="row d-flex">
-			{RatingReviewlist}
+		<Form style={{width:'70%'}}>
+			<Form.Group className="mb-3" controlId="formBasicEmail">
+				<Form.Label>Overall Rating</Form.Label>
+				<div style={{color:'gold',fontSize:'26px'}} className="row">
+				<Rating
+					fractions={2}
+					emptySymbol={<FaRegStar/>}
+					fullSymbol={<FaStar/>}
+					initialRating={rating}
+					onClick={rate => setRating(rate)}
+				/>
+				</div>
+			</Form.Group>
+			<Form.Group className="mb-3" controlId="ReviewTitle">
+				<Form.Label>Review Title</Form.Label>
+				<FormControl className="form-control" type="text" placeholder="Enter Review Title" />
+			</Form.Group>
+			<Form.Group className="mb-3" controlId="ReviewDescription">
+				<Form.Label>Review Description</Form.Label>
+				<FormControl className="form-control" as="textarea" placeholder="Enter Review Description" rows={3} />
+			</Form.Group>
+			<Button type="submit">
+				Submit Review
+			</Button>
+		</Form>
 		</div>
 	  </div>
    </div>

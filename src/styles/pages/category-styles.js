@@ -1,5 +1,6 @@
 import styled,{css} from "styled-components";
 import { Lora, Slab } from "../themes/font-styles";
+import {Carousel} from "react-bootstrap";
 
 export const SidebarWrapper = styled.div`
      min-height: 20vh;
@@ -350,10 +351,12 @@ export const CardProductOffer = styled.div`
     }
 `;
 
-export const CardWishlist = styled.a`
+export const CardWishlist = styled.button`
      text-align:center;
      display:inline-block;
      padding-left:8px;
+     border: none;
+     background-color: white;
      padding-bottom:3px;
      margin-left:5px;
      font-size:22px;
@@ -376,11 +379,17 @@ export const ProductNameDetail = styled.h2`
      font-size:25px;
      text-transform:uppercase;
      font-family: ${Slab};
+     @media screen and (max-width:568px){
+          margin-top: -25%;
+    }
 `;
 
 export const ProductPriceDetail = styled.h4`
      font-size:20px;
      font-family:${Lora};
+     @media screen and (max-width:568px){
+          margin-top: -5%;
+    }
 `;
 
 export const ProductOldPriceDetail = styled.del`
@@ -407,6 +416,9 @@ export const ProductColorDetail = styled.button`
      &.active{
           border: 4px solid plum;
      }
+     @media screen and (max-width:568px){
+          width: 7%;
+    }
 `;
 
 export const QtyBtn = styled.button`
@@ -414,8 +426,81 @@ export const QtyBtn = styled.button`
     background: none;
     display: flex;
     font-size: 18px;
+    margin-top: 3px;
     :hover{
         color:purple;
     }
 `;
 
+export const ProductSubDetail = styled.h2`
+     padding-top :2%;
+     padding-bottom: 5px;
+     font-size:25px;
+     text-transform:uppercase;
+     font-family: ${Lora};
+     @media screen and (max-width:568px){
+          font-size: 23px;
+    }
+`;
+
+export const ProductWriteReview = styled.h3`
+     padding-bottom: 5px;
+     font-size:22px;
+     text-transform:uppercase;
+     font-family: ${Lora};
+`;
+
+export const FormControl = styled.input`
+     :focus{
+          box-shadow: 0 0 4px 0 plum;
+          border: 1px solid plum;
+     }
+`;
+
+export const Caro = styled(Carousel)`
+     @media screen and (max-width:568px){
+          overflow: hidden;
+          object-fit: contain;
+          width: 85%;
+          height: 90%;
+          margin-top: -10%;
+    }
+`;
+
+export const CartButton  = styled.div`
+     @media screen and (max-width:568px){
+          padding:0;
+    }
+`;
+
+export const WishlistButton  = styled.div`
+     @media screen and (max-width:568px){
+          margin-left: 15%;
+          padding-top: 2px;
+    }
+`;
+
+export const Similar = styled.div`
+     @media screen and (max-width:568px){
+          justify-content: center;
+    }
+`;
+
+export const TopButton = styled.div`
+     position: fixed;
+     width: 100%;
+     left: 89%;
+     bottom: 40px;
+     height: 20px;
+     font-size: 2rem;
+     z-index: 1;
+     cursor: pointer;
+     color: plum;
+     display: none;
+     :hover{
+          color: purple;
+     }
+     @media screen and (max-width:568px){
+          display: inline;
+    }
+`;
