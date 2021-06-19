@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Center } from "../../../styles/widgets/positioning";
-import { Button } from "../../../styles/widgets/widgets";
-import { Text } from "../../../styles/pages/home-page";
+import { Button, Text } from "../../../styles/widgets/widgets";
 import Wrapper from "../../pages/authentication";
 
 const Error = () => {
