@@ -282,7 +282,6 @@ export const CardImg = styled.img`
      @media screen and (max-width:568px){
           height: 30vw;
           margin-top: 5px;
-          width: 120px;
     }
 `;
 
