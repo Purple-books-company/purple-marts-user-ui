@@ -12,10 +12,6 @@ export const Background = styled.div`
   align-items: center;
   z-index: 3;
 `;
-export const Seperator = styled.span`
-  margin: 0 auto;
-`;
-
 export const Text = styled.span`
   font-size: x-large;
   font-weight: bold;
@@ -27,7 +23,7 @@ export const Text = styled.span`
 `;
 export const ModalWrapper = styled.div`
   width: 800px;
-  height: 550px;
+  height: auto;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
@@ -56,14 +52,15 @@ export const ModalImg = styled.img`
 export const ModalContent = styled.div`
   display: flex;
   width: 100%;
+  height: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   line-height: 1.8;
   color: #141414;
-  p {
+  /* p {
     margin-bottom: 1rem;
-  }
+  } */
 
   // button {
   //   padding: 10px 24px;
@@ -77,7 +74,7 @@ export const CloseModalButton = styled(MdClose)`
   cursor: pointer;
   position: absolute;
   top: 2%;
-  right: 0.0%;
+  right: 0%;
   width: 10%;
   height: 5%;
   z-index: 10;

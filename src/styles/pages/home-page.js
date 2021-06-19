@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { DarkShade, LightShade, Silver } from "../themes/color-theme";
-import { Lora, Slab } from "../themes/font-styles";
+import { LightShade, Silver } from "../themes/color-theme";
+import { Slab } from "../themes/font-styles";
 
 // Home page carousel styling
 
@@ -30,30 +30,6 @@ export const Box = styled.div`
   }
   :hover {
     cursor: pointer;
-  }
-`;
-
-export const Text = styled.div`
-  color: white;
-  font-family: ${Lora};
-  text-align: center;
-  letter-spacing: 3px;
-  line-height: 1.6;
-  font-size: 20px;
-  padding: 60px 20px;
-  border: 4px solid ${Silver};
-  ${(props) =>
-    props.primary &&
-    css`
-      color: ${DarkShade};
-      border: none;
-      padding: 60px 0px;
-    `};
-  @media screen and (max-width: 450px) {
-    line-height: 1.3;
-    letter-spacing: 4px;
-    font-size: 7px;
-    padding: 20px 10px;
   }
 `;
 
