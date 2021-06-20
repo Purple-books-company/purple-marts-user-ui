@@ -5,16 +5,20 @@ import { Text } from "../../../../styles/widgets/widgets";
 import { ApiGetService } from "../../../../services/api/api-services";
 
 export default function Categories() {
-  var settings = {
+  const [urls, setUrls] = useState([]);
+
+  let slides;
+  if (urls.length >= 5) slides = 5;
+  else slides = urls.length % 5;
+
+  let settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: slides,
     slidesToScroll: 1,
     swipeToSlide: true,
   };
-
-  const [urls, setUrls] = useState([]);
 
   const fetchCategories = async () => {
     let categories = [];
@@ -25,12 +29,12 @@ export default function Categories() {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [urls]);
 
   return (
     <>
       <center>
-        <Text primary>CATEGORIES TO BAG</Text>
+        <Text primary>CATEGORIES TO BAG </Text>
         <div className="container" style={{ marginTop: "10px" }}>
           <div className="row">
             <Slider {...settings}>
