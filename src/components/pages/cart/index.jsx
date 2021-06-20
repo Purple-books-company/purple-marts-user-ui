@@ -14,6 +14,12 @@ const Cart = () => {
     const [shipping, setShipping] = useState(0)
     const [empty, setEmpty] = useState(0)
     const [cod, setCod] = useState(false)
+    const [del, setDel] = useState(true)
+
+    useEffect(() => {
+        document.getElementById('cart').setAttribute("style", "color:hsla(328, 75%, 45%, 1) !important;");
+        document.getElementById('cartnum').setAttribute("style", "background-color:hsla(328, 75%, 45%, 1) !important;");
+    }, [])
 
     useEffect(() => {
         setItem(item)
@@ -60,7 +66,16 @@ const Cart = () => {
                                     return (
                                         <CartItemBox className="mt-3 pl-5 border-bottom" key={product.id}>
                                             <CartDetail ><Image src={product.url} /></CartDetail>
-                                            <CartDetail align="left">{product.productName}</CartDetail>
+                                            <CartDetail align="left">
+                                                {product.productName} <br />
+                                                {
+                                                    // delivery amount for each product and if our condition is satisfy its been free delivery
+                                                    true ?
+                                                        <p style={{ marginLeft: '2%' }}>| ₹40</p>
+                                                        :
+                                                        <del style={{ marginLeft: '2%' }}>| ₹40</del>
+                                                }
+                                            </CartDetail>
                                             <CartDetail >₹{product.price}</CartDetail>
                                             <CartDetail className="form-inline" type="Quantity">
                                                 <QtyBtn
@@ -110,7 +125,7 @@ const Cart = () => {
                                         :
                                         <FaCheckCircle color="red" className="mx-2" onClick={payMethod} />
                                 }
-                        Pay By Online</span>
+                                Pay By Online</span>
                             <br /><br />
                             <span className="m-3 mt-5">
                                 {
@@ -118,8 +133,8 @@ const Cart = () => {
                                         : <BiCircle color="gray" className="mx-2" onClick={payMethod} />
 
                                 }
-                        Cash on delivery
-                    </span>
+                                Cash on delivery
+                            </span>
                         </div>
                         <div className="col-5 ml-5" style={{ alignContent: 'right' }}>
                             <span className="row">

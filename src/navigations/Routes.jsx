@@ -22,6 +22,7 @@ function Routes() {
 
   return (
     <Router>
+
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category} />
