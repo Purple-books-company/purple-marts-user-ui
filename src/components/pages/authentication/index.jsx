@@ -13,7 +13,6 @@ import {
 import { refreshTokenSetup } from "./components/RefreshTokenSetup";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
-import { Links } from "../../../styles/widgets/widgets";
 
 const Wrapper = ({ showModal, setShowModal }) => {
   const [loginForm, setLoginForm] = useState(true);

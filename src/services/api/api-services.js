@@ -1,5 +1,5 @@
 import axios from "axios";
-import { retriveDetails, storeDetails } from "../storage/details";
+import { storeDetails } from "../storage/details";
 
 async function ApiGetService(link) {
   let url = process.env.REACT_APP_API + link;
