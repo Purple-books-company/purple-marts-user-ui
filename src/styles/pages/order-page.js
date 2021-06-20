@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import {Lora , Slab} from '../themes/font-styles'
-import {LightShade, DarkShade, Silver} from "../themes/color-theme"
+import {LightShade, DarkShade} from "../themes/color-theme"
 
 export const TabHead= styled.thead`
     background-color: ${LightShade};
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-family: ${Slab};
     color:white;
     text-align:center;
@@ -14,9 +14,10 @@ export const TabHead= styled.thead`
 
 export const TabBody = styled.tbody`
     white-space: pre-line;
-    font-size: 13px;
+    font-size: 0.9rem;
     font-weight:700;
     color: ${DarkShade};
+    background-color: #fff;
     font-family: ${Lora};
     text-align:center;
     vertical-align: middle !important;
@@ -24,13 +25,15 @@ export const TabBody = styled.tbody`
 
 export const Tab = styled.div`
     padding: 20px;
-    background-color: #fff;
+    @media (min-width:0px) and (max-width:766px){
+        padding: 20px 0;
+    }
 `;
 
 export const Para=styled.p`
     margin:0px;
+    font-family: ${Lora};
     font-weight: 600;
-    color:grey;
 `;
 
 export const Head = styled.h1`
@@ -43,16 +46,17 @@ export const Head = styled.h1`
 const StatusColor = status =>{
     switch (status) {
         case "Delivered":
-            return "green";
+            return "4EDC07";
         case "Dispatched":
-            return "blue";
+            return "1E14F7";
         default:
-            return "red";
+            return "F83535";
     }
 };
 
 export const StyleStatus =styled.h5`
-    color: ${({ status }) => StatusColor(status)};
+    font-family : ${Lora};
+    color: #${({ status }) => StatusColor(status)};
     text-align:center;
     vertical-align: middle !important;
     font-weight: 900;

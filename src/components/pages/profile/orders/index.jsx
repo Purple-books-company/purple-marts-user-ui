@@ -1,39 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {Container, Table, Row, Col } from "react-bootstrap"; 
 import {TabBody, TabHead, Tab, Para, StyleStatus} from '../../../../styles/pages/order-page'
-import { MdPictureAsPdf } from "react-icons/md"
-import { VscSync } from 'react-icons/vsc'
 import data from "../../../../api/Orders.json"
-import { BiSearchAlt2 } from "react-icons/bi";
-import {Lora , Slab} from '../../../../styles/themes/font-styles'
+import {Slab} from '../../../../styles/themes/font-styles';
+import  SideNav  from '../SideNav';
+import {NavDiv, ProfileLink} from '../../../../styles/pages/profile-page';
 
 function Order() {
 
-    let styles={
-        float:'right',
-        zIndex:'10',
-        fontSize:'20px'
-    };
     let StatusStyle={
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         textAlign: 'center',
         verticalAlign: 'middle'
-    };
-    let IconStyle={
-        fontSize:'30px',
-        display: 'flex',
-        justifyContent: 'center',
-        margin: 'auto',
-        alignItems: 'center'
     };
     
     const [order, setOrder] = useState(data)
     
     const tabBody = order.map((id) =>
-        <tr>
-            <td>{id.orderRef}</td>
+        <tr>            
+            <td><ProfileLink to='../details'>{id.orderRef}</ProfileLink></td>
             <td>{id.orderDate}</td>
             <td>{id.deliveryDate}</td>
             <td>₹.{id.total}</td>
@@ -42,35 +26,50 @@ function Order() {
             <td style={StatusStyle}><StyleStatus status={id.status}>{id.status}</StyleStatus>
                 {/* <StyledButton className=" shadow-none " status={id.status}>{id.status}</StyledButton> */}
                 </td>
-            <td><a href={id.invoice}><MdPictureAsPdf style={IconStyle}/></a></td>
-            <td><a>Details</a><br/>
-            <a>Reorder</a></td>
+            {/* <td><a href={id.invoice}><MdPictureAsPdf style={IconStyle}/></a></td> */}
+            {/* <td><a>Details</a><br/>
+            <a>Reorder</a></td> */}
         </tr>
     );
 
     const tab = order.map((id) =>
         <div>
-            <BiSearchAlt2 style={styles}/>
-            <Para>{id.orderRef}</Para>
-            <VscSync style={styles}/>
-            <Para>{id.orderDate}</Para>
-            <Para>{id.deliveryDate}</Para>
-            <Para>₹.{id.total}</Para>
-            <Para>{id.noItems}</Para>
-            <StyleStatus style={{float:"left"}} status={id.status}>{id.status}</StyleStatus><br/>
+            <ProfileLink to='../details'>
+                <Row>
+                    <Col xs={4}>
+                        <Para>OrderRef</Para>
+                        <Para>Ordered on</Para>
+                        <Para>Est. Delivery</Para>
+                        <Para>Total</Para>
+                        <Para>{id.noItems} items</Para>
+                    </Col>
+                    <Col xs={2} style={{textAlign:'center'}}>
+                        <Para>:</Para>
+                        <Para>:</Para>
+                        <Para>:</Para>
+                        <Para>:</Para>
+                    </Col>
+                    <Col >
+                        <Para>{id.orderRef}</Para>
+                        <Para>{id.orderDate}</Para>
+                        <Para>{id.deliveryDate}</Para>
+                        <Para>₹.{id.total}</Para>
+                        <StyleStatus style={{float:"left"}} status={id.status}>{id.status}</StyleStatus><br/>
+                    </Col>
+                </Row>
+            {/* <Para>{id.noItems} items</Para>
+            <StyleStatus style={{float:"left"}} status={id.status}>{id.status}</StyleStatus><br/> */}
+            </ProfileLink>
             <hr />
         </div>
     );
     return (
-        <Container fluid>
+        <Container fluid style={{ clear:'both' }}>
             <Row>
-                <Col xs={2} className="m-auto d-none d-lg-block">
-                    <img
-                    className="img-fluid"
-                    src="https://demo.codezeel.com/prestashop/PRS16/PRS160380/PRS01/modules/cz_leftbanner/views/img/left-banner-1.jpg"
-                    alt="temporary placeholder" />
-                </Col>
-                <Col xs={10} id="as" className="d-none d-lg-block">
+                <SideNav />
+
+                <Col xs={10} id="as" className="d-none d-md-block">
+                    <NavDiv type='main'>
                     <h4 style={{fontFamily:Slab}} >Order History</h4>
                     <Tab>
                         <h5 style={{fontFamily:Slab}}>Here are the orders you've placed since your account was created.</h5>
@@ -90,8 +89,8 @@ function Order() {
                                     <td>Payment<br />
                                         Method</td>
                                     <td>Status</td>
-                                    <td>Invoice</td>
-                                    <td></td>
+                                    {/* <td>Invoice</td> */}
+                                    {/* <td></td> */}
                                 </tr>
                             </TabHead>
                             <TabBody>
@@ -100,10 +99,11 @@ function Order() {
                         </Table>
                     </Tab>
                     <br />
+                    </NavDiv>
                 </Col>
             </Row>
-            <div className="d-lg-none">
-                <h5 style={{fontFamily:Slab}} >Order History</h5>
+            <div className="d-md-none">
+                <h5 style={{fontFamily:Slab, margin:'10px 0 0'}} >Order History</h5>
                 <Tab>
                     <h6 style={{fontFamily:Slab}}>Here are the orders you've placed since your account was created.</h6>
                     {tab}
