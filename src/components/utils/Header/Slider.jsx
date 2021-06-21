@@ -10,7 +10,7 @@ import {
 } from "../../../styles/pages/header";
 import { NavLink as Link } from 'react-router-dom';
 import { AiOutlineHeart, AiOutlineRight } from 'react-icons/ai'
-import {  RiDashboardFill, RiHome2Fill, RiHome3Line } from 'react-icons/ri'
+import { RiDashboardFill, RiHome2Fill, RiHome3Line } from 'react-icons/ri'
 import { FaOpencart, FaUserAlt, FaUserCircle, } from 'react-icons/fa'
 import { useState } from "react";
 import { FiLogOut } from "react-icons/fi";
@@ -20,13 +20,13 @@ const Slider = () => {
     return (
         <>
             <SliderBtn
-                className="btn sticky-top"
+                className="btn fixed-top"
                 data-bs-toggle="offcanvas"
                 href="#offcanvasExample"
                 role="button"
                 aria-controls="offcanvasExample"
             >
-                <Menu size="28" className="sticky-top" />
+                <Menu size="28" className="sticky-top bg-light" />
             </SliderBtn>
             <div
                 className="offcanvas offcanvas-start w-75"

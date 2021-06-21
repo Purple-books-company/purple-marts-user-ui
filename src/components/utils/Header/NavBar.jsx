@@ -1,45 +1,44 @@
 import React, { useState } from 'react';
 import {
-    Nav,
+    HeaderNav,
     NavLink,
-    NavMenu,
-    LogoImg,
-    LogoBox
+    CartNum
 } from '../../../styles/pages/header';
-import logo from '../../../assets/images/PM_logo.png'
-import data from '../../../api/navbarDetails.json'
-import Slider from './Slider'
-import { Dropdown } from 'react-bootstrap'
+// import data from '../../../api/navbarDetails.json'
+import { Nav } from 'react-bootstrap'
+import { MdShoppingCart } from 'react-icons/md'
 
-const Navbar = () => {
-    const [log, setLog] = useState(false)
-    const [navData, setNavData] = useState(data)
-    const [dropShow, setDropShow] = useState(false)
-
+const NavBar = () => {
+    const [logged, setLogged] = useState(true)
     return (
         <>
+            <HeaderNav bg="light" expand="lg" className="sticky-top">
 
-            <LogoBox >
-                <LogoImg src={logo} alt="" />
-            </LogoBox>
-            <Slider />
-            <Nav className="sticky-top">
-                <NavMenu>
-                    <NavLink to="/" activeStyle >Home</NavLink>
-                    <NavLink to="/category" activeStyle>category</NavLink>
-                    <NavLink to="/" activeStyle >Custom Product</NavLink>
-                    <NavLink to="/cart" activeStyle >Cart</NavLink>
-                    <NavLink to="/wishlist" activeStyle >Wishlist</NavLink>
+                <Nav
+                    className="my-lg-0"
+                    navbarScroll
+                >
+                    <NavLink href='/' >Home</NavLink>
+                    <NavLink href='/category' >category</NavLink>
+                    <NavLink href='/custom' >custom products</NavLink>
                     {
-                        log ?
-                            <NavLink to="/profile/info" activeStyle >Profile</NavLink>
+                        logged ?
+                            <>
+                                <NavLink href='/profile/order' >my orders</NavLink>
+                                <NavLink id="wishlist" href='/wishlist' >Wishlist</NavLink>
+                                <NavLink id="cart" href='/cart' ><MdShoppingCart size="27" />
+                                    <CartNum id="cartnum">2</CartNum>
+                                </NavLink>
+                                <NavLink href='/profile/info'  >Profile</NavLink>
+                            </>
                             :
-                            <NavLink to="/login" activeStyle >Login</NavLink>
+                            <NavLink href='/auth/login' >login</NavLink>
                     }
-                </NavMenu>
-            </Nav>
+
+                </Nav>
+            </HeaderNav>
         </>
     );
 };
 
-export default Navbar;
+export default NavBar;
