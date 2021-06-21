@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 import { Lora, Slab } from '../themes/font-styles';
-import { Card } from 'react-bootstrap';
+import { Card , Col } from 'react-bootstrap';
 
 export const Image = styled.img`
     object-fit: contain;
@@ -16,38 +16,37 @@ export const Image = styled.img`
 `;
 
 export const TabHead = styled.thead`
-    font: 20px ${Slab};
-    font-weight: 700;
+    font: 1.25rem ${Slab};
+    font-weight: 500;
     text-align:center;
     @media (min-width:0px) and (max-width:568px){
-        font: 15px ${Lora};
+        font: 0.9rem ${Lora};
         font-weight: 700;   
     }
 `;
 
 export const TabData = styled.td`
-    font: 16px ${Slab};
+    font: 1rem ${Slab};
     text-align: center;
     @media (min-width:0px) and (max-width:568px){
-        font-size : 14px;
+        font-size : 0.9rem;
+        padding:0.3rem 0;
     }
-    /* padding-bottom: 7px; */
 
     ${props => props.width === "etc" && css`
         width: 80px;
 
         @media (min-width:0px) and (max-width:568px){
-            width : 70px;
+            width : 58px;
         }
     `}
     
     ${props => props.font === "small" && css`
-        font-size:13px !important;
+        font-size:0.89rem !important;
         @media (min-width:0px) and (max-width:568px){
             font-size : 11px;
         }
     `}
-
 
     ${props => props.font === "none" && css`
         font-family:system-ui;
@@ -59,8 +58,8 @@ export const TabData = styled.td`
 
     ${props => props.float === "left" && css`
         float: left;
-        font-size: 16px;
-        font-weight: bold;
+        font-size: 1rem;
+        font-weight: 600;
     `}
 
     ${props => props.float === "right" && css`
@@ -82,13 +81,20 @@ export const Header = styled.h5`
     ${props => props.align === "right" && css`
         text-align: right;
         color:purple;
+        padding: 7px 7px 0 0;
+        @media (min-width:0px) and (max-width:568px){
+            padding-right:0;
+        }
+        @media (min-width:568px) and (max-width:991px){
+            margin-bottom:1rem !important;
+        }
     `}
     ${props => props.font === "small" && css`
         font-size: 14px;
         font-weight: 400;
     `}
-    @media (min-width:0px) and (max-width:568px){
-        font-size:18px;
+    @media (min-width:0px) and (max-width:766px){
+        font-size:1.2rem;
     }
 `;
 
@@ -123,4 +129,28 @@ export const Link= styled.a`
     :visited{
         color:blue;
     };
+`;
+
+export const StyledCol=styled(Col)`
+    ${props => props.paddindR === "true" && css`
+        padding-right:0.25rem;
+        @media (min-width:0px) and (max-width:568px){
+            padding-right:0;
+        }
+    `}
+    ${props => props.marginL === "true" && css`
+        margin-left: -5px;
+        @media (min-width:0px) and (max-width:568px){
+            margin-left:0;
+        }
+    `}
+`;
+
+export const StyledTable = styled.table`
+    width:100%;
+    margin-left: 4px;
+    margin-top: -18px;
+    @media (min-width:0px) and (max-width:568px){
+        margin-top:0;
+    }
 `;
