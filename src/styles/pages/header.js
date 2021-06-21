@@ -1,21 +1,17 @@
 import { NavLink as Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { DarkShade, LightShade, Silver } from '../themes/color-theme'
-import { TiThMenu } from 'react-icons/ti'
+import { FcMenu } from 'react-icons/fc'
 import { Lora, Slab } from '../themes/font-styles'
 import { Image, Navbar, Nav } from 'react-bootstrap'
 
 // logo styles
 export const LogoImg = styled(Image)`
-  height: 12%;
-  width: 12%;
-  @media (min-width:0px) and (max-width:600px){
+  height: 15%;
+  width: 15%;
+  @media (min-width:0px) and (max-width:568px){
     height: 35%;
-    width: 40%;
-  }
-  @media (min-width:600px) and (max-width:1200px){
-    height: 15%;
-    width: 15%;
+    width: 30%;
   }
 `;
 
@@ -23,53 +19,61 @@ export const LogoBox = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
+  @media(min-width:1000px){
+    display:none;
+  }
 `;
 
 // Nav bar styles 
 export const HeaderNav = styled(Navbar)`
-  justify-content: space-around;
+  padding:2px;
   @media (min-width:0px) and (max-width:1000px){
     display:none;
   }
 `;
 
+export const BrandImg = styled.img`
+  height:4rem;
+`;
+
 export const CartNum = styled.p`
   margin-left: -5px;
   margin-top: -15px;
-  background-color: ${DarkShade};
-  color: white; 
-  font-size: 12px !important;
-  padding: 0px 5px;
+  border:2px solid;
   border-radius: 50%;
-  /* :hover{
-    background-color: #B639FF;
-  } */
+  border-color: ${DarkShade}; 
+  font-size: 10px !important;
+  padding: 0px 3px;
 `;
 
 export const NavLink = styled(Nav.Link)`
-  color: ${DarkShade} !important;
-  font-family:${Slab};
+  font-weight: 600;
+  color:#535252 !important;
+  font-family:${Lora},${Slab};
   display: flex;
-  margin-left: 5rem;
   align-items: center;
   text-decoration: solid;
-  padding: .7rem;
+  padding:1.5rem;
+  margin: 0 0.7rem;
   height: 100%;
   cursor: pointer;
-  font-weight: 600;
   text-transform: uppercase;
+  vertical-align:middle;
   
   :hover{
-    color: #F88989 !important ;
-    ${CartNum}{
-      background-color: #F88989;
-    }
+    color: ${DarkShade} !important;
+    font-weight: bold;
+    ${props => props.color && css`
+    border-bottom: 0.2rem solid;
+    border-bottom-color:${props.color};
+    `
+  }
   }
 `;
 
 
 // Slider styles
-export const Menu = styled(TiThMenu)`
+export const Menu = styled(FcMenu)`
   display: none;
   @media (min-width:0px) and (max-width:1000px){
         display: flex;

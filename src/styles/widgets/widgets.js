@@ -33,6 +33,10 @@ export const SearchContainer = styled.div`
     margin: auto;
     width: 75%;
   }
+  ${props => props.header === "true" && css`
+  width:90%
+  `
+  }
 `;
 
 export const SearchText = styled.span`
