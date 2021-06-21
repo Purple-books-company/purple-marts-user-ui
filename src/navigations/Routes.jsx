@@ -4,12 +4,14 @@ import Category from "../components/pages/Category";
 import Loading from "../components/utils/loader";
 import Products from "../components/pages/Category/Components/viewproduct";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from '../components/utils/Header'
 
 const Errors = lazy(() => import("../components/utils/errors"));
 const Cart = lazy(() => import("../components/pages/cart"));
 const WishList = lazy(() => import("../components/pages/wishList"));
 const Order = lazy(() => import("../components/pages/profile/orders"));
 const Profile = lazy(() => import("../components/pages/profile"));
+
 const LogOut = lazy(() =>
   import("../components/pages/authentication/components/LogOut")
 );
@@ -22,13 +24,13 @@ function Routes() {
 
   return (
     <Router>
+      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category} />
         <Route path="/products" component={Products} />
 
         <Suspense fallback={<Loading />}>
-          {/* <Header /> */}
 
           {logged ? (
             <>

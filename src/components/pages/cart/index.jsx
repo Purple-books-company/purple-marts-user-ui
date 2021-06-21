@@ -17,11 +17,6 @@ const Cart = () => {
     const [del, setDel] = useState(true)
 
     useEffect(() => {
-        document.getElementById('cart').setAttribute("style", "color:hsla(328, 75%, 45%, 1) !important;");
-        document.getElementById('cartnum').setAttribute("style", "background-color:hsla(328, 75%, 45%, 1) !important;");
-    }, [])
-
-    useEffect(() => {
         setItem(item)
         calcTotal()
         setShipping(50)

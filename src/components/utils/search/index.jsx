@@ -7,7 +7,7 @@ import {
   SearchText,
 } from "../../../styles/widgets/widgets";
 
-const Search = () => {
+const Search = (props) => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -31,7 +31,7 @@ const Search = () => {
 
   return (
     <div>
-      <SearchContainer className="input-group mb-3">
+      <SearchContainer header={props.head} className="input-group mb-3">
         <input
           className="form-control"
           list="datalistOptions"

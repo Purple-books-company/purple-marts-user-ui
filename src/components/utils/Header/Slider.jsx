@@ -20,7 +20,7 @@ const Slider = () => {
     return (
         <>
             <SliderBtn
-                className="btn fixed-top"
+                className="btn"
                 data-bs-toggle="offcanvas"
                 href="#offcanvasExample"
                 role="button"

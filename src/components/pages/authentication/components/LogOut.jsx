@@ -1,21 +1,23 @@
 import { GoogleLogout } from "react-google-login";
+const clearStorage = () => {
+  localStorage.removeItem("isLogged");
+  localStorage.removeItem("photo");
+  localStorage.removeItem("number");
+
+  alert("Logged out");
+  window.location = "/";
+};
 
 const LogOut = () => {
-  const clearStorage = () => {
-    localStorage.removeItem("isLogged");
-    localStorage.removeItem("photo");
-    localStorage.removeItem("number");
 
-    alert("Logged out");
-    window.location = "/";
-  };
   return (
-    <GoogleLogout
-      clientId={process.env.REACT_APP_CLIENT_ID}
-      buttonText="Logout"
-      onLogoutSuccess={clearStorage}
-    ></GoogleLogout>
+    // <GoogleLogout
+    //   clientId={process.env.REACT_APP_CLIENT_ID}
+    //   buttonText="Logout"
+    //   onLogoutSuccess={clearStorage}
+    // ></GoogleLogout>
+    <button onClick={clearStorage}>Logout</button>
   );
 };
 
-export default LogOut;
+export default clearStorage;

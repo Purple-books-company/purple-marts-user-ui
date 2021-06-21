@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import {
     HeaderNav,
     NavLink,
-    CartNum
+    CartNum,
+    BrandImg
 } from '../../../styles/pages/header';
 // import data from '../../../api/navbarDetails.json'
 import { Nav } from 'react-bootstrap'
-import { MdShoppingCart } from 'react-icons/md'
+import { HiOutlineShoppingCart, HiLogout } from 'react-icons/hi'
+import logo from '../../../assets/images/logo.png'
+import { FiHeart } from 'react-icons/fi';
+import { BiUser } from 'react-icons/bi';
+import clearStorage from '../../pages/authentication/components/LogOut';
+// import Search from '../Search'
 
 const NavBar = () => {
     const [logged, setLogged] = useState(true)
+
     return (
         <>
             <HeaderNav bg="light" expand="lg" className="sticky-top">
@@ -18,21 +25,40 @@ const NavBar = () => {
                     className="my-lg-0"
                     navbarScroll
                 >
-                    <NavLink href='/' >Home</NavLink>
-                    <NavLink href='/category' >category</NavLink>
-                    <NavLink href='/custom' >custom products</NavLink>
+                    <Nav.Link className="mx-3" href='/' color="#FF005C">
+                        <BrandImg src={logo} alt="" />
+                    </Nav.Link>
+                    {/* <NavLink href='/' color="#FF005C">Home</NavLink> */}
+                    <NavLink href='/category' color="#45FF8C">category</NavLink>
+                    <NavLink href='/custom' color="#45EFFF">custom products</NavLink>
+                    {
+                        logged &&
+                        <NavLink href='/profile/order' color="#EDEC17">my orders</NavLink>
+                    }
+                    {/* <Search head="true" /> */}
                     {
                         logged ?
                             <>
-                                <NavLink href='/profile/order' >my orders</NavLink>
-                                <NavLink id="wishlist" href='/wishlist' >Wishlist</NavLink>
-                                <NavLink id="cart" href='/cart' ><MdShoppingCart size="27" />
-                                    <CartNum id="cartnum">2</CartNum>
+                                <NavLink href='/profile/info' style={{ display: 'flex', alignContent: 'right' }}>
+                                    <BiUser size="23" />
+                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>profile</p>
                                 </NavLink>
-                                <NavLink href='/profile/info'  >Profile</NavLink>
+                                <NavLink id="wishlist" className="" href='/wishlist'>
+                                    <FiHeart size="23" />
+                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>wishlist</p>
+                                </NavLink>
+                                <NavLink id="cart" href='/cart'>
+                                    <HiOutlineShoppingCart size="23" />
+                                    <CartNum id="cartnum">2</CartNum>
+                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>cart</p>
+                                </NavLink>
+                                <NavLink onClick={clearStorage}>
+                                    <HiLogout size="23" />
+                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>Logout</p>
+                                </NavLink>
                             </>
                             :
-                            <NavLink href='/auth/login' >login</NavLink>
+                            <NavLink href='/auth/login' color="#F9FF00" >login</NavLink>
                     }
 
                 </Nav>

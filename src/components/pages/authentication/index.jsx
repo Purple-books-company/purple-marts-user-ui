@@ -89,7 +89,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
                   />
                 )}
 
-                <center>
+                {/* <center>
                   <GoogleLogin
                     clientId={process.env.REACT_APP_CLIENT_ID}
                     onSuccess={responseGoogle}
@@ -101,7 +101,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
                     cookiePolicy={"single_host_origin"}
                     className="mt-2"
                   />
-                </center>
+                </center> */}
               </ModalContent>
 
               <CloseModalButton
