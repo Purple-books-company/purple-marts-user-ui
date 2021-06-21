@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { Alert } from "react-bootstrap";
 import OtpInput from "react-otp-input";
 import Countdown from "react-countdown";
-import { RiCloseFill } from "react-icons/ri";
+import PopError from "./PopError";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { Button, Links } from "../../../../styles/widgets/widgets";
 import { DarkShade } from "../../../../styles/themes/color-theme";
@@ -13,14 +12,17 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
     name: "",
     email: "",
     password: "",
-    photo: "",
+    photo:
+      "https://purple.ai/wp-content/uploads/2021/03/Guest-WiFi-WiFi-analytics-product-page-user-line.png",
+    token: 0,
   };
 
   const [form, setForm] = useState(initial);
+  const [timer, setTimer] = useState(0);
 
   const [cPass, setCPass] = useState("");
   const [error, setError] = useState("");
-  const [originalOtp, setoriginalOtp] = useState("");
+  const [originalOtp, setOriginalOtp] = useState("");
   const [inputOtp, setInputOtp] = useState(0);
 
   const handleChange = (e) => {
@@ -32,7 +34,6 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const handleSubmit = async (e) => {
     setError("");
-    // console.log(form);
     e.preventDefault();
 
     if (form.email !== "" && form.password !== "") {
@@ -41,44 +42,35 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
       else {
         const email = { email: form.email };
         let value = await ApiPostService(process.env.REACT_APP_OTP_URL, email);
-        setoriginalOtp(value.otp);
-        console.log("Response: ", value.otp);
+        setTimer(Date.now() + 300000);
+        setOriginalOtp(value.otp);
+        // console.log("Response: ", value.otp);
       }
     } else setError("Missing fields!");
   };
 
-  const verifyOtp = async () => {
+  const verifyOtp = async (e) => {
+    e.preventDefault();
     if (originalOtp === Number(inputOtp)) {
       const res = await ApiPostService(
         process.env.REACT_APP_REGISTER_URL,
         form
       );
-      if (res) setShowModal(false);
+      if (res.success) setShowModal(false);
       else {
-        setError("Registration failed!");
+        setError("User already exists.");
+        setInputOtp("");
+        setOriginalOtp("");
       }
     } else setError("Invalid otp!");
   };
 
-  const handleTimer = () => {
+  const handleTimer = (e) => {
+    e.preventDefault();
     setError("Time's Up!!");
-    setoriginalOtp("");
+    setOriginalOtp("");
     setInputOtp("");
   };
-
-  const PopError = () => (
-    <span>
-      {error && (
-        <Alert variant="danger">
-          {error}
-          <RiCloseFill
-            style={{ float: "right", fontSize: "auto", marginTop: "5px" }}
-            onClick={() => setError("")}
-          />
-        </Alert>
-      )}
-    </span>
-  );
 
   return (
     <>
@@ -109,6 +101,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
               name="password"
               value={form.password}
               onChange={handleChange}
+              minLength="8"
             />
           </Form.Group>
           <Form.Group className="mb-3 mt-2" controlId="confirmPassword">
@@ -120,26 +113,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label style={{ color: "grey" }}>
-              Choose Profile pic
-            </Form.Label>
-            <Form.Control
-              type="file"
-              style={{ color: "grey" }}
-              value={form.photo}
-              onChange={
-                (e) => console.log(e.target.files[0])
-                // setForm({
-                //   ...form,
-                //   [e.target.name]: e.target.files[0],
-                // })
-              }
-              name="photo"
-            />
-          </Form.Group>
-
-          <PopError />
+          <PopError error={error} setError={setError} color="danger" />
           <Button
             type="submit"
             style={{ width: "100%" }}
@@ -186,10 +160,10 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
           {!error ? (
             <>
               <h6 style={{ color: "red" }}>Your time ends in:</h6>
-              <Countdown date={Date.now() + 300000} onComplete={handleTimer} />
+              <Countdown date={timer} onComplete={handleTimer} />
             </>
           ) : (
-            <PopError />
+            <PopError error={error} setError={setError} color="danger" />
           )}
         </div>
       )}

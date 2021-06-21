@@ -1,64 +1,49 @@
-import { useState } from "react";
-import LogOut from "../components/pages/authentication/components/LogOut";
+import React, { Suspense, useState, lazy } from "react";
 import Home from "../components/pages/home";
-import Cart from "../components/pages/cart";
 import Category from "../components/pages/Category";
-import Order from "../components/pages/profile/orders";
-import WishList from "../components/pages/wishList";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Search from "../components/utils/Search";
-import Wrapper from "../components/pages/authentication/";
-import { Button } from "../styles/widgets/widgets";
+import Loading from "../components/utils/loader";
 import Products from "../components/pages/Category/Components/viewproduct";
-import Profile from "../components/pages/profile";
-import OrderDetails from "../components/pages/profile/orders/details";
-import Header from "../components/utils/Header";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+const Errors = lazy(() => import("../components/utils/errors"));
+const Cart = lazy(() => import("../components/pages/cart"));
+const WishList = lazy(() => import("../components/pages/wishList"));
+const Order = lazy(() => import("../components/pages/profile/orders"));
+const Profile = lazy(() => import("../components/pages/profile"));
+const LogOut = lazy(() =>
+  import("../components/pages/authentication/components/LogOut")
+);
+const OrderDetails = lazy(() =>
+  import("../components/pages/profile/orders/details")
+);
 
 function Routes() {
-  const [showModal, setShowModal] = useState(false);
   const [logged, setLogged] = useState(localStorage.getItem("isLogged"));
-
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
 
   return (
     <Router>
-      <Header />
-      <Search />
-      {!logged && <Button onClick={openModal}>Login</Button>}
-
-      <LogOut />
-      <Wrapper showModal={showModal} setShowModal={setShowModal} />
-
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/auth/login">
-          <Wrapper />
-        </Route>
-        <Route path="/category">
-          <Category />
-        </Route>
-        <Route path="/products">
-          <Products />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-        <Route path="/wishlist">
-          <WishList />
-        </Route>
-        <Route path="/profile/order">
-          <Order />
-        </Route>
-        <Route path="/profile/info">
-          <Profile />
-        </Route>
-        <Route path="/details">
-          <OrderDetails />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route path="/category" component={Category} />
+        <Route path="/products" component={Products} />
+
+        <Suspense fallback={<Loading />}>
+          {/* <Header /> */}
+
+          {logged ? (
+            <>
+              <LogOut />
+              <Route path="/cart" component={Cart} />
+              <Route path="/wishlist" component={WishList} />
+              <Route path="/profile/order" component={Order} />
+              <Route path="/profile/info" component={Profile} />
+              <Route path="/details" component={OrderDetails} />
+              {/* <Route component={Home} /> */}
+            </>
+          ) : (
+            <Route path="*" component={Errors} />
+          )}
+        </Suspense>
       </Switch>
     </Router>
   );
