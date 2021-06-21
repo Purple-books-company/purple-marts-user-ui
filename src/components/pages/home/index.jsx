@@ -1,8 +1,18 @@
+import { useEffect } from "react";
+import Grid from "./components/Grid";
 import Carousel from "./components/Carousel";
 import Categories from "./components/Categories";
-import Grid from "./components/Grid";
+import { getApi } from "../../../services/api/get-services";
 
 export default function Home() {
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    await getApi();
+  };
+
   return (
     <>
       <div>
