@@ -5,7 +5,7 @@ import {
   Button,
   SearchContainer,
   SearchText,
-} from "../../styles/widgets/widgets";
+} from "../../../styles/widgets/widgets";
 
 const Search = (props) => {
   const [users, setUsers] = useState([]);
@@ -40,17 +40,12 @@ const Search = (props) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <datalist id="datalistOptions" >
+        <datalist id="datalistOptions">
           {users.map((val) => (
             <option value={val.name} key={val.email} />
           ))}
         </datalist>
-        <Button
-          className="btn btn-outline-secondary"
-          type="button"
-          id="button-addon2"
-          onClick={handleSearch}
-        >
+        <Button onClick={handleSearch}>
           <BiSearchAlt2 style={{ marginRight: "5px" }} />
           <SearchText>Search</SearchText>
         </Button>

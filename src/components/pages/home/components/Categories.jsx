@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { Block, Image, Text } from "../../../../styles/pages/home-page";
-import { ApiGetService } from "../../../../services/api/api-services";
+import { fetchResult } from "../../../../services/api/get-services";
+import { Block, Image } from "../../../../styles/pages/home-page";
+import { Text } from "../../../../styles/widgets/widgets";
 
 export default function Categories() {
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    swipeToSlide: true,
-  };
-
   const [urls, setUrls] = useState([]);
+  const [settings, setSettings] = useState(null);
 
   const fetchCategories = async () => {
+    let slides;
     let categories = [];
-    categories = await ApiGetService(process.env.REACT_APP_CATEGORY_GET_URL);
+    categories = await fetchResult("categories");
     if (categories === null) categories = [];
     setUrls(categories);
+
+    if (categories.length >= 5) slides = 5;
+    else slides = categories.length % 5;
+
+    setSettings({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: slides,
+      slidesToScroll: 1,
+      swipeToSlide: true,
+    });
   };
 
   useEffect(() => {
@@ -33,18 +39,19 @@ export default function Categories() {
         <div className="container" style={{ marginTop: "10px" }}>
           <div className="row">
             <Slider {...settings}>
-              {urls.map((url) => (
-                <Block
-                  primary
-                  className="col mt-2"
-                  key={url}
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="right"
-                  title={url.name}
-                >
-                  <Image src={url.image} alt="Category" />
-                </Block>
-              ))}
+              {urls.length > 0 &&
+                urls.map((url) => (
+                  <Block
+                    primary
+                    className="col mt-2"
+                    key={url}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    title={url.name}
+                  >
+                    <Image src={url.image} alt="Category" />
+                  </Block>
+                ))}
             </Slider>
           </div>
         </div>

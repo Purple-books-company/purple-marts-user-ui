@@ -12,10 +12,6 @@ export const Background = styled.div`
   align-items: center;
   z-index: 3;
 `;
-export const Seperator = styled.span`
-  margin: 0 auto;
-`;
-
 export const Text = styled.span`
   font-size: x-large;
   font-weight: bold;
@@ -26,24 +22,23 @@ export const Text = styled.span`
   }
 `;
 export const ModalWrapper = styled.div`
-  width: 900px;
-  height: 600px;
+  width: 800px;
+  height: auto;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: relative;
-  z-index: 10;
+  z-index: 3;
   border-radius: 10px;
-  margin-bottom: 10%;
 
   @media screen and (max-width: 540px) {
     grid-template-columns: 0fr 1fr;
-    width: 83%;
-    height: 60%;
+    width: 85%;
+    height: 90%;
     margin: 5%;
-    margin-bottom: 50%;
+    margin-bottom: 10%;
   }
 `;
 
@@ -57,14 +52,15 @@ export const ModalImg = styled.img`
 export const ModalContent = styled.div`
   display: flex;
   width: 100%;
+  height: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   line-height: 1.8;
   color: #141414;
-  p {
+  /* p {
     margin-bottom: 1rem;
-  }
+  } */
 
   // button {
   //   padding: 10px 24px;
@@ -77,10 +73,9 @@ export const ModalContent = styled.div`
 export const CloseModalButton = styled(MdClose)`
   cursor: pointer;
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 32px;
-  height: 32px;
-  padding: 0;
+  top: 2%;
+  right: 0%;
+  width: 10%;
+  height: 5%;
   z-index: 10;
 `;

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { LightShade, DarkShade } from "../themes/color-theme";
+import { LightShade, DarkShade, Silver } from "../themes/color-theme";
 import { Lora } from "../themes/font-styles";
 
 // Contains widgets like Button, Text box etc.
@@ -25,10 +25,35 @@ export const Button = styled.button`
   }
 `;
 
+// Text in caps
+export const Text = styled.div`
+  color: white;
+  font-family: ${Lora};
+  text-align: center;
+  letter-spacing: 3px;
+  line-height: 1.6;
+  font-size: 20px;
+  padding: 60px 20px;
+  border: 4px solid ${Silver};
+  ${(props) =>
+    props.primary &&
+    css`
+      color: ${DarkShade};
+      border: none;
+      padding: 60px 0px;
+    `};
+  @media screen and (max-width: 450px) {
+    line-height: 1.3;
+    letter-spacing: 4px;
+    font-size: 7px;
+    padding: 20px 10px;
+  }
+`;
+
+// Search container
 export const SearchContainer = styled.div`
-  margin: 20px;
+  margin-right: 0%;
   width: 35%;
-  float: right;
   @media screen and (max-width: 450px) {
     margin: auto;
     width: 75%;
@@ -47,11 +72,11 @@ export const SearchText = styled.span`
 `;
 
 export const Links = styled.div`
-  margin-top:3%;
+  margin-top: 3%;
   margin-bottom: 5%;
   color: ${DarkShade};
   cursor: pointer;
   :hover {
-    text-decoration: underline;
+    font-weight: 500;
   }
 `;
