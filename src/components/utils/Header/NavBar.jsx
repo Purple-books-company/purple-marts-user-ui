@@ -11,10 +11,12 @@ import { HiOutlineShoppingCart, HiLogout } from 'react-icons/hi'
 import logo from '../../../assets/images/logo.png'
 import { FiHeart } from 'react-icons/fi';
 import { BiUser } from 'react-icons/bi';
-import Search from '../Search'
+import clearStorage from '../../pages/authentication/components/LogOut';
+// import Search from '../Search'
 
 const NavBar = () => {
     const [logged, setLogged] = useState(true)
+
     return (
         <>
             <HeaderNav bg="light" expand="lg" className="sticky-top">
@@ -33,7 +35,7 @@ const NavBar = () => {
                         logged &&
                         <NavLink href='/profile/order' color="#EDEC17">my orders</NavLink>
                     }
-                    <Search head="true" />
+                    {/* <Search head="true" /> */}
                     {
                         logged ?
                             <>
@@ -50,7 +52,7 @@ const NavBar = () => {
                                     <CartNum id="cartnum">2</CartNum>
                                     <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>cart</p>
                                 </NavLink>
-                                <NavLink href='/'>
+                                <NavLink onClick={clearStorage}>
                                     <HiLogout size="23" />
                                     <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>Logout</p>
                                 </NavLink>
