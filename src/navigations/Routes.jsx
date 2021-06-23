@@ -4,7 +4,7 @@ import Category from "../components/pages/Category";
 import Loading from "../components/utils/loader";
 import Products from "../components/pages/Category/Components/viewproduct";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from '../components/utils/Header'
+import Header from "../components/utils/Header";
 
 const Errors = lazy(() => import("../components/utils/errors"));
 const Cart = lazy(() => import("../components/pages/cart"));
@@ -12,9 +12,6 @@ const WishList = lazy(() => import("../components/pages/wishList"));
 const Order = lazy(() => import("../components/pages/profile/orders"));
 const Profile = lazy(() => import("../components/pages/profile"));
 
-const LogOut = lazy(() =>
-  import("../components/pages/authentication/components/LogOut")
-);
 const OrderDetails = lazy(() =>
   import("../components/pages/profile/orders/details")
 );
@@ -22,19 +19,24 @@ const OrderDetails = lazy(() =>
 function Routes() {
   const [logged, setLogged] = useState(localStorage.getItem("isLogged"));
 
+  const setLogin = () => {
+    setLogged(true);
+  };
+
+  const setLogOut = () => {
+    setLogged(false);
+  };
   return (
     <Router>
-      <Header />
+      <Header func={setLogOut} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category} />
         <Route path="/products" component={Products} />
 
         <Suspense fallback={<Loading />}>
-
           {logged ? (
             <>
-              <LogOut />
               <Route path="/cart" component={Cart} />
               <Route path="/wishlist" component={WishList} />
               <Route path="/profile/order" component={Order} />
@@ -43,7 +45,7 @@ function Routes() {
               {/* <Route component={Home} /> */}
             </>
           ) : (
-            <Route path="*" component={Errors} />
+            <Route path="*" component={() => <Errors func={setLogin} />} />
           )}
         </Suspense>
       </Switch>

@@ -37,7 +37,8 @@ async function ApiPostService(link, data) {
     if (
       (link === process.env.REACT_APP_LOGIN_URL ||
         link === process.env.REACT_APP_REGISTER_URL) &&
-      localStorage.getItem("isLogged") !== true
+      localStorage.getItem("isLogged") !== true &&
+      res.success === true
     ) {
       storeDetails(res);
     }
