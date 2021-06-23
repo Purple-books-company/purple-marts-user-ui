@@ -12,7 +12,7 @@ import {
 } from "../../../styles/pages/authentication";
 import { refreshTokenSetup } from "./components/RefreshTokenSetup";
 import RegisterForm from "./components/RegisterForm";
-import LoginForm from "./components/LoginForm";
+import Login from "./components/Login";
 
 const Wrapper = ({ showModal, setShowModal }) => {
   const [loginForm, setLoginForm] = useState(true);
@@ -63,7 +63,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
 
   return (
     <>
-      {showModal ? (
+      {showModal && (
         <Background onClick={closeModal} ref={modalRef} className="mx-2">
           <animated.div style={animation}>
             <ModalWrapper showModal={showModal}>
@@ -77,7 +77,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
 
                 {loginForm ? (
                   <div style={{ width: "80%" }}>
-                    <LoginForm
+                    <Login
                       setShowModal={setShowModal}
                       setLoginForm={setLoginForm}
                     />
@@ -111,7 +111,7 @@ const Wrapper = ({ showModal, setShowModal }) => {
             </ModalWrapper>
           </animated.div>
         </Background>
-      ) : null}
+      )}
     </>
   );
 };

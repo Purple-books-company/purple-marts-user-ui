@@ -5,11 +5,9 @@ const clearStorage = () => {
   localStorage.removeItem("number");
 
   alert("Logged out");
-  window.location = "/";
 };
 
 const LogOut = () => {
-
   return (
     // <GoogleLogout
     //   clientId={process.env.REACT_APP_CLIENT_ID}
