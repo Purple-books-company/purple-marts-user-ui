@@ -13,7 +13,7 @@ const OTPVerification = ({ email, setError, func }) => {
   }, []);
 
   const [Otp, setOtp] = useState("");
-  const verifyOtp = async (e) => {
+  const verifyOtp = (e) => {
     e.preventDefault();
 
     if (originalOtp === Number(Otp)) {

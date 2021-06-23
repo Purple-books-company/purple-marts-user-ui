@@ -45,6 +45,7 @@ function LoginForm({
         setShowModal(false);
       } else setError(res.description);
     } else setError("Missing Fields..");
+    setForm(initial);
   };
 
   const handleForgotPass = async () => {

@@ -10,7 +10,7 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 5;
 `;
 export const Text = styled.span`
   font-size: x-large;
@@ -22,7 +22,7 @@ export const Text = styled.span`
   }
 `;
 export const ModalWrapper = styled.div`
-  width: 800px;
+  width: 750px;
   height: auto;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
