@@ -56,7 +56,7 @@ function LoginForm({
           password: form.password,
         });
         console.log(res);
-        if (res) {
+        if (res.success) {
           setColor("success");
           setForm(initial);
           setVerify(false);
@@ -64,7 +64,7 @@ function LoginForm({
           setEmail("");
         }
 
-        setError(res.description);
+        setError(res.err.email || res.description);
       }
     } else setError("Missing field");
   };
@@ -83,7 +83,7 @@ function LoginForm({
             />
           </Form.Group>
         )}
-        <Form.Group className="mb-3 mt-4" controlId="formBasicPassword">
+        <Form.Group className="mb-3 mt-4 " controlId="formBasicPassword">
           <Form.Control
             type="password"
             placeholder="Password"
@@ -93,7 +93,7 @@ function LoginForm({
           />
         </Form.Group>
         {update && (
-          <Form.Group className="mb-3 mt-4" controlId="ConfirmPassword">
+          <Form.Group className="mb-3 mt-4 " controlId="ConfirmPassword">
             <Form.Control
               type="password"
               placeholder="Confirm New Password"

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import PopError from "./PopError";
-import Countdown from "react-countdown";
-import OTPVerification from "./OTPVerification";
+import OTPVerification, { fetchOtp } from "./OTPVerification";
 import LoginForm from "./LoginForm";
 import { Links } from "../../../../styles/widgets/widgets";
 
@@ -26,6 +25,7 @@ function Login({ setShowModal, setLoginForm }) {
     else {
       setError("");
       setVerify(true);
+      fetchOtp(email);
     }
   };
   // Switched to Update form
@@ -52,11 +52,7 @@ function Login({ setShowModal, setLoginForm }) {
         />
       ) : (
         <>
-          <OTPVerification
-            email={email}
-            setError={setError}
-            func={handleVerified}
-          />
+          <OTPVerification setError={setError} func={handleVerified} />
         </>
       )}
       <PopError
@@ -65,8 +61,8 @@ function Login({ setShowModal, setLoginForm }) {
         color={color}
         setColor={setColor}
       />
-      <div className="container">
-        <div className="row" >
+      <div className="container mt-2">
+        <div className="row">
           <div className="col">
             <Links onClick={handleVerification}>
               {update ? "Back to Login" : "Forgot Password"}

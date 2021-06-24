@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import PopError from "./PopError";
-import Countdown from "react-countdown";
-import OTPVerification from "./OTPVerification";
+import OTPVerification, { fetchOtp } from "./OTPVerification";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { Button, Links } from "../../../../styles/widgets/widgets";
 
@@ -16,7 +15,8 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const [form, setForm] = useState(initial);
   const [error, setError] = useState("");
-  const [timer, setTimer] = useState(0);
+  const [verify, setVerify] = useState(false);
+  const [color, setColor] = useState("danger");
 
   const handleChange = (e) => {
     setForm({
@@ -31,13 +31,10 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
     if (form.email !== "" && form.password !== "") {
       form.email = form.email.toLowerCase();
-      if (form.cPass !== form.password) setError("Oh snap! Password mismatch!");
+      if (form.cpass !== form.password) setError("Oh snap! Password mismatch!");
       else {
-        const email = { email: form.email };
-        let value = await ApiPostService(process.env.REACT_APP_OTP_URL, email);
-        setTimer(Date.now() + 300000);
-
-        // console.log("Response: ", value.otp);
+        fetchOtp(form.email);
+        setVerify(true);
       }
     } else setError("Missing fields!");
   };
@@ -58,16 +55,13 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
     if (res.success) setShowModal(false);
     else {
       setError("User already exists.");
+      setForm(initial);
     }
-  };
-  const handleTimer = (e) => {
-    e.preventDefault();
-    setError("Time's Up!!");
   };
 
   return (
     <>
-      {timer == 0 ? (
+      {!verify ? (
         <Form style={{ width: "80%" }}>
           <Form.Control
             className="mb-3 mt-4"
@@ -100,13 +94,21 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
           <Form.Group className="mb-3 mt-2" controlId="confirmPassword">
             <Form.Control
               type="password"
+              name="cpass"
               placeholder=" Confirm Password"
               value={form.cpass}
               onChange={handleChange}
+              minLength="8"
             />
           </Form.Group>
 
-          <PopError error={error} setError={setError} color="danger" />
+          <PopError
+            error={error}
+            setError={setError}
+            color={color}
+            setColor={setColor}
+          />
+
           <Button
             type="submit"
             style={{ width: "100%" }}
@@ -118,19 +120,20 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
         </Form>
       ) : (
         <>
-          <OTPVerification
-            email={form.email}
-            setError={setError}
-            func={register}
-          />
+          <OTPVerification setError={setError} func={register} />
 
-          {!error ? (
-            <>
-              <h6 style={{ color: "red" }}>Your time ends in:</h6>
-              <Countdown date={timer} onComplete={handleTimer} />
-            </>
-          ) : (
-            <PopError error={error} setError={setError} color="danger" />
+          {error && (
+            // (<>
+            //   <h6 style={{ color: "red" }}>Your time ends in:</h6>
+            //   <Countdown date={timer} onComplete={handleTimer} />
+            // </>) : (
+
+            <PopError
+              error={error}
+              setError={setError}
+              color="danger"
+              setColor={setColor}
+            />
           )}
         </>
       )}
