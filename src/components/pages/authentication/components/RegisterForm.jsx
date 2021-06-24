@@ -120,7 +120,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
         </Form>
       ) : (
         <>
-          <OTPVerification setError={setError} func={register} />
+          <OTPVerification setError={setError} setVerify={setVerify}  func={register} />
 
           {error && (
             // (<>

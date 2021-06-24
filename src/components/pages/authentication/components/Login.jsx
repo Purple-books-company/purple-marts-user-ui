@@ -40,19 +40,42 @@ function Login({ setShowModal, setLoginForm }) {
   return (
     <>
       {!verify ? (
-        <LoginForm
-          setShowModal={setShowModal}
-          setEmail={setEmail}
-          update={update}
-          setError={setError}
-          check={returnEmail}
-          setColor={setColor}
-          setVerify={setVerify}
-          setUpdate={setUpdate}
-        />
+        <>
+          <LoginForm
+            setShowModal={setShowModal}
+            setEmail={setEmail}
+            update={update}
+            setError={setError}
+            check={returnEmail}
+            setColor={setColor}
+            setVerify={setVerify}
+            setUpdate={setUpdate}
+          />
+          <div className="container mt-2">
+            <div className="row">
+              <div className="col">
+                <Links onClick={handleVerification}>
+                  {update ? "Back to Login" : "Forgot Password"}
+                </Links>
+              </div>
+              <div className="col">
+                <Links
+                  onClick={() => setLoginForm(false)}
+                  style={{ float: "right" }}
+                >
+                  Create Account
+                </Links>
+              </div>
+            </div>
+          </div>
+        </>
       ) : (
         <>
-          <OTPVerification setError={setError} func={handleVerified} />
+          <OTPVerification
+            setError={setError}
+            setVerify={setVerify}
+            func={handleVerified}
+          />
         </>
       )}
       <PopError
@@ -61,23 +84,6 @@ function Login({ setShowModal, setLoginForm }) {
         color={color}
         setColor={setColor}
       />
-      <div className="container mt-2">
-        <div className="row">
-          <div className="col">
-            <Links onClick={handleVerification}>
-              {update ? "Back to Login" : "Forgot Password"}
-            </Links>
-          </div>
-          <div className="col">
-            <Links
-              onClick={() => setLoginForm(false)}
-              style={{ float: "right" }}
-            >
-              Create Account
-            </Links>
-          </div>
-        </div>
-      </div>
     </>
   );
 }
