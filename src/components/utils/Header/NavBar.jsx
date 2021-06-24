@@ -1,70 +1,82 @@
-import React, { useState } from 'react';
 import {
-    HeaderNav,
-    NavLink,
-    CartNum,
-    BrandImg
-} from '../../../styles/pages/header';
-// import data from '../../../api/navbarDetails.json'
-import { Nav } from 'react-bootstrap'
-import { HiOutlineShoppingCart, HiLogout } from 'react-icons/hi'
-import logo from '../../../assets/images/logo.png'
-import { FiHeart } from 'react-icons/fi';
-import { BiUser } from 'react-icons/bi';
-import clearStorage from '../../pages/authentication/components/LogOut';
-// import Search from '../Search'
+  HeaderNav,
+  NavLink,
+  // CartNum,
+  BrandImg,
+} from "../../../styles/pages/header";
+import { Nav, Container } from "react-bootstrap";
+import { HiOutlineShoppingCart, HiLogout } from "react-icons/hi";
+import logo from "../../../assets/images/logo.png";
+import { FiHeart } from "react-icons/fi";
+import { BiUser } from "react-icons/bi";
+import clearStorage from "../../pages/authentication/components/LogOut";
+import { DarkShade } from "../../../styles/themes/color-theme";
+import Search from "../search";
 
-const NavBar = () => {
-    const [logged, setLogged] = useState(true)
+const NavBar = ({ func }) => {
+  const handleLogOut = () => {
+    clearStorage();
+    func();
+  };
 
-    return (
-        <>
-            <HeaderNav bg="light" expand="lg" className="sticky-top">
+  return (
+    <>
+      <HeaderNav expand="lg" className="sticky-top">
+        <Nav.Link href="#">
+          <BrandImg src={logo} alt="" />
+        </Nav.Link>
+        <Container>
+          <Nav navbarScroll className="ms-5">
+            <NavLink href="/" color="#FF005C">
+              Home
+            </NavLink>
+            <NavLink href="/category" color={DarkShade}>
+              Category
+            </NavLink>
+            <NavLink href="/custom" color="#45EFFF">
+              Custom products
+            </NavLink>
 
-                <Nav
-                    className="my-lg-0"
-                    navbarScroll
-                >
-                    <Nav.Link className="mx-3" href='/' color="#FF005C">
-                        <BrandImg src={logo} alt="" />
-                    </Nav.Link>
-                    {/* <NavLink href='/' color="#FF005C">Home</NavLink> */}
-                    <NavLink href='/category' color="#45FF8C">category</NavLink>
-                    <NavLink href='/custom' color="#45EFFF">custom products</NavLink>
-                    {
-                        logged &&
-                        <NavLink href='/profile/order' color="#EDEC17">my orders</NavLink>
-                    }
-                    {/* <Search head="true" /> */}
-                    {
-                        logged ?
-                            <>
-                                <NavLink href='/profile/info' style={{ display: 'flex', alignContent: 'right' }}>
-                                    <BiUser size="23" />
-                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>profile</p>
-                                </NavLink>
-                                <NavLink id="wishlist" className="" href='/wishlist'>
-                                    <FiHeart size="23" />
-                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>wishlist</p>
-                                </NavLink>
-                                <NavLink id="cart" href='/cart'>
-                                    <HiOutlineShoppingCart size="23" />
-                                    <CartNum id="cartnum">2</CartNum>
-                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>cart</p>
-                                </NavLink>
-                                <NavLink onClick={clearStorage}>
-                                    <HiLogout size="23" />
-                                    <p style={{ fontSize: 14, marginBottom: '-4.5em', marginLeft: '-3em' }}>Logout</p>
-                                </NavLink>
-                            </>
-                            :
-                            <NavLink href='/auth/login' color="#F9FF00" >login</NavLink>
-                    }
+            <NavLink href="/profile/order" color="#EDEC17">
+              my orders
+            </NavLink>
+          </Nav>
+          <Nav className="mt-2">
+            <Search />
+          </Nav>
+          <Nav className="mx-3">
+            {/* <Navbar.Collapse className="justify-content-end"> */}
+            <NavLink icon="true" href="/profile/info">
+              <br />
+              <BiUser size="21" />
+              <p>profile</p>
+            </NavLink>
+            <NavLink icon="true" id="wishlist" className="" href="/wishlist">
+              <br />
+              <FiHeart size="21" />
+              <p>wishlist</p>
+            </NavLink>
+            <NavLink icon="true" id="cart" href="/cart">
+              <br />
+              <HiOutlineShoppingCart size="21" />
+              {/* <CartNum id="cartnum">2</CartNum> */}
+              <p>cart</p>
+            </NavLink>
+            <NavLink icon="true" onClick={handleLogOut}>
+              <br />
+              <HiLogout size="21" />
+              <p>Logout</p>
+            </NavLink>
+            {/* </Navbar.Collapse> */}
 
-                </Nav>
-            </HeaderNav>
-        </>
-    );
+            {/* <NavLink href="/auth/login" color="#F9FF00">
+              login
+            </NavLink> */}
+          </Nav>
+        </Container>
+      </HeaderNav>
+    </>
+  );
 };
 
 export default NavBar;

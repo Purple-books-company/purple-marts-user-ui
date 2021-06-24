@@ -1,14 +1,19 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Center } from "../../../styles/widgets/positioning";
 import { Button, Text } from "../../../styles/widgets/widgets";
 import Wrapper from "../../pages/authentication";
 
-const Error = () => {
+const Error = ({ func }) => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (showModal === false && localStorage.getItem("isLogged")) func();
+  });
 
   return (
     <Center>

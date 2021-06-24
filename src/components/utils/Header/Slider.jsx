@@ -30,7 +30,7 @@ const Slider = () => {
             </SliderBtn>
             <div
                 className="offcanvas offcanvas-start w-75"
-                tabindex="-1"
+                tabIndex="-1"
                 id="offcanvasExample"
                 aria-labelledby="offcanvasExampleLabel"
             >
@@ -38,7 +38,7 @@ const Slider = () => {
                     <div style={{ textAlign: 'right', padding: '5px' }}>
                         <button
                             type="button"
-                            class="btn-close text-reset"
+                            className="btn-close text-reset"
                             data-bs-dismiss="offcanvas"
                             aria-label="Close"
                         ></button>

@@ -1,137 +1,122 @@
-import { useState } from "react";
-import PopError from "./PopError";
 import Form from "react-bootstrap/Form";
 import { ApiPostService } from "../../../../services/api/api-services";
-import { Button, Links } from "../../../../styles/widgets/widgets";
+import { Button } from "../../../../styles/widgets/widgets";
+import { useState } from "react";
 
-const LoginForm = ({ setShowModal, setLoginForm }) => {
+function LoginForm({
+  setShowModal,
+  setError,
+  update,
+  setEmail,
+  check,
+  setColor,
+  setVerify,
+  setUpdate,
+}) {
   let initial = {
     email: "",
     password: "",
+    cpass: "",
   };
-
+  let loginBtn = "Login";
   const [form, setForm] = useState(initial);
-  const [btnText, setBtnText] = useState("Login");
-  const [linkText, setLinkText] = useState("Forgot Password");
-  const [placeHolder, setPlaceholder] = useState("Password");
-  // Confirm Password
-  const [cPass, setCPass] = useState("");
-  const [color, setColor] = useState("danger");
-  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    if (e.target.name === "email" && !update) setEmail(e.target.value);
+  }
 
-  const handleLink = () => {
-    if (btnText === "Login") {
-      setBtnText("Update Password");
-      setLinkText("Back to Login");
-      setPlaceholder("New Password");
-    } else if (btnText === "Update Password") {
-      setError("");
-      setForm(initial);
-      setCPass("");
-      setBtnText("Login");
-      setPlaceholder("Password");
-      setLinkText("Forgot Password");
-    }
-  };
-
-  const handleClick = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (btnText === "Login") handleLogin();
-    else handleForgotPass();
-  };
-
-  const handleLogin = async () => {
+    if (update) {
+      handleForgotPass();
+      return;
+    }
+    let formDetail = {
+      email: form.email,
+      password: form.password,
+    };
     if (form.email !== "" && form.password !== "") {
-      let res = await ApiPostService(process.env.REACT_APP_LOGIN_URL, form);
+      loginBtn = "Logging in..";
+      let res = await ApiPostService(
+        process.env.REACT_APP_LOGIN_URL,
+        formDetail
+      );
 
       if (res.success) {
+        loginBtn = "Login";
         setShowModal(false);
-        window.location.href = "/";
       } else setError(res.description);
     } else setError("Missing Fields..");
+    setForm(initial);
   };
 
   const handleForgotPass = async () => {
-    console.log(process.env.REACT_APP_FORGOT_PASSWORD);
-    if (form.email !== "" && form.password !== "" && cPass !== "") {
-      let res = await ApiPostService(
-        process.env.REACT_APP_FORGOT_PASSWORD,
-        form
-      );
-      console.log(res);
-      if (res) {
-        setColor("success");
+    if (form.password !== "" && form.cpass !== "") {
+      if (form.password === form.cpass) {
+        let res = await ApiPostService(process.env.REACT_APP_FORGOT_PASSWORD, {
+          email: check(),
+          password: form.password,
+        });
+        console.log(res);
+        if (res.success) {
+          setColor("success");
+          setForm(initial);
+          setVerify(false);
+          setUpdate(false);
+          setEmail("");
+        }
+
+        setError(res.err.email || res.description);
       }
-      setError(res.description);
-    } else setError("Missing Fields..");
+    } else setError("Missing field");
   };
 
   return (
-    <Form style={{ width: "100%" }}>
-      <Form.Group className="mb-3 mt-5" controlId="formBasicEmail">
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3 mt-4" controlId="formBasicPassword">
-        <Form.Control
-          type="password"
-          placeholder={placeHolder}
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {btnText === "Update Password" && (
-        <Form.Group className="mb-3 mt-4" controlId="ConfirmPassword">
+    <>
+      <Form style={{ width: "100%" }}>
+        {!update && (
+          <Form.Group className="mb-3 mt-5" controlId="formBasicEmail">
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+            />
+          </Form.Group>
+        )}
+        <Form.Group className="mb-3 mt-4 " controlId="formBasicPassword">
           <Form.Control
             type="password"
-            placeholder="Confirm New Password"
+            placeholder="Password"
             name="password"
-            value={cPass}
-            onChange={(e) => setCPass(e.target.value)}
+            value={form.password}
+            onChange={handleChange}
           />
         </Form.Group>
-      )}
-      <PopError error={error} setError={setError} color={color} />
-      <center>
+        {update && (
+          <Form.Group className="mb-3 mt-4 " controlId="ConfirmPassword">
+            <Form.Control
+              type="password"
+              placeholder="Confirm New Password"
+              name="cpass"
+              value={form.cpass}
+              onChange={handleChange}
+            />
+          </Form.Group>
+        )}
+
         <Button
           type="submit"
           style={{ width: "100%", marginBottom: "3px" }}
-          onClick={handleClick}
+          onClick={handleLogin}
         >
-          {btnText}
+          {update ? "Update Password" : loginBtn}
         </Button>
-      </center>
-      <div className="container">
-        <div className="row align-items-start">
-          <div className="col">
-            <Links onClick={handleLink}>{linkText}</Links>
-          </div>
-          <div className="col">
-            <Links
-              onClick={() => setLoginForm(false)}
-              style={{ float: "right" }}
-            >
-              Create Account
-            </Links>
-          </div>
-        </div>
-      </div>
-    </Form>
+      </Form>
+    </>
   );
-};
+}
 
 export default LoginForm;

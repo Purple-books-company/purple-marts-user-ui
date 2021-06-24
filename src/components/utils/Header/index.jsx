@@ -1,18 +1,18 @@
-import { LogoBox, LogoImg } from '../../../styles/pages/header';
-import NavBar from './NavBar'
-import Slider from './Slider';
-import logo from '../../../assets/images/logo.png'
+// import { LogoBox, LogoImg } from "../../../styles/pages/header";
+import NavBar from "./NavBar";
+// import Slider from "./Slider";
+// import logo from "../../../assets/images/logo.png";
 
-const Header = () => {
-    return (
-        <>
-            <LogoBox className="m-1">
-                <LogoImg src={logo} alt="" />
-            </LogoBox>
-            <Slider />
-            <NavBar />
-        </>
-    )
-}
+const Header = ({ func }) => {
+  return (
+    <>
+      {/* <LogoBox >
+        <LogoImg src={logo} alt="" />
+      </LogoBox> */}
+      {/* <Slider /> */}
+      <NavBar func={func} />
+    </>
+  );
+};
 
 export default Header;

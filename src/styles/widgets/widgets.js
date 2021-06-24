@@ -52,31 +52,26 @@ export const Text = styled.div`
 
 // Search container
 export const SearchContainer = styled.div`
-  margin-right: 0%;
-  width: 35%;
+  width: 100%;
   @media screen and (max-width: 450px) {
     margin: auto;
     width: 75%;
-  }
-  ${props => props.header === "true" && css`
-  width:90%
-  `
-  }
-`;
-
-export const SearchText = styled.span`
-  @media screen and (max-width: 450px) {
-    display: none;
-    align-items: center;
   }
 `;
 
 export const Links = styled.div`
   margin-top: 3%;
   margin-bottom: 5%;
+  font-size: 90%;
   color: ${DarkShade};
   cursor: pointer;
   :hover {
     font-weight: 500;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 70%;
+    margin-bottom: 15%;
+    margin-top: 10%;
   }
 `;
