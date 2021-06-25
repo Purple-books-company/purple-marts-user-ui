@@ -35,15 +35,18 @@ async function ApiPostService(link, data) {
       },
     });
     if (
-      (link === process.env.REACT_APP_LOGIN_URL ||
-        link === process.env.REACT_APP_REGISTER_URL) &&
-      localStorage.getItem("isLogged") !== true &&
-      res.success === true
+      link === process.env.REACT_APP_LOGIN_URL ||
+      link === process.env.REACT_APP_REGISTER_URL
     ) {
-      storeDetails(res);
+      if (
+        localStorage.getItem("isLogged") !== true &&
+        res.data.success === true
+      ) {
+        storeDetails(res);
+      }
     }
 
-    console.log("Full response: ", res);
+    console.log("Full response: ", res.data);
 
     if (res.data.success) {
       console.log("Data Posted!");

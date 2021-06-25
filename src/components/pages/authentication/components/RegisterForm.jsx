@@ -41,13 +41,14 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
 
   const register = async () => {
     let formInfo = {
-      name: "",
-      email: "",
-      password: "",
+      name: form.name,
+      email: form.email,
+      password: form.password,
       photo:
         "https://purple.ai/wp-content/uploads/2021/03/Guest-WiFi-WiFi-analytics-product-page-user-line.png",
       token: 0,
     };
+  
     const res = await ApiPostService(
       process.env.REACT_APP_REGISTER_URL,
       formInfo
@@ -120,7 +121,11 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
         </Form>
       ) : (
         <>
-          <OTPVerification setError={setError} setVerify={setVerify}  func={register} />
+          <OTPVerification
+            setError={setError}
+            setVerify={setVerify}
+            func={register}
+          />
 
           {error && (
             // (<>

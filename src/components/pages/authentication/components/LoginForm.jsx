@@ -18,7 +18,7 @@ function LoginForm({
     password: "",
     cpass: "",
   };
-  let loginBtn = "Login";
+
   const [form, setForm] = useState(initial);
 
   function handleChange(e) {
@@ -37,18 +37,19 @@ function LoginForm({
       password: form.password,
     };
     if (form.email !== "" && form.password !== "") {
-      loginBtn = "Logging in..";
       let res = await ApiPostService(
         process.env.REACT_APP_LOGIN_URL,
         formDetail
       );
 
       if (res.success) {
-        loginBtn = "Login";
         setShowModal(false);
       } else setError(res.description);
-    } else setError("Missing Fields..");
-    setForm(initial);
+    } else {
+      setError("Missing Fields..");
+      setForm(initial);
+    }
+    console.log();
   };
 
   const handleForgotPass = async () => {
@@ -67,7 +68,8 @@ function LoginForm({
           setEmail("");
         }
 
-        setError(res.err.email || res.description);
+        setError(res.description || res.err.email || res.err.password);
+      
       }
     } else setError("Missing field");
   };
@@ -112,7 +114,7 @@ function LoginForm({
           style={{ width: "100%", marginBottom: "3px" }}
           onClick={handleLogin}
         >
-          {update ? "Update Password" : loginBtn}
+          {update ? "Update Password" : "Login"}
         </Button>
       </Form>
     </>
