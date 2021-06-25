@@ -8,7 +8,6 @@ import { useState } from "react";
 let originalOtp;
 
 export const fetchOtp = async (mail) => {
-  console.log(mail);
   let value = await ApiPostService(process.env.REACT_APP_OTP_URL, {
     email: mail,
   });
@@ -18,7 +17,7 @@ export const fetchOtp = async (mail) => {
 
 const OTPVerification = ({ setError, setVerify, func }) => {
   const [Otp, setOtp] = useState("");
-  const timer = Date.now() + 300000;
+  const [timer, setTimer] = useState(Date.now() + 300000);
 
   const verifyOtp = (e) => {
     e.preventDefault();
@@ -30,6 +29,7 @@ const OTPVerification = ({ setError, setVerify, func }) => {
 
   const handleTimer = () => {
     // e.preventDefault();
+    setTimer(0);
     setError("Time's Up!!");
     setVerify(false);
   };
