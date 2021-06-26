@@ -2,13 +2,16 @@ import styled,{css} from "styled-components";
 import { Lora, Slab } from "../themes/font-styles";
 import {Carousel} from "react-bootstrap";
 
-export const SidebarWrapper = styled.div`
+export const SidebarWrapper = styled.div`                                                                                                       
      min-height: 20vh;
     margin-left: 0;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
+    @media screen and (max-width:600px){
+          display: none;
+    }
 `;
 
 export const SidebarHeading = styled.div`
@@ -23,9 +26,10 @@ export const Toggle = styled.button`
      border: none;
      font-size: 30px;
      background-color: white;
-     color: white;
+     color: black;
      @media screen and (max-width:600px){
           color: black;
+          display: none;
     }
 `;
 
@@ -114,6 +118,9 @@ export const SizeLink = styled.label`
 //     text-align: center;
 //     width: 100%;
 // `;
+
+//card
+
 export const CardDesign = styled.div`
     box-sizing: border-box;
     display: flex;
@@ -300,7 +307,7 @@ export const CardProductName = styled.a`
           color: plum;
      }
      @media screen and (max-width:568px){
-          font-size:13px;
+          font-size:15px;
     }
 `;
 
@@ -322,10 +329,10 @@ export const CardProductBottomDetails = styled.div`
      display:flex;
      align-items:center;
      @media screen and (max-width:568px){
-          font-size: 1rem;
+          font-size: 1.2rem;
           flex-wrap: wrap;
           text-align: center;
-          padding-left: 20px;
+          padding-left: 30px;
     }
 `;
 
@@ -345,7 +352,7 @@ export const CardProductOffer = styled.div`
      color:purple;
      font-weight:600;
      @media screen and (max-width:568px){
-          font-size: 0.9rem;
+          font-size: 1rem;
           text-align: center;
     }
 `;
@@ -364,6 +371,11 @@ export const CardWishlist = styled.button`
      :hover{
           color: plum;
      }
+     :active {
+          svg{
+               fill: purple;
+          }
+     }
      @media screen and (max-width:568px){
           font-size: 1.1rem;
           text-align: center;
@@ -371,6 +383,12 @@ export const CardWishlist = styled.button`
 `;
 
 //Product Details Page
+
+export const ProductImg = styled.div`
+     @media screen and (max-width:568px){
+          margin-left: 7%;
+    }
+`;
 
 export const ProductNameDetail = styled.h2`
      padding-top :5%;
@@ -468,14 +486,14 @@ export const Caro = styled(Carousel)`
 
 export const CartButton  = styled.div`
      @media screen and (max-width:568px){
-          padding:0;
+          margin-left: 7%;
     }
 `;
 
 export const WishlistButton  = styled.div`
      @media screen and (max-width:568px){
-          margin-left: 15%;
-          padding-top: 2px;
+          margin-left: 23%;
+          margin-top: -4%;
     }
 `;
 
@@ -502,4 +520,75 @@ export const TopButton = styled.div`
      @media screen and (max-width:568px){
           display: inline;
     }
+`;
+
+//shopbyfilter
+
+export const Shopbyprice = styled.div`
+     text-align:center;
+     margin:5px;
+     text-transform:uppercase;
+     font-family:${Lora};
+     display: none;
+     @media screen and (max-width:568px){
+          display: block;
+    }
+`;
+
+export const Shopbysize = styled.div`
+     text-align:center;
+     margin:5px;
+     text-transform:uppercase;
+     font-family:${Lora};
+     display: none;
+     @media screen and (max-width:568px){
+          display: block;
+    }
+`;
+
+export const Shopcol = styled.div`
+     float:left;
+     height:7vh;
+     width:18%;
+     padding:0 10px;
+     margin-left:5.5%;
+     @media screen and (max-width:568px){
+          width: 50%;
+          margin-left: 0%;
+          float: none;
+          padding: 5px;
+          margin-bottom: 2%;
+    }
+`;
+
+export const Shopcard = styled.div`
+     box-shadow :2px 2px 2px 2px #dfdfdf;
+     border-radius: 5%;
+     text-align:center;
+     background-color :white;
+     &:hover{
+          cursor: pointer;
+     }
+     @media screen and (max-width:568px){
+          padding: 0px;
+    }
+`;
+
+export const Shoplist = styled.li`
+     display:inline-block;
+     margin-right:15px;
+     margin-top :10px;
+     height:5vh;
+`;
+
+export const LabelforSize = styled.label`
+     cursor: pointer;
+     font-size: 17px;
+`;
+
+export const Size = styled.input`
+  visibility: hidden;
+  &:checked + ${LabelforSize} {
+     color: #f83535;
+  }
 `;

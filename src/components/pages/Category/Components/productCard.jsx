@@ -6,7 +6,7 @@ import { FaStar,FaRegStar } from "react-icons/fa";
 import product from "../../../../api/SingleProduct.json";
 import product_card from "../../../../api/Products.json";
 import Ratingreview from "../../../../api/RatingReview.json";
-import {Badge, Card, CardImg, CardProductBottomDetails, CardProductDescription, CardProductName, CardProductOffer, CardProductOldprice, CardWishlist,ProductNameDetail,ProductPriceDetail,ProductOldPriceDetail, ProductOfferDetail,ProductColorDetail,QtyBtn, ProductSubDetail, ProductWriteReview,FormControl,Caro, CartButton, WishlistButton,Similar} from '../../../../styles/pages/category-styles';
+import {Badge, Card, CardImg, CardProductBottomDetails, CardProductDescription, CardProductName, CardProductOffer, CardProductOldprice, CardWishlist,ProductImg,ProductNameDetail,ProductPriceDetail,ProductOldPriceDetail, ProductOfferDetail,ProductColorDetail,QtyBtn, ProductSubDetail, ProductWriteReview,FormControl,Caro, CartButton, WishlistButton,Similar} from '../../../../styles/pages/category-styles';
 import { Button } from '../../../../styles/widgets/widgets';
 import StarRatings from 'react-star-ratings';
 import Rating from "react-rating";
@@ -56,7 +56,7 @@ const Card2 = () => {
 	<div key={item.id}>
 		<div className="container">
 			<div className="row">
-		 		<div className="col-xs-6 col-md-6 col-lg-6" style={{marginTop:'8%'}}>
+		 		<ProductImg className="col-xs-6 col-md-6 col-lg-6" style={{marginTop:'8%'}}>
           			<Caro prevLabel='' nextLabel='' nextIcon={<GrFormNextLink style={{fontSize:'30px',fontWeight:'bolder',backgroundColor:`${LightShade}`,borderRadius:'50%',padding:'2px'}}/>} 
 						prevIcon={<GrFormPreviousLink style={{fontSize:'30px',fontWeight:'bolder',backgroundColor:`${LightShade}`,borderRadius:'50%',padding:'2px'}}/>}>
 						{
@@ -67,7 +67,7 @@ const Card2 = () => {
 							))
 						}
             		</Caro>
-		  		</div>
+		  		</ProductImg>
 		  		<div className="col-xs-6 col-md-6 col-lg-6">
 					<div className="row">
 			  			<ProductNameDetail>{item.product_name}</ProductNameDetail>
