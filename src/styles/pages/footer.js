@@ -9,7 +9,7 @@ export const FormSub=styled(Form)`
     left:50%;
     transform:translate(-50%,-50%);
     @media (min-width:0px) and (max-width:568px){
-        width:100%;
+        width:90%;
         height: 10%;
     }
 `;

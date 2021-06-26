@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {Card, Form, FormControl, Button} from 'react-bootstrap';
 import {AiFillFacebook, AiFillInstagram, AiFillYoutube} from 'react-icons/ai'
 import {HiMail} from 'react-icons/hi'
-import {FooterIcon,FooterBody,AdList,TopList,FormSub} from '../../styles/pages/footer'
+import {FooterIcon,FooterBody,AdList,TopList,FormSub} from '../../../styles/pages/footer'
 
 
 
@@ -28,7 +28,7 @@ const Footer=()=> {
         value={email}
         onChange={e=>setEmail(e.target.value)}
       />
-      <Button variant="btn btn-success" style={{ width:"25%",borderRadius:"25px",marginLeft:'-50px',zIndex:10}} onClick={Subscribe}>Subscribe</Button>
+      <Button variant="btn btn-success" style={{ width:"auto",borderRadius:"25px",marginLeft:'-50px',zIndex:10}} onClick={Subscribe}>Subscribe</Button>
       </FormSub>
       </div>
       <div  className="pt-4">
