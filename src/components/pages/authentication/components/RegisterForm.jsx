@@ -63,7 +63,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
   return (
     <>
       {!verify ? (
-        <Form style={{ width: "80%" }}>
+        <Form style={{ width: "100%" }}>
           <Form.Control
             className="mb-3 mt-4"
             type="text"
