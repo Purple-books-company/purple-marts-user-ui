@@ -1,3 +1,4 @@
+import React from "react";
 import {
   HeaderNav,
   NavLink,
@@ -26,7 +27,9 @@ const NavBar = ({ func }) => {
           <BrandImg src={logo} alt="Purple Marts" />
         </Nav.Link>
         <Container>
-          <Nav className="ms-5 active">
+          {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav"> */}
+          <Nav className="ms-5">
             <NavLink href="/" color="#FF005C">
               Home
             </NavLink>
@@ -41,11 +44,11 @@ const NavBar = ({ func }) => {
               my orders
             </NavLink>
           </Nav>
+
           <Nav className="mt-2">
             <Search />
           </Nav>
           <Nav className="mx-3">
-            {/* <Navbar.Collapse className="justify-content-end"> */}
             <NavLink icon="true" href="/profile/info">
               <br />
               <BiUser size="21" />
@@ -67,16 +70,16 @@ const NavBar = ({ func }) => {
               <HiLogout size="21" />
               <p>Logout</p>
             </NavLink>
-            {/* </Navbar.Collapse> */}
 
             {/* <NavLink href="/auth/login" color="#F9FF00">
               login
             </NavLink> */}
           </Nav>
+          {/* </Navbar.Collapse> */}
         </Container>
       </HeaderNav>
     </div>
   );
 };
 
-export default NavBar;
+export default React.memo(NavBar);

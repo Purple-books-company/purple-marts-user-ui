@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { fetchResult } from "../../../../services/api/get-services";
 import { Block, Image } from "../../../../styles/pages/home-page";
 import { Text } from "../../../../styles/widgets/widgets";
 
-export default function Categories() {
+function Categories() {
   const [urls, setUrls] = useState([]);
   const [settings, setSettings] = useState(null);
 
@@ -61,3 +61,5 @@ export default function Categories() {
     </>
   );
 }
+
+export default React.memo(Categories);

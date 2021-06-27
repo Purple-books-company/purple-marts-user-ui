@@ -3,7 +3,7 @@ import Countdown from "react-countdown";
 import { DarkShade } from "../../../../styles/themes/color-theme";
 import { Button } from "../../../../styles/widgets/widgets";
 import { ApiPostService } from "../../../../services/api/api-services";
-import { useState } from "react";
+import React, { useState } from "react";
 
 let originalOtp;
 
@@ -75,4 +75,4 @@ const OTPVerification = ({ setError, setVerify, func }) => {
   );
 };
 
-export default OTPVerification;
+export default React.memo(OTPVerification);

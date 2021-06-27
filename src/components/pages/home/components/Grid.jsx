@@ -1,3 +1,4 @@
+import React from 'react';
 import { DarkShade } from "../../../../styles/themes/color-theme";
 import { Text } from "../../../../styles/widgets/widgets";
 import { Block, Caption } from "../../../../styles/pages/home-page";
@@ -38,4 +39,4 @@ const Grid = () => {
   );
 };
 
-export default Grid;
+export default React.memo(Grid);

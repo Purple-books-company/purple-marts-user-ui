@@ -9,6 +9,7 @@ import { Image, Navbar, Nav } from "react-bootstrap";
 export const HeaderNav = styled(Navbar)`
   /* padding: 0.5%; */
   background-color: white;
+  border-bottom: 0.1rem solid ${LightShade};
   height: 10%;
   @media (min-width: 0px) and (max-width: 1000px) {
     display: none;
@@ -32,8 +33,8 @@ export const CartNum = styled.p`
 `;
 
 export const NavLink = styled(Nav.Link)`
-  font-weight: 700;
-  font-size: small;
+  font-weight: 600;
+  font-size: 88%;
   letter-spacing: 0.2vh;
   margin: 0 0.7rem;
   color: #535252 !important;

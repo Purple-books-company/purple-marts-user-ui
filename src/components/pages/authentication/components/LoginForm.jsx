@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { Button } from "../../../../styles/widgets/widgets";
-import { useState } from "react";
+import React, { useState } from "react";
 
 function LoginForm({
   setShowModal,
@@ -18,8 +18,6 @@ function LoginForm({
     password: "",
     cpass: "",
   };
-
-  console.log("Child render");
 
   const [form, setForm] = useState(initial);
 
@@ -51,7 +49,6 @@ function LoginForm({
       setError("Missing Fields..");
       setForm(initial);
     }
-  
   };
 
   const handleForgotPass = async () => {
@@ -71,7 +68,6 @@ function LoginForm({
         }
 
         setError(res.description || res.err.email || res.err.password);
-      
       }
     } else setError("Missing field");
   };
@@ -123,4 +119,4 @@ function LoginForm({
   );
 }
 
-export default LoginForm;
+export default React.memo(LoginForm);

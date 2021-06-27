@@ -1,3 +1,4 @@
+import React from 'react';
 import { Promotion, Box } from "../../../../styles/pages/home-page";
 import { Text } from "../../../../styles/widgets/widgets";
 import Sale1 from "../../../../assets/images/Sale1.png";
@@ -87,4 +88,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default React.memo(Carousel);

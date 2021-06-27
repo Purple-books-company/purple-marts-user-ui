@@ -1,11 +1,11 @@
 import React, { Suspense, useState, lazy } from "react";
 import Home from "../components/pages/home";
+import Header from "../components/utils/header";
+import Footer from "../components/utils/footer";
 import Category from "../components/pages/Category";
 import Loading from "../components/utils/loader";
 import Products from "../components/pages/Category/Components/viewproduct";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "../components/utils/Header";
-import Footer from "../components/utils/Footer";
 
 const Errors = lazy(() => import("../components/utils/errors"));
 const Cart = lazy(() => import("../components/pages/cart"));
