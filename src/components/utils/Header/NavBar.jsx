@@ -20,13 +20,13 @@ const NavBar = ({ func }) => {
   };
 
   return (
-    <>
-      <HeaderNav expand="lg" className="sticky-top">
+    <div className="container-fluid">
+      <HeaderNav expand="lg" fixed="top">
         <Nav.Link href="#">
-          <BrandImg src={logo} alt="" />
+          <BrandImg src={logo} alt="Purple Marts" />
         </Nav.Link>
         <Container>
-          <Nav navbarScroll className="ms-5">
+          <Nav className="ms-5 active">
             <NavLink href="/" color="#FF005C">
               Home
             </NavLink>
@@ -75,7 +75,7 @@ const NavBar = ({ func }) => {
           </Nav>
         </Container>
       </HeaderNav>
-    </>
+    </div>
   );
 };
 

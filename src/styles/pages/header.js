@@ -9,6 +9,7 @@ import { Image, Navbar, Nav } from "react-bootstrap";
 export const HeaderNav = styled(Navbar)`
   /* padding: 0.5%; */
   background-color: white;
+  height: 10%;
   @media (min-width: 0px) and (max-width: 1000px) {
     display: none;
   }

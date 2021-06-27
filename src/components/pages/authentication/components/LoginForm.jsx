@@ -19,6 +19,8 @@ function LoginForm({
     cpass: "",
   };
 
+  console.log("Child render");
+
   const [form, setForm] = useState(initial);
 
   function handleChange(e) {
@@ -49,7 +51,7 @@ function LoginForm({
       setError("Missing Fields..");
       setForm(initial);
     }
-    console.log();
+  
   };
 
   const handleForgotPass = async () => {
