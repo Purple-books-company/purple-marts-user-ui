@@ -43,7 +43,7 @@ const Search = (props) => {
         </datalist>
 
         <Button onClick={handleSearch}>
-          <BiSearchAlt2 style={{ marginRight: "3px" }} />
+          <BiSearchAlt2 size = "23" style={{ marginRight: "3px" }} />
         </Button>
       </SearchContainer>
     </div>

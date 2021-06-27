@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import PopError from "./PopError";
 import OTPVerification, { fetchOtp } from "./OTPVerification";
@@ -48,7 +48,7 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
         "https://purple.ai/wp-content/uploads/2021/03/Guest-WiFi-WiFi-analytics-product-page-user-line.png",
       token: 0,
     };
-  
+
     const res = await ApiPostService(
       process.env.REACT_APP_REGISTER_URL,
       formInfo
@@ -146,4 +146,4 @@ const RegisterForm = ({ setLoginForm, setShowModal }) => {
   );
 };
 
-export default RegisterForm;
+export default React.memo(RegisterForm);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import PopError from "./PopError";
 import OTPVerification, { fetchOtp } from "./OTPVerification";
 import LoginForm from "./LoginForm";
@@ -87,4 +87,4 @@ function Login({ setShowModal, setLoginForm }) {
     </>
   );
 }
-export default Login;
+export default React.memo(Login);
