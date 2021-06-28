@@ -292,7 +292,7 @@ const Card2 = () => {
             </div>
             <div className="row mt-2">
               <CartButton
-                style={{ paddingLeft: "25%" }}
+                style={{ paddingLeft: "22%" }}
                 className="col-xs-12 col-md-6"
               >
                 <Button>Add to Cart</Button>
@@ -322,7 +322,7 @@ const Card2 = () => {
           <ProductWriteReview>Give Review & Rating</ProductWriteReview>
         </div>
         <div className="row d-flex">
-          <Form style={{ width: "70%" }}>
+          <Form style={{ width: "70%",paddingBottom:'2%' }}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Overall Rating</Form.Label>
               <div style={{ color: "gold", fontSize: "26px" }} className="row">
@@ -363,7 +363,7 @@ const Card2 = () => {
       $(this).addClass("active").siblings().removeClass("active");
     });
   });
-  return <div>{listItems}</div>;
+  return <div style={{marginTop:'5%'}}>{listItems}</div>;
 };
 
 export default Card2;

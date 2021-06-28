@@ -271,7 +271,7 @@ const Card1 = () => {
     </div>
   );
   return (
-    <div className="container">
+    <div className="container" style={{marginTop:'5%'}}>
       <div className="row">
         {listItems1}
         <Shopbyprice className="row">
