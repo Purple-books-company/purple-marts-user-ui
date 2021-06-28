@@ -1,11 +1,14 @@
 import React, { useState,useEffect} from "react";
 import $ from 'jquery';
+import { fetchResult } from "../../../../services/api/get-services";
 import { GoGrabber } from "react-icons/go";
 import {AiFillCaretDown,AiOutlinePlus} from 'react-icons/ai';
 import {Links,ListGroup, PageContentWrapper, PriceLink, RadioGroup, SidebarHeading, SidebarWrapper, SizeLink, Toggle, TogglePrice, UnorderedList } from "../../../../styles/pages/category-styles";
 import { Lora } from "../../../../styles/themes/font-styles";
 
 const SidebarNav = () => {
+  const [caturls, setcaturls] = useState([]);
+  const [subcaturls, setsubcaturls] = useState([]);
   const [showGifts, setShowGifts] = useState(false);
   const [showGadgets, setShowGadgets] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
@@ -13,6 +16,21 @@ const SidebarNav = () => {
   const [showSize, setShowSize] = useState(true);
   const[radioPrice,SetRadioPrice] = useState('₹100 - ₹200');
   const[radioSize,SetRadioSize] = useState('S');
+
+  const fetchCategories = async () => {
+    let categories = [];
+    categories = await fetchResult("categories");
+    if (categories === null) categories = [];
+    setcaturls(categories);
+  };
+
+  const fetchSubCategories = async () => {
+    let subcategories = [];
+    subcategories = await fetchResult("subcategories");
+    if(subcategories === null) subcategories = [];
+    setsubcaturls(subcategories);
+  };
+
   useEffect(() => {
     $('nav ul li').click(function(){
       $(this).addClass("active").siblings().removeClass("active");
@@ -21,9 +39,11 @@ const SidebarNav = () => {
     $('div input').click(function(){
       $(this).addClass("active").siblings().removeClass("active");
     });
+    fetchCategories();
+    fetchSubCategories();
   })
   return (
-      <div className="d-flex">
+      <div className="d-flex" style={{marginTop:'5%'}}>
         { showSidebar &&
         <div>
           <nav>
@@ -32,58 +52,35 @@ const SidebarNav = () => {
                                   Category
                                 </SidebarHeading>
                                 <ListGroup>
+                                
                                   <UnorderedList>
                                     <li className="active">
                                       <Links href="#">All Categories</Links>
                                     </li>
+                                    {caturls.length > 0 &&
+                                  caturls.map((url) => (
                                     <li>
                                       <Links
                                         href="#"
                                         onClick={() => setShowGadgets(!showGadgets)}
                                       >
-                                        Gadgets
-                                        <AiOutlinePlus style={{float:'right'}}/>
+                                        {url.name}
+                                        {subcaturls.length > 0 && subcaturls.map((url) => ( 
+                                          <>
+                                            <AiOutlinePlus style={{float:'right'}}/>
+                                              <ul>
+                                                <li>
+                                                  <Links href="#">{url.name}
+                                                  </Links>
+                                                </li>
+                                              </ul>
+                                          </>
+                                          
+                                        ))}
+                                       
                                       </Links>
-                                      {showGadgets && (
-                                        <ul>
-                                          <li>
-                                            <Links href="#">Phone Cases
-                                            </Links>
-                                          </li>
-                                          <li>
-                                            <Links href="#">Headsets
-                                            </Links>
-                                          </li>
-                                        </ul>
-                                      )}
                                     </li>
-                                    <li>
-                                      <Links
-                                        href="#"
-                                        onClick={() => setShowGifts(!showGifts)}
-                                      >
-                                        Gifts
-                                        <AiOutlinePlus style={{float:'right'}}/>
-                                      </Links>
-                                      {showGifts && (
-                                        <ul>
-                                          <li>
-                                            <Links href="#">Pillow
-                                            </Links>
-                                          </li>
-                                          <li>
-                                            <Links href="#">Lamp
-                                            </Links>
-                                          </li>
-                                        </ul>
-                                      )}
-                                    </li>
-                                    <li>
-                                      <Links href="#">Groceries</Links>
-                                    </li>
-                                    <li>
-                                      <Links href="#">Cosmetics</Links>
-                                    </li>
+                                      ))}
                                   </UnorderedList>
                                 </ListGroup>
                               </SidebarWrapper>
