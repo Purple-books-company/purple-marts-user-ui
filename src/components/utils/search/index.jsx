@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchResult } from "../../../services/api/get-services";
+import { fetchResult } from "../../../services/api/loaded-services";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { Button, SearchContainer } from "../../../styles/widgets/widgets";
 
