@@ -92,14 +92,7 @@ export default function Modals({ showModal, setShowModal }) {
             </Row>
           </Container>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer> */}
+      
       </Modal>
     </>
   );

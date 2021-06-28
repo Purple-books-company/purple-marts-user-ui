@@ -7,10 +7,10 @@ async function getApi() {
 }
 
 async function postApi(data) {
-  // subcategories = await ApiPostService(
-  //   process.env.REACT_APP_CATEGORY_GET_URL,
-  //   data
-  // );
+  subcategories = await ApiPostService(
+    process.env.REACT_APP_CATEGORY_GET_URL,
+    data
+  );
 }
 
 // Fetches data as per need
