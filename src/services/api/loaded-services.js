@@ -1,10 +1,17 @@
-import { ApiGetService } from "./api-services";
+import { ApiGetService, ApiPostService } from "./api-services";
 
 // Gets all the (get) requests
 let categories = [];
-const getApi = async () => {
+async function getApi() {
   categories = await ApiGetService(process.env.REACT_APP_CATEGORY_GET_URL);
-};
+}
+
+async function postApi(data) {
+  // subcategories = await ApiPostService(
+  //   process.env.REACT_APP_CATEGORY_GET_URL,
+  //   data
+  // );
+}
 
 // Fetches data as per need
 const fetchResult = async (item) => {
