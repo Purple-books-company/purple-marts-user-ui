@@ -51,6 +51,7 @@ export const NavLink = styled(Nav.Link)`
       text-transform: capitalize;
       margin-left: 2%;
       margin-right: 1%;
+      border: none;
     `}
 
   :hover {
