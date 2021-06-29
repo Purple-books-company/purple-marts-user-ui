@@ -135,7 +135,7 @@ const Card1 = () => {
                 SetRadioPrice(e.target.value);
               }}
             />
-            <LabelforSize for="100to200">₹100 - ₹200</LabelforSize>
+            <LabelforSize htmlFor="100to200">₹100 - ₹200</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>
@@ -153,7 +153,7 @@ const Card1 = () => {
                 SetRadioPrice(e.target.value);
               }}
             />
-            <LabelforSize for="200to300">₹200 - ₹300</LabelforSize>
+            <LabelforSize htmlFor="200to300">₹200 - ₹300</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>
@@ -171,7 +171,7 @@ const Card1 = () => {
                 SetRadioPrice(e.target.value);
               }}
             />
-            <LabelforSize for="300to400">₹300 - ₹400</LabelforSize>
+            <LabelforSize htmlFor="300to400">₹300 - ₹400</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>
@@ -189,7 +189,7 @@ const Card1 = () => {
                 SetRadioPrice(e.target.value);
               }}
             />
-            <LabelforSize for="400to500">₹400 - ₹500</LabelforSize>
+            <LabelforSize htmlFor="400to500">₹400 - ₹500</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>
@@ -210,7 +210,7 @@ const Card1 = () => {
                 SetRadioSize(e.target.value);
               }}
             />
-            <LabelforSize for="XXLarge">XXL</LabelforSize>
+            <LabelforSize htmlFor="XXLarge">XXL</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>
@@ -228,7 +228,7 @@ const Card1 = () => {
                 SetRadioSize(e.target.value);
               }}
             />
-            <LabelforSize for="Xlarge">Xl</LabelforSize>
+            <LabelforSize htmlFor="Xlarge">Xl</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>
@@ -246,7 +246,7 @@ const Card1 = () => {
                 SetRadioSize(e.target.value);
               }}
             />
-            <LabelforSize for="Large">L</LabelforSize>
+            <LabelforSize htmlFor="Large">L</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>
@@ -264,7 +264,7 @@ const Card1 = () => {
                 SetRadioSize(e.target.value);
               }}
             />
-            <LabelforSize for="Small">S</LabelforSize>
+            <LabelforSize htmlFor="Small">S</LabelforSize>
           </Shoplist>
         </Shopcard>
       </Shopcol>

@@ -1,6 +1,6 @@
 import React, { useState,useEffect} from "react";
 import $ from 'jquery';
-import { fetchResult } from "../../../../services/api/get-services";
+import { fetchResult } from "../../../../services/api/loaded-services";
 import { GoGrabber } from "react-icons/go";
 import {AiFillCaretDown,AiOutlinePlus} from 'react-icons/ai';
 import {Links,ListGroup, PageContentWrapper, PriceLink, RadioGroup, SidebarHeading, SidebarWrapper, SizeLink, Toggle, TogglePrice, UnorderedList } from "../../../../styles/pages/category-styles";
@@ -9,7 +9,6 @@ import { Lora } from "../../../../styles/themes/font-styles";
 const SidebarNav = () => {
   const [caturls, setcaturls] = useState([]);
   const [subcaturls, setsubcaturls] = useState([]);
-  const [showGifts, setShowGifts] = useState(false);
   const [showGadgets, setShowGadgets] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const [showPrice, setShowPrice] = useState(true);
@@ -30,7 +29,6 @@ const SidebarNav = () => {
     if(subcategories === null) subcategories = [];
     setsubcaturls(subcategories);
   };
-
   useEffect(() => {
     $('nav ul li').click(function(){
       $(this).addClass("active").siblings().removeClass("active");
@@ -41,7 +39,8 @@ const SidebarNav = () => {
     });
     fetchCategories();
     fetchSubCategories();
-  })
+  },[])
+  console.log(subcaturls);
   return (
       <div className="d-flex" style={{marginTop:'5%'}}>
         { showSidebar &&
@@ -59,14 +58,14 @@ const SidebarNav = () => {
                                     </li>
                                     {caturls.length > 0 &&
                                   caturls.map((url) => (
-                                    <li>
+                                    <li key={url.id}>
                                       <Links
                                         href="#"
                                         onClick={() => setShowGadgets(!showGadgets)}
                                       >
                                         {url.name}
                                         {subcaturls.length > 0 && subcaturls.map((url) => ( 
-                                          <>
+                                          <div key={url.id}>
                                             <AiOutlinePlus style={{float:'right'}}/>
                                               <ul>
                                                 <li>
@@ -74,10 +73,8 @@ const SidebarNav = () => {
                                                   </Links>
                                                 </li>
                                               </ul>
-                                          </>
-                                          
+                                          </div>
                                         ))}
-                                       
                                       </Links>
                                     </li>
                                       ))}
