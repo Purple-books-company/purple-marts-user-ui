@@ -21,7 +21,7 @@ const Offers = () => {
   ];
   const [val, setVal] = useState(initial);
   return (
-    <Containerstyle={{ marginTop: "10%", marginBottom: "10%" }}>
+    <Container style={{ marginTop: "10%", marginBottom: "10%" }}>
       <Row>
         {val.map((item, index) => (
           <Col
