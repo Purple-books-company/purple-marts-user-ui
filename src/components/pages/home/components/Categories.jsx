@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { fetchResult } from "../../../../services/api/get-services";
+import { fetchResult } from "../../../../services/api/loaded-services";
 import { Block, Image } from "../../../../styles/pages/home-page";
 import { Text } from "../../../../styles/widgets/widgets";
 

@@ -46,6 +46,7 @@ export const NavLink = styled(Nav.Link)`
       text-transform: capitalize;
       margin-left: 2%;
       margin-right: 1%;
+
       @media (min-width: 0px) and (max-width: 1000px){
         text-align: left;
         align-items: left;
@@ -54,6 +55,7 @@ export const NavLink = styled(Nav.Link)`
         margin: 0 0.7rem;
         text-transform: uppercase;
       }
+
     `}
     @media (min-width: 1000px){
   :hover {
