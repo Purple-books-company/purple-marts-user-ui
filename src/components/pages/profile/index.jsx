@@ -1,19 +1,18 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { Links, Img, TabData, Para , NavDiv , ProfileLink} from "../../../styles/pages/profile-page";
+import { Links, TabData, Para , NavDiv , ProfileLink} from "../../../styles/pages/profile-page";
 import { Slab } from "../../../styles/themes/font-styles"
 import  SideNav  from './SideNav';
 import { RiPencilFill } from "react-icons/ri";
 import { AiTwotoneShopping } from "react-icons/ai";
-import { FiLogOut } from 'react-icons/fi';
 import {IoIosArrowForward} from 'react-icons/io'
 const Profile = () => {
 	return (
-		<Container fluid style={{ clear:'both', backgroundColor:'#fff', fontFamily: Slab }}>
+		<Container fluid style={{ clear:'both', backgroundColor:'#fff', fontFamily: Slab, marginTop:'5%'}}>
 			<Row>
 
 				<SideNav />
 				
-				<Col xs={10} className="m-auto p-auto d-none d-md-block">
+				<Col xs={10} className="m-auto p-auto d-none d-md-block" >
 					<NavDiv type='main'>
 						<h4 style={{fontFamily:Slab, color:'purple'}}>Personal Information</h4>
 						<Row>
@@ -33,7 +32,7 @@ const Profile = () => {
 						</Row>
 					</NavDiv>
 				</Col>
-				<div className="d-md-none" style={{padding:0}}>
+				<div className="d-md-none" style={{padding:0, marginTop:'-5%'}}>
 						<Container className='py-4' style={{backgroundColor:"purple",width:'100%'}}>
 							<h2 style={{fontFamily:Slab, color:'#fff' , textAlign:'center'}}>Profile</h2>
 							<img className='mx-auto' style={{ borderRadius: '50%' , width : '100px' , height : '100px' ,display:'block', margin:'auto'}} src="https://lh3.googleusercontent.com/a-/AOh14GhwgF6-YeLPhg2KB8rPpU7DxzZXPMZFhuoIq5AIzg=s96-c" />

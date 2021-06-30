@@ -64,7 +64,7 @@ function Order() {
         </div>
     );
     return (
-        <Container fluid style={{ clear:'both' }}>
+        <Container fluid style={{ clear:'both', marginTop:'5%' }}>
             <Row>
                 <SideNav />
 
