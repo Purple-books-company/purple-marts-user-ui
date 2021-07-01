@@ -30,6 +30,7 @@ import {
   CartButton,
   WishlistButton,
   Similar,
+  Productpage
 } from "../../../../styles/pages/category-styles";
 import { Button } from "../../../../styles/widgets/widgets";
 import StarRatings from "react-star-ratings";
@@ -363,7 +364,7 @@ const Card2 = () => {
       $(this).addClass("active").siblings().removeClass("active");
     });
   });
-  return <div style={{marginTop:'5%'}}>{listItems}</div>;
+  return <Productpage>{listItems}</Productpage>;
 };
 
 export default Card2;

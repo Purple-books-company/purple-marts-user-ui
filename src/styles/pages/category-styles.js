@@ -2,6 +2,13 @@ import styled,{css} from "styled-components";
 import { Lora, Slab } from "../themes/font-styles";
 import {Carousel} from "react-bootstrap";
 
+export const Productpage = styled.div`
+      margin-top: 7em;
+      @media(min-width:0px) and (max-width:568px){
+          margin-top: 5em;
+    }
+`;
+
 export const SidebarWrapper = styled.div`                                                                                                       
      min-height: 20vh;
     margin-left: 0;

@@ -18,6 +18,7 @@ import {
   Shoplist,
   Shopbyprice,
   Shopbysize,
+  Productpage
 } from "../../../../styles/pages/category-styles";
 
 const Card1 = () => {
@@ -271,7 +272,7 @@ const Card1 = () => {
     </div>
   );
   return (
-    <div className="container" style={{marginTop:'5%'}}>
+    <Productpage className="container">
       <div className="row">
         {listItems1}
         <Shopbyprice className="row">
@@ -285,7 +286,7 @@ const Card1 = () => {
         </Shopbysize>
         {listItems3}
       </div>
-    </div>
+    </Productpage>
   );
 };
 
