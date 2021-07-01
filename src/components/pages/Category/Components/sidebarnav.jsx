@@ -49,7 +49,7 @@ const SidebarNav = () => {
     fetchSubCategories();
   },[])
   return (
-      <div className="d-flex" style={{marginTop:'5%'}}>
+      <div className="d-flex" style={{marginTop:'7%'}}>
         { showSidebar &&
         <div>
           <nav>
