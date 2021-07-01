@@ -9,7 +9,7 @@ import { Lora } from "../../../../styles/themes/font-styles";
 const SidebarNav = () => {
   const [caturls, setcaturls] = useState([]);
   const [subcaturls, setsubcaturls] = useState([]);
-  const [showGadgets, setShowGadgets] = useState(false);
+  const [showGadgets, setShowGadgets] = useState({});
   const [showSidebar, setShowSidebar] = useState(true);
   const [showPrice, setShowPrice] = useState(true);
   const [showSize, setShowSize] = useState(true);
@@ -21,16 +21,24 @@ const SidebarNav = () => {
     categories = await fetchResult("categories");
     if (categories === null) categories = [];
     setcaturls(categories);
+    // console.log(caturls[0].name);
+    console.log(caturls);
+    setShowGadgets(data=>{
+      return {...data,...Array(categories.length).fill(false)}
+    });
+    console.log("show",showGadgets);
   };
 
   const fetchSubCategories = async () => {
     let subcategories = [];
     subcategories = await fetchResult("subcategories");
-    if(subcategories === null) subcategories = [];
-    setsubcaturls(subcategories);
+    if (subcategories === null) subcategories = [];
+    setsubcaturls([...subcategories]);
+    // console.log(caturls[0].name);
+    console.log(subcaturls,subcategories);
   };
   useEffect(() => {
-    $('nav ul li').click(function(){
+    $('ul li').click(function(){
       $(this).addClass("active").siblings().removeClass("active");
       $(this).siblings().find('li').removeClass('active');
     });
@@ -40,7 +48,6 @@ const SidebarNav = () => {
     fetchCategories();
     fetchSubCategories();
   },[])
-  console.log(subcaturls);
   return (
       <div className="d-flex" style={{marginTop:'5%'}}>
         { showSidebar &&
@@ -51,30 +58,36 @@ const SidebarNav = () => {
                                   Category
                                 </SidebarHeading>
                                 <ListGroup>
-                                
                                   <UnorderedList>
                                     <li className="active">
                                       <Links href="#">All Categories</Links>
                                     </li>
                                     {caturls.length > 0 &&
-                                  caturls.map((url) => (
-                                    <li key={url.id}>
+                                  caturls.map((url,index) => (
+                                    <li key={url.name}>
                                       <Links
                                         href="#"
-                                        onClick={() => setShowGadgets(!showGadgets)}
+                                        onClick={
+                                          () => 
+                                          {
+                                            let temp = showGadgets
+                                            temp[index] = !temp[index]
+                                            setShowGadgets({...temp})}
+                                          }
                                       >
-                                        {url.name}
-                                        {subcaturls.length > 0 && subcaturls.map((url) => ( 
-                                          <div key={url.id}>
-                                            <AiOutlinePlus style={{float:'right'}}/>
+                                       {console.log("update",showGadgets)}
+                                        {console.log("cat map")}
+                                        {url.name} 
+                                         <AiOutlinePlus key={url.name} style={{float:'right'}}/>
+                                         {console.log("print",showGadgets[index])}
+                                             {showGadgets[index] ? (subcaturls.filter(e=>e.category == url.name).map((sub) => (
                                               <ul>
-                                                <li>
-                                                  <Links href="#">{url.name}
+                                                <li key={sub.name}>
+                                                  <Links href="#">{sub.name}
                                                   </Links>
                                                 </li>
-                                              </ul>
-                                          </div>
-                                        ))}
+                                              </ul> 
+                                          ))): (<></>)}
                                       </Links>
                                     </li>
                                       ))}
