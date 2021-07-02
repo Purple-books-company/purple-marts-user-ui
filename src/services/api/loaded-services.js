@@ -6,7 +6,15 @@ let home = [];
 
 // Gets all the (get) requests
 async function getApi() {
+  getCategory();
+  getHome();
+}
+
+async function getCategory() {
   categories = await ApiGetService(process.env.REACT_APP_CATEGORY_GET_URL);
+}
+
+async function getHome() {
   home = await ApiGetService(process.env.REACT_APP_HOME_URL);
 }
 
@@ -27,10 +35,9 @@ async function postApi(value) {
 
 // Fetches data as per need
 async function fetchResult(item) {
-  
   switch (item) {
     case "categories":
-      if (categories.length === 0) await getApi();
+      if (categories.length === 0) await getCategory();
       return categories;
 
     case "subcategories":
@@ -38,7 +45,7 @@ async function fetchResult(item) {
       return subcategories;
 
     case "home":
-      if (home.length === 0) await getApi("home");
+      if (home.length === 0) await getHome("home");
       return home;
 
     // case "profile":
@@ -47,6 +54,6 @@ async function fetchResult(item) {
     default:
       return null;
   }
-};
+}
 
 export { getApi, fetchResult };
