@@ -13,6 +13,7 @@ const Cart = lazy(() => import("../components/pages/cart"));
 const WishList = lazy(() => import("../components/pages/wishList"));
 const Order = lazy(() => import("../components/pages/profile/orders"));
 const Profile = lazy(() => import("../components/pages/profile"));
+const Delivery = lazy(() => import("../components/pages/profile/delivery"));
 
 const OrderDetails = lazy(() =>
   import("../components/pages/profile/orders/details")
@@ -45,6 +46,7 @@ function Routes() {
               <Route path="/profile/order" component={Order} />
               <Route path="/profile/info" component={Profile} />
               <Route path="/details" component={OrderDetails} />
+              <Route path="/delivery" component={Delivery} />
               {/* <Route component={Home} /> */}
             </>
           ) : (

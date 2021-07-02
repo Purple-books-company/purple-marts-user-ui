@@ -82,7 +82,7 @@ const DeliveryInformation = () =>{
     },[pin])
 
     return (
-        <Container fluid style={{clear: 'both', overflow: 'hidden'}}>
+        <Container fluid style={{clear: 'both', overflow: 'hidden', marginTop:'5%'}}>
             <Row>
 
                 <SideNav />

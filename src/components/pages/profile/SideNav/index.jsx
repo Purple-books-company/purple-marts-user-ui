@@ -3,7 +3,6 @@ import { AiTwotoneShopping } from "react-icons/ai";
 import { FiLogOut } from 'react-icons/fi'
 import { Button, Col, Modal } from 'react-bootstrap';
 import { NavDiv , ProfileLink } from '../../../../styles/pages/profile-page'
-import { Link } from 'react-router-dom';
 import React, { useState } from "react";
 import { Slab } from "../../../../styles/themes/font-styles";
 

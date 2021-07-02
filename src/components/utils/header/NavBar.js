@@ -13,6 +13,7 @@ import logo from "../../../assets/images/logo.png";
 import clearStorage from "../../pages/authentication/components/LogOut";
 import { DarkShade } from "../../../styles/themes/color-theme";
 import Search from "../search";
+// import { retriveDetails } from "../../../services/storage/details";
 
 const NavBar = ({ func }) => {
   const [show, setShow] = useState(false);
@@ -25,83 +26,78 @@ const NavBar = ({ func }) => {
     func();
     // alert("Logged out");
   };
+  let logged = localStorage.getItem("isLogged")
 
   return (
-    <div className="container-fluid">
-      <HeaderNav expand="lg" fixed="top">
-        <Nav.Link href="#">
-          <BrandImg src={logo} alt="Purple Marts" />
-        </Nav.Link>
+    <div className="container-fluid sticky-top w-100 bg-light">
+      <HeaderNav expand="lg" bg="light" variant="light" fixed="top">
         <Container>
-          {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav"> */}
-          <Nav className="ms-5">
-            <NavLink href="/" color="#FF005C">
-              Home
-            </NavLink>
-            <NavLink href="/category" color={DarkShade}>
-              Category
-            </NavLink>
-            <NavLink href="/custom" color="#45EFFF">
-              Custom products
-            </NavLink>
-
-            <NavLink href="/profile/order" color="#EDEC17">
-              my orders
-            </NavLink>
-          </Nav>
-
-          <Nav className="mt-2">
+          <Nav.Link href="#" className="j">
+            {/* <HeaderNav.Toggle aria-controls="search-nav" />
+          <HeaderNav.Collapse id="search-nav">
             <Search />
-          </Nav>
-          <Nav className="mx-3">
-            <NavLink icon="true" href="/profile/info">
-              <br />
-              <BiUser size="21" />
-              <p>profile</p>
-            </NavLink>
-            <NavLink icon="true" id="wishlist" className="" href="/wishlist">
-              <br />
-              <FiHeart size="21" />
-              <p>wishlist</p>
-            </NavLink>
-            <NavLink icon="true" id="cart" href="/cart">
-              <br />
-              <HiOutlineShoppingCart size="21" />
-              {/* <CartNum id="cartnum">2</CartNum> */}
-              <p>cart</p>
-            </NavLink>
-            <NavLink icon="true" onClick={handleShow}>
-              <br />
-              <HiLogout size="21" />
-              <p>Logout</p>
-            </NavLink>
+          </HeaderNav.Collapse> */}
+            <BrandImg src={logo} alt="Purple Marts" />
+          </Nav.Link>
+          <HeaderNav.Toggle aria-controls="basic-navbar-nav" />
+          <HeaderNav.Collapse id="basic-navbar-nav">
+            <Nav className="d-lg-none d-inline">
+              <Search />
+            </Nav>
+            <Nav className="me-auto ms-auto">
+              <NavLink href="/" color="#FF005C">
+                Home
+              </NavLink>
+              <NavLink href="/category" color={DarkShade}>
+                Category
+              </NavLink>
+              <NavLink href="/custom" color="#45EFFF">
+                Custom products
+              </NavLink>
 
-            {show && (
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header>
-                  <Modal.Title>Confirm the action</Modal.Title>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    aria-label="Close"
-                    onClick={handleClose}
-                  ></button>
-                </Modal.Header>
-                <Modal.Body>Are you sure you want to log out now?</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="danger" onClick={handleLogOut}>
-                    Confirm
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-            )}
+              <NavLink href="/profile/order" color="#EDEC17">
+                my orders
+              </NavLink>
+            </Nav>
 
-            {/* <NavLink href="/auth/login" color="#F9FF00">
-              login
-            </NavLink> */}
-          </Nav>
-          {/* </Navbar.Collapse> */}
+            <Nav className="mt-2 me-auto d-none d-lg-inline">
+              <Search />
+            </Nav>
+
+            <Nav className="ml-2">
+              <NavLink icon="true" href="/profile/info">
+                <br className="d-none d-lg-inline" />
+                <BiUser size="21" className="d-none d-lg-inline" />
+                <p> profile</p>
+              </NavLink>
+              <NavLink icon="true" id="wishlist" className="" href="/wishlist">
+                <br className="d-none d-lg-inline" />
+                <FiHeart size="21" className="d-none d-lg-inline" />
+                <p>wishlist</p>
+              </NavLink>
+              <NavLink icon="true" id="cart" href="/cart">
+                <br className="d-none d-lg-inline" />
+                <HiOutlineShoppingCart size="21" className="d-none d-lg-inline" />
+                {/* <CartNum id="cartnum">2</CartNum> */}
+                <p>cart</p>
+              </NavLink>
+              {
+                logged ?
+
+                  <NavLink icon="true" onClick={handleLogOut}>
+                    <br className="d-none d-lg-inline" />
+                    <HiLogout size="21" className="d-none d-lg-inline" />
+                    <p>Logout</p>
+                  </NavLink >
+                  :
+                  <NavLink href="/login" icon="true" color="#F9FF00">
+                    <br className="d-none d-lg-inline" />
+                    <HiLogout size="21" className="d-none d-lg-inline" />
+                    <p>Login</p>
+                  </NavLink>
+              }
+            </Nav>
+          </HeaderNav.Collapse>
         </Container>
       </HeaderNav>
     </div>

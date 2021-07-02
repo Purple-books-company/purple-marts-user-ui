@@ -12,6 +12,7 @@ async function getApi() {
 
 async function getCategory() {
   categories = await ApiGetService(process.env.REACT_APP_CATEGORY_GET_URL);
+  subcategories=await ApiGetService(process.env.REACT_APP_SUBCATEGORY_GET_URL);
 }
 
 async function getHome() {
@@ -19,19 +20,24 @@ async function getHome() {
 }
 
 // Handles post requests
-async function postApi(value) {
-  let element;
-  if (value === "subcategories") {
-    for (let index = 0; index < categories.length; index++) {
-      element = categories[index];
-      console.log(element);
-      subcategories = await ApiPostService(
-        process.env.REACT_APP_SUBCATEGORY_POST_URL,
-        { category: element.name }
-      );
-    }
-  }
-}
+
+// async function postApi(value) {
+//   let element;
+//   if (value === "subcategories"){
+//     console.log("POST")
+//     for (let index = 0; index < categories.length; index++) {
+//       element = categories[index];
+//       let result = await ApiPostService(
+//         process.env.REACT_APP_SUBCATEGORY_POST_URL,
+//         {category : element.name}
+//       );
+//      result.data.forEach(item => {
+//        console.log("item",item);
+//        subcategories.push(item);
+//      });  
+//     }
+//   }
+// }
 
 // Fetches data as per need
 async function fetchResult(item) {
@@ -41,7 +47,7 @@ async function fetchResult(item) {
       return categories;
 
     case "subcategories":
-      if (subcategories.length === 0) await postApi("subcategories");
+      if (subcategories.length === 0) await getApi();
       return subcategories;
 
     case "home":

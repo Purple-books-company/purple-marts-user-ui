@@ -49,7 +49,8 @@ export const Links= styled.div`
 export const NavDiv=styled.div`
     margin-top:10px;
     margin-right:-15px;
-    background-color:#F9F1F7;
+    background-color:#FCF8FB;
+    border-radius: 5px;
     box-shadow: 3px 3px 10px 1px rgba(199,173,230,0.77);
     -webkit-box-shadow: 3px 3px 10px 1px rgba(199,173,230,0.77);
     font-family:${Slab};
