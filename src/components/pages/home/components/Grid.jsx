@@ -1,16 +1,15 @@
-import React from 'react';
+import React from "react";
 import { DarkShade } from "../../../../styles/themes/color-theme";
 import { Text } from "../../../../styles/widgets/widgets";
 import { Block, Caption } from "../../../../styles/pages/home-page";
 
-const Grid = () => {
+const Grid = ({ data }) => {
   const gridImg = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTugCX5kSC9m1XFVcK7BWoZY9HiycolFcoTQ&usqp=CAU",
     "https://m.media-amazon.com/images/I/61R4wTQfJdL._AC_SX425_.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu5mYIH9y9ovhGwpiqquVjk2g6ivCHrnSO1g&usqp=CAU",
   ];
 
-  const gridText = ["PHONE ACCESSORIES", "SHOP ESSENTIALS", "SHOP HEAD PHONES"];
   return (
     <>
       <Text primary>DEALS OF THE DAY</Text>
@@ -23,14 +22,14 @@ const Grid = () => {
                   backgroundImage: `url(${img})`,
                 }}
               >
-                <Caption>{gridText[index]}</Caption>
+                <Caption>Shop {data[index].subCategory}</Caption>
               </Block>
             </div>
           ))}
 
           <div className="col-md-3 mt-4">
             <Block style={{ background: DarkShade }}>
-              <Caption>SHOP AIR PODS</Caption>
+              <Caption>SHOP {data[3].subCategory}S</Caption>
             </Block>
           </div>
         </div>
@@ -39,4 +38,4 @@ const Grid = () => {
   );
 };
 
-export default React.memo(Grid);
+export default Grid;

@@ -97,6 +97,7 @@ const Footer = () => {
                   <AdList head="true">
                     <a
                       href="#"
+                      className="text-muted"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       About

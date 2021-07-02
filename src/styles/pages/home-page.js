@@ -4,34 +4,23 @@ import { Slab } from "../themes/font-styles";
 
 // Home page carousel styling
 
-export const Promotion = styled.div`
-  position: relative;
-  height: 500px;
-  margin-bottom: 40px;
+export const Title = styled.div`
+  background-color: #000000bd;
+  border: 10px solid ${LightShade};
   @media screen and (max-width: 450px) {
-    height: auto;
-    margin-bottom: 20px;
+    display: none;
   }
 `;
 
-export const Box = styled.div`
-  position: absolute;
-  background: ${LightShade};
-  top: 10%;
-  height: auto;
-  width: auto;
-  left: 10%;
-  margin: 5%;
-  padding: 20px;
+export const Main = styled.h3`
+  color: white;
   @media screen and (max-width: 450px) {
-    height: auto;
-    width: auto;
-    margin-bottom: 10%;
-  }
-  :hover {
-    cursor: pointer;
+    margin-top: 2%;
+    font-size: medium;
   }
 `;
+
+// Grid styling
 
 export const Caption = styled.div`
   display: block;
@@ -40,6 +29,7 @@ export const Caption = styled.div`
   font-family: ${Slab};
   color: white;
   text-align: center;
+  text-transform: uppercase;
 
   @media screen and (max-width: 450px) {
     font-size: 10px;
@@ -78,4 +68,13 @@ export const Block = styled.div`
 export const Image = styled.img`
   max-width: 80%;
   height: 90%;
+  ${(props) =>
+    props.sub &&
+    css`
+      height: 100%;
+      width: 100%
+      max-width: none;
+      border: 5px solid ${LightShade};
+      /* object-fit: fill; */
+    `};
 `;

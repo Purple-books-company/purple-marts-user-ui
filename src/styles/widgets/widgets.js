@@ -31,16 +31,20 @@ export const Text = styled.div`
   font-family: ${Lora};
   text-align: center;
   letter-spacing: 3px;
+  /* border: 4px solid ${Silver}; */
+  /* padding: 60px 20px; */
   line-height: 1.6;
+
   font-size: 20px;
-  padding: 60px 20px;
-  border: 4px solid ${Silver};
+
   ${(props) =>
     props.primary &&
     css`
       color: ${DarkShade};
       border: none;
       padding: 60px 0px;
+      font-weight: 600;
+      text-transform: uppercase;
     `};
   @media screen and (max-width: 450px) {
     line-height: 1.3;
