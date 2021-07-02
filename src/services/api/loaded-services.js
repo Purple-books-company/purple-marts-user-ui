@@ -1,23 +1,32 @@
+import { retriveDetails } from "../storage/details";
 import { ApiGetService, ApiPostService } from "./api-services";
 
 // Gets all the (get) requests
 let categories = [];
 let subcategories = [];
+let userData = {};
+let personalDetails={};
 async function getApi() {
   categories = await ApiGetService(process.env.REACT_APP_CATEGORY_GET_URL);
 }
 
 async function postApi(value) {
   let element;
-  if (value === "subcategories"){
+  if (value === "subcategories") {
     for (let index = 0; index < categories.length; index++) {
       element = categories[index];
       console.log(element);
       subcategories = await ApiPostService(
         process.env.REACT_APP_SUBCATEGORY_POST_URL,
-        {category : element.name}
+        { category: element.name }
       );
     }
+  }
+  if (value === "profile") {
+    let userId = await retriveDetails()
+    let userDetails = await ApiPostService(process.env.REACT_APP_PROFILE, { 'customer': userId.id })
+    userData = userDetails.data
+    personalDetails = userDetails.data.personalInfo
   }
 }
 
@@ -30,11 +39,13 @@ const fetchResult = async (item) => {
     case "subcategories":
       if (subcategories.length === 0) await postApi("subcategories");
       return subcategories;
-    // case "profile":
-    //  return profile;
+    case "profile":
+      return userData;
+    case 'delivery':
+      return personalDetails;
     default:
       return null;
   }
 };
 
-export { getApi, fetchResult };
+export { getApi, postApi, fetchResult };
