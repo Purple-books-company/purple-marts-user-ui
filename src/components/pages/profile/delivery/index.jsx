@@ -12,27 +12,38 @@ import { ApiPostService } from "../../../../services/api/api-services";
 import { retriveDetails } from "../../../../services/storage/details";
 
 const DeliveryInformation = () =>{
-    const [fname,setfName]=useState( '' )
-    const [lname,setlName]=useState( "" )
-    const [phno,setPhno]=useState( "" )
-    const [address,setAddress]=useState( "" )
-    const [pin,setPin]=useState( "" )
-    const [city,setCity]=useState( "" )
-    const [state,setState]=useState( "" )
-    const [err,setErr]=useState("")
-    const [msg,setMsg]=useState("")
+    const [details,setDetails]= useState( 
+        { fname:'', lname:'' , phno:'' , address:'' , pin:'' , city:'' ,state:'' }
+    )
+    const [msg,setMsg]=useState({ err:'', msg:'' })
+
+    const handleChange = e => {
+        const { name, value } = e.target;
+        setDetails(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     function assign(data){
         console.log('data', data)
         var name=data.deliveryName.split(" ");
-        setfName(name[0])
-        setlName(name[1])
-        setPhno(data.phoneNumber)
-        setAddress(data.address)
-        // console.log(data.pincode)
-        data.pincode === 0 ? setPin("") : setPin(data.pincode) 
-        setCity(data.city)
-        setState(data.state)
+        var pincode= data.pincode === 0 ? "" : data.pincode
+        setDetails({
+            'fname':name[0] ,
+            'lname': name[1],
+            'phno':data.phoneNumber ,
+            'address':data.address,
+            'pin':pincode,
+            'city':data.city,
+            'state':data.state});
+    }
+
+    function messages(name, str){
+        setMsg(prevState => ({
+            ...prevState,
+            [name]: str
+         }));
     }
 
     let userId = retriveDetails()
@@ -55,32 +66,26 @@ const DeliveryInformation = () =>{
         for (var i = 0, max = TextElements.length; i < max; i++) {
             TextElements[i].removeAttribute("readOnly")
         }
-        setErr("")
-        setMsg("")
+        messages('err',"")
+        messages('msg',"")
     }
     const reset= () =>{
-        setfName("");
-        setlName("");
-        setPhno("");
-        setAddress("");
-        setPin("");
-        setCity("");
-        setState("");
+        setDetails({ fname:'', lname:'' , phno:'' , address:'' , pin:'' , city:'' ,state:'' })
     }
     const save =() =>{
-        if (fname==="" || lname==="" || phno==='' || address==="" || pin===""|| city==="" || state==="") {
-            setErr("All fields are required!")
+        if (details.fname==="" || details.lname==="" || details.phno==='' || details.address==="" || details.pin===""|| details.city==="" || details.state==="") {
+            messages('err',"All fields are required!")
             return;
         }
-        if(phno.length<10 || phno.length>10){
-            setErr('Enter a valid phone number!')
+        if(details.phno.length<10 || details.phno.length>10){
+            messages('err', 'Enter a valid phone number!')
             return;
         }
-        if(pin.length<6 || pin.length>6){
-            setErr('Enter a valid pincode!')
+        if(details.pin.length<6 || details.pin.length>6){
+             messages('err', 'Enter a valid pincode!')
             return;
         }
-        setErr("")
+        messages('err','')
         var TextElements = document.getElementsByClassName("info");
         for (var i = 0, max = TextElements.length; i < max; i++) {
             TextElements[i].readOnly = true;
@@ -88,40 +93,43 @@ const DeliveryInformation = () =>{
         document.getElementById('clear').style['display']="none";
         document.getElementById('save').style['display']="none";
         document.getElementById('edit').style['display']="block";
-        let delName=fname+" "+lname;
-        setMsg("Your Address have been Updated!")
-        console.log('cuid', pin)
+        let delName=details.fname+" "+details.lname;
         let op = ApiPostService(process.env.REACT_APP_DELIVERYUPDATE, { 
             'customer': userId.id, 
-            'phoneNumber': phno , 
-            'address': address,
+            'phoneNumber': details.phno , 
+            'address': details.address,
             'deliveryName': delName,
-            'pincode': pin,
+            'pincode': details.pin,
             'nation': 'India',
-            'state': state,
-            'city': city,
-            })
-        console.log('output',op)
+            'state': details.state,
+            'city': details.city,
+        })
+        messages('msg','Your Address have been Updated!')
     }
     
     useEffect(() => {
         async function getpin(){
-            let a={pin}
-            await axios.get(`https://api.postalpincode.in/pincode/`+a.pin)
+            let a={details}
+            await axios.get(`https://api.postalpincode.in/pincode/`+a.details.pin)
             .then((res) => {
-                // console.log(res);
                 let cy=res.data[0].PostOffice[0]
-                setCity(cy.District)
-                setState(cy.State)
+                setDetails(prevState => ({
+                    ...prevState,
+                    city: cy.District,
+                    state: cy.State
+                 }));
             })
             .catch((err) => {
-                // console.log(err)
-                setCity('')
-                setState('')
+                console.log(err)
+                setDetails(prevState => ({
+                    ...prevState,
+                    city: '',
+                    state: ''
+                 }));
             })
         }
         getpin()
-    },[pin])
+    },[details.pin])
 
     return (
         <Container fluid style={{clear: 'both', overflow: 'hidden', marginTop:'9%'}}>
@@ -139,13 +147,13 @@ const DeliveryInformation = () =>{
                     <StyledRow style={{clear:'both'}}>
                         <Col lg={5} xs={7} md={5}>
                             <div className="form-floating mb-3">
-                                <Input width="full" type="text" className="form-control info" id="firstName" value={fname} readOnly onChange={e=>setfName(e.target.value)} />
+                                <Input width="full" type="text" className="form-control info" id="firstName" value={details.fname} readOnly onChange={handleChange} name="fname" />
                                 <label htmlFor="firstName">First Name</label>
                             </div>
                         </Col>
                         <Col lg={5} xs={5} md={5}>
                             <div className="form-floating mb-3">
-                                <Input style={{width:'80%'}} type="text" className="form-control info" id="lasttName" value={lname} readOnly onChange={e=>setlName(e.target.value)} />
+                                <Input style={{width:'80%'}} type="text" className="form-control info" id="lasttName" value={details.lname} readOnly onChange={handleChange} name='lname'/>
                                 <label htmlFor="lasttName">Last Name</label>
                             </div>
                         </Col>
@@ -153,30 +161,30 @@ const DeliveryInformation = () =>{
                     <StyledRow>
                         <Col>
                             <div className="form-floating mb-3">
-                                <Input type="number" className="form-control info" id="phone" value={phno} readOnly onChange={e=>setPhno(e.target.value)} />
+                                <Input type="number" className="form-control info" id="phone" value={details.phno} readOnly onChange={handleChange} name='phno' />
                                 <label htmlFor="phone">Phone Number</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <Input type="text" className="form-control info" id="address" value={address} readOnly onChange={e=>setAddress(e.target.value)} />
+                                <Input type="text" className="form-control info" id="address" value={details.address} readOnly onChange={handleChange} name='address' />
                                 <label htmlFor="address">Address</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <Input type="number" className="form-control info" id="pin" value={pin} readOnly onChange={e=>setPin(e.target.value)} />
+                                <Input type="number" className="form-control info" id="pin" value={details.pin} readOnly onChange={handleChange} name='pin' />
                                 <label htmlFor="pin">PinCode</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <Input type="text" className="form-control info" id="district" value={city} readOnly />
+                                <Input type="text" className="form-control info" id="district" value={details.city} readOnly name='district' />
                                 <label htmlFor="district">District</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <Input type="text" className="form-control info" id="state" value={state} readOnly />
+                                <Input type="text" className="form-control info" id="state" value={details.state} readOnly name='state' />
                                 <label htmlFor="state">State</label>
                             </div>
                         </Col>
                     </StyledRow>
-                    <Msg type='err' style={{color:'#F83535'}}>{err}</Msg>
+                    <Msg type='err' style={{color:'#F83535'}}>{msg.err}</Msg>
                     <StyledButton className='form-control ' onClick={save} style={{display:'none', backgroundColor:'#00A550' }} type='save' id="save">Save<FaSave className="mx-1 mb-1" size='16' /></StyledButton>
-                    <Msg style={{marginLeft:'16rem', color:'#00A550'}}>{msg}</Msg>
+                    <Msg style={{marginLeft:'16rem', color:'#00A550'}}>{msg.msg}</Msg>
                     <br />
                     </NavDiv>
                 </Col>
