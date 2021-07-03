@@ -5,6 +5,12 @@ import { Navbar, Nav } from "react-bootstrap";
 // Nav bar styles
 export const HeaderNav = styled(Navbar)`
   border-bottom: 0.1rem solid ${LightShade};
+  height:4.5em;
+  overflow:hidden;
+  @media(min-width:0) and (max-width:800px){
+    height:3rem;
+    overflow:inherit;
+  }
 `;
 
 export const BrandImg = styled.img`
@@ -34,8 +40,7 @@ export const NavLink = styled(Nav.Link)`
   color: #535252 !important;
   cursor: pointer;
   text-transform: uppercase;
-  border-bottom: 0.2rem solid;
-  border-bottom-color: white;
+  padding-top: 1.5em;
   ${(props) =>
     props.icon &&
     css`
