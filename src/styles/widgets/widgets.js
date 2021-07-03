@@ -43,7 +43,7 @@ export const Text = styled.div`
       color: ${DarkShade};
       border: none;
       padding: 60px 0px;
-      font-weight: 600;
+      font-weight: 400;
       text-transform: uppercase;
     `};
   @media screen and (max-width: 450px) {

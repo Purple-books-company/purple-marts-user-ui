@@ -31,7 +31,7 @@ const Carousels = ({ data }) => {
           ></button>
         </div>
         <div className="carousel-inner">
-          {data.map((item, index) => (
+          {data && data.map((item, index) => (
             <div
               className={`carousel-item ${index === 0 && " active"}`}
               key={item.id}
@@ -44,7 +44,7 @@ const Carousels = ({ data }) => {
                 </p>
               </Title>
             </div>
-          ))} 
+          ))}
         </div>
         <button
           className="carousel-control-prev"

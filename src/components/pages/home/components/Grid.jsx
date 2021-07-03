@@ -22,7 +22,7 @@ const Grid = ({ data }) => {
                   backgroundImage: `url(${img})`,
                 }}
               >
-                <Caption>Shop {data[index].subCategory}</Caption>
+                <Caption>Shop { data && data[index].subCategory}</Caption>
               </Block>
             </div>
           ))}

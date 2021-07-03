@@ -1,30 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   HeaderNav,
   NavLink,
   // CartNum,
   BrandImg,
 } from "../../../styles/pages/header";
-import { FiHeart } from "react-icons/fi";
-import { BiUser } from "react-icons/bi";
-import { Nav, Container, Modal, Button} from "react-bootstrap";
+import { Nav, Container } from "react-bootstrap";
 import { HiOutlineShoppingCart, HiLogout } from "react-icons/hi";
 import logo from "../../../assets/images/logo.png";
+import { FiHeart } from "react-icons/fi";
+import { BiUser } from "react-icons/bi";
 import clearStorage from "../../pages/authentication/components/LogOut";
 import { DarkShade } from "../../../styles/themes/color-theme";
 import Search from "../search";
 // import { retriveDetails } from "../../../services/storage/details";
 
 const NavBar = ({ func }) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const handleLogOut = () => {
-    handleClose();
     clearStorage();
     func();
-    // alert("Logged out");
   };
   let logged = localStorage.getItem("isLogged")
 
