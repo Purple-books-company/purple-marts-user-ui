@@ -51,7 +51,7 @@ const OrderDetails = () => {
     );
 
     return(
-        <Container fluid style={{ clear:'both', marginTop:'5%' }}>
+        <Container fluid style={{ clear:'both', marginTop:'9%' }}>
             <Row>
                 
                 <SideNav />
@@ -133,10 +133,10 @@ const OrderDetails = () => {
                                 </Row>
                                 <Row>
                                     <Col xs={10}>
-                                        <DelPara>URL  : <a href={data.trackURL} target='_blank'>{data.trackURL}</a></DelPara>
+                                        <DelPara>URL  : <a href={data.trackURL} rel="noreferrer" target='_blank'>{data.trackURL}</a></DelPara>
                                     </Col>
                                     <Col xs={2}>
-                                        <a href={data.trackURL} target='_blank' ><MdOpenInNew className='mb-1' style={{float:'right', color:'#000'}} size='20' /></a>
+                                        <a href={data.trackURL} rel="noreferrer" target='_blank' ><MdOpenInNew className='mb-1' style={{float:'right', color:'#000'}} size='20' /></a>
                                     </Col>
                                 </Row>
                             </StyledCard>
