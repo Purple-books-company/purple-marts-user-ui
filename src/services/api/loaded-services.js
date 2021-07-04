@@ -49,24 +49,37 @@ async function getHome() {
 // Handles post requests
 
 async function postProduct(value,opt) {
-  let element=[];
     let custId = retriveDetails()
     console.log("fvd",custId)
-  if (value === "product"){
+  if (value === "productcategory"){
     if(custId === null){
-             let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_GENERAL_URL,{'category':opt,'page':1})
+             let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_CAT_GENERAL_URL,{'category':opt,'page':1})
               product = productDetails.data
               return product
               // console.log("pro",product)
       } 
     else{
-            let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_URL,{'customer':custId.id,'category':opt,'page':1})
+            let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_CAT_URL,{'customer':custId.id,'category':opt,'page':1})
               product = productDetails.data
-              console.log("pro",product)
+              // console.log("pro",product)
               return product
       }
-    }  
-    return [];
+    } 
+    if (value === "productsubcategory"){
+      if(custId === null){
+               let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_SUBCAT_GENERAL_URL,{'subCategory':opt,'page':1})
+                product = productDetails.data
+                return product
+                // console.log("pro",product)
+        } 
+      else{
+              let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_SUBCAT_URL,{'customer':custId.id,'subCategory':opt,'page':1})
+                product = productDetails.data
+                console.log("sub",opt)
+                return product
+        }
+      }  
+      return [];
   }
 
 // Fetches data as per need
@@ -90,10 +103,11 @@ async function fetchResult(item,opt=null) {
       if (home.length === 0) await getHome();
       return home;
     
-    case "product":  
-      return await postProduct("product",opt);
-    // case "profile":
-    //  return profile;
+    case "productcategory":  
+      return await postProduct("productcategory",opt);
+    
+    case "productsubcategory":
+      return await postProduct("productsubcategory",opt)
 
     default:
       return null;

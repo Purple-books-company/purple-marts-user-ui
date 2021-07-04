@@ -33,10 +33,17 @@ const Card1 = forwardRef((props,ref)=> {
   useImperativeHandle(ref, () => ({
    async fetchCategory(cat){
     let pro=[];
-    pro = await fetchResult("product",cat)
+    pro = await fetchResult("productcategory",cat)
     setproductData(pro)
     console.log("product",productData)
     console.log("casga",cat)
+   },
+   async fetchsubCategory(subcat){
+    let pro=[];
+    pro = await fetchResult("productsubcategory",subcat)
+    setproductData(pro)
+    console.log("product",productData)
+    console.log("casga",subcat)
    }
   }));
 

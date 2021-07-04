@@ -17,6 +17,7 @@ const Category = () => {
       setVisible(false)
     }
   };
+
   
   const scrollToTop = () =>{
     window.scrollTo({
@@ -29,9 +30,13 @@ const Category = () => {
       childRef.current.fetchCategory(index)
       console.log("set",index)
     };
+    const sendsubCategory = (index) => { 
+      childRef.current.fetchsubCategory(index)
+      console.log("set",index)
+    };
     
     return ( <div style={{width:'100%'}} className="d-flex container-fluid">
-        <SidebarNav sendCategory={sendCategory}/>
+        <SidebarNav sendCategory={sendCategory} sendsubCategory={sendsubCategory}/>
         <Card1 ref={childRef}/> 
         <TopButton>
             <FaArrowCircleUp onClick={scrollToTop} 

@@ -7,7 +7,7 @@ import {AiFillCaretDown,AiOutlinePlus} from 'react-icons/ai';
 import {Links,ListGroup, PageContentWrapper, PriceLink, RadioGroup, SidebarHeading, SidebarWrapper, SizeLink, Toggle, TogglePrice, UnorderedList,ActiveClass } from "../../../../styles/pages/category-styles";
 import { Lora } from "../../../../styles/themes/font-styles";
 
-const SidebarNav = ({sendCategory}) => {
+const SidebarNav = ({sendCategory,sendsubCategory}) => {
   const [caturls, setcaturls] = useState([]);
   const [subcaturls, setsubcaturls] = useState([]);
   const [showGadgets, setShowGadgets] = useState({});
@@ -105,7 +105,7 @@ const SidebarNav = ({sendCategory}) => {
                                              {showGadgets[index] ? (subcaturls.filter(e=>e.category === url.name).map((sub) => (
                                               <ul>
                                                 <ActiveClass key={sub.name}>
-                                                  <Links onClick={(e)=>handleactivechildren(e,index)}>{sub.name}
+                                                  <Links onClick={(e)=>{handleactivechildren(e,index); sendsubCategory(sub.name);}}>{sub.name}
                                                   </Links>
                                                 </ActiveClass>
                                               </ul> 
