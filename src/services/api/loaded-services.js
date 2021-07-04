@@ -1,10 +1,13 @@
 import { retriveDetails } from "../storage/details";
 import { ApiGetService, ApiPostService } from "./api-services";
 
-let categories = [];
-let subcategories = [];
 let home = [];
 let product=[];
+let categories = [];
+let subcategories = [];
+let userData = {};
+let personalDetails={};
+
 
 // Gets all the (get) requests
 async function getApi() {
@@ -13,6 +16,24 @@ async function getApi() {
 }
 
 async function postApi(value) {
+  let element;
+  if (value === "subcategories") {
+    for (let index = 0; index < categories.length; index++) {
+      element = categories[index];
+      console.log(element);
+      subcategories = await ApiPostService(
+        process.env.REACT_APP_SUBCATEGORY_POST_URL,
+        { category: element.name }
+      );
+    }
+  }
+  if (value === "profile") {
+    let userId = await retriveDetails()
+    let userDetails = await ApiPostService(process.env.REACT_APP_PROFILE, { 'customer': userId.id })
+    userData = userDetails.data
+    personalDetails = userDetails.data.personalInfo
+  }
+
   postProduct(value);
 }
 
@@ -59,6 +80,12 @@ async function fetchResult(item,opt=null) {
       if (subcategories.length === 0) await getCategory();
       return subcategories;
 
+    case "profile":
+      return userData;
+      
+    case 'delivery':
+      return personalDetails;
+      
     case "home":
       if (home.length === 0) await getHome();
       return home;
@@ -73,4 +100,6 @@ async function fetchResult(item,opt=null) {
   }
 }
 
+
 export { getApi, postApi, fetchResult };
+
