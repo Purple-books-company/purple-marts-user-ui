@@ -24,8 +24,8 @@ const Products = () => {
       });
   };
     window.addEventListener('scroll', toggleVisible);
-    return ( <div class="d-flex" style={{clear:'both'}}> 
-        <SidebarNav/>
+    return ( <div class="d-flex" style={{clear:'both',display:'flex',justifyContent:'center'}}> 
+        {/* <SidebarNav/> */}
         <Card2/>  
         <TopButton>
             <FaArrowCircleUp onClick={scrollToTop} 
