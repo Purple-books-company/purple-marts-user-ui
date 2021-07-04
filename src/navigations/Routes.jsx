@@ -6,6 +6,7 @@ import Category from "../components/pages/Category";
 import Loading from "../components/utils/loader";
 import Products from "../components/pages/Category/Components/viewproduct";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Offers from "../components/pages/offer-page";
 
 const Errors = lazy(() => import("../components/utils/errors"));
 const Cart = lazy(() => import("../components/pages/cart"));
@@ -35,6 +36,7 @@ function Routes() {
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category} />
         <Route path="/products" component={Products} />
+        <Route path="/offers" component={Offers} />
 
         <Suspense fallback={<Loading />}>
           {logged ? (

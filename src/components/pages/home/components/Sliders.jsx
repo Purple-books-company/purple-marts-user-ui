@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
-import { fetchResult } from "../../../../services/api/loaded-services";
 import { Block, Image } from "../../../../styles/pages/home-page";
 import { Text } from "../../../../styles/widgets/widgets";
+let slides;
 
-function Categories() {
-  const [urls, setUrls] = useState([]);
+function Sliders({ data, text }) {
   const [settings, setSettings] = useState(null);
 
-  const fetchCategories = async () => {
-    let slides;
-    let categories = [];
-    categories = await fetchResult("categories");
-    if (categories === null) categories = [];
-    setUrls(categories);
-
-    if (categories.length >= 5) slides = 5;
-    else slides = categories.length % 5;
+  useEffect(() => {
+    if (data.length >= 5) slides = 5;
+    else slides = data.length % 5;
 
     setSettings({
       dots: true,
@@ -26,21 +19,17 @@ function Categories() {
       slidesToScroll: 1,
       swipeToSlide: true,
     });
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  }, [data.length]);
 
   return (
     <>
       <center>
-        <Text primary>CATEGORIES TO BAG</Text>
+        <Text primary>{text}</Text>
         <div className="container" style={{ marginTop: "10px" }}>
           <div className="row">
             <Slider {...settings}>
-              {urls.length > 0 &&
-                urls.map((url) => (
+              {data.length > 0 &&
+                data.map((url) => (
                   <Block
                     primary
                     className="col mt-2"
@@ -62,4 +51,4 @@ function Categories() {
   );
 }
 
-export default React.memo(Categories);
+export default Sliders;

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React,{ useState,useEffect,forwardRef,useImperativeHandle } from "react";
 import { FiHeart } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
 import product_card from "../../../../api/Products.json";
+import { fetchResult } from "../../../../services/api/loaded-services";
 import {
   Badge,
   Card,
@@ -18,108 +20,89 @@ import {
   Shoplist,
   Shopbyprice,
   Shopbysize,
+  Productpage
 } from "../../../../styles/pages/category-styles";
 
-const Card1 = () => {
+const Card1 = forwardRef((props,ref)=> {
+  const [productData, setproductData] = useState(Array())
+  const [wishlist, setwishlist] = useState(true)
   const [radioPrice, SetRadioPrice] = useState("100to200");
   const [radioSize, SetRadioSize] = useState("XXL");
   const [toggleHeart, setToggleHeart] = useState(false);
-  console.log(radioPrice);
+
+  useImperativeHandle(ref, () => ({
+   async fetchCategory(cat){
+    let pro=[];
+    pro = await fetchResult("product",cat)
+    setproductData(pro)
+    console.log("product",productData)
+    console.log("casga",cat)
+   }
+  }));
+
   function HeartToggle(id) {
     setToggleHeart(!toggleHeart);
     console.log(id);
     console.log(toggleHeart);
   }
-  const listItems1 = product_card.slice(0, 10).map((item, id) => (
-    <Card className="col-xs-6 col-md-4 col-lg-2" key={id}>
-      <Badge Status={item.badge}>{item.badge}</Badge>
-      <a href="/products">
-        <CardImg
-          alt="Card image"
-          className="card-img-top"
-          variant="top"
-          src={item.thumb}
-        />
-      </a>
-      <div className="card-block">
-        <CardProductName href="/products" className="card-title">
-          {item.product_name}
-        </CardProductName>
-        <CardProductDescription className="card-text">
-          {item.description}
-        </CardProductDescription>
-        <CardProductBottomDetails className="product-bottom-details">
-          ₹{item.newprice}
-          <CardProductOldprice>₹{item.oldprice}</CardProductOldprice>
-          <CardProductOffer>{item.offer}%OFF</CardProductOffer>
-          <CardWishlist id={id} href="">
-            <FiHeart
-              className={toggleHeart ? "heart active" : "heart"}
-              onClick={() => HeartToggle(id)}
-            />
-          </CardWishlist>
-        </CardProductBottomDetails>
-      </div>
-    </Card>
-  ));
-  const listItems2 = product_card.slice(10, 20).map((item, id) => (
-    <Card className="col-xs-6 col-md-4 col-lg-2" key={id}>
-      <Badge Status={item.badge}>{item.badge}</Badge>
-      <a href="/products">
-        <CardImg
-          alt="Card image"
-          className="card-img-top"
-          variant="top"
-          src={item.thumb}
-        />
-      </a>
-      <div className="card-block">
-        <CardProductName href="/products" className="card-title">
-          {item.product_name}
-        </CardProductName>
-        <CardProductDescription className="card-text">
-          {item.description}
-        </CardProductDescription>
-        <CardProductBottomDetails className="product-bottom-details">
-          ₹{item.newprice}
-          <CardProductOldprice>₹{item.oldprice}</CardProductOldprice>
-          <CardProductOffer>{item.offer}%OFF</CardProductOffer>
-          <CardWishlist href="">
-            <FiHeart />
-          </CardWishlist>
-        </CardProductBottomDetails>
-      </div>
-    </Card>
-  ));
-  const listItems3 = product_card.slice(20).map((item, id) => (
-    <Card className="col-xs-6 col-md-4 col-lg-2" key={id}>
-      <Badge Status={item.badge}>{item.badge}</Badge>
-      <a href="/products">
-        <CardImg
-          alt="Card image"
-          className="card-img-top"
-          variant="top"
-          src={item.thumb}
-        />
-      </a>
-      <div className="card-block">
-        <CardProductName href="/products" className="card-title">
-          {item.product_name}
-        </CardProductName>
-        <CardProductDescription className="card-text">
-          {item.description}
-        </CardProductDescription>
-        <CardProductBottomDetails className="product-bottom-details">
-          ₹{item.newprice}
-          <CardProductOldprice>₹{item.oldprice}</CardProductOldprice>
-          <CardProductOffer>{item.offer}%OFF</CardProductOffer>
-          <CardWishlist href="">
-            <FiHeart />
-          </CardWishlist>
-        </CardProductBottomDetails>
-      </div>
-    </Card>
-  ));
+  // const listItems2 = product_card.slice(10, 20).map((item, id) => (
+  //   <Card className="col-xs-6 col-md-4 col-lg-2" key={id}>
+  //     <Badge Status={item.badge}>{item.badge}</Badge>
+  //     <a href="/products">
+  //       <CardImg
+  //         alt="Card image"
+  //         className="card-img-top"
+  //         variant="top"
+  //         src={item.thumb}
+  //       />
+  //     </a>
+  //     <div className="card-block">
+  //       <CardProductName href="/products" className="card-title">
+  //         {item.product_name}
+  //       </CardProductName>
+  //       <CardProductDescription className="card-text">
+  //         {item.description}
+  //       </CardProductDescription>
+  //       <CardProductBottomDetails className="product-bottom-details">
+  //         ₹{item.newprice}
+  //         <CardProductOldprice>₹{item.oldprice}</CardProductOldprice>
+  //         <CardProductOffer>{item.offer}%OFF</CardProductOffer>
+  //         <CardWishlist href="">
+  //           <FiHeart />
+  //         </CardWishlist>
+  //       </CardProductBottomDetails>
+  //     </div>
+  //   </Card>
+  // ));
+  // const listItems3 = product_card.slice(20).map((item, id) => (
+  //   <Card className="col-xs-6 col-md-4 col-lg-2" key={id}>
+  //     <Badge Status={item.badge}>{item.badge}</Badge>
+  //     <a href="/products">
+  //       <CardImg
+  //         alt="Card image"
+  //         className="card-img-top"
+  //         variant="top"
+  //         src={item.thumb}
+  //       />
+  //     </a>
+  //     <div className="card-block">
+  //       <CardProductName href="/products" className="card-title">
+  //         {item.product_name}
+  //       </CardProductName>
+  //       <CardProductDescription className="card-text">
+  //         {item.description}
+  //       </CardProductDescription>
+  //       <CardProductBottomDetails className="product-bottom-details">
+  //         ₹{item.newprice}
+  //         <CardProductOldprice>₹{item.oldprice}</CardProductOldprice>
+  //         <CardProductOffer>{item.offer}%OFF</CardProductOffer>
+  //         <CardWishlist href="">
+  //           <FiHeart />
+  //         </CardWishlist>
+  //       </CardProductBottomDetails>
+  //     </div>
+  //   </Card>
+  // ));
   const ShopbyPrice = () => (
     <div style={{ boxSizing: "border-box", margin: "0 -5px" }} className="row">
       <Shopcol className="col-xs-12 col-md-4 col-lg-2">
@@ -271,22 +254,62 @@ const Card1 = () => {
     </div>
   );
   return (
-    <div className="container" style={{marginTop:'5%'}}>
+    <Productpage className="container">
       <div className="row">
-        {listItems1}
+      {productData.length > 0 &&
+    productData.map((item,id) => (
+    <Card className="col-xs-6 col-md-4 col-lg-2" key={id}>
+      <Badge Status={item.badge}>NEW</Badge>
+      <a href="/products">
+        <CardImg
+          alt="Card image"
+          className="card-img-top"
+          variant="top"
+          src={item.image}
+        />
+      </a>
+      <div className="card-block">
+        <CardProductName href="/products" className="card-title">
+         {item.name}
+        </CardProductName>
+        <CardProductDescription className="card-text">
+          {item.description}
+        </CardProductDescription>
+        <CardProductBottomDetails className="product-bottom-details">
+          ₹{item.buyingPrice}
+          <CardProductOldprice>₹{item.originalPrice}</CardProductOldprice>
+          <CardProductOffer>{item.discount}%OFF</CardProductOffer>
+          <CardWishlist id={id} href="">
+          <span>
+                                {
+                                    wishlist ?
+                                        <FiHeart onClick={() => setwishlist(!wishlist)} />
+                                        :
+                                        <FaHeart onClick={() => setwishlist(!wishlist)}/>
+                                }
+          </span>
+              {/* <FiHeart
+              className={toggleHeart ? "heart active" : "heart"}
+              onClick={() => HeartToggle(id)}
+            /> */}
+          </CardWishlist>
+        </CardProductBottomDetails>
+      </div>
+    </Card>
+  ))}
         <Shopbyprice className="row">
           <h4>Shop by Price</h4>
           <ShopbyPrice />
         </Shopbyprice>
-        {listItems2}
+        {/* {listItems2} */}
         <Shopbysize className="row">
           <h4>Shop by Size</h4>
           <ShopbySize />
         </Shopbysize>
-        {listItems3}
+        {/* {listItems3} */}
       </div>
-    </div>
+    </Productpage>
   );
-};
+          });
 
 export default Card1;

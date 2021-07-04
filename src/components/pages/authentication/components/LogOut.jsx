@@ -3,8 +3,6 @@ const clearStorage = () => {
   localStorage.removeItem("isLogged");
   localStorage.removeItem("photo");
   localStorage.removeItem("number");
-
-  alert("Logged out");
 };
 
 // const LogOut = () => {

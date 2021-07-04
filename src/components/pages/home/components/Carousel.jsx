@@ -1,27 +1,17 @@
-import React from 'react';
-import { Promotion, Box } from "../../../../styles/pages/home-page";
-import { Text } from "../../../../styles/widgets/widgets";
-import Sale1 from "../../../../assets/images/Sale1.png";
-import Sale2 from "../../../../assets/images/Sale2.png";
-import Sale3 from "../../../../assets/images/Sale3.png";
-const Carousel = () => {
-  let promotions = [Sale2, Sale3];
-  let promoteTexts = [
-    " FREE SHIPPING ON FIRST ORDER",
-    " FLAT 80% OFF ON AIRPODS & BUDS",
-  ];
+import { Title, Main } from "../../../../styles/pages/home-page";
 
+const Carousels = ({ data }) => {
   return (
-    <div>
-      <Promotion
-        id="carouselExampleIndicators"
-        className="carousel slide carousel-fade"
+    <>
+      <div
+        id="carouselExampleCaptions"
+        className="carousel carousel-dark slide"
         data-bs-ride="carousel"
       >
         <div className="carousel-indicators">
           <button
             type="button"
-            data-bs-target="#carouselExampleIndicators"
+            data-bs-target="#carouselExampleCaptions"
             data-bs-slide-to="0"
             className="active"
             aria-current="true"
@@ -29,40 +19,37 @@ const Carousel = () => {
           ></button>
           <button
             type="button"
-            data-bs-target="#carouselExampleIndicators"
+            data-bs-target="#carouselExampleCaptions"
             data-bs-slide-to="1"
             aria-label="Slide 2"
           ></button>
           <button
             type="button"
-            data-bs-target="#carouselExampleIndicators"
+            data-bs-target="#carouselExampleCaptions"
             data-bs-slide-to="2"
             aria-label="Slide 3"
           ></button>
         </div>
-        <Promotion className="carousel-inner">
-          <Promotion className="carousel-item active">
-            <img src={Sale1} className="d-block w-100" alt="..." />
-
-            <Box>
-              <Text>
-                FLAT 80% OFF ON PHONE <br /> ACCESORIES
-              </Text>
-            </Box>
-          </Promotion>
-          {promotions.map((img, index) => (
-            <Promotion className="carousel-item" key={index}>
-              <img src={img} className="d-block w-100" alt="..." />
-              <Box>
-                <Text>{promoteTexts[index]}</Text>
-              </Box>
-            </Promotion>
+        <div className="carousel-inner">
+          {data && data.map((item, index) => (
+            <div
+              className={`carousel-item ${index === 0 && " active"}`}
+              key={item.id}
+            >
+              <img src={item.image} className="d-block w-100" alt="..." />
+              <Title className="carousel-caption d-none d-md-block">
+                <Main>{item.description}</Main>
+                <p style={{ color: "white" }}>
+                  Some representative placeholder content for the first slide.
+                </p>
+              </Title>
+            </div>
           ))}
-        </Promotion>
+        </div>
         <button
           className="carousel-control-prev"
           type="button"
-          data-bs-target="#carouselExampleIndicators"
+          data-bs-target="#carouselExampleCaptions"
           data-bs-slide="prev"
         >
           <span
@@ -74,7 +61,7 @@ const Carousel = () => {
         <button
           className="carousel-control-next"
           type="button"
-          data-bs-target="#carouselExampleIndicators"
+          data-bs-target="#carouselExampleCaptions"
           data-bs-slide="next"
         >
           <span
@@ -83,9 +70,9 @@ const Carousel = () => {
           ></span>
           <span className="visually-hidden">Next</span>
         </button>
-      </Promotion>
-    </div>
+      </div>
+    </>
   );
 };
 
-export default React.memo(Carousel);
+export default Carousels;

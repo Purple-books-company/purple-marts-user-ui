@@ -2,6 +2,12 @@ import styled,{css} from "styled-components";
 import { Lora, Slab } from "../themes/font-styles";
 import {Carousel} from "react-bootstrap";
 
+export const Productpage = styled.div`
+      @media(min-width:0px) and (max-width:568px){
+          margin-top: 3em;
+    }
+`;
+
 export const SidebarWrapper = styled.div`                                                                                                       
      min-height: 20vh;
     margin-left: 0;
@@ -60,10 +66,18 @@ export const Links = styled.a`
     font-weight: 500;
     display: block;
     width: 100%;
+    cursor: pointer;
     border-left: 3px solid transparent;
     :hover{
         color: purple!important;
 }
+`;
+
+export const ActiveClass = styled.li`
+     &.active>a{
+      color: purple !important;
+      font-weight: 600;
+    }
 `;
 
 export const TogglePrice = styled.button`
@@ -300,6 +314,11 @@ export const CardProductName = styled.a`
      font-size :20px;
      display:block;
      text-transform:uppercase;
+     display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
      transition:0.3s;
      margin-bottom :2px;
      cursor: pointer;
@@ -317,6 +336,11 @@ export const CardProductDescription = styled.p`
      line-height :22px;
       margin-bottom:18px;
       color:gray;
+      display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 `;
 
 export const CardProductBottomDetails = styled.div`
