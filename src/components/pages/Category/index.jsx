@@ -1,13 +1,11 @@
-import React, {useState,useRef} from 'react';
+import React, {useState} from 'react';
 import {FaArrowCircleUp} from 'react-icons/fa';
 import Card1 from "./Components/procard"
 import SidebarNav from "./Components/sidebarnav"
 import {TopButton} from "../../../styles/pages/category-styles" 
-
+import {Route} from "react-router-dom";
 const Category = () => {
-  const childRef = useRef();
   const [visible, setVisible] = useState(false)
-  const [cat,setCat] = useState("Electronics")
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 100){
@@ -25,19 +23,12 @@ const Category = () => {
       behavior: 'smooth'
     });
 };
-    window.addEventListener('scroll', toggleVisible);
-    const sendCategory = (index) => { 
-      childRef.current.fetchCategory(index)
-      console.log("set",index)
-    };
-    const sendsubCategory = (index) => { 
-      childRef.current.fetchsubCategory(index)
-      console.log("set",index)
-    };
-    
+    window.addEventListener('scroll', toggleVisible);    
     return ( <div style={{width:'100%'}} className="d-flex container-fluid">
-        <SidebarNav sendCategory={sendCategory} sendsubCategory={sendsubCategory}/>
-        <Card1 ref={childRef}/> 
+        <SidebarNav/>
+        {window.location.pathname.split("/").length <=3 ?
+         <Route exact path="/category/:slug" component={Card1} /> :
+        <Route path="/category/:slug/:subslug" component={Card1} />}
         <TopButton>
             <FaArrowCircleUp onClick={scrollToTop} 
             style={{display: visible ? 'inline' : 'none'}} />
