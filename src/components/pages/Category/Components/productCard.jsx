@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 import { Carousel, Form } from "react-bootstrap";
 import { FiHeart } from "react-icons/fi";
+import { BsArrowLeftShort } from "react-icons/bs";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import product from "../../../../api/SingleProduct.json";
 import product_card from "../../../../api/Products.json";
 import Ratingreview from "../../../../api/RatingReview.json";
+import { useParams } from "react-router-dom";
 import {
   Badge,
   Card,
@@ -29,7 +30,8 @@ import {
   Caro,
   CartButton,
   WishlistButton,
-  Similar
+  Similar,
+  BackBtn
 } from "../../../../styles/pages/category-styles";
 import { Button } from "../../../../styles/widgets/widgets";
 import StarRatings from "react-star-ratings";
@@ -38,7 +40,7 @@ import { Lora } from "../../../../styles/themes/font-styles";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { LightShade } from "../../../../styles/themes/color-theme";
 import $ from "jquery";
-const Card2 = () => {
+const Card2 = ({item}) => {
   const [selectedOption, setSelectedOption] = useState("XXL");
   const [selectedColor, setSelectedColor] = useState("");
   const [Quantity, setQuantity] = useState(1);
@@ -50,6 +52,7 @@ const Card2 = () => {
   function handleColor(e) {
     setSelectedColor(e.target.style.background);
   }
+  console.log("dataaaa",item)
   const RatingReviewlist = Ratingreview.map((item) => (
     <div className="row mb-4">
       <div className="media">
@@ -82,7 +85,7 @@ const Card2 = () => {
       </a>
       <div className="card-block">
         <CardProductName href="/products" className="card-title">
-          {item.product_name}
+       {item.name}
         </CardProductName>
         <CardProductDescription className="card-text">
           {item.description}
@@ -98,8 +101,19 @@ const Card2 = () => {
       </div>
     </Card>
   ));
-  const listItems = product.map((item) => (
-    <div key={item.id}>
+  useEffect(() => {
+    $("button").click(function () {
+      $(this).addClass("active").siblings().removeClass("active");
+    });
+  });
+  return <div className="d-flex">
+     <BackBtn className="" aln="true">
+          <span className="">
+            <BsArrowLeftShort className="mx-2" />
+            Back
+          </span>
+        </BackBtn>
+        <div key={item.id}>
       <div className="container">
         <div className="row">
           <ProductImg
@@ -132,8 +146,8 @@ const Card2 = () => {
                 />
               }
             >
-              {item.src.map((img) => (
-                <Carousel.Item key={img.value} interval={4000}>
+              {item.images != undefined  && item.images.map((img) => (
+                <Carousel.Item key={img} interval={4000}>
                   <img
                     style={{
                       height: "28rem",
@@ -141,8 +155,8 @@ const Card2 = () => {
                       objectFit: "contain",
                     }}
                     className=" d-block w-100"
-                    src={img}
-                    alt="image"
+                    src={img.image}
+                    alt="product"
                   />
                 </Carousel.Item>
               ))}
@@ -150,13 +164,13 @@ const Card2 = () => {
           </ProductImg>
           <div className="col-xs-6 col-md-6 col-lg-6">
             <div className="row">
-              <ProductNameDetail>{item.product_name}</ProductNameDetail>
+              <ProductNameDetail>{item.name}</ProductNameDetail>
             </div>
             <div className="row">
               <ProductPriceDetail>
-                ₹{item.newprice}
-                <ProductOldPriceDetail>₹{item.oldprice}</ProductOldPriceDetail>
-                <ProductOfferDetail>{item.offer}% Off</ProductOfferDetail>
+                ₹{item.buyingPrice}
+                <ProductOldPriceDetail>₹{item.originalPrice}</ProductOldPriceDetail>
+                <ProductOfferDetail>{item.discount}% Off</ProductOfferDetail>
               </ProductPriceDetail>
             </div>
             <div className="row">
@@ -177,22 +191,13 @@ const Card2 = () => {
                     textAlign: "justify",
                   }}
                 >
-                  {item.description}Lorem Ipsum is simply dummy text of the
-                  printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s, when an
-                  unknown printer took a galley of type and scrambled it to make
-                  a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
+                  {item.description}
                 </p>
               </div>
             </div>
             <div className="row mt-2">
               <div className="d-flex">
-                <h4
+                {/* <h4
                   style={{
                     fontFamily: `${Lora}`,
                     fontSize: "20px",
@@ -218,12 +223,12 @@ const Card2 = () => {
                       {size.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
               </div>
             </div>
             <div className="row mt-2">
               <div className="d-flex">
-                <h4
+                {/* <h4
                   style={{
                     fontFamily: `${Lora}`,
                     fontSize: "20px",
@@ -239,7 +244,7 @@ const Card2 = () => {
                     onClick={(e) => handleColor(e)}
                     style={{ background: color }}
                   ></ProductColorDetail>
-                ))}
+                ))} */}
               </div>
             </div>
             <div className="row mt-2">
@@ -286,7 +291,7 @@ const Card2 = () => {
                   Total Price:
                 </h4>
                 <h4 style={{ fontFamily: `${Lora}`, fontSize: "20px" }}>
-                  ₹{item.newprice * Quantity}
+                  ₹{item.buyingPrice * Quantity}
                 </h4>
               </div>
             </div>
@@ -357,13 +362,7 @@ const Card2 = () => {
         </div>
       </div>
     </div>
-  ));
-  useEffect(() => {
-    $("button").click(function () {
-      $(this).addClass("active").siblings().removeClass("active");
-    });
-  });
-  return <div>{listItems}</div>;
+    </div>;
 };
 
 export default Card2;
