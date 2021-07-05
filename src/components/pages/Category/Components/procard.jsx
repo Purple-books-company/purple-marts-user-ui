@@ -1,7 +1,7 @@
 import React,{ useState,useEffect,forwardRef,useImperativeHandle } from "react";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import { Link, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 // import product_card from "../../../../api/Products.json";
 import { fetchResult } from "../../../../services/api/loaded-services";
 import {
@@ -61,7 +61,6 @@ const Card1 = () => {
   //   console.log(id);
   //   console.log(toggleHeart);
   // }
-
   const ShopbyPrice = () => (
     <div style={{ boxSizing: "border-box", margin: "0 -5px" }} className="row">
       <Shopcol className="col-xs-12 col-md-4 col-lg-2">
@@ -219,14 +218,14 @@ const Card1 = () => {
     productData.map((item,id) => (
     <Card className="col-xs-6 col-md-4 col-lg-2" key={id}>
       <Badge Status={item.badge}>NEW</Badge>
-      <Link href= {`/products/${item.id}`}>
+      <a href= {`/products/${item.id}`}>
         <CardImg
           alt="Card image"
           className="card-img-top"
           variant="top"
           src={item.image}
         />
-      </Link>
+      </a>
       <div className="card-block">
         <CardProductName key={item.id} to={`/products/${item.id}`} className="card-title">
          {item.name}
