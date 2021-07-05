@@ -5,16 +5,18 @@ import { Navbar, Nav } from "react-bootstrap";
 // Nav bar styles
 export const HeaderNav = styled(Navbar)`
   border-bottom: 0.1rem solid ${LightShade};
-  height:4.5em;
-  overflow:hidden;
-  @media(min-width:0) and (max-width:800px){
-    height:3rem;
-    overflow:inherit;
+  overflow: hidden;
+  height:5em;
+  @media(min-width:0) and (max-width:992px){
+    overflow:visible;
+  }
+  @media(min-width:992px){
+    padding: 1em;
+    padding-right:3em;
   }
 `;
 
 export const BrandImg = styled.img`
-  margin-left: -5em;
   height: 3.5rem;
   @media(min-width:0) and (max-width:800px){
     height:3rem;
