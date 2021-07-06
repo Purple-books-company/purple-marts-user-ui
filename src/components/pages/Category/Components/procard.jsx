@@ -1,9 +1,13 @@
-import React,{ useState,useEffect,forwardRef,useImperativeHandle } from "react";
+import React,{ useState,useEffect } from "react";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import { Route } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 // import product_card from "../../../../api/Products.json";
+import PuffLoader from "react-spinners/PuffLoader";
 import { fetchResult } from "../../../../services/api/loaded-services";
+import { LightShade } from "../../../../styles/themes/color-theme";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Badge,
   Card,
@@ -30,12 +34,14 @@ const Card1 = () => {
   const [wishlist, setwishlist] = useState(true)
   const [radioPrice, SetRadioPrice] = useState("100to200");
   const [radioSize, SetRadioSize] = useState("XXL");
+  const [loading, setloading] = useState(true);
   // const [toggleHeart, setToggleHeart] = useState(false);
 
   async function fetchCategory(cat){
     let pro=[];
     pro = await fetchResult("productcategory",cat)
     setproductData(pro)
+    setloading(false);
     console.log("product",productData)
     console.log("casga",cat)
    }
@@ -43,6 +49,7 @@ const Card1 = () => {
     let pro=[];
     pro = await fetchResult("productsubcategory",subcat)
     setproductData(pro)
+    setloading(false);
     console.log("product",productData)
     console.log("casga",subcat)
    }
@@ -56,11 +63,60 @@ const Card1 = () => {
     else
       fetchsubCategory(params.subslug)
     }, [params.slug,params.subslug]);
-  // function HeartToggle(id) {
-  //   setToggleHeart(!toggleHeart);
-  //   console.log(id);
-  //   console.log(toggleHeart);
-  // }
+  const updatewish = async (id,wish) => {
+    let item=productData;
+    console.log("wishid",id);
+    console.log("wishstatus",wish)
+    let wishlistproduct=[];
+    if(wish){
+      wishlistproduct = await fetchResult("removefromwishlist",id)
+      console.log("wishlistproduct",wishlistproduct)
+      if(wishlistproduct.description.includes("doesn't")){
+        toast("Already removed from Wishlist!",{
+          style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
+        });
+      }
+      else if(wishlistproduct.description.includes("successfully")){
+        toast("Removed from Wishlist!",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+        let a=item.find(e => e.id == id)
+        a.wishlist = !a.wishlist;
+        console.log("uytdfgh",item)
+        setproductData([...item])
+      }
+      else{
+        toast.error("Error in Removing from Wishlist",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+      }
+    }
+    else{
+      wishlistproduct = await fetchResult("addtowishlist",id)
+      console.log("wishlistproduct",wishlistproduct)
+      if(wishlistproduct.description.includes("Already")){
+        toast("Already in Wishlist!",{
+          style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
+        });
+      }
+      else if(wishlistproduct.description.includes("created")){
+        toast("Added To Wishlist!",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+        let a=item.find(e => e.id == id)
+        a.wishlist = !a.wishlist;
+        console.log("uytdfgh",item)
+        setproductData([...item])
+      }
+      else{
+        toast.error("Error in Adding to Wishlist",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+      }
+    }
+    
+  }
+
   const ShopbyPrice = () => (
     <div style={{ boxSizing: "border-box", margin: "0 -5px" }} className="row">
       <Shopcol className="col-xs-12 col-md-4 col-lg-2">
@@ -212,6 +268,17 @@ const Card1 = () => {
     </div>
   );
   return (
+    <>
+    <ToastContainer
+                  position="bottom-center"
+                  autoClose={5000}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  pauseOnHover />
+    {loading ? <div style={{display: "flex",alignItems: "center",paddingLeft:'35%'}}><PuffLoader color={"purple"} size={60} /></div> : 
     <Productpage className="container">
       <div className="row">
       {productData.length > 0 &&
@@ -236,20 +303,14 @@ const Card1 = () => {
         <CardProductBottomDetails className="product-bottom-details">
           ₹{item.buyingPrice}
           <CardProductOldprice>₹{item.originalPrice}</CardProductOldprice>
-          <CardProductOffer>{item.discount}%OFF</CardProductOffer>
-          <CardWishlist id={id} href="">
+          <CardProductOffer>{item.discount === 0 ? <CardWishlist style={{paddingLeft:'1.5rem'}}><AiOutlineShoppingCart/></CardWishlist>: item.discount+'%OFF'}</CardProductOffer>
+          <CardWishlist onClick={() => updatewish(item.id,item.wishlist)}>
           <span>
-                                {
-                                    wishlist ?
-                                        <FiHeart onClick={() => setwishlist(!wishlist)} />
-                                        :
-                                        <FaHeart onClick={() => setwishlist(!wishlist)}/>
-                                }
+          {item.wishlist ?
+              <FaHeart/>
+                  :
+              <FiHeart/>}
           </span>
-              {/* <FiHeart
-              className={toggleHeart ? "heart active" : "heart"}
-              onClick={() => HeartToggle(id)}
-            /> */}
           </CardWishlist>
         </CardProductBottomDetails>
       </div>
@@ -268,6 +329,7 @@ const Card1 = () => {
       </div>
       
     </Productpage>
+   }</>
   );
           };
 
