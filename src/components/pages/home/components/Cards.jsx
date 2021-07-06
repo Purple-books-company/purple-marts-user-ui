@@ -2,6 +2,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Text } from "../../../../styles/widgets/widgets";
 import { Cards, CardImg } from "../../../../styles/pages/home-page";
 import { useHistory } from "react-router";
+
 const CardGroup = ({ data }) => {
   let history = useHistory();
   return (

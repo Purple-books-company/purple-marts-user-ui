@@ -21,7 +21,6 @@ export const Main = styled.h3`
   }
 `;
 
-
 // Grid styling
 
 export const Block = styled.div`

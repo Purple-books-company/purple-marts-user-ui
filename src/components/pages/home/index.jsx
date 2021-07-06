@@ -43,7 +43,7 @@ export default function Home() {
             <Grid data={home.subCategory} text="Shop best selling items" />
           )}
 
-          {home.banner_2 && <ImageBanners banner={home.banner_2} />}
+          {/* {home.banner_2 && <ImageBanners banner={home.banner_2} />} */}
           {home["Test Sale"].length > 0 && (
             <Sliders data={home["Test Sale"]} text="Mega sale" />
           )}
