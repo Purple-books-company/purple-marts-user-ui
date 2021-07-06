@@ -26,6 +26,7 @@ const SidebarNav = () => {
     categories = await fetchResult("categories");
     if (categories === null) categories = [];
     setcaturls(categories);
+    setloading(false);
     // console.log(caturls[0].name);
     // console.log(caturls);
     setShowGadgets(data=>{
@@ -46,6 +47,7 @@ const SidebarNav = () => {
     subcategories = await fetchResult("subcategories");
     if (subcategories === null) subcategories = [];
     setsubcaturls([...subcategories]);
+    setloading(false);
     // console.log(caturls[0].name);
     console.log("subcat",subcaturls);
   };
@@ -55,7 +57,6 @@ const SidebarNav = () => {
     });
     fetchCategories();
     fetchSubCategories();
-    setloading(false);
     HandleCategory();
   },[])
   function handleactiveparent(e){
@@ -91,7 +92,7 @@ const SidebarNav = () => {
                                     <ActiveClass className="active">
                                       <Links to={`/category/All`} onClick={(e)=>{handleactiveparent(e); }}>All Categories</Links>
                                     </ActiveClass>
-                                    {loading ? <div style={{display: "flex",justifyContent: "center",alignItems: "center"}}><PuffLoader color={"purple"} size={60} /></div> : 
+                                    {loading ? <div style={{paddingTop:'8px',display: "flex",justifyContent: "center",alignItems: "center"}}><PuffLoader color={"purple"} size={30} /></div> : 
                                     <>
                                     {caturls.length > 0 &&
                                   caturls.map((url,index) => (
