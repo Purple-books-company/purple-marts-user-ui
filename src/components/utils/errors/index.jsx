@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import logPic from "../../../assets/images/LoginError.png"
+import logPic from "../../../assets/images/LoginError.png";
 import { Button, Text } from "../../../styles/widgets/widgets";
 import Wrapper from "../../pages/authentication";
 
@@ -16,7 +16,9 @@ const Error = ({ func }) => {
 
   return (
     <>
-      <Text primary style={{ marginTop: "5%",}}>Please login to view details</Text>
+      <Text primary align="center" style={{ marginTop: "5%" }}>
+        Please login to view details
+      </Text>
       <div
         className="container-fluid"
         style={{ width: "40%", marginBottom: "10%" }}
