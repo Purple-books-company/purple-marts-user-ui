@@ -352,6 +352,7 @@ export const CardProductBottomDetails = styled.div`
      padding-left:10px;
      padding-bottom:10px;
      display:flex;
+     font-size: 1.1rem;
      align-items:center;
      @media screen and (max-width:568px){
           font-size: 1.2rem;
@@ -389,7 +390,6 @@ export const CardWishlist = styled.button`
      border: none;
      background-color: white;
      padding-bottom:3px;
-     margin-left:5px;
      font-size:22px;
      color:purple;
      transition:0.3s;

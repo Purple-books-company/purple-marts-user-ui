@@ -37,7 +37,7 @@ const Products = () => {
     window.addEventListener('scroll', toggleVisible);
     return ( <div class="d-flex" style={{clear:'both',display:'flex',justifyContent:'center'}}> 
         {/* <SidebarNav/> */}
-        <Card2 item={data}/>  
+        <Card2 item={data} setItem ={setData}/>  
         <TopButton>
             <FaArrowCircleUp onClick={scrollToTop} 
             style={{display: visible ? 'inline' : 'none'}} />
