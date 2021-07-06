@@ -1,6 +1,6 @@
 import { retriveDetails } from "../storage/details";
 import { ApiGetService, ApiPostService } from "./api-services";
-
+import { Redirect } from 'react-router'
 let home = [];
 let product=[];
 let categories = [];
@@ -81,20 +81,48 @@ async function postProduct(value,opt) {
       } 
       if (value === "singleproduct"){
         if(custId === null){
-          let url = process.env.REACT_APP_GET_PARTICULAR_PRODUCT+opt+'/';
-          console.log("url",url)
-                 let productDetails = await ApiGetService(url)
+                 let productDetails = await ApiGetService(process.env.REACT_APP_GET_PARTICULAR_PRODUCT+opt+'/')
                   product = productDetails
                   console.log("productdetails",productDetails)
                   return product
           } 
         else{
-                let productDetails = await ApiPostService(process.env.REACT_APP_GET_PARTICULAR_PRODUCT,{'customer':custId.id,'id':opt})
-                  product = productDetails
+                let productDetails = await ApiPostService(process.env.REACT_APP_GET_PARTICULAR_PRODUCT,{'customer':custId.id,'product':opt})
+                  product = productDetails.data
                   console.log("subsingle",productDetails)
                   return product
           }
         }  
+        if (value === "addtocart"){
+          if(custId === null){
+            <Redirect to="/login"/>
+            } 
+          else{
+                  let cart = await ApiPostService(process.env.REACT_APP_CART_URL,{'customer':custId.id,'product':opt.id,'varient':opt.varient,'image':opt.image,'count':opt.count})
+                    console.log("cart",cart)
+                    return cart
+            }
+          }
+          if (value === "addtowishlist"){
+            if(custId === null){
+              <Redirect to="/login"/>
+              } 
+            else{
+                    let wishlist = await ApiPostService(process.env.REACT_APP_ADD_WISHLIST_URL,{'customer':custId.id,'product':opt})
+                      console.log("wishlist",wishlist)
+                      return wishlist
+              }
+            }
+            if (value === "removefromwishlist"){
+              if(custId === null){
+                <Redirect to="/login"/>
+                } 
+              else{
+                      let wishlist = await ApiPostService(process.env.REACT_APP_REMOVE_WISHLIST_URL+ custId.id +"/"+opt+"/")
+                        console.log("wishlist",wishlist)
+                        return wishlist
+                }
+              }
       return [];
   }
 
@@ -127,6 +155,15 @@ async function fetchResult(item,opt=null) {
 
     case "singleproduct":
       return await postProduct("singleproduct",opt);
+
+    case "addtocart":
+      return await postProduct("addtocart",opt)
+
+    case "addtowishlist":
+      return await postProduct("addtowishlist",opt)
+    
+    case "removefromwishlist":
+      return await postProduct("removefromwishlist",opt)
 
     default:
       return null;
