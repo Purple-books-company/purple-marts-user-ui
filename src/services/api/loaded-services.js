@@ -47,11 +47,11 @@ async function fetchResult(item) {
       return categories;
 
     case "subcategories":
-      if (subcategories.length === 0) await getApi();
+      if (subcategories.length === 0) await getCategory();
       return subcategories;
 
     case "home":
-      if (home.length === 0) await getHome("home");
+      if (home.length === 0) await getHome();
       return home;
 
     // case "profile":
