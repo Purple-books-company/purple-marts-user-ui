@@ -21,11 +21,16 @@ const NavBar = ({ func }) => {
     func();
   };
 
-  let logged = localStorage.getItem("isLogged")
+  let logged = localStorage.getItem("isLogged");
 
   return (
-    <HeaderNav expand="lg" bg="light" variant="light" fixed="top">
-      <Container className="bg-light">
+    <HeaderNav
+      expand="lg"
+      variant="light"
+      fixed="top"
+      style={{ backgroundColor: "white" }}
+    >
+      <Container>
         <Nav.Link href="#" className="j">
           {/* <HeaderNav.Toggle aria-controls="search-nav" />
           <HeaderNav.Collapse id="search-nav">
@@ -35,7 +40,10 @@ const NavBar = ({ func }) => {
         </Nav.Link>
         <HeaderNav.Toggle aria-controls="basic-navbar-nav" />
         <HeaderNav.Collapse id="basic-navbar-nav">
-          <Nav className="d-lg-none d-inline" style={{ marginTop: '3em !important' }}>
+          <Nav
+            className="d-lg-none d-inline"
+            style={{ marginTop: "3em !important" }}
+          >
             <Search className="" />
           </Nav>
           <Nav className="me-auto ms-auto">
@@ -75,26 +83,23 @@ const NavBar = ({ func }) => {
               {/* <CartNum id="cartnum">2</CartNum> */}
               <p>cart</p>
             </NavLink>
-            {
-              logged ?
-
-                <NavLink icon="true" onClick={handleLogOut}>
-                  <br className="d-none d-lg-inline" />
-                  <HiLogout size="21" className="d-none d-lg-inline" />
-                  <p>Logout</p>
-                </NavLink >
-                :
-                <NavLink href="/login" icon="true" color="#F9FF00">
-                  <br className="d-none d-lg-inline" />
-                  <HiLogout size="21" className="d-none d-lg-inline" />
-                  <p>Login</p>
-                </NavLink>
-            }
+            {logged ? (
+              <NavLink icon="true" onClick={handleLogOut}>
+                <br className="d-none d-lg-inline" />
+                <HiLogout size="21" className="d-none d-lg-inline" />
+                <p>Logout</p>
+              </NavLink>
+            ) : (
+              <NavLink href="/login" icon="true" color="#F9FF00">
+                <br className="d-none d-lg-inline" />
+                <HiLogout size="21" className="d-none d-lg-inline" />
+                <p>Login</p>
+              </NavLink>
+            )}
           </Nav>
         </HeaderNav.Collapse>
       </Container>
     </HeaderNav>
-
   );
 };
 
