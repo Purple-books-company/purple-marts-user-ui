@@ -1,6 +1,11 @@
-import { Title, Main } from "../../../../styles/pages/home-page";
+import { TitleBox, Main } from "../../../../styles/pages/home-page";
 
 const Carousels = ({ data }) => {
+  let promote = [
+    "We have Sale that Brings joy",
+    "Its Sale! you can’t Resist",
+    "Your favorite products made affordable for you",
+  ];
   return (
     <>
       <div
@@ -31,18 +36,21 @@ const Carousels = ({ data }) => {
           ></button>
         </div>
         <div className="carousel-inner">
-          {data && data.map((item, index) => (
+          {data.map((item, index) => (
             <div
               className={`carousel-item ${index === 0 && " active"}`}
               key={item.id}
             >
-              <img src={item.image} className="d-block w-100" alt="..." />
-              <Title className="carousel-caption d-none d-md-block">
+              <img
+                src={item.image}
+                className="d-block w-100"
+                alt="SALE IS LIVE"
+                height="90%x"
+              />
+              <TitleBox className="carousel-caption d-none d-md-block">
                 <Main>{item.description}</Main>
-                <p style={{ color: "white" }}>
-                  Some representative placeholder content for the first slide.
-                </p>
-              </Title>
+                <p style={{ color: "white" }}>{promote[index]} !!!</p>
+              </TitleBox>
             </div>
           ))}
         </div>

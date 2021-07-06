@@ -1,9 +1,9 @@
 import React from "react";
 import { DarkShade } from "../../../../styles/themes/color-theme";
 import { Text } from "../../../../styles/widgets/widgets";
-import { Block, Caption } from "../../../../styles/pages/home-page";
+import { Block } from "../../../../styles/pages/home-page";
 
-const Grid = ({ data }) => {
+const Grid = ({ data, text }) => {
   const gridImg = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTugCX5kSC9m1XFVcK7BWoZY9HiycolFcoTQ&usqp=CAU",
     "https://m.media-amazon.com/images/I/61R4wTQfJdL._AC_SX425_.jpg",
@@ -12,8 +12,10 @@ const Grid = ({ data }) => {
 
   return (
     <>
-      <Text primary>DEALS OF THE DAY</Text>
-      <div className="container">
+      <Text primary className="mt-1" align="center">
+        {text}
+      </Text>
+      <div className="container-fluid my-4">
         <div className="row">
           {gridImg.map((img, index) => (
             <div className="col-md-3 mt-4" key={index}>
@@ -22,14 +24,20 @@ const Grid = ({ data }) => {
                   backgroundImage: `url(${img})`,
                 }}
               >
-                <Caption>Shop { data && data[index].subCategory}</Caption>
+                <Text tags color="white" align="center">
+                  Shop {data[index].name}
+                </Text>
               </Block>
             </div>
           ))}
 
-          <div className="col-md-3 mt-4">
+          <div className="col-md-3 my-4">
             <Block style={{ background: DarkShade }}>
-              <Caption>SHOP {data[3].subCategory}S</Caption>
+              {data && (
+                <Text tags color="white" align="center">
+                  SHOP {data[3].name}S
+                </Text>
+              )}
             </Block>
           </div>
         </div>
