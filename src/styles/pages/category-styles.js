@@ -1,11 +1,11 @@
 import styled,{css} from "styled-components";
 import { Lora, Slab } from "../themes/font-styles";
+import { LightShade } from '../themes/color-theme'
 import {Carousel} from "react-bootstrap";
-
+import { Link } from 'react-router-dom';
 export const Productpage = styled.div`
-      margin-top: 7em;
       @media(min-width:0px) and (max-width:568px){
-          margin-top: 5em;
+          margin-top: 3em;
     }
 `;
 
@@ -57,7 +57,7 @@ export const UnorderedList = styled.ul`
      list-style: none;
 `;
 
-export const Links = styled.a`
+export const Links = styled(Link)`
     position: relative;
     color: black;
     text-decoration: none !important;
@@ -67,10 +67,18 @@ export const Links = styled.a`
     font-weight: 500;
     display: block;
     width: 100%;
+    cursor: pointer;
     border-left: 3px solid transparent;
     :hover{
         color: purple!important;
 }
+`;
+
+export const ActiveClass = styled.li`
+     &.active>a{
+      color: purple !important;
+      font-weight: 600;
+    }
 `;
 
 export const TogglePrice = styled.button`
@@ -299,7 +307,7 @@ export const CardImg = styled.img`
     }
 `;
 
-export const CardProductName = styled.a`
+export const CardProductName = styled(Link)`
      color:black;
      text-decoration :none;
      text-align :center;
@@ -307,6 +315,11 @@ export const CardProductName = styled.a`
      font-size :20px;
      display:block;
      text-transform:uppercase;
+     display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
      transition:0.3s;
      margin-bottom :2px;
      cursor: pointer;
@@ -324,6 +337,11 @@ export const CardProductDescription = styled.p`
      line-height :22px;
       margin-bottom:18px;
       color:gray;
+      display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 `;
 
 export const CardProductBottomDetails = styled.div`
@@ -334,6 +352,7 @@ export const CardProductBottomDetails = styled.div`
      padding-left:10px;
      padding-bottom:10px;
      display:flex;
+     font-size: 1.1rem;
      align-items:center;
      @media screen and (max-width:568px){
           font-size: 1.2rem;
@@ -371,7 +390,6 @@ export const CardWishlist = styled.button`
      border: none;
      background-color: white;
      padding-bottom:3px;
-     margin-left:5px;
      font-size:22px;
      color:purple;
      transition:0.3s;
@@ -598,4 +616,23 @@ export const Size = styled.input`
   &:checked + ${LabelforSize} {
      color: #f83535;
   }
+`;
+
+export const BackBtn = styled.button`
+    border:none;
+    height:40px;
+    width: 80px;
+    background-color: #EDF0F3;
+    border-radius: 10px;
+    font-family: ${Lora};
+    text-align: center;
+    :hover{
+        background-color: ${LightShade};
+        color:#FFFFFF;
+
+    }
+    @media (min-width:0px) and (max-width:568px){
+        font-size: smaller;
+        width:30px;
+    }
 `;

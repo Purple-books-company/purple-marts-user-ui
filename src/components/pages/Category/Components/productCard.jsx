@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { GrFormPreviousLink, GrFormNextLink } from "react-icons/gr";
 import { Carousel, Form } from "react-bootstrap";
 import { FiHeart } from "react-icons/fi";
+import { BsArrowLeftShort } from "react-icons/bs";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import product from "../../../../api/SingleProduct.json";
 import product_card from "../../../../api/Products.json";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import Ratingreview from "../../../../api/RatingReview.json";
+import { fetchResult } from "../../../../services/api/loaded-services";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Badge,
   Card,
@@ -30,7 +34,7 @@ import {
   CartButton,
   WishlistButton,
   Similar,
-  Productpage
+  BackBtn
 } from "../../../../styles/pages/category-styles";
 import { Button } from "../../../../styles/widgets/widgets";
 import StarRatings from "react-star-ratings";
@@ -39,7 +43,7 @@ import { Lora } from "../../../../styles/themes/font-styles";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { LightShade } from "../../../../styles/themes/color-theme";
 import $ from "jquery";
-const Card2 = () => {
+const Card2 = ({item,setItem}) => {
   const [selectedOption, setSelectedOption] = useState("XXL");
   const [selectedColor, setSelectedColor] = useState("");
   const [Quantity, setQuantity] = useState(1);
@@ -51,47 +55,110 @@ const Card2 = () => {
   function handleColor(e) {
     setSelectedColor(e.target.style.background);
   }
-  const RatingReviewlist = Ratingreview.map((item) => (
+  const Addtocart = async () => {
+    let cart ={
+      'id': item.id,
+      'count':Quantity,
+      'varient':item.varients[0].id,
+      'image':item.varients[0].images[0].image
+    };
+    console.log("cartdata",cart)
+    let cartproduct=[];
+    cartproduct = await fetchResult("addtocart",cart)
+    console.log("cartproduct",cartproduct)
+    if(cartproduct.description.includes("Update")){
+      toast("Updated To Cart!",{
+        style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
+      });
+    }
+    else{
+      toast("Added To Cart!",{
+        style:{backgroundColor:'plum',color:'white',width:'50%'}
+      });
+    }
+  }
+  const Addtowishlist = async () => {
+    let wishlistproduct={description:''};
+    if(item.wishlist){
+      wishlistproduct = await fetchResult("removefromwishlist",item.id)
+      if(wishlistproduct.description.includes("doesn't")){
+        toast("Already removed from Wishlist!",{
+          style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
+        });
+      }
+      else if(wishlistproduct.description.includes("successfully")){
+        toast("Removed from Wishlist!",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+        item.wishlist =!item.wishlist
+        setItem({...item});
+      }
+      else{
+        toast.error("Error in Removing from Wishlist",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+      }
+    }
+    else{
+      wishlistproduct = await fetchResult("addtowishlist",item.id)
+      if(wishlistproduct.description.includes("Already")){
+        toast("Already in Wishlist!",{
+          style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
+        });
+      }
+      else if(wishlistproduct.description.includes("created")){
+        toast("Added To Wishlist!",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+        item.wishlist =!item.wishlist
+        setItem({...item});
+      }
+      else{
+        toast.error("Error in Adding to Wishlist",{
+          style:{backgroundColor:'plum',color:'white',width:'50%'}
+        });
+      }
+    }
+  }
+  // console.log("dataaaa",item)
+  const RatingReviewlist = item.recent_review != undefined  && item.recent_review.map((rating) => (
     <div className="row mb-4">
       <div className="media">
         <div className="d-lg-flex">
-          <h5 className="mt-1" style={{ marginRight: "20px" }}>
-            {item.review_heading}
-          </h5>
           <StarRatings
-            rating={item.rating}
+            rating={rating.rating}
             starDimension="25px"
             starSpacing="2px"
             starRatedColor="gold"
             starEmptyColor="gray"
           />
         </div>
-        {item.review_description}
+        {rating.description}
       </div>
     </div>
   ));
-  const Similarlist = product_card.slice(0, 5).map((item) => (
-    <Card className="col-xs-6 col-md-4 col-lg-2" key={item.id}>
-      <Badge Status={item.badge}>{item.badge}</Badge>
+  const Similarlist = item.images != undefined  && item.suggestion.map((suggest) => (
+    <Card className="col-xs-6 col-md-4 col-lg-2" key={suggest.id}>
+      <Badge Status={item.badge}>NEW</Badge>
       <a href="/products">
         <CardImg
           alt="Card image"
           className="card-img-top"
           variant="top"
-          src={item.thumb}
+          src={suggest.image}
         />
       </a>
       <div className="card-block">
         <CardProductName href="/products" className="card-title">
-          {item.product_name}
+       {suggest.name}
         </CardProductName>
         <CardProductDescription className="card-text">
-          {item.description}
+          {suggest.description}
         </CardProductDescription>
         <CardProductBottomDetails className="product-bottom-details">
-          ₹{item.newprice}
-          <CardProductOldprice>₹{item.oldprice}</CardProductOldprice>
-          <CardProductOffer>{item.offer}%OFF</CardProductOffer>
+          ₹{suggest.offerPrice}
+          <CardProductOldprice>₹{suggest.originalPrice}</CardProductOldprice>
+          <CardProductOffer>{suggest.discount === 0 ? <CardWishlist style={{paddingLeft:'1.5rem'}}><AiOutlineShoppingCart/></CardWishlist>: suggest.discount+'%OFF'}</CardProductOffer>
           <CardWishlist href="">
             <FiHeart />
           </CardWishlist>
@@ -99,8 +166,19 @@ const Card2 = () => {
       </div>
     </Card>
   ));
-  const listItems = product.map((item) => (
-    <div key={item.id}>
+  useEffect(() => {
+    $("button").click(function () {
+      $(this).addClass("active").siblings().removeClass("active");
+    });
+  });
+  return <div className="d-flex">
+     <BackBtn className="" aln="true">
+          <span className="">
+            <BsArrowLeftShort className="mx-2" />
+            Back
+          </span>
+        </BackBtn>
+        <div key={item.id}>
       <div className="container">
         <div className="row">
           <ProductImg
@@ -133,8 +211,8 @@ const Card2 = () => {
                 />
               }
             >
-              {item.src.map((img) => (
-                <Carousel.Item key={img.value} interval={4000}>
+              {item.images != undefined  && item.images.map((img) => (
+                <Carousel.Item key={img} interval={4000}>
                   <img
                     style={{
                       height: "28rem",
@@ -142,8 +220,8 @@ const Card2 = () => {
                       objectFit: "contain",
                     }}
                     className=" d-block w-100"
-                    src={img}
-                    alt="image"
+                    src={img.image}
+                    alt="product"
                   />
                 </Carousel.Item>
               ))}
@@ -151,13 +229,13 @@ const Card2 = () => {
           </ProductImg>
           <div className="col-xs-6 col-md-6 col-lg-6">
             <div className="row">
-              <ProductNameDetail>{item.product_name}</ProductNameDetail>
+              <ProductNameDetail>{item.name}</ProductNameDetail>
             </div>
             <div className="row">
               <ProductPriceDetail>
-                ₹{item.newprice}
-                <ProductOldPriceDetail>₹{item.oldprice}</ProductOldPriceDetail>
-                <ProductOfferDetail>{item.offer}% Off</ProductOfferDetail>
+                ₹{item.buyingPrice}
+                <ProductOldPriceDetail>₹{item.originalPrice}</ProductOldPriceDetail>
+                <ProductOfferDetail>{item.discount === 0 ? '': item.discount+'%OFF'}</ProductOfferDetail>
               </ProductPriceDetail>
             </div>
             <div className="row">
@@ -178,22 +256,13 @@ const Card2 = () => {
                     textAlign: "justify",
                   }}
                 >
-                  {item.description}Lorem Ipsum is simply dummy text of the
-                  printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s, when an
-                  unknown printer took a galley of type and scrambled it to make
-                  a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
+                  {item.description}
                 </p>
               </div>
             </div>
             <div className="row mt-2">
               <div className="d-flex">
-                <h4
+                {/* <h4
                   style={{
                     fontFamily: `${Lora}`,
                     fontSize: "20px",
@@ -219,12 +288,12 @@ const Card2 = () => {
                       {size.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
               </div>
             </div>
             <div className="row mt-2">
               <div className="d-flex">
-                <h4
+                {/* <h4
                   style={{
                     fontFamily: `${Lora}`,
                     fontSize: "20px",
@@ -240,7 +309,7 @@ const Card2 = () => {
                     onClick={(e) => handleColor(e)}
                     style={{ background: color }}
                   ></ProductColorDetail>
-                ))}
+                ))} */}
               </div>
             </div>
             <div className="row mt-2">
@@ -287,7 +356,7 @@ const Card2 = () => {
                   Total Price:
                 </h4>
                 <h4 style={{ fontFamily: `${Lora}`, fontSize: "20px" }}>
-                  ₹{item.newprice * Quantity}
+                  ₹{item.buyingPrice * Quantity}
                 </h4>
               </div>
             </div>
@@ -296,11 +365,24 @@ const Card2 = () => {
                 style={{ paddingLeft: "22%" }}
                 className="col-xs-12 col-md-6"
               >
-                <Button>Add to Cart</Button>
+                <Button onClick={Addtocart}>Add to Cart</Button>
+                <ToastContainer
+                  position="bottom-center"
+                  autoClose={5000}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  pauseOnHover />
               </CartButton>
               <br />
               <WishlistButton className="col-xs-12 col-md-6">
-                <Button>Add to Wishlist</Button>
+                {item.wishlist ?
+                <Button onClick={() => Addtowishlist()}>Remove from Wishlist</Button>
+                 :  
+                <Button onClick={() => Addtowishlist()}>Add to Wishlist</Button> 
+                }
               </WishlistButton>
             </div>
           </div>
@@ -318,7 +400,7 @@ const Card2 = () => {
         </div>
         <div className="row d-flex">{RatingReviewlist}</div>
       </div>
-      <div className="container">
+      {/* <div className="container">
         <div className="row">
           <ProductWriteReview>Give Review & Rating</ProductWriteReview>
         </div>
@@ -356,15 +438,9 @@ const Card2 = () => {
             <Button type="submit">Submit Review</Button>
           </Form>
         </div>
-      </div>
+      </div> */}
     </div>
-  ));
-  useEffect(() => {
-    $("button").click(function () {
-      $(this).addClass("active").siblings().removeClass("active");
-    });
-  });
-  return <Productpage>{listItems}</Productpage>;
+    </div>;
 };
 
 export default Card2;

@@ -35,7 +35,7 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category} />
-        <Route path="/products" component={Products} />
+        <Route path="/products/:id" component={Products} />
         <Route path="/offers" component={Offers} />
 
         <Suspense fallback={<Loading />}>

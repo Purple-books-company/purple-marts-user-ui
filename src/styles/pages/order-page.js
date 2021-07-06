@@ -1,30 +1,52 @@
-import styled from "styled-components"
-import {Lora , Slab} from '../themes/font-styles'
-import {LightShade, DarkShade} from "../themes/color-theme"
+import styled, { css }  from "styled-components"
+import {Lora } from '../themes/font-styles'
 
-export const TabHead= styled.thead`
-    background-color: ${LightShade};
-    font-weight: 700;
-    font-size: 1.125rem;
-    font-family: ${Slab};
-    color:white;
-    text-align:center;
-    vertical-align: middle !important;
-`;
-
-export const TabBody = styled.tbody`
-    white-space: pre-line;
-    font-size: 0.9rem;
-    font-weight:700;
-    color: ${DarkShade};
-    background-color: #fff;
-    font-family: ${Lora};
-    text-align:center;
-    vertical-align: middle !important;
+export const TabData= styled.td`
+    border:0;
+    padding:0 !important;
+    font:0.9rem;
+    ${props => props.width === "med" && css`
+        width:13%;
+        @media (min-width:0px) and (max-width:1020px){
+            width: 20%;   
+        }
+    `}
+    ${props => props.width === "small" && css`
+        width:10%;
+        @media (min-width:0px) and (max-width:1020px){
+            width: auto;   
+        }
+    `}
+    ${props => props.font === "bold" && css`
+        font-weight:700;
+    `}
+    ${props => props.width === "big" && css`
+        width:40%;
+        @media (min-width:1064px) and (max-width:1200px){
+            width: 35%;   
+        }
+        @media (min-width:0px) and (max-width:1064px){
+            width: auto;   
+        }
+    `}
+    ${props => props.float === "right" && css`
+        width:74%;
+        text-align:right;
+        @media (min-width:0px) and (max-width:900px){
+            width: 60%;   
+        }
+    `}
+    ${props => props.width === "full" && css`
+        width:auto;
+        text-align:right;
+    `}
+    ${props => props.width === "auto" && css`
+        width:auto;
+    `}
 `;
 
 export const Tab = styled.div`
-    padding: 20px;
+    padding: 20px 20px 0;
     @media (min-width:0px) and (max-width:766px){
         padding: 20px 0;
     }

@@ -1,36 +1,84 @@
-import React, { useState } from "react";
-import {Container, Table, Row, Col } from "react-bootstrap"; 
-import {TabBody, TabHead, Tab, Para, StyleStatus} from '../../../../styles/pages/order-page'
+ import React, { useState } from "react";
+import {Container, Table, Row, Col , Card } from "react-bootstrap"; 
+import {Tab, Para, StyleStatus , TabData} from '../../../../styles/pages/order-page'
 import data from "../../../../api/Orders.json"
 import {Slab} from '../../../../styles/themes/font-styles';
 import  SideNav  from '../SideNav';
 import {NavDiv, ProfileLink} from '../../../../styles/pages/profile-page';
+import { MdContentCopy , MdOpenInNew } from 'react-icons/md';
+import Clipboard from 'react-clipboard.js';
 
 function Order() {
-
-    let StatusStyle={
-        textAlign: 'center',
-        verticalAlign: 'middle'
-    };
     
     const [order, setOrder] = useState(data)
     
-    const tabBody = order.map((id) =>
-        <tr>            
-            <td><ProfileLink to='../details'>{id.orderRef}</ProfileLink></td>
-            <td>{id.orderDate}</td>
-            <td>{id.deliveryDate}</td>
-            <td>₹.{id.total}</td>
-            <td>{id.noItems}</td>
-            <td>{id.payment}</td>
-            <td style={StatusStyle}><StyleStatus status={id.status}>{id.status}</StyleStatus>
-                {/* <StyledButton className=" shadow-none " status={id.status}>{id.status}</StyledButton> */}
-                </td>
-            {/* <td><a href={id.invoice}><MdPictureAsPdf style={IconStyle}/></a></td> */}
-            {/* <td><a>Details</a><br/>
-            <a>Reorder</a></td> */}
-        </tr>
+    const card = order.map((id) =>
+        <Card className='mb-lg-2 mb-md-3'>
+            <ProfileLink to='../details'>
+            <Card.Header>
+                <Table style={{marginBottom:0}}>
+                    <tbody>
+                        <tr>
+                            <TabData width='med' font='bold'>Ordered on</TabData>
+                            <TabData float='right'>Order ID</TabData>
+                            <TabData width='auto' float='right'>#{id.orderRef}</TabData>
+                        </tr>
+                        <tr>
+                            <TabData>21/11/11</TabData>
+                            <TabData colSpan={2} width='full'>Shipped to Gowthaman</TabData>
+                        </tr>
+                    </tbody>
+                </Table>
+            </Card.Header>
+            </ProfileLink>            
+            <Card.Body>
+                <Table style={{marginBottom:0}}>
+                    <tbody>
+                        <tr>
+                            <TabData width='med' font='bold'>Delivered</TabData>
+                            <TabData width='big'>{id.deliveryDate}</TabData>
+                            <TabData font='bold'>Tracking ID</TabData>
+                            <TabData>:</TabData>
+                            <TabData>CT040857193IN</TabData>
+                            <TabData width='small' >
+                                <Clipboard data-clipboard-text='CT040857193IN' style={{border:'none', padding:0, backgroundColor:'#fff'}}>
+                                    <MdContentCopy className='mb-1' size='20' />
+                                </Clipboard>
+                            </TabData>
+                        </tr>
+                        <tr>
+                            <TabData width='med' font='bold'>Total</TabData>
+                            <TabData>₹ {id.total}</TabData>
+                            <TabData font='bold'>Tracking URL</TabData>
+                            <TabData>:</TabData>
+                            <TabData><a style={{padding:0}} href="https://www.indiapost.gov.in/_layouts/15/DOP.Portal.Tracking/TrackConsignment.aspx" rel="noreferrer" target='_blank'>{add3Dots('https://www.indiapost.gov.in/_layouts/15/DOP.Portal.Tracking/TrackConsignment.aspx' , 22)}</a></TabData>
+                            <TabData width='small'>
+                                <a href="https://www.indiapost.gov.in/_layouts/15/DOP.Portal.Tracking/TrackConsignment.aspx" rel="noreferrer" target='_blank' className='px-0'><MdOpenInNew className='mb-1' style={{color:'#000'}} size='20' /></a>
+                            </TabData>
+                        </tr>
+                        <tr>
+                            <TabData width='med' font='bold'>No. of Items</TabData>
+                            <TabData>{id.noItems}</TabData>
+                            <TabData font='bold'>Payment</TabData>
+                            <TabData>:</TabData>
+                            <TabData>{id.payment}</TabData>
+                        </tr>
+                    </tbody>
+                </Table>                              
+            </Card.Body>
+        </Card>
     );
+
+    function add3Dots(string, limit)
+    {
+        var dots = "...";
+        if(string.length > limit)
+        {
+            string = string.substring(0,limit) + dots;
+        }
+        
+        return string;
+    }
 
     const tab = order.map((id) =>
         <div>
@@ -57,14 +105,12 @@ function Order() {
                         <StyleStatus style={{float:"left"}} status={id.status}>{id.status}</StyleStatus><br/>
                     </Col>
                 </Row>
-            {/* <Para>{id.noItems} items</Para>
-            <StyleStatus style={{float:"left"}} status={id.status}>{id.status}</StyleStatus><br/> */}
             </ProfileLink>
             <hr />
         </div>
     );
     return (
-        <Container fluid style={{ clear:'both', marginTop:'5%' }}>
+        <Container fluid style={{ clear:'both', marginTop:'9%' }}>
             <Row>
                 <SideNav />
 
@@ -73,30 +119,7 @@ function Order() {
                     <h4 style={{fontFamily:Slab}} >Order History</h4>
                     <Tab>
                         <h5 style={{fontFamily:Slab}}>Here are the orders you've placed since your account was created.</h5>
-                        <Table bordered >
-                            <TabHead>
-                                <tr>
-                                    <td>Order<br/>
-                                        Reference</td>
-                                    <td>Ordered<br />
-                                        Date</td>
-                                    <td>Expected<br />
-                                        Delivery Date</td>
-                                    <td>Total<br/>
-                                        Price</td>
-                                    <td>No. of<br />
-                                        Items</td>
-                                    <td>Payment<br />
-                                        Method</td>
-                                    <td>Status</td>
-                                    {/* <td>Invoice</td> */}
-                                    {/* <td></td> */}
-                                </tr>
-                            </TabHead>
-                            <TabBody>
-                                {tabBody}
-                            </TabBody>
-                        </Table>
+                        {card}
                     </Tab>
                     <br />
                     </NavDiv>
