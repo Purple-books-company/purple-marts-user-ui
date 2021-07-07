@@ -1,12 +1,16 @@
+import { Card } from "react-bootstrap";
 import styled, { css } from "styled-components";
 import { LightShade, Silver } from "../themes/color-theme";
-import { Slab } from "../themes/font-styles";
 
 // Home page carousel styling
 
-export const Title = styled.div`
+export const TitleBox = styled.div`
   background-color: #000000bd;
   border: 10px solid ${LightShade};
+  :hover {
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 450px) {
     display: none;
   }
@@ -22,20 +26,6 @@ export const Main = styled.h3`
 
 // Grid styling
 
-export const Caption = styled.div`
-  display: block;
-  margin: auto;
-  font-size: 18px;
-  font-family: ${Slab};
-  color: white;
-  text-align: center;
-  text-transform: uppercase;
-
-  @media screen and (max-width: 450px) {
-    font-size: 10px;
-  }
-`;
-
 export const Block = styled.div`
   display: flex;
   height: 150px;
@@ -46,8 +36,8 @@ export const Block = styled.div`
   }
   &:hover {
     cursor: pointer;
-    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2),
-      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 4px 4px 8px 0 rgb(210, 185, 225),
+      0 6px 20px 0 rgb(210, 185, 225);
   }
 
   ${(props) =>
@@ -60,7 +50,7 @@ export const Block = styled.div`
       :hover {
         cursor: pointer;
         box-shadow: none;
-        transform: scale(1.1);
+        /* transform: scale(1.1); */
       }
     `};
 `;
@@ -75,6 +65,28 @@ export const Image = styled.img`
       width: 100%
       max-width: none;
       border: 5px solid ${LightShade};
-      /* object-fit: fill; */
     `};
+`;
+
+// Sale
+
+export const Cards = styled(Card)`
+  height: 270px;
+  width: 230px;
+  @media screen and (max-width: 450px) {
+    height: 160px;
+    width: 130px;
+  }
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const CardImg = styled(Card.Img)`
+  height: 190px;
+  /* width: 200px; */
+  @media screen and (max-width: 450px) {
+    height: 90px;
+    /* width: 160px; */
+  }
 `;

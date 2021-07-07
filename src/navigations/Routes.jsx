@@ -7,6 +7,7 @@ import Loading from "../components/utils/loader";
 import Products from "../components/pages/Category/Components/viewproduct";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Offers from "../components/pages/offer-page";
+import ScrollToTop from "../components/utils/restore-scroll/Scroll";
 
 const Errors = lazy(() => import("../components/utils/errors"));
 const Cart = lazy(() => import("../components/pages/cart"));
@@ -31,6 +32,7 @@ function Routes() {
   };
   return (
     <Router>
+      <ScrollToTop />
       <Header func={setLogOut} />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -42,6 +44,7 @@ function Routes() {
           {logged ? (
             <>
               <Route path="/cart" component={Cart} />
+
               <Route path="/wishlist" component={WishList} />
               <Route path="/profile/order" component={Order} />
               <Route path="/profile/info" component={Profile} />

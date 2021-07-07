@@ -1,40 +1,17 @@
-import { useState } from "react";
+import Layout from "./components/Layout";
+import { Text } from "../../../styles/widgets/widgets";
 import { Container, Row, Col } from "react-bootstrap";
 
 const Offers = () => {
-  let initial = [
-    "all",
-    "none",
-    "all",
-    "all",
-    "none",
-    "all",
-    "all",
-    "none",
-    "all",
-    "all",
-    "none",
-    "all",
-    "all",
-    "none",
-    "all",
-  ];
-  const [val, setVal] = useState(initial);
   return (
-    <Container style={{ marginTop: "10%", marginBottom: "10%" }}>
-      <Row>
-        {val.map((item, index) => (
-          <Col
-            lg="4"
-            md="auto"
-            key={index}
-            style={{ backgroundColor: "black", color: "white" }}
-          >
-            {item}
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <>
+      <Container className="my-5">
+        <Row style={{ backgroundColor: "#edeaee" }}>
+          <Text align="center">Purple Mart's Grand Sale</Text>
+        </Row>
+      </Container>
+      <Layout />
+    </>
   );
 };
 
