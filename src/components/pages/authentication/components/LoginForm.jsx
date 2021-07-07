@@ -1,7 +1,8 @@
-import Form from "react-bootstrap/Form";
-import { ApiPostService } from "../../../../services/api/api-services";
-import { Button } from "../../../../styles/widgets/widgets";
 import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import { useHistory } from "react-router";
+import { Button } from "../../../../styles/widgets/widgets";
+import { ApiPostService } from "../../../../services/api/api-services";
 
 function LoginForm({
   setShowModal,
@@ -13,6 +14,7 @@ function LoginForm({
   setVerify,
   setUpdate,
 }) {
+  let history = useHistory();
   let initial = {
     email: "",
     password: "",
@@ -44,6 +46,7 @@ function LoginForm({
 
       if (res.success) {
         setShowModal(false);
+        history.push("/");
       } else setError(res.description);
     } else {
       setError("Missing Fields..");

@@ -1,14 +1,20 @@
 import React from "react";
+import { useHistory } from "react-router";
 import { DarkShade } from "../../../../styles/themes/color-theme";
 import { Text } from "../../../../styles/widgets/widgets";
 import { Block } from "../../../../styles/pages/home-page";
 
 const Grid = ({ data, text }) => {
+  let history = useHistory();
   const gridImg = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTugCX5kSC9m1XFVcK7BWoZY9HiycolFcoTQ&usqp=CAU",
     "https://m.media-amazon.com/images/I/61R4wTQfJdL._AC_SX425_.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu5mYIH9y9ovhGwpiqquVjk2g6ivCHrnSO1g&usqp=CAU",
   ];
+
+  function handleClick(category, name) {
+    history.push("/category/" + category + "/" + name);
+  }
 
   return (
     <>
@@ -23,6 +29,9 @@ const Grid = ({ data, text }) => {
                 style={{
                   backgroundImage: `url(${img})`,
                 }}
+                onClick={() =>
+                  handleClick(data[index].category, data[index].name)
+                }
               >
                 <Text tags color="white" align="center">
                   Shop {data[index].name}
@@ -32,7 +41,10 @@ const Grid = ({ data, text }) => {
           ))}
 
           <div className="col-md-3 my-4">
-            <Block style={{ background: DarkShade }}>
+            <Block
+              style={{ background: DarkShade }}
+              onClick={() => handleClick(data[3].category, data[3].name)}
+            >
               {data && (
                 <Text tags color="white" align="center">
                   SHOP {data[3].name}S

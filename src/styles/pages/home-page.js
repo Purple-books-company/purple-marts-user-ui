@@ -7,6 +7,9 @@ import { LightShade, Silver } from "../themes/color-theme";
 export const TitleBox = styled.div`
   background-color: #000000bd;
   border: 10px solid ${LightShade};
+  :hover {
+    cursor: pointer;
+  }
 
   @media screen and (max-width: 450px) {
     display: none;

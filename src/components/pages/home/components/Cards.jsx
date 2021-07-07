@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 
 const CardGroup = ({ data }) => {
   let history = useHistory();
+
   return (
     <Container fluid className="my-3">
       <Text primary align="center">
@@ -13,7 +14,10 @@ const CardGroup = ({ data }) => {
       <Row>
         {data.map((item) => (
           <Col lg="3" xs md="6" sm="6" key={item.id}>
-            <Cards className="my-2" onClick={() => history.push("/category")}>
+            <Cards
+              className="my-2"
+              onClick={() => history.push("/category/" + item.name)}
+            >
               <CardImg
                 variant="top"
                 className="img-thumbnail"
@@ -21,7 +25,7 @@ const CardGroup = ({ data }) => {
               />
               <Card.Body>
                 <Card.Link
-                  href="/category"
+                  onClick={() => history.push("/category")}
                   style={{
                     textDecoration: "none",
                     color: "black",

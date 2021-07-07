@@ -1,13 +1,14 @@
 import Slider from "react-slick";
+import { useHistory } from "react-router";
 import React, { useState, useEffect } from "react";
 import { Text } from "../../../../styles/widgets/widgets";
-import { Container, Row} from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { Block, Image } from "../../../../styles/pages/home-page";
-import { LightShade } from "../../../../styles/themes/color-theme";
 
 let slides;
 
 function Sliders({ data, text }) {
+  let history = useHistory();
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
@@ -19,10 +20,16 @@ function Sliders({ data, text }) {
       // infinite: true,
       speed: 500,
       slidesToShow: slides,
-      slidesToScroll: 3,
+      slidesToScroll: 5,
       swipeToSlide: true,
     });
   }, [data.length]);
+
+  function handleClick(dataType, category, id) {
+    if (dataType === "SubCategory")
+      history.push("/category/" + category + "/" + id);
+    else if (dataType == "Product") history.push("/offers/");
+  }
 
   return (
     <>
@@ -42,7 +49,14 @@ function Sliders({ data, text }) {
                   data-bs-placement="right"
                   title={url.name}
                 >
-                  <Image className="mb-3" src={url.image} alt="Category" />
+                  <Image
+                    className="mb-3"
+                    src={url.image}
+                    alt="Image"
+                    onClick={() =>
+                      handleClick(url.dataType, url.category, url.id)
+                    }
+                  />
                   {url.offerPrice && (
                     <Row className="mx-1">
                       <Text
@@ -71,6 +85,9 @@ function Sliders({ data, text }) {
                       align={!url.offerPrice && "center"}
                       thickness={url.offerPrice && "200"}
                       space="1"
+                      onClick={() =>
+                        handleClick(url.dataType, url.category, url.id)
+                      }
                     >
                       {url.name}
                     </Text>
@@ -82,7 +99,7 @@ function Sliders({ data, text }) {
                           case="capitalize"
                           size="80%"
                           space="1"
-                          color={LightShade}
+                          color="#956daa"
                           className="py-0"
                         >
                           Now : INR {url.offerPrice}

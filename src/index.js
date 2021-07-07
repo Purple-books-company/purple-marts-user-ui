@@ -8,6 +8,7 @@ import Routes from "./navigations/Routes";
 
 ReactDOM.render(
   <React.StrictMode>
+    <div style={{ marginTop: "7%" }}></div>
     <Routes />
   </React.StrictMode>,
   document.getElementById("root")

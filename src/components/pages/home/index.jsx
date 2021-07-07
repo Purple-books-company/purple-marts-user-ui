@@ -4,10 +4,12 @@ import Grid from "./components/Grid";
 import Carousel from "./components/Carousel";
 import Sliders from "./components/Sliders";
 import Loading from "../../utils/loader";
+import { useHistory } from "react-router-dom";
 import { getApi, fetchResult } from "../../../services/api/loaded-services";
 import CardGroup from "./components/Cards";
 
 function ImageBanners({ banner }) {
+  let history = useHistory();
   return (
     <Image
       src={banner.image}
@@ -15,6 +17,7 @@ function ImageBanners({ banner }) {
       alt={banner.id}
       className="my-4"
       fluid
+      onClick={() => history.push("/offers")}
     />
   );
 }
@@ -31,7 +34,7 @@ export default function Home() {
     let values;
     values = await fetchResult("home");
     setHome({ ...values });
-    // console.log(values);
+    console.log(values);
   };
 
   return (
