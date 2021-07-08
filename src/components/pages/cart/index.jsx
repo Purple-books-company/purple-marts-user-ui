@@ -5,42 +5,52 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi"
 import { CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn, QtyBtn, CartTitleInfo, EmptyImg, CartEmpty } from "../../../styles/pages/cart-page"
 import CartHead from "./CartHead";
-import datas from '../../../api/CartProducts.json'
 import empty_cart from '../../../assets/images/empty_cart.png'
-import { useParams } from "react-router-dom";
-import { fetchResult } from '../../../services/api/loaded-services';
+import { ApiGetService, ApiPostService } from '../../../services/api/api-services';
+import { retriveDetails } from '../../../services/storage/details';
+import Loading from '../../utils/loader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
-    const [item, setItem] = useState(datas)
-    const [total, setTotal] = useState(0)
-    const [shipping, setShipping] = useState(0)
-    const [empty, setEmpty] = useState(0)
+    const [item, setItem] = useState(["initial"])
+    const [delInfo, setDelInfo] = useState({ "total": 0, "shipping": 0, "delCharges": true })
     const [cod, setCod] = useState(false)
-    const [del, setDel] = useState(true)
-    const [data, setData]= useState({})
-    const params = useParams();
+
     useEffect(() => {
-        setItem(item)
-        calcTotal()
-        setShipping(50)
-        setEmpty(item.length)
-        console.log("proparams",params.id);
-        async function fetchdata() {
-            let res = await fetchResult("addtocart",params.id)
-            setData(res);
-            console.log("cartdata",res)
+        async function fetchApi() {
+            let usr = await retriveDetails()
+            let res = await ApiGetService(process.env.REACT_APP_CART_GET + "/" + usr.id + "/")
+            setItem(res)
         }
-        fetchdata();
+        fetchApi()
+    }, [])
+
+
+    useEffect(() => {
+        calcTotal()
     }, [item])
+
+    function messages(name, str) {
+        setDelInfo(prevState => ({
+            ...prevState,
+            [name]: str
+        }));
+    }
 
     const calcTotal = () => {
         let tempTotal = 0;
+        let deliveryAmount = 0;
         item.forEach((e) => {
-            let temp = tempTotal + (e.price * e.quantity)
-            tempTotal = temp
-            console.log(total)
+            tempTotal = tempTotal + (e.amount * e.count)
+            deliveryAmount = deliveryAmount + e.deliveryAmount
         })
-        setTotal(tempTotal)
+        messages("total", tempTotal)
+        messages("shipping", deliveryAmount)
+        if (tempTotal > 500) {
+            messages("delCharges", false)
+            messages("shipping", 0)
+        }
     }
 
     const payMethod = () => {
@@ -52,8 +62,11 @@ const Cart = () => {
         <div className="container mt-5">
 
             <CartHead />
-            {empty !== 0
-                ? <>
+            {
+                item[0] === "initial" && <Loading />
+            }
+            {item.length !== 0 && item[0] !== "initial"
+                && <>
                     <table className="w-100" style={{ margin: '50px', marginLeft: '0px' }}>
                         <thead>
                             <CartItemBox className="border-bottom">
@@ -70,24 +83,24 @@ const Cart = () => {
                                 item.map((product, index) => {
                                     return (
                                         <CartItemBox className="mt-3 pl-5 border-bottom" key={product.id}>
-                                            <CartDetail ><Image src={product.url} /></CartDetail>
+                                            <CartDetail ><Image src={product.image} /></CartDetail>
                                             <CartDetail align="left">
-                                                {product.productName} <br />
+                                                {product.name} <br />
                                                 {
                                                     // delivery amount for each product and if our condition is satisfy its been free delivery
-                                                    true ?
-                                                        <p style={{ marginLeft: '2%' }}>| ₹40</p>
+                                                    delInfo.delCharges ?
+                                                        <p style={{ marginLeft: '2%' }}>| ₹{product.deliveryAmount}</p>
                                                         :
-                                                        <del style={{ marginLeft: '2%' }}>| ₹40</del>
+                                                        <del style={{ marginLeft: '2%' }}>| ₹{product.deliveryAmount}</del>
                                                 }
                                             </CartDetail>
-                                            <CartDetail >₹{product.price}</CartDetail>
+                                            <CartDetail >₹{product.amount}</CartDetail>
                                             <CartDetail className="form-inline" type="Quantity">
                                                 <QtyBtn
                                                     onClick={() => {
-                                                        if (product.quantity !== 1) {
+                                                        if (product.count !== 1) {
                                                             let newItem = [...item]
-                                                            newItem[index].quantity -= 1
+                                                            newItem[index].count -= 1
                                                             setItem(newItem)
                                                             // setItem(items => [...items])
                                                         }
@@ -95,23 +108,39 @@ const Cart = () => {
                                                 >
                                                     <FiMinusCircle className="mx-2" />
                                                 </QtyBtn>
-                                                {product.quantity}
+                                                {product.count}
                                                 <QtyBtn onClick={() => {
                                                     let newItem = [...item]
-                                                    newItem[index].quantity += 1
+                                                    newItem[index].count += 1
                                                     setItem(newItem)
                                                 }}>
                                                     <FiPlusCircle className="mx-2" />
                                                 </QtyBtn>
                                             </CartDetail>
-                                            <CartDetail className="col">₹{product.price * product.quantity}</CartDetail>
+                                            <CartDetail className="col">₹{product.amount * product.count}</CartDetail>
                                             <CartDetail className="col" hover="true">
-                                                <ImCross onClick={() => {
+                                                <ImCross onClick={async () => {
                                                     let newItem = [...item]
                                                     newItem.splice(index, 1)
                                                     setItem(newItem)
+                                                    await ApiPostService(process.env.REACT_APP_CART_DELETE, {
+                                                        "product": product.product,
+                                                        "varient": product.varient,
+                                                        "customer": product.customer
+                                                    }
+                                                    )
+                                                    toast("removed successfully", {
+                                                        style: { background: "#F1797B", textAlign: 'center', color: "#ffffff" }
+                                                    })
                                                 }} />
                                             </CartDetail>
+                                            <ToastContainer
+                                                position="bottom-center"
+                                                autoClose={2000}
+                                                hideProgressBar
+                                                rtl={false}
+                                                pauseOnFocusLoss
+                                                pauseOnHover />
                                         </CartItemBox>
                                     )
                                 })
@@ -144,24 +173,25 @@ const Cart = () => {
                         <div className="col-5 ml-5" style={{ alignContent: 'right' }}>
                             <span className="row">
                                 <b className="col">Subtotal:</b>
-                                <p className="col">₹{total}</p>
+                                <p className="col">₹{delInfo.total}</p>
                             </span>
                             <span className="row">
                                 <b className="col">Shipping:</b>
-                                <p className="col">₹{shipping}</p>
+                                <p className="col">₹{delInfo.shipping}</p>
                             </span>
 
                             <div className="border-bottom border-top">
                                 <span className="row ">
                                     <b className="col">Total:</b>
-                                    <p className="col">₹{total + shipping}</p>
+                                    <p className="col">₹{delInfo.total + delInfo.shipping}</p>
                                 </span>
                             </div>
-                            <CheckOutBtn>Checkout ₹{total + shipping}</CheckOutBtn>
+                            <CheckOutBtn>Checkout ₹{delInfo.total + delInfo.shipping}</CheckOutBtn>
                         </div>
                     </CheckoutBox>
                 </>
-                :
+            }{
+                item.length === 0 &&
                 <div className="justify-content-center text-center">
                     <div className="container justify-content-center d-flex">
                         <EmptyImg src={empty_cart} alt="" srcset="" />
@@ -175,4 +205,3 @@ const Cart = () => {
 }
 
 export default Cart;
-
