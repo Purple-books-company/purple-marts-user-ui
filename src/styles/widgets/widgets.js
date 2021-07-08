@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { LightShade, DarkShade, Silver } from "../themes/color-theme";
-import { Lora } from "../themes/font-styles";
+import { LightShade, DarkShade } from "../themes/color-theme";
+import { Lora, Roboto } from "../themes/font-styles";
 
 // Contains widgets like Button, Text box etc.
 export const Button = styled.button`
@@ -27,29 +27,36 @@ export const Button = styled.button`
 
 // Text in caps
 export const Text = styled.div`
-  color: white;
-  font-family: ${Lora};
-  text-align: center;
-  letter-spacing: 3px;
-  /* border: 4px solid ${Silver}; */
-  /* padding: 60px 20px; */
-  line-height: 1.6;
-
-  font-size: 20px;
+  line-height: 1.8;
+  font-family: ${Roboto};
+  text-align: ${(props) => props.align || "start"};
+  letter-spacing: ${(props) => props.space || "5px"};
+  font-size: ${(props) => props.size || "110%"};
+  text-transform: ${(props) => props.case || "uppercase"};
+  color: ${(props) => props.color || "black"};
+  font-weight: ${(props) => props.thickness || "600"};
 
   ${(props) =>
     props.primary &&
     css`
-      color: ${DarkShade};
-      border: none;
       padding: 60px 0px;
-      font-weight: 400;
-      text-transform: uppercase;
     `};
+
+  ${(props) =>
+    props.tags &&
+    css`
+      display: block;
+      font-weight: 550;
+      margin: auto;
+      text-overflow: unset;
+      white-space: unset;
+      font-size: 18px;
+    `};
+
   @media screen and (max-width: 450px) {
     line-height: 1.3;
-    letter-spacing: 4px;
-    font-size: 7px;
+    letter-spacing: ${(props) => props.space || "4px"};
+    font-size: 8px;
     padding: 20px 10px;
   }
 `;

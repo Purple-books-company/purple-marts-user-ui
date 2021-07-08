@@ -6,8 +6,11 @@ import { GoGrabber } from "react-icons/go";
 import {AiFillCaretDown,AiOutlinePlus} from 'react-icons/ai';
 import {Links,ListGroup, PageContentWrapper, PriceLink, RadioGroup, SidebarHeading, SidebarWrapper, SizeLink, Toggle, TogglePrice, UnorderedList,ActiveClass } from "../../../../styles/pages/category-styles";
 import { Lora } from "../../../../styles/themes/font-styles";
+import {
+  useHistory,useParams
+} from "react-router-dom";
 
-const SidebarNav = ({sendCategory}) => {
+const SidebarNav = () => {
   const [caturls, setcaturls] = useState([]);
   const [subcaturls, setsubcaturls] = useState([]);
   const [showGadgets, setShowGadgets] = useState({});
@@ -23,6 +26,7 @@ const SidebarNav = ({sendCategory}) => {
     categories = await fetchResult("categories");
     if (categories === null) categories = [];
     setcaturls(categories);
+    setloading(false);
     // console.log(caturls[0].name);
     // console.log(caturls);
     setShowGadgets(data=>{
@@ -30,14 +34,22 @@ const SidebarNav = ({sendCategory}) => {
     });
     // console.log("show",showGadgets);
   };
-
+  const history = useHistory();
+  function HandleCategory() {
+    if (window.location.pathname === '/category'){
+      history.push('/category/All');
+    }
+  }
+  let params = useParams();
+  console.log("sdcs",params);
   const fetchSubCategories = async () => {
     let subcategories = [];
     subcategories = await fetchResult("subcategories");
     if (subcategories === null) subcategories = [];
     setsubcaturls([...subcategories]);
+    setloading(false);
     // console.log(caturls[0].name);
-    // console.log(subcaturls,subcategories);
+    console.log("subcat",subcaturls);
   };
   useEffect(() => {
     $('div input').click(function(){
@@ -45,8 +57,7 @@ const SidebarNav = ({sendCategory}) => {
     });
     fetchCategories();
     fetchSubCategories();
-    setloading(false);
-    sendCategory("All");
+    HandleCategory();
   },[])
   function handleactiveparent(e){
     let cls=""
@@ -79,19 +90,17 @@ const SidebarNav = ({sendCategory}) => {
                                 <ListGroup>
                                   <UnorderedList>
                                     <ActiveClass className="active">
-                                      <Links href="#" onClick={(e)=>{handleactiveparent(e); sendCategory("All"); }}>All Categories</Links>
+                                      <Links to={`/category/All`} onClick={(e)=>{handleactiveparent(e); }}>All Categories</Links>
                                     </ActiveClass>
-                                    {loading ? <div style={{display: "flex",justifyContent: "center",alignItems: "center"}}><PuffLoader color={"purple"} size={60} /></div> : 
+                                    {loading ? <div style={{paddingTop:'8px',display: "flex",justifyContent: "center",alignItems: "center"}}><PuffLoader color={"purple"} size={30} /></div> : 
                                     <>
                                     {caturls.length > 0 &&
                                   caturls.map((url,index) => (
                                     <ActiveClass id={"category_"+index} key={url.name}>
                                       <Links
-                                        href="#"
-                                        onClick={(e)=>{handleactiveparent(e); sendCategory(url.name); }}
+                                        to={`/category/${url.slug}`}
+                                        onClick={(e)=>{handleactiveparent(e); }}
                                       >
-                                       {/* {console.log("update",showGadgets)}
-                                        {console.log("cat map")} */}
                                         {url.name} 
                                          <AiOutlinePlus key={url.name}  onClick={
                                           () => 
@@ -105,7 +114,9 @@ const SidebarNav = ({sendCategory}) => {
                                              {showGadgets[index] ? (subcaturls.filter(e=>e.category === url.name).map((sub) => (
                                               <ul>
                                                 <ActiveClass key={sub.name}>
-                                                  <Links onClick={(e)=>handleactivechildren(e,index)}>{sub.name}
+                                                  <Links 
+                                                  to={`/category/${url.slug}/${sub.slug}`}
+                                                  onClick={(e)=>{handleactivechildren(e,index);}}>{sub.name}
                                                   </Links>
                                                 </ActiveClass>
                                               </ul> 

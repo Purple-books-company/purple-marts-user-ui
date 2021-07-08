@@ -5,22 +5,32 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi"
 import { CartItemBox, CartDetail, Image, CheckoutBox, CheckOutBtn, QtyBtn, CartTitleInfo, EmptyImg, CartEmpty } from "../../../styles/pages/cart-page"
 import CartHead from "./CartHead";
-import data from '../../../api/CartProducts.json'
+import datas from '../../../api/CartProducts.json'
 import empty_cart from '../../../assets/images/empty_cart.png'
+import { useParams } from "react-router-dom";
+import { fetchResult } from '../../../services/api/loaded-services';
 
 const Cart = () => {
-    const [item, setItem] = useState(data)
+    const [item, setItem] = useState(datas)
     const [total, setTotal] = useState(0)
     const [shipping, setShipping] = useState(0)
     const [empty, setEmpty] = useState(0)
     const [cod, setCod] = useState(false)
     const [del, setDel] = useState(true)
-
+    const [data, setData]= useState({})
+    const params = useParams();
     useEffect(() => {
         setItem(item)
         calcTotal()
         setShipping(50)
         setEmpty(item.length)
+        console.log("proparams",params.id);
+        async function fetchdata() {
+            let res = await fetchResult("addtocart",params.id)
+            setData(res);
+            console.log("cartdata",res)
+        }
+        fetchdata();
     }, [item])
 
     const calcTotal = () => {

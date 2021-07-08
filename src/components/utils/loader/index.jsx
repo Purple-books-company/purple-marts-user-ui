@@ -1,4 +1,4 @@
-import PuffLoader from "react-spinners/PuffLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 import { DarkShade } from "../../../styles/themes/color-theme";
 
 const Loading = () => {
@@ -11,7 +11,7 @@ const Loading = () => {
         alignItems: "center",
       }}
     >
-      <PuffLoader color={DarkShade} size={65} />
+      <BeatLoader color={DarkShade} size={10} />
     </div>
   );
 };
