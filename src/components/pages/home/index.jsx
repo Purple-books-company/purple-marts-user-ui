@@ -34,7 +34,7 @@ export default function Home() {
     let values;
     values = await fetchResult("home");
     setHome({ ...values });
-    console.log(values);
+    // console.log(values);
   };
 
   return (

@@ -19,7 +19,7 @@ const Layout = () => {
       let home;
       home = await fetchResult("home");
       setSaleProducts(home["Flat Sale"]);
-      console.log(home["Flat Sale"]);
+      // console.log(home["Flat Sale"]);
     }
     getProducts();
   }, []);
