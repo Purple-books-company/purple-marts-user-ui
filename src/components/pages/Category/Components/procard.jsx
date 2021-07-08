@@ -31,7 +31,6 @@ import { useParams } from "react-router-dom";
 
 const Card1 = () => {
   const [productData, setproductData] = useState([])
-  const [wishlist, setwishlist] = useState(true)
   const [radioPrice, SetRadioPrice] = useState("100to200");
   const [radioSize, SetRadioSize] = useState("XXL");
   const [loading, setloading] = useState(true);
@@ -58,7 +57,7 @@ const Card1 = () => {
   console.log("paramssubslug",params.subslug);
   useEffect(() => {
     // Fetch single product here
-    if(params.subslug == undefined || params.subslug==='All')
+    if(params.subslug === undefined || params.subslug==='All')
       fetchCategory(params.slug)
     else
       fetchsubCategory(params.subslug)
@@ -80,7 +79,7 @@ const Card1 = () => {
         toast("Removed from Wishlist!",{
           style:{backgroundColor:'plum',color:'white',width:'50%'}
         });
-        let a=item.find(e => e.id == id)
+        let a=item.find(e => e.id === id)
         a.wishlist = !a.wishlist;
         console.log("uytdfgh",item)
         setproductData([...item])
@@ -103,7 +102,7 @@ const Card1 = () => {
         toast("Added To Wishlist!",{
           style:{backgroundColor:'plum',color:'white',width:'50%'}
         });
-        let a=item.find(e => e.id == id)
+        let a=item.find(e => e.id === id)
         a.wishlist = !a.wishlist;
         console.log("uytdfgh",item)
         setproductData([...item])
