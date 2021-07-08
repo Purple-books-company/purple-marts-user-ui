@@ -4,10 +4,8 @@ import { Carousel, Form } from "react-bootstrap";
 import { FiHeart } from "react-icons/fi";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import product_card from "../../../../api/Products.json";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import Ratingreview from "../../../../api/RatingReview.json";
-import { fetchResult } from "../../../../services/api/loaded-services";
+import { fetchResult } from "../../../services/api/loaded-services";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -35,13 +33,13 @@ import {
   WishlistButton,
   Similar,
   BackBtn
-} from "../../../../styles/pages/category-styles";
-import { Button } from "../../../../styles/widgets/widgets";
+} from "../../../styles/pages/category-styles";
+import { Button } from "../../../styles/widgets/widgets";
 import StarRatings from "react-star-ratings";
 import Rating from "react-rating";
-import { Lora } from "../../../../styles/themes/font-styles";
+import { Lora } from "../../../styles/themes/font-styles";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
-import { LightShade } from "../../../../styles/themes/color-theme";
+import { LightShade } from "../../../styles/themes/color-theme";
 import $ from "jquery";
 const Card2 = ({item,setItem}) => {
   const [selectedOption, setSelectedOption] = useState("XXL");
@@ -121,7 +119,7 @@ const Card2 = ({item,setItem}) => {
     }
   }
   // console.log("dataaaa",item)
-  const RatingReviewlist = item.recent_review != undefined  && item.recent_review.map((rating) => (
+  const RatingReviewlist = item.recent_review !== undefined  && item.recent_review.map((rating) => (
     <div className="row mb-4">
       <div className="media">
         <div className="d-lg-flex">
@@ -137,7 +135,7 @@ const Card2 = ({item,setItem}) => {
       </div>
     </div>
   ));
-  const Similarlist = item.images != undefined  && item.suggestion.map((suggest) => (
+  const Similarlist = item.images !== undefined  && item.suggestion.map((suggest) => (
     <Card className="col-xs-6 col-md-4 col-lg-2" key={suggest.id}>
       <Badge Status={item.badge}>NEW</Badge>
       <a href="/products">
@@ -211,7 +209,7 @@ const Card2 = ({item,setItem}) => {
                 />
               }
             >
-              {item.images != undefined  && item.images.map((img) => (
+              {item.images !== undefined  && item.images.map((img) => (
                 <Carousel.Item key={img} interval={4000}>
                   <img
                     style={{
