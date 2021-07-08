@@ -12,8 +12,8 @@ const Grid = ({ data, text }) => {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu5mYIH9y9ovhGwpiqquVjk2g6ivCHrnSO1g&usqp=CAU",
   ];
 
-  function handleClick(category, name) {
-    history.push("/category/" + category + "/" + name);
+  function handleClick(category, slug) {
+    history.push("/category/" + category + "/" + slug);
   }
 
   return (
@@ -30,7 +30,7 @@ const Grid = ({ data, text }) => {
                   backgroundImage: `url(${img})`,
                 }}
                 onClick={() =>
-                  handleClick(data[index].category, data[index].name)
+                  handleClick(data[index].category, data[index].slug)
                 }
               >
                 <Text tags color="white" align="center">
@@ -43,7 +43,7 @@ const Grid = ({ data, text }) => {
           <div className="col-md-3 my-4">
             <Block
               style={{ background: DarkShade }}
-              onClick={() => handleClick(data[3].category, data[3].name)}
+              onClick={() => handleClick(data[3].category, data[3].slug)}
             >
               {data && (
                 <Text tags color="white" align="center">

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { Image } from "react-bootstrap";
 import Grid from "./components/Grid";
 import Carousel from "./components/Carousel";
 import Sliders from "./components/Sliders";
 import Loading from "../../utils/loader";
 import { useHistory } from "react-router-dom";
+import { HoverImage } from "../../../styles/widgets/widgets";
 import { getApi, fetchResult } from "../../../services/api/loaded-services";
 import CardGroup from "./components/Cards";
 
 function ImageBanners({ banner }) {
   let history = useHistory();
   return (
-    <Image
+    <HoverImage
       src={banner.image}
       width="100%"
       alt={banner.id}
