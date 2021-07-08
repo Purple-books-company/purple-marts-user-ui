@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {FaArrowCircleUp} from 'react-icons/fa';
-import Card2 from "./productCard"
+import Card2 from "../../../utils/layout/productCard"
 // import SidebarNav from "./sidebarnav"
 import {TopButton} from "../../../../styles/pages/category-styles"
 import { useParams } from "react-router-dom";
