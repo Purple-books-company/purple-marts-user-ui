@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { Image } from "react-bootstrap";
 import { LightShade, DarkShade } from "../themes/color-theme";
 import { Lora, Roboto } from "../themes/font-styles";
 
@@ -85,4 +86,18 @@ export const Links = styled.div`
     margin-bottom: 15%;
     margin-top: 10%;
   }
+`;
+
+export const HoverImage = styled(Image)`
+  &:hover {
+    cursor: pointer;
+  }
+  ${(props) =>
+    props.grid &&
+    css`
+      height: 250px;
+      @media screen and (max-width: 450px) {
+        height: 100px;
+      }
+    `};
 `;

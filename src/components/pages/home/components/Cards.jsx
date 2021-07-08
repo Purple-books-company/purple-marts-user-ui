@@ -13,14 +13,15 @@ const CardGroup = ({ data }) => {
       </Text>
       <Row>
         {data.map((item) => (
-          <Col lg="3" xs md="6" sm="6" key={item.id}>
+          <Col lg="2" xs="6" md="6" sm="6" key={item.id}>
             <Cards
-              className="my-2"
+              className="border-0 my-3"
               onClick={() => history.push("/category/" + item.name)}
             >
               <CardImg
                 variant="top"
-                className="img-thumbnail"
+                className="text-uppercase"
+                style={{ backgroundColor: "#d6c3e0" }}
                 src={item.image}
               />
               <Card.Body>

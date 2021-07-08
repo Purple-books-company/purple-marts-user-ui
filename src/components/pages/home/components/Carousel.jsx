@@ -1,5 +1,5 @@
-import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { HoverImage } from "../../../../styles/widgets/widgets";
 import { TitleBox, Main } from "../../../../styles/pages/home-page";
 
 const Carousels = ({ data }) => {
@@ -45,7 +45,7 @@ const Carousels = ({ data }) => {
               key={item.id}
               onClick={() => history.push("/offers")}
             >
-              <Image
+              <HoverImage
                 src={item.image}
                 className="d-block w-100"
                 alt="SALE IS LIVE"
