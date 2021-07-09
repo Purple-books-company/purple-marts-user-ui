@@ -8,7 +8,7 @@ import { Block, Image } from "../../../../styles/pages/home-page";
 
 let slides;
 
-function Sliders({ data, text, slug }) {
+function Sliders({ data, text, slug, offer }) {
   let history = useHistory();
   const [id, setId] = useState(null);
   const [settings, setSettings] = useState(null);
@@ -132,7 +132,7 @@ function Sliders({ data, text, slug }) {
               ))}
             </Slider>
 
-            {id !== null && (
+            {offer && (
               <Link to={`/offers/${id}`} className="text-right w-100 py-5">
                 Show More
               </Link>
