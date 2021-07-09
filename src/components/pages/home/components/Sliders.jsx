@@ -25,10 +25,12 @@ function Sliders({ data, text }) {
     });
   }, [data.length]);
 
-  function handleClick(dataType, category, id) {
-    if (dataType === "SubCategory")
-      history.push("/category/" + category + "/" + id);
-    else if (dataType == "Product") history.push("/offers/");
+  function handleSubCategory(subcategory, slug) {
+    history.push("/category/" + subcategory + "/" + slug);
+  }
+
+  function handleProduct(id) {
+    history.push("/products/" + id);
   }
 
   return (
@@ -52,10 +54,13 @@ function Sliders({ data, text }) {
                   <Image
                     className="mb-3"
                     src={url.image}
+                    style={{ backgroundColor: "#d6c3e0" }}
                     alt="Image"
-                    onClick={() =>
-                      handleClick(url.dataType, url.category, url.id)
-                    }
+                    onClick={() => {
+                      url.dataType === "SubCategory"
+                        ? handleSubCategory(url.category, url.slug)
+                        : handleProduct(url.id);
+                    }}
                   />
                   {url.offerPrice && (
                     <Row className="mx-1">
@@ -85,9 +90,11 @@ function Sliders({ data, text }) {
                       align={!url.offerPrice && "center"}
                       thickness={url.offerPrice && "200"}
                       space="1"
-                      onClick={() =>
-                        handleClick(url.dataType, url.category, url.id)
-                      }
+                      onClick={() => {
+                        url.dataType === "SubCategory"
+                          ? handleSubCategory(url.category, url.slug)
+                          : handleProduct(url.id);
+                      }}
                     >
                       {url.name}
                     </Text>
