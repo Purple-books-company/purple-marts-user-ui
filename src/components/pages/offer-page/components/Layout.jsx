@@ -30,7 +30,6 @@ const Layout = () => {
     let getData = JSON.parse(JSON.stringify(saleProducts.values)).concat(
       newProducts.data
     );
-    console.log(getData);
     setSaleProducts({ ...saleProducts, values: getData });
   }
 
