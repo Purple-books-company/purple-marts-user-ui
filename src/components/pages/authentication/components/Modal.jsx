@@ -13,7 +13,9 @@ import { Modal, Container, Row, Col } from "react-bootstrap";
 import { ApiPostService } from "../../../../services/api/api-services";
 
 export default function Modals({ showModal, setShowModal }) {
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
   const responseGoogle = (response) => {
     let res = response.profileObj;
@@ -92,7 +94,6 @@ export default function Modals({ showModal, setShowModal }) {
             </Row>
           </Container>
         </Modal.Body>
-      
       </Modal>
     </>
   );

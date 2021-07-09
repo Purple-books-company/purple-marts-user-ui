@@ -7,21 +7,22 @@ const CardGroup = ({ data }) => {
   let history = useHistory();
 
   return (
-    <Container fluid className="my-3">
+    <Container className="my-3">
       <Text primary align="center">
         Categories to bag
       </Text>
       <Row>
         {data.map((item) => (
-          <Col lg="2" xs="6" md="6" sm="6" key={item.id}>
+          <Col lg="2" xs="6" md="4" sm="6" key={item.id}>
             <Cards
-              className="border-0 my-3"
+              className="border-0"
               onClick={() => history.push("/category/" + item.name)}
             >
               <CardImg
                 variant="top"
                 className="text-uppercase"
                 style={{ backgroundColor: "#d6c3e0" }}
+                width="100%"
                 src={item.image}
               />
               <Card.Body>

@@ -1,25 +1,44 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../../utils/loader";
 import { Text, HoverImage } from "../../../../styles/widgets/widgets";
 import { Container, Row, Col } from "react-bootstrap";
 import { fetchResult } from "../../../../services/api/loaded-services";
+import { ApiPostService } from "../../../../services/api/api-services";
 
 const Layout = () => {
   let history = useHistory();
-  const [saleProducts, setSaleProducts] = useState([]);
+  let { name } = useParams();
+
+  const [saleProducts, setSaleProducts] = useState(null);
 
   function handleClick(productId) {
     history.push("products/" + productId);
+  }
+
+  async function fetchMore() {
+    let page = saleProducts.values.length / 10 + 1;
+    let payload = {
+      offerName: saleProducts.name,
+      page: page,
+    };
+    let newProducts = await ApiPostService(
+      process.env.REACT_APP_OFFER_GET,
+      payload
+    );
+    let getData = JSON.parse(JSON.stringify(saleProducts.values)).concat(
+      newProducts.data
+    );
+    console.log(getData);
+    setSaleProducts({ ...saleProducts, values: getData });
   }
 
   useEffect(() => {
     async function getProducts() {
       let home;
       home = await fetchResult("home");
-      setSaleProducts(home["Flat Sale"]);
-      // console.log(home["Flat Sale"]);
+      setSaleProducts(home.offers[name]);
     }
     getProducts();
   }, []);
@@ -28,15 +47,15 @@ const Layout = () => {
     <>
       {saleProducts ? (
         <>
-          <Container className="mt-5">
-            <Row style={{ backgroundColor: "#edeaee" }} className="my-5">
-              <Text align="center">Purple Mart's Grand Sale</Text>
-            </Row>
+          <Text align="center" style={{ backgroundColor: "#edeaee" }}>
+            Purple Mart's {saleProducts.name}
+          </Text>
+          <Container fluid className="mt-5 mx-5">
             <Row>
-              {saleProducts.map((item) => (
+              {saleProducts.values.map((item) => (
                 <Col
                   primary="true"
-                  className="my-3"
+                  className="my-5 mx-2"
                   lg="2"
                   md="3"
                   xs="4"
@@ -46,7 +65,7 @@ const Layout = () => {
                   title={item.name}
                 >
                   <HoverImage
-                    grid
+                    grid="true"
                     className="mb-3"
                     src={item.image}
                     alt="Category"
@@ -117,6 +136,9 @@ const Layout = () => {
                 </Col>
               ))}
             </Row>
+            {saleProducts.values.length % 10 === 0 && (
+              <div onClick={fetchMore}>Show more</div>
+            )}
           </Container>
         </>
       ) : (

@@ -10,6 +10,14 @@ import CardGroup from "./components/Cards";
 
 function ImageBanners({ banner }) {
   let history = useHistory();
+
+  function handleClick(item) {
+    if (item.dataType === "Product") history.push("/products/" + item.id);
+    else if (item.dataType === "Category")
+      history.push("/category/" + item.slug);
+    else if (item.dataType === "SubCategory")
+      history.push("/category/" + item.category + "/" + item.slug);
+  }
   return (
     <HoverImage
       src={banner.image}
@@ -17,13 +25,14 @@ function ImageBanners({ banner }) {
       alt={banner.id}
       className="my-4"
       fluid
-      onClick={() => history.push("/offers")}
+      onClick={() => handleClick(banner)}
     />
   );
 }
 
 export default function Home() {
   const [home, setHome] = useState(null);
+  let logged = localStorage.getItem("isLogged");
 
   useEffect(() => {
     getData();
@@ -34,33 +43,45 @@ export default function Home() {
     let values;
     values = await fetchResult("home");
     setHome({ ...values });
-    // console.log(values);
+    console.log(values);
   };
 
   return (
     <>
-      {home ? (
-        <div>
+      {!home ? (
+        <Loading />
+      ) : (
+        <>
           {home.carousel && <Carousel data={home.carousel} />}
-          {home.subCategory.length > 0 && (
+          {home.subCategory && (
             <Grid data={home.subCategory} text="Shop best selling items" />
           )}
-
-          {/* {home.banner_2 && <ImageBanners banner={home.banner_2} />} */}
-          {home["Test Sale"].length > 0 && (
+          {home.banner[1] && <ImageBanners banner={home.banner[1]} />}
+          {home["Test Sale"] && (
             <Sliders data={home["Test Sale"]} text="Mega sale" />
           )}
 
-          {home.banner_0 && <ImageBanners banner={home.banner_0} />}
-          {home.subCategory.length > 0 && (
-            <Sliders data={home.subCategory} text="EXPLORE TRENDING ITEMS" />
+          {home.offers &&
+            home.offers.map((sale, index) => (
+              <Sliders
+                data={sale.values}
+                text={sale.name}
+                slug={index}
+                key={sale.name}
+              />
+            ))}
+
+          {home.recentView && (
+            <Sliders data={home.recentView} text="EXPLORE TRENDING ITEMS" />
+          )}
+          {home.banner[2] && <ImageBanners banner={home.banner[2]} />}
+          {logged && home["topRating"] && (
+            <Sliders data={home["topRating"]} text="Top rated products" />
           )}
 
           {home.category && <CardGroup data={home.category} />}
-          {home.banner_1 && <ImageBanners banner={home.banner_1} />}
-        </div>
-      ) : (
-        <Loading />
+          {home.banner[0] && <ImageBanners banner={home.banner[0]} />}
+        </>
       )}
     </>
   );
