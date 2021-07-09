@@ -52,9 +52,8 @@ async function getCategory() {
 async function getHome() {
   if (customer) {
     home = await ApiGetService(
-      process.env.REACT_APP_HOME_LOGGED + customer.id + "/"
+      process.env.REACT_APP_HOME_URL + customer.id + "/"
     );
-    console.log(home);
   } else home = await ApiGetService(process.env.REACT_APP_HOME_URL);
 }
 

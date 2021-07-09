@@ -68,6 +68,7 @@ export default function Home() {
                 text={sale.name}
                 slug={index}
                 key={sale.name}
+                offer="true"
               />
             ))}
 
