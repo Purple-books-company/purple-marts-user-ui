@@ -1,5 +1,6 @@
 import Slider from "react-slick";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Text } from "../../../../styles/widgets/widgets";
 import { Container, Row } from "react-bootstrap";
@@ -7,9 +8,14 @@ import { Block, Image } from "../../../../styles/pages/home-page";
 
 let slides;
 
-function Sliders({ data, text }) {
+function Sliders({ data, text, slug, offer }) {
   let history = useHistory();
+  const [id, setId] = useState(null);
   const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    setId(slug);
+  }, [slug]);
 
   useEffect(() => {
     if (data.length >= 6) slides = 6;
@@ -25,21 +31,17 @@ function Sliders({ data, text }) {
     });
   }, [data.length]);
 
-  function handleSubCategory(subcategory, slug) {
-    history.push("/category/" + subcategory + "/" + slug);
-  }
-
-  function handleProduct(id) {
-    history.push("/products/" + id);
+  function handleClick(item) {
+    history.push("/products/" + item.id);
   }
 
   return (
     <>
       <center>
-        <Text primary className="my-4" align="center">
+        <Text primary className="my-2" align="center">
           {text}
         </Text>
-        <Container fluid style={{ marginTop: "10px", marginBottom: "2%" }}>
+        <Container fluid className="my-2">
           <div className="row">
             <Slider {...settings}>
               {data.map((url) => (
@@ -57,9 +59,7 @@ function Sliders({ data, text }) {
                     style={{ backgroundColor: "#d6c3e0" }}
                     alt="Image"
                     onClick={() => {
-                      url.dataType === "SubCategory"
-                        ? handleSubCategory(url.category, url.slug)
-                        : handleProduct(url.id);
+                      handleClick(url);
                     }}
                   />
                   {url.offerPrice && (
@@ -91,9 +91,7 @@ function Sliders({ data, text }) {
                       thickness={url.offerPrice && "200"}
                       space="1"
                       onClick={() => {
-                        url.dataType === "SubCategory"
-                          ? handleSubCategory(url.category, url.slug)
-                          : handleProduct(url.id);
+                        handleClick(url);
                       }}
                     >
                       {url.name}
@@ -133,6 +131,12 @@ function Sliders({ data, text }) {
                 </Block>
               ))}
             </Slider>
+
+            {offer && (
+              <Link to={`/offers/${id}`} className="text-right w-100 py-5">
+                Show More
+              </Link>
+            )}
           </div>
         </Container>
         <br />

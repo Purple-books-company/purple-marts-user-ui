@@ -72,7 +72,7 @@ export const Image = styled.img`
 
 export const Cards = styled(Card)`
   height: 270px;
-  width: 230px;
+  width: 100%;
   @media screen and (max-width: 450px) {
     height: 160px;
     width: 130px;
