@@ -61,7 +61,7 @@ function LoginForm({
           email: check(),
           password: form.password,
         });
-        console.log(res);
+        // console.log(res);
         if (res.success) {
           setColor("success");
           setForm(initial);

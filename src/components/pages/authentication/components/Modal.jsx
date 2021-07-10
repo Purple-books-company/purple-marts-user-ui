@@ -26,7 +26,7 @@ export default function Modals({ showModal, setShowModal }) {
       email: res.email,
       name: res.name,
     };
-    console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
+    // console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
     if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload)) {
       setShowModal(false);
       alert(`Logged in successfully welcome ${res.name} 😍. `);
@@ -78,7 +78,7 @@ export default function Modals({ showModal, setShowModal }) {
                     />
                   )}
 
-                  {/* <GoogleLogin
+                  <GoogleLogin
                     clientId={process.env.REACT_APP_CLIENT_ID}
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
@@ -88,7 +88,7 @@ export default function Modals({ showModal, setShowModal }) {
                     }
                     cookiePolicy={"single_host_origin"}
                     className="mt-2"
-                  /> */}
+                  />
                 </ModalContent>
               </Col>
             </Row>

@@ -13,6 +13,7 @@ let customer;
 export function getCustomer() {
   customer = retriveDetails();
 }
+
 // Gets all the (get) requests
 async function getApi() {
   getCategory();
@@ -49,7 +50,7 @@ async function getCategory() {
   );
 }
 
-async function getHome() {
+export async function getHome() {
   if (customer) {
     home = await ApiGetService(
       process.env.REACT_APP_HOME_URL + customer.id + "/"
