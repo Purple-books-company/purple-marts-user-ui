@@ -1,4 +1,4 @@
-import { getCustomer, getHome } from "../../../../services/api/loaded-services";
+import { getCustomer} from "../../../../services/api/loaded-services";
 
 // import { GoogleLogout } from "react-google-login";
 const clearStorage = () => {
@@ -6,7 +6,7 @@ const clearStorage = () => {
   localStorage.removeItem("photo");
   localStorage.removeItem("number");
   getCustomer();
-  getHome();
+  
 };
 
 // const LogOut = () => {

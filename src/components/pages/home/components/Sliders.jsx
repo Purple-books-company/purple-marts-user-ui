@@ -20,6 +20,10 @@ function Sliders({ data, text, slug, offer }) {
   useEffect(() => {
     if (data.length >= 6) slides = 6;
     else slides = data.length % 6;
+    if (window.innerWidth < 450) {
+      if (data.length >= 3) slides = 3;
+      else slides = data.length % 3;
+    }
 
     setSettings({
       dots: true,
