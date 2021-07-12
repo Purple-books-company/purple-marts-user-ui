@@ -12,7 +12,6 @@ export function decryptData(data) {
 }
 
 export const storeDetails = (res) => {
-  console.log(res.data.data.customerId);
   let cipherPhoto = encryptData(res.data.data.photo);
   let cipherId = encryptData(res.data.data.customerId);
 

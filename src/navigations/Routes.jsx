@@ -44,10 +44,10 @@ function Routes() {
       <ScrollToTop />
       <Header func={setLogOut} />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={() => <Home login={logged} />} />
         <Route path="/category" component={Category} />
         <Route path="/products/:id" component={Products} />
-        <Route path="/offers/:name" component={Offers} />
+        <Route path="/offers/:index" component={Offers} />
 
         <Suspense fallback={<Loading />}>
           {logged ? (

@@ -12,7 +12,7 @@ export const fetchOtp = async (mail) => {
     email: mail,
   });
   originalOtp = value.otp;
-  console.log(originalOtp);
+  // console.log(originalOtp);
 };
 
 const OTPVerification = ({ setError, setVerify, func }) => {

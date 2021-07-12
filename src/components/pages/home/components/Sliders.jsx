@@ -20,6 +20,10 @@ function Sliders({ data, text, slug, offer }) {
   useEffect(() => {
     if (data.length >= 6) slides = 6;
     else slides = data.length % 6;
+    if (window.innerWidth < 450) {
+      if (data.length >= 3) slides = 3;
+      else slides = data.length % 3;
+    }
 
     setSettings({
       dots: true,
@@ -72,7 +76,7 @@ function Sliders({ data, text, slug, offer }) {
                         space="1"
                         color="#393939"
                         style={{
-                          backgroundColor: "#f3e8f8",
+                          backgroundColor: "#f5e6fc",
                           width: "max-content",
                         }}
                       >
@@ -85,7 +89,7 @@ function Sliders({ data, text, slug, offer }) {
                     <Text
                       className="text-truncate py-1"
                       case="capitalize"
-                      color="#393939"
+                      color="#535766"
                       size={url.offerPrice ? "80%" : "90%"}
                       align={!url.offerPrice && "center"}
                       thickness={url.offerPrice && "200"}
@@ -120,7 +124,6 @@ function Sliders({ data, text, slug, offer }) {
                           className="me-1 py-0"
                           style={{
                             textDecoration: "line-through",
-                            float: "right",
                           }}
                         >
                           INR {url.originalPrice}
@@ -133,9 +136,28 @@ function Sliders({ data, text, slug, offer }) {
             </Slider>
 
             {offer && (
-              <Link to={`/offers/${id}`} className="text-right w-100 py-5">
-                Show More
-              </Link>
+              <Text
+                space="1px"
+                size="90%"
+                weight="500"
+                case="capitalize"
+                className="pt-4 pe-3 h-25"
+              >
+                <Link
+                  to={`/offers/${id}`}
+                  className="px-3 py-1"
+                  style={{
+                    backgroundColor: "#f3e8f8",
+                    color: "#28242b",
+                    fontWeight: "500",
+                    width: "max-content",
+                    float: "right",
+                    textDecoration: "none",
+                  }}
+                >
+                  Show More
+                </Link>
+              </Text>
             )}
           </div>
         </Container>

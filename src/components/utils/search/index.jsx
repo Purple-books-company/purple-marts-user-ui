@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { fetchResult } from "../../../services/api/loaded-services";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { Button, SearchContainer } from "../../../styles/widgets/widgets";
 
-const Search = (props) => {
-  const [users, setUsers] = useState([]);
+const Search = () => {
+  let history = useHistory();
+  const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -12,14 +14,20 @@ const Search = (props) => {
   }, []);
 
   const fetchData = async (e) => {
-    let categories = [];
-    categories = await fetchResult("categories");
-    if (categories === null) categories = [];
-    setUsers(categories);
+    let subcategories = [];
+    subcategories = await fetchResult("subcategories");
+    if (subcategories === null) subcategories = [];
+    setData(subcategories);
   };
 
   const handleSearch = (e) => {
-    if (searchQuery !== "") alert(searchQuery);
+    let array = searchQuery.split("/");
+    let category = array[0];
+    let subcategory = array[1];
+
+    if (searchQuery !== "")
+      history.push("/category/" + category + "/" + subcategory);
+      
     else alert("Choose a product");
     setSearchQuery("");
   };
@@ -37,13 +45,17 @@ const Search = (props) => {
           style={{ backgroundColor: "#f5f5f6" }}
         />
         <datalist id="datalistOptions">
-          {users.map((val) => (
-            <option value={val.name} key={val.image} />
+          {data.map((val) => (
+            <option
+              value={val.category + "/" + val.slug}
+              key={val.image}
+              onClick={handleSearch}
+            />
           ))}
         </datalist>
 
         <Button onClick={handleSearch}>
-          <BiSearchAlt2 size = "23" style={{ marginRight: "3px" }} />
+          <BiSearchAlt2 size="23" style={{ marginRight: "3px" }} />
         </Button>
       </SearchContainer>
     </div>
