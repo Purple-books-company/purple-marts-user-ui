@@ -57,9 +57,6 @@ export default function Home({ login }) {
             <Grid data={home.subCategory} text="Shop best selling items" />
           )}
           {home.banner[1] && <ImageBanners banner={home.banner[1]} />}
-          {home["Test Sale"] && (
-            <Sliders data={home["Test Sale"]} text="Mega sale" />
-          )}
 
           {home.offers &&
             home.offers.map((sale, index) => (
