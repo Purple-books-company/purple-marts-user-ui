@@ -1,6 +1,5 @@
 import { retriveDetails } from "../storage/details";
 import { ApiGetService, ApiPostService } from "./api-services";
-import { Redirect } from 'react-router'
 let home = [];
 let product = [];
 let categories = [];
@@ -95,7 +94,10 @@ async function postProduct(value, opt) {
   }
   if (value === "addtocart") {
     if (custId === null) {
-      <Redirect to="/login" />
+     return {
+       "description":"",
+       "customer":null
+     }
     }
     else {
       let cart = await ApiPostService(process.env.REACT_APP_CART_URL, { 'customer': custId.id, 'product': opt.id, 'varient': opt.varient, 'image': opt.image, 'count': opt.count })
@@ -105,7 +107,10 @@ async function postProduct(value, opt) {
   }
   if (value === "addtowishlist") {
     if (custId === null) {
-      <Redirect to="/login" />
+      return {
+        "description":"",
+        "customer":null
+      }
     }
     else {
       let wishlist = await ApiPostService(process.env.REACT_APP_ADD_WISHLIST_URL, { 'customer': custId.id, 'product': opt })
@@ -115,7 +120,10 @@ async function postProduct(value, opt) {
   }
   if (value === "removefromwishlist") {
     if (custId === null) {
-      <Redirect to="/login" />
+      return {
+        "description":"",
+        "customer":null
+      }
     }
     else {
       let wishlist = await ApiPostService(process.env.REACT_APP_REMOVE_WISHLIST_URL + custId.id + "/" + opt + "/")
