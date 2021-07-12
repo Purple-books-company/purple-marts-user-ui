@@ -8,6 +8,7 @@ import { fetchResult } from '../../../../services/api/loaded-services';
 const Products = () => {
     const [visible, setVisible] = useState(false)
     const [data, setData]= useState({})
+    const [loading,setLoading]= useState(true)
     const toggleVisible = () => {
       const scrolled = document.documentElement.scrollTop;
       if (scrolled > 100){
@@ -30,6 +31,7 @@ const Products = () => {
     async function fetchdata() {
      let res = await fetchResult("singleproduct",params.id)
      setData(res);
+     setLoading(false);
      console.log("res",res)
     }
     fetchdata();
@@ -37,7 +39,7 @@ const Products = () => {
     window.addEventListener('scroll', toggleVisible);
     return ( <div class="d-flex" style={{clear:'both',display:'flex',justifyContent:'center'}}> 
         {/* <SidebarNav/> */}
-        <Card2 item={data} setItem ={setData}/>  
+        <Card2 item={data} setItem ={setData} loading={loading}/>  
         <TopButton>
             <FaArrowCircleUp onClick={scrollToTop} 
             style={{display: visible ? 'inline' : 'none'}} />
