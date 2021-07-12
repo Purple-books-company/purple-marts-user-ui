@@ -1,8 +1,12 @@
+import { getCustomer} from "../../../../services/api/loaded-services";
+
 // import { GoogleLogout } from "react-google-login";
 const clearStorage = () => {
   localStorage.removeItem("isLogged");
   localStorage.removeItem("photo");
   localStorage.removeItem("number");
+  getCustomer();
+  
 };
 
 // const LogOut = () => {

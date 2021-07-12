@@ -1,21 +1,24 @@
-var CryptoJS = require("crypto-js");
+import { getCustomer } from "../api/loaded-services";
+
+let CryptoJS = require("crypto-js");
+let key = process.env.REACT_APP_SECRET_KEY;
+
+export function encryptData(data) {
+  return CryptoJS.AES.encrypt(data, key).toString();
+}
+
+export function decryptData(data) {
+  return CryptoJS.AES.decrypt(data, key).toString(CryptoJS.enc.Utf8);
+}
 
 export const storeDetails = (res) => {
-  console.log(res.data.data.customerId);
-
-  let cipherId = CryptoJS.AES.encrypt(
-    res.data.data.customerId,
-    process.env.REACT_APP_SECRET_KEY
-  ).toString();
-
-  let cipherPhoto = CryptoJS.AES.encrypt(
-    res.data.data.photo,
-    process.env.REACT_APP_SECRET_KEY
-  ).toString();
+  let cipherPhoto = encryptData(res.data.data.photo);
+  let cipherId = encryptData(res.data.data.customerId);
 
   localStorage.setItem("isLogged", res.data.success);
   localStorage.setItem("photo", cipherPhoto);
   localStorage.setItem("number", cipherId);
+  getCustomer();
 };
 
 export const retriveDetails = () => {
@@ -23,14 +26,8 @@ export const retriveDetails = () => {
   let pic = localStorage.getItem("photo");
 
   try {
-    let id = CryptoJS.AES.decrypt(
-      val,
-      process.env.REACT_APP_SECRET_KEY
-    ).toString(CryptoJS.enc.Utf8);
-    let photo = CryptoJS.AES.decrypt(
-      pic,
-      process.env.REACT_APP_SECRET_KEY
-    ).toString(CryptoJS.enc.Utf8);
+    let id = decryptData(val);
+    let photo = decryptData(pic);
 
     let result = {
       id: id,

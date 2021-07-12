@@ -1,5 +1,6 @@
 import Slider from "react-slick";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Text } from "../../../../styles/widgets/widgets";
 import { Container, Row } from "react-bootstrap";
@@ -7,13 +8,22 @@ import { Block, Image } from "../../../../styles/pages/home-page";
 
 let slides;
 
-function Sliders({ data, text }) {
+function Sliders({ data, text, slug, offer }) {
   let history = useHistory();
+  const [id, setId] = useState(null);
   const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    setId(slug);
+  }, [slug]);
 
   useEffect(() => {
     if (data.length >= 6) slides = 6;
     else slides = data.length % 6;
+    if (window.innerWidth < 450) {
+      if (data.length >= 3) slides = 3;
+      else slides = data.length % 3;
+    }
 
     setSettings({
       dots: true,
@@ -25,21 +35,17 @@ function Sliders({ data, text }) {
     });
   }, [data.length]);
 
-  function handleSubCategory(subcategory, slug) {
-    history.push("/category/" + subcategory + "/" + slug);
-  }
-
-  function handleProduct(id) {
-    history.push("/products/" + id);
+  function handleClick(item) {
+    history.push("/products/" + item.id);
   }
 
   return (
     <>
       <center>
-        <Text primary className="my-4" align="center">
+        <Text primary className="my-2" align="center">
           {text}
         </Text>
-        <Container fluid style={{ marginTop: "10px", marginBottom: "2%" }}>
+        <Container fluid className="my-2">
           <div className="row">
             <Slider {...settings}>
               {data.map((url) => (
@@ -57,9 +63,7 @@ function Sliders({ data, text }) {
                     style={{ backgroundColor: "#d6c3e0" }}
                     alt="Image"
                     onClick={() => {
-                      url.dataType === "SubCategory"
-                        ? handleSubCategory(url.category, url.slug)
-                        : handleProduct(url.id);
+                      handleClick(url);
                     }}
                   />
                   {url.offerPrice && (
@@ -72,7 +76,7 @@ function Sliders({ data, text }) {
                         space="1"
                         color="#393939"
                         style={{
-                          backgroundColor: "#f3e8f8",
+                          backgroundColor: "#f5e6fc",
                           width: "max-content",
                         }}
                       >
@@ -85,15 +89,13 @@ function Sliders({ data, text }) {
                     <Text
                       className="text-truncate py-1"
                       case="capitalize"
-                      color="#393939"
+                      color="#535766"
                       size={url.offerPrice ? "80%" : "90%"}
                       align={!url.offerPrice && "center"}
                       thickness={url.offerPrice && "200"}
                       space="1"
                       onClick={() => {
-                        url.dataType === "SubCategory"
-                          ? handleSubCategory(url.category, url.slug)
-                          : handleProduct(url.id);
+                        handleClick(url);
                       }}
                     >
                       {url.name}
@@ -122,7 +124,6 @@ function Sliders({ data, text }) {
                           className="me-1 py-0"
                           style={{
                             textDecoration: "line-through",
-                            float: "right",
                           }}
                         >
                           INR {url.originalPrice}
@@ -133,6 +134,31 @@ function Sliders({ data, text }) {
                 </Block>
               ))}
             </Slider>
+
+            {offer && (
+              <Text
+                space="1px"
+                size="90%"
+                weight="500"
+                case="capitalize"
+                className="pt-4 pe-3 h-25"
+              >
+                <Link
+                  to={`/offers/${id}`}
+                  className="px-3 py-1"
+                  style={{
+                    backgroundColor: "#f3e8f8",
+                    color: "#28242b",
+                    fontWeight: "500",
+                    width: "max-content",
+                    float: "right",
+                    textDecoration: "none",
+                  }}
+                >
+                  Show More
+                </Link>
+              </Text>
+            )}
           </div>
         </Container>
         <br />

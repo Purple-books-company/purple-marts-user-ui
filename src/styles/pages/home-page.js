@@ -72,7 +72,7 @@ export const Image = styled.img`
 
 export const Cards = styled(Card)`
   height: 270px;
-  width: 230px;
+  width: 100%;
   @media screen and (max-width: 450px) {
     height: 160px;
     width: 130px;
@@ -83,10 +83,11 @@ export const Cards = styled(Card)`
 `;
 
 export const CardImg = styled(Card.Img)`
-  height: 190px;
-  /* width: 200px; */
+  height: ${(props) => props.imgheight || "190px"};
+  :hover {
+    cursor: pointer;
+  }
   @media screen and (max-width: 450px) {
-    height: 90px;
-    /* width: 160px; */
+    height: 100px;
   }
 `;

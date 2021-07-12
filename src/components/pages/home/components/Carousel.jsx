@@ -9,6 +9,14 @@ const Carousels = ({ data }) => {
     "Its Sale! you can’t Resist",
     "Your favorite products made affordable for you",
   ];
+
+  function handleClick(item) {
+    if (item.dataType === "Product") history.push("/products/" + item.id);
+    else if (item.dataType === "Category")
+      history.push("/category/" + item.slug);
+    else if (item.dataType === "SubCategory")
+      history.push("/category/" + item.category + "/" + item.slug);
+  }
   return (
     <>
       <div
@@ -43,7 +51,7 @@ const Carousels = ({ data }) => {
             <div
               className={`carousel-item ${index === 0 && " active"}`}
               key={item.id}
-              onClick={() => history.push("/offers")}
+              onClick={() => handleClick(item)}
             >
               <HoverImage
                 src={item.image}

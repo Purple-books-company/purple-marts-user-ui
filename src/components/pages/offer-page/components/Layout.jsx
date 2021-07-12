@@ -1,25 +1,42 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 import Loading from "../../../utils/loader";
-import { Text, HoverImage } from "../../../../styles/widgets/widgets";
-import { Container, Row, Col } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { TiMediaPlayOutline } from "react-icons/ti";
+import { Container, Row } from "react-bootstrap";
+import { Text } from "../../../../styles/widgets/widgets";
 import { fetchResult } from "../../../../services/api/loaded-services";
+import { ApiPostService } from "../../../../services/api/api-services";
+import { CardImg } from "../../../../styles/pages/home-page";
+import { Column } from "../../../../styles/pages/offer-page";
 
 const Layout = () => {
   let history = useHistory();
-  const [saleProducts, setSaleProducts] = useState([]);
+  let { index } = useParams();
 
-  function handleClick(productId) {
-    history.push("products/" + productId);
+  const [saleProducts, setSaleProducts] = useState(null);
+
+  async function fetchMore() {
+    let page = saleProducts.values.length / 10 + 1;
+    let payload = {
+      offerName: saleProducts.name,
+      page: page,
+    };
+    let newProducts = await ApiPostService(
+      process.env.REACT_APP_OFFER_GET,
+      payload
+    );
+    let getData = JSON.parse(JSON.stringify(saleProducts.values)).concat(
+      newProducts.data
+    );
+    setSaleProducts({ ...saleProducts, values: getData });
   }
 
   useEffect(() => {
     async function getProducts() {
       let home;
       home = await fetchResult("home");
-      setSaleProducts(home["Flat Sale"]);
-      // console.log(home["Flat Sale"]);
+      setSaleProducts(home.offers[index]);
     }
     getProducts();
   }, []);
@@ -28,30 +45,29 @@ const Layout = () => {
     <>
       {saleProducts ? (
         <>
+          <Text align="center" style={{ backgroundColor: "#edeaee" }}>
+            Purple Mart's {saleProducts.name}
+          </Text>
           <Container className="mt-5">
-            <Row style={{ backgroundColor: "#edeaee" }} className="my-5">
-              <Text align="center">Purple Mart's Grand Sale</Text>
-            </Row>
             <Row>
-              {saleProducts.map((item) => (
-                <Col
+              {saleProducts.values.map((item) => (
+                <Column
                   primary="true"
-                  className="my-3"
                   lg="2"
                   md="3"
-                  xs="4"
+                  xs="6"
                   key={item.id}
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
                   title={item.name}
                 >
-                  <HoverImage
-                    grid
+                  <CardImg
+                    imgheight="230px"
                     className="mb-3"
                     src={item.image}
                     alt="Category"
                     width="100%"
-                    onClick={() => handleClick(item.id)}
+                    onClick={() => history.push(`/products/${item.id}`)}
                   />
                   <Row className="mx-1">
                     <Text
@@ -114,9 +130,26 @@ const Layout = () => {
                       INR {item.originalPrice}
                     </Text>
                   </Row>
-                </Col>
+                </Column>
               ))}
             </Row>
+            {saleProducts.values.length % 10 === 0 && (
+              <center>
+                <Text
+                  cursor="true"
+                  case="capitalize"
+                  space="0px"
+                  thickness="500"
+                  size="100%"
+                  color="#282c3f"
+                  onClick={fetchMore}
+                  style={{ width: "max-content" }}
+                  className="mb-5 p-1"
+                >
+                  <TiMediaPlayOutline size="22" className="mb-1" /> Next..
+                </Text>
+              </center>
+            )}
           </Container>
         </>
       ) : (

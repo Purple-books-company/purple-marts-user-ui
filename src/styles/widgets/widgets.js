@@ -1,28 +1,28 @@
 import styled, { css } from "styled-components";
 import { Image } from "react-bootstrap";
 import { LightShade, DarkShade } from "../themes/color-theme";
-import { Lora, Roboto } from "../themes/font-styles";
+import { Roboto } from "../themes/font-styles";
 
 // Contains widgets like Button, Text box etc.
 export const Button = styled.button`
+  font-weight: ${(props) => props.thickness || "600"};
   background: ${LightShade};
   border-radius: 5px;
   border: 2px solid ${LightShade};
   color: white;
   font-family: Helvetica, sans-serif;
   font-size: 15px;
-  font-weight: bold;
   width: auto;
   height: 40px;
   letter-spacing: 2px;
   padding: 0.25em 1em;
-  font-family: ${Lora};
+  font-family: ${Roboto};
   transition: 0.3s;
 
   :hover {
     background: transparent;
-    color: ${LightShade};
-    border: 2px solid ${LightShade};
+    color: #956daa;
+    border: 2px solid #956daa;
   }
 `;
 
@@ -41,6 +41,20 @@ export const Text = styled.div`
     props.primary &&
     css`
       padding: 60px 0px;
+    `};
+
+  ${(props) =>
+    props.cursor &&
+    css`
+      border: 2px solid #d4d5d9;
+      border-radius: 4px;
+      :hover {
+        cursor: pointer;
+        border: 2px solid #282c3f;
+      }
+      @media screen and (max-width: 450px) {
+        border: none;
+      }
     `};
 
   ${(props) =>
@@ -89,15 +103,7 @@ export const Links = styled.div`
 `;
 
 export const HoverImage = styled(Image)`
-  &:hover {
+  :hover {
     cursor: pointer;
   }
-  ${(props) =>
-    props.grid &&
-    css`
-      height: 250px;
-      @media screen and (max-width: 450px) {
-        height: 100px;
-      }
-    `};
 `;
