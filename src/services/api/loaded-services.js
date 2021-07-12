@@ -7,6 +7,9 @@ let subcategories = [];
 let userData = {};
 let personalDetails = {};
 
+export function getCustomer() {
+  customer = retriveDetails();
+}
 
 // Gets all the (get) requests
 async function getApi() {
