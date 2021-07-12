@@ -4,6 +4,7 @@ import { Carousel, Form } from "react-bootstrap";
 import { FiHeart } from "react-icons/fi";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { FaStar, FaRegStar } from "react-icons/fa";
+import PuffLoader from "react-spinners/PuffLoader";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { fetchResult } from "../../../services/api/loaded-services";
 import { ToastContainer, toast } from 'react-toastify';
@@ -41,38 +42,53 @@ import { Lora } from "../../../styles/themes/font-styles";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { LightShade } from "../../../styles/themes/color-theme";
 import $ from "jquery";
-const Card2 = ({item,setItem}) => {
-  const [selectedOption, setSelectedOption] = useState("XXL");
+import { useHistory } from "react-router-dom";
+const Card2 = ({item,setItem,loading}) => {
+  let history = useHistory();
+  const [selectedOption0, setSelectedOption0] = useState("");
+  const [selectedOption1, setSelectedOption1] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [Quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(0);
-  console.log(selectedOption);
+  const[zeroState,setZeroState] = useState("");
+  const[oneState,setOneState] = useState("");
+  const[images,setImages] = useState([]);
+  const[originalPrice,setOriginalPrice] = useState(0);
+  const[offerPrice,setOfferPrice] = useState(0);
+  const[discount,setDiscount] = useState(0);
+  const[varientId,setVarientId] = useState("");
+  console.log(selectedOption0);
   console.log(selectedColor);
   console.log(Quantity);
   console.log(rating);
-  function handleColor(e) {
-    setSelectedColor(e.target.style.background);
+  function handleColor(c) {
+    setZeroState(c);
   }
   const Addtocart = async () => {
     let cart ={
       'id': item.id,
       'count':Quantity,
-      'varient':item.varients[0].id,
-      'image':item.varients[0].images[0].image
+      'varient': varientId,
+      'image': images[0].image
     };
     console.log("cartdata",cart)
     let cartproduct=[];
     cartproduct = await fetchResult("addtocart",cart)
     console.log("cartproduct",cartproduct)
-    if(cartproduct.description.includes("Update")){
+    if(cartproduct!==null && cartproduct.description.includes("Update")){
       toast("Updated To Cart!",{
         style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
       });
     }
-    else{
+    else if(cartproduct!==null && cartproduct.description.includes("created")){
       toast("Added To Cart!",{
         style:{backgroundColor:'plum',color:'white',width:'50%'}
       });
+    }else if(cartproduct !==null && cartproduct.description==="" && cartproduct.customer===null){
+      history.push("/login");
+    }
+    else{
+      toast.error("Error to add cart");
     }
   }
   const Addtowishlist = async () => {
@@ -90,6 +106,8 @@ const Card2 = ({item,setItem}) => {
         });
         item.wishlist =!item.wishlist
         setItem({...item});
+      }else if(wishlistproduct !==null && wishlistproduct.description==="" && wishlistproduct.customer===null){
+        history.push("/login");
       }
       else{
         toast.error("Error in Removing from Wishlist",{
@@ -110,6 +128,8 @@ const Card2 = ({item,setItem}) => {
         });
         item.wishlist =!item.wishlist
         setItem({...item});
+      }else if(wishlistproduct !==null && wishlistproduct.description==="" && wishlistproduct.customer===null){
+        history.push("/login");
       }
       else{
         toast.error("Error in Adding to Wishlist",{
@@ -118,6 +138,9 @@ const Card2 = ({item,setItem}) => {
       }
     }
   }
+  function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
   // console.log("dataaaa",item)
   const RatingReviewlist = item.recent_review !== undefined  && item.recent_review.map((rating) => (
     <div className="row mb-4">
@@ -164,18 +187,172 @@ const Card2 = ({item,setItem}) => {
       </div>
     </Card>
   ));
+  const types = item.typeKey !== undefined  && item.typeKey.length >=1 && (
+    (item.typeKey[0].trim().toLowerCase() ==="color" ? 
+    <div className="row mt-2">
+              <div className="d-flex">
+                  <h4
+                    style={{
+                      fontFamily: `${Lora}`,
+                      fontSize: "20px",
+                      fontWeight: "500",
+                      marginRight: "10px",
+                    }}
+                  >
+                    Color:
+                  </h4>
+                  {item.typeVarients !== undefined && item.typeVarients[item.typeKey[0]].map((color) => (
+                    <ProductColorDetail 
+                      className={zeroState===color ? "active" : ""}
+                      key={color}
+                      onClick={() => handleColor(color)}
+                      style={{ background: color.trim().toLocaleLowerCase().replaceAll(" ", "") }}
+                    ></ProductColorDetail>
+                  ))}
+              </div>
+    </div>
+    :
+    <div className="row mt-2">
+    <div className="d-flex">
+      <h4
+        style={{
+          fontFamily: `${Lora}`,
+          fontSize: "20px",
+          fontWeight: "500",
+          marginRight: "10px",
+        }}
+      >
+        {capitalizeFirstLetter(item.typeKey[0].trim())}:
+      </h4>
+      <select
+        style={{
+          fontSize: "16px",
+          height: "80%",
+          color: "purple",
+          borderBlockColor: "plum",
+          borderRadius: "25px",
+        }}
+        value={selectedOption0}
+        onChange={(e) => {
+          setSelectedOption0(e.target.value)
+          setZeroState(e.target.value);
+        }}
+      >
+        {console.log("setone",oneState)}
+        {console.log("item.type[zeroState]",item.type[zeroState])}
+        {item.typeVarients !== undefined && item.typeVarients[item.typeKey[0]].map((varient) => (
+          <option key={varient} value={varient}>
+            {varient}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>)
+  );
+  const types1 = item.typeKey !== undefined  && item.typeKey.length ===2 && (
+    (item.typeKey[1].trim().toLowerCase() ==="color" ? 
+    <div className="row mt-2">
+              <div className="d-flex">
+                  <h4
+                    style={{
+                      fontFamily: `${Lora}`,
+                      fontSize: "20px",
+                      fontWeight: "500",
+                      marginRight: "10px",
+                    }}
+                  >
+                    Color:
+                  </h4>
+                  {item.typeVarients !== undefined && item.typeVarients[item.typeKey[0]].map((color) => (
+                    <ProductColorDetail
+                      key={color}
+                      onClick={() => handleColor(color)}
+                      style={{ background: color.trim().toLocaleLowerCase().replaceAll(" ", "") }}
+                    ></ProductColorDetail>
+                  ))}
+              </div>
+    </div>
+    :
+    <div className="row mt-2">
+    <div className="d-flex">
+      <h4
+        style={{
+          fontFamily: `${Lora}`,
+          fontSize: "20px",
+          fontWeight: "500",
+          marginRight: "10px",
+        }}
+      >
+        {capitalizeFirstLetter(item.typeKey[1].trim())}:
+      </h4>
+      <select
+        style={{
+          fontSize: "16px",
+          height: "80%",
+          color: "purple",
+          borderBlockColor: "plum",
+          borderRadius: "25px",
+        }}
+        value={selectedOption1}
+        onChange={(e) => {
+          setSelectedOption1(e.target.value)
+          setOneState(e.target.value);
+        }}
+      >
+        {console.log("setone",oneState)}
+        {console.log("item.type[zeroState]",item.type[zeroState])}
+        {item.type!==undefined && item.type[zeroState]!==undefined && item.type[zeroState].map((size) => (
+          <option key={size} value={size}>
+            {size}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>)
+  );
+  function Varient(var1, a, b){
+    console.log("abc",var1,a,b)
+    if(b !=="" && b !== undefined && var1.varientType[0].value === a && var1.varientType[1].value === b)
+        return true
+    else if((b ==="" || b === undefined)&& var1.varientType[0].value === a)
+        return true
+    return false
+}
   useEffect(() => {
-    $("button").click(function () {
-      $(this).addClass("active").siblings().removeClass("active");
-    });
-  });
+    if(item!==undefined && item.typeKey!==undefined && item.typeKey.length >=1 && item.typeVarients!==undefined){
+      setZeroState(item.typeVarients[item.typeKey[0]][0])
+      setOneState(item.type[item.typeVarients[item.typeKey[0]][0]][0])
+      let varients = item.varients[0];
+      setImages([...varients.images])
+      setOfferPrice(varients.offerPrice)
+      setOriginalPrice(varients.originalPrice)
+      setDiscount(varients.discount)
+      setVarientId(varients.id)
+    }
+  },[item]);
+  useEffect(() => {
+    if(zeroState!=="" && oneState !=="" && item !== undefined && item.varients!==undefined){
+      let varients = item.varients.find(e=>Varient(e, zeroState, oneState))
+      console.log("Varientsss",varients)
+      if(varients!==null && varients!==undefined){
+        setImages([...varients.images])
+        setOfferPrice(varients.offerPrice)
+        setOriginalPrice(varients.originalPrice)
+        setDiscount(varients.discount)
+        setVarientId(varients.id)
+      }
+    }
+    console.log("zerooooo",zeroState);
+    console.log("oneeee",oneState)
+  },[zeroState,oneState]);
   return <div className="d-flex">
-     <BackBtn className="" aln="true">
+     <BackBtn className="" aln="true"onClick={() => history.goBack()} >
           <span className="">
             <BsArrowLeftShort className="mx-2" />
             Back
           </span>
         </BackBtn>
+        {loading ? <div style={{display: "flex",alignItems: "center",paddingBottom:'160%',paddingTop:'160%'}}><PuffLoader color={"purple"} size={60} /></div> : 
         <div key={item.id}>
       <div className="container">
         <div className="row">
@@ -209,8 +386,8 @@ const Card2 = ({item,setItem}) => {
                 />
               }
             >
-              {item.images !== undefined  && item.images.map((img) => (
-                <Carousel.Item key={img} interval={4000}>
+              {images !== undefined  && images.map((img) => (
+                <Carousel.Item  interval={4000}>
                   <img
                     style={{
                       height: "28rem",
@@ -231,9 +408,9 @@ const Card2 = ({item,setItem}) => {
             </div>
             <div className="row">
               <ProductPriceDetail>
-                ₹{item.buyingPrice}
-                <ProductOldPriceDetail>₹{item.originalPrice}</ProductOldPriceDetail>
-                <ProductOfferDetail>{item.discount === 0 ? '': item.discount+'%OFF'}</ProductOfferDetail>
+                ₹{offerPrice}
+                <ProductOldPriceDetail>₹{originalPrice}</ProductOldPriceDetail>
+                <ProductOfferDetail>{discount === 0 ? '': discount+'%OFF'}</ProductOfferDetail>
               </ProductPriceDetail>
             </div>
             <div className="row">
@@ -258,58 +435,8 @@ const Card2 = ({item,setItem}) => {
                 </p>
               </div>
             </div>
-            <div className="row mt-2">
-              <div className="d-flex">
-                {/* <h4
-                  style={{
-                    fontFamily: `${Lora}`,
-                    fontSize: "20px",
-                    fontWeight: "500",
-                    marginRight: "10px",
-                  }}
-                >
-                  Size:
-                </h4>
-                <select
-                  style={{
-                    fontSize: "16px",
-                    height: "80%",
-                    color: "purple",
-                    borderBlockColor: "plum",
-                    borderRadius: "25px",
-                  }}
-                  value={selectedOption}
-                  onChange={(e) => setSelectedOption(e.target.value)}
-                >
-                  {item.size.map((size) => (
-                    <option key={size.value} value={size.value}>
-                      {size.label}
-                    </option>
-                  ))}
-                </select> */}
-              </div>
-            </div>
-            <div className="row mt-2">
-              <div className="d-flex">
-                {/* <h4
-                  style={{
-                    fontFamily: `${Lora}`,
-                    fontSize: "20px",
-                    fontWeight: "500",
-                    marginRight: "10px",
-                  }}
-                >
-                  Color:
-                </h4>
-                {item.colors.map((color) => (
-                  <ProductColorDetail
-                    key={color.value}
-                    onClick={(e) => handleColor(e)}
-                    style={{ background: color }}
-                  ></ProductColorDetail>
-                ))} */}
-              </div>
-            </div>
+            {types}
+            {types1}
             <div className="row mt-2">
               <div className="d-flex">
                 <h4
@@ -354,7 +481,7 @@ const Card2 = ({item,setItem}) => {
                   Total Price:
                 </h4>
                 <h4 style={{ fontFamily: `${Lora}`, fontSize: "20px" }}>
-                  ₹{item.buyingPrice * Quantity}
+                  ₹{offerPrice * Quantity}
                 </h4>
               </div>
             </div>
@@ -437,7 +564,7 @@ const Card2 = ({item,setItem}) => {
           </Form>
         </div>
       </div> */}
-    </div>
+    </div> }
     </div>;
 };
 
