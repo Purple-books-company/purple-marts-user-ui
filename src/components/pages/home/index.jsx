@@ -30,13 +30,13 @@ function ImageBanners({ banner }) {
   );
 }
 
-export default function Home() {
+export default function Home({ login }) {
   const [home, setHome] = useState(null);
   let logged = localStorage.getItem("isLogged");
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [login]);
 
   const getData = async () => {
     await getApi();

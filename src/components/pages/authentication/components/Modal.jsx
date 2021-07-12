@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import RegisterForm from "./RegisterForm";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import {
   ModalImg,
   ModalContent,
@@ -78,7 +78,7 @@ export default function Modals({ showModal, setShowModal }) {
                     />
                   )}
 
-                  <GoogleLogin
+                  {/* <GoogleLogin
                     clientId={process.env.REACT_APP_CLIENT_ID}
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
@@ -88,7 +88,7 @@ export default function Modals({ showModal, setShowModal }) {
                     }
                     cookiePolicy={"single_host_origin"}
                     className="mt-2"
-                  />
+                  /> */}
                 </ModalContent>
               </Col>
             </Row>
