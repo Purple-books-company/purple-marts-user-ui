@@ -41,8 +41,13 @@ async function getCategory() {
   subcategories = await ApiGetService(process.env.REACT_APP_SUBCATEGORY_GET_URL);
 }
 
-async function getHome() {
-  home = await ApiGetService(process.env.REACT_APP_HOME_URL);
+
+export async function getHome() {
+  if (customer) {
+    home = await ApiGetService(
+      process.env.REACT_APP_HOME_URL + customer.id + "/"
+    );
+  } else home = await ApiGetService(process.env.REACT_APP_HOME_URL);
 }
 
 // Handles post requests
