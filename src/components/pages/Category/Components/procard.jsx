@@ -28,8 +28,9 @@ import {
   Productpage
 } from "../../../../styles/pages/category-styles";
 import { useParams } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 const Card1 = () => {
+  let history = useHistory();
   const [productData, setproductData] = useState([])
   const [radioPrice, SetRadioPrice] = useState("100to200");
   const [radioSize, SetRadioSize] = useState("XXL");
@@ -83,6 +84,8 @@ const Card1 = () => {
         a.wishlist = !a.wishlist;
         console.log("uytdfgh",item)
         setproductData([...item])
+      }else if(wishlistproduct !==null && wishlistproduct.description==="" && wishlistproduct.customer===null){
+        history.push("/login");
       }
       else{
         toast.error("Error in Removing from Wishlist",{
@@ -106,6 +109,8 @@ const Card1 = () => {
         a.wishlist = !a.wishlist;
         console.log("uytdfgh",item)
         setproductData([...item])
+      }else if(wishlistproduct !==null && wishlistproduct.description==="" && wishlistproduct.customer===null){
+        history.push("/login");
       }
       else{
         toast.error("Error in Adding to Wishlist",{
