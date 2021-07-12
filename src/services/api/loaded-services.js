@@ -1,11 +1,13 @@
 import { retriveDetails } from "../storage/details";
 import { ApiGetService, ApiPostService } from "./api-services";
+
 let home = [];
 let product = [];
 let categories = [];
 let subcategories = [];
 let userData = {};
 let personalDetails = {};
+let customer;
 
 export function getCustomer() {
   customer = retriveDetails();
