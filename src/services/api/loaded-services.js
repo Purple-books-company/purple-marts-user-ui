@@ -55,9 +55,7 @@ export async function getHome() {
     home = await ApiGetService(
       process.env.REACT_APP_HOME_URL + customer.id + "/"
     );
-  } else {
-    home = await ApiGetService(process.env.REACT_APP_HOME_URL);
-  }
+  } else home = await ApiGetService(process.env.REACT_APP_HOME_URL);
 }
 
 // Handles post requests
