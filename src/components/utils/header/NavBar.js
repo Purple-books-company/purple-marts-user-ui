@@ -63,7 +63,7 @@ const NavBar = ({ func }) => {
             </Nav>
 
             <Nav className="ml-2 mt-1">
-              <NavLink icon="true" to="/profile/info">
+              <NavLink icon="true" to="/profile">
                 <br className="d-none d-lg-inline" />
                 <BiUser size="21" className="d-none d-lg-inline" />
                 <p> profile</p>

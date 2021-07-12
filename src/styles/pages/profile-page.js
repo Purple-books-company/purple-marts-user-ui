@@ -44,6 +44,7 @@ export const Links= styled.div`
     margin-top: 10px;
     font:15px ${Lora};
     color:blue;
+    cursor:pointer;
 `;
 
 export const NavDiv=styled.div`
