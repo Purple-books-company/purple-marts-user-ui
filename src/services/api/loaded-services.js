@@ -57,18 +57,18 @@ export async function getHome() {
 
 // Handles post requests
 
-async function postProduct(value, opt) {
+async function postProduct(value, opt , page) {
   let custId = retriveDetails()
   console.log("fvd", custId)
   if (value === "productcategory") {
     if (custId === null) {
-      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_CAT_GENERAL_URL, { 'category': opt, 'page': 1 })
+      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_CAT_GENERAL_URL, { 'category': opt, 'page': page })
       product = productDetails.data
       return product
       // console.log("pro",product)
     }
     else {
-      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_CAT_URL, { 'customer': custId.id, 'category': opt, 'page': 1 })
+      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_CAT_URL, { 'customer': custId.id, 'category': opt, 'page': page })
       product = productDetails.data
       // console.log("pro",product)
       return product
@@ -76,13 +76,13 @@ async function postProduct(value, opt) {
   }
   if (value === "productsubcategory") {
     if (custId === null) {
-      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_SUBCAT_GENERAL_URL, { 'subCategory': opt, 'page': 1 })
+      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_SUBCAT_GENERAL_URL, { 'subCategory': opt, 'page': page })
       product = productDetails.data
       return product
       // console.log("pro",product)
     }
     else {
-      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_SUBCAT_URL, { 'customer': custId.id, 'subCategory': opt, 'page': 1 })
+      let productDetails = await ApiPostService(process.env.REACT_APP_PRODUCT_POST_SUBCAT_URL, { 'customer': custId.id, 'subCategory': opt, 'page': page })
       product = productDetails.data
       console.log("sub", opt)
       return product
@@ -145,7 +145,7 @@ async function postProduct(value, opt) {
 }
 
 // Fetches data as per need
-async function fetchResult(item, opt = null) {
+async function fetchResult(item, opt = null, page=1) {
   switch (item) {
     case "categories":
       if (categories.length === 0) await getCategory();
@@ -166,22 +166,22 @@ async function fetchResult(item, opt = null) {
       return home;
 
     case "productcategory":
-      return await postProduct("productcategory", opt);
+      return await postProduct("productcategory", opt,page);
 
     case "productsubcategory":
-      return await postProduct("productsubcategory", opt);
+      return await postProduct("productsubcategory", opt,page);
 
     case "singleproduct":
-      return await postProduct("singleproduct", opt);
+      return await postProduct("singleproduct", opt ,page);
 
     case "addtocart":
-      return await postProduct("addtocart", opt)
+      return await postProduct("addtocart", opt,page)
 
     case "addtowishlist":
-      return await postProduct("addtowishlist", opt)
+      return await postProduct("addtowishlist", opt,page)
 
     case "removefromwishlist":
-      return await postProduct("removefromwishlist", opt)
+      return await postProduct("removefromwishlist", opt,page)
 
     default:
       return null;
