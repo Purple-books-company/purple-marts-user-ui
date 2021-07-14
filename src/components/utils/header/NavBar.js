@@ -46,7 +46,7 @@ const NavBar = ({ func }) => {
               <NavLink to="/" color="#FF005C">
                 Home
               </NavLink>
-              <NavLink to="/category" color={DarkShade}>
+              <NavLink to="/category/All" color={DarkShade}>
                 Category
               </NavLink>
               <NavLink to="/custom" color="#45EFFF">
