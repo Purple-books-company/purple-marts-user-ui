@@ -17,21 +17,21 @@ export default function Modals({ showModal, setShowModal }) {
     setShowModal(false);
   };
 
-  const responseGoogle = (response) => {
-    let res = response.profileObj;
-    // refreshTokenSetup(response);
-    const payload = {
-      id: res.googleId,
-      photo: res.imageUrl,
-      email: res.email,
-      name: res.name,
-    };
-    // console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
-    if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload)) {
-      setShowModal(false);
-      alert(`Logged in successfully welcome ${res.name} 😍. `);
-    }
-  };
+  // const responseGoogle = (response) => {
+  //   let res = response.profileObj;
+  //   // refreshTokenSetup(response);
+  //   const payload = {
+  //     id: res.googleId,
+  //     photo: res.imageUrl,
+  //     email: res.email,
+  //     name: res.name,
+  //   };
+  //   // console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
+  //   if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload)) {
+  //     setShowModal(false);
+  //     alert(`Logged in successfully welcome ${res.name} 😍. `);
+  //   }
+  // };
 
   const [loginForm, setLoginForm] = useState(true);
 

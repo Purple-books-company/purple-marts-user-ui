@@ -47,7 +47,7 @@ const Grid = ({ data, text }) => {
             >
               {data && (
                 <Text tags color="white" align="center">
-                  SHOP {data[3].name}S
+                  SHOP {data[3].name}
                 </Text>
               )}
             </Block>
