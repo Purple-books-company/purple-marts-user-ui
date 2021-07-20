@@ -30,20 +30,20 @@ function ImageBanners({ banner }) {
   );
 }
 
-export default function Home({ login }) {
+export default function Home({ logged }) {
   const [home, setHome] = useState(null);
-  let logged = localStorage.getItem("isLogged");
 
   useEffect(() => {
-    const getData = async () => {
-      await getApi();
-      let values;
-      values = await fetchResult("home");
-      setHome({ ...values });
-      // console.log(values);
-    };
     getData();
-  }, [login]);
+  }, [logged]);
+
+  const getData = async () => {
+    await getApi();
+    let values;
+    values = await fetchResult("home");
+    setHome({ ...values });
+    console.log(values);
+  };
 
   return (
     <>
