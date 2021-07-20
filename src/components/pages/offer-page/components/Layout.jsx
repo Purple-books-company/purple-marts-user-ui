@@ -8,10 +8,12 @@ import { Text, Button } from "../../../../styles/widgets/widgets";
 import { fetchResult } from "../../../../services/api/loaded-services";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { CardImg } from "../../../../styles/pages/home-page";
-import { Column, Overlay, ImgOverlay } from "../../../../styles/pages/offer-page";
-import { HiHeart } from 'react-icons/hi'
-import { toast } from "react-toastify";
-import { LightShade } from "../../../../styles/themes/color-theme";
+import {
+  Column,
+  Overlay,
+  ImgOverlay,
+} from "../../../../styles/pages/offer-page";
+import { HiHeart } from "react-icons/hi";
 import { retriveDetails } from "../../../../services/storage/details";
 
 
@@ -44,39 +46,41 @@ const Layout = () => {
       setSaleProducts(home.offers[index]);
     }
     getProducts();
-    console.log("sale", saleProducts)
   }, [saleProducts]);
 
-  const AddWishlist = async (pid, index) => {
-    let user = await retriveDetails()
-    let res = await ApiPostService(process.env.REACT_APP_ADD_WISHLIST_URL, {
-      "customer": user.id,
-      "product": pid
-    })
-    if (res.sucess) {
-      setSaleProducts()
-      console.log("before", saleProducts)
-      setSaleProducts(prev => ({
-        ...prev,
-        [saleProducts.values[index].wishlist]: true
-      }))
-      console.log("after", saleProducts)
-    }
-  }
+  const addWishlist = async (product, index) => {
+    let currentState = { ...saleProducts };
+    let addedToWishlist = { ...saleProducts };
+    addedToWishlist.values[index].wishlist = true;
+    setSaleProducts(addedToWishlist);
 
-  const RemoveWishlist = async (pid) => {
-    let user = await retriveDetails()
-    let res = await ApiPostService(process.env.REACT_APP_REMOVE_WISHLIST_URL + "/" + user.id + "/" + pid + "/")
-    if (res.sucess) {
-      setSaleProducts()
-      console.log("before", saleProducts)
-      setSaleProducts(prev => ({
-        ...prev,
-        [saleProducts.values[index].wishlist]: false
-      }))
-      console.log("after", saleProducts)
-    }
-  }
+    let user = await retriveDetails();
+    let res = await ApiPostService(process.env.REACT_APP_ADD_WISHLIST_URL, {
+      customer: user.id,
+      product: product.id,
+    });
+
+    if (!res.success) setSaleProducts(currentState);
+  };
+
+  const RemoveWishlist = async (pid, index) => {
+    let currentState = { ...saleProducts };
+    let remove = { ...saleProducts };
+    remove.values[index].wishlist = false;
+    setSaleProducts(remove);
+    let user = retriveDetails();
+    let res = await ApiPostService(
+      process.env.REACT_APP_REMOVE_WISHLIST_URL +
+        "/" +
+        user.id +
+        "/" +
+        pid +
+        "/"
+    );
+
+    if (!res.success) setSaleProducts(currentState);
+  };
+
   return (
     <>
 
@@ -108,23 +112,21 @@ const Layout = () => {
                       onClick={() => history.push(`/products/${item.id}`)}
                     />
                     <Overlay>
-                      {
-                        !item.wishlist ?
-                          <Button onClick={() => AddWishlist(item.id, i)}>
-                            <span style={{ fontSize: '.75rem' }} >
-                              Add to wishlist
-                              <HiHeart size="18" className="ml-2 mb-1" />
-                            </span>
-                          </Button>
-                          :
-
-                          <Button onClick={() => RemoveWishlist(item.id, i)}>
-                            <span style={{ fontSize: '.8rem' }} >
-                              Remove
-                              <HiHeart size="18" className="ml-2 mb-1" />
-                            </span>
-                          </Button>
-                      }
+                      {!item.wishlist ? (
+                        <Button onClick={() => addWishlist(item, i)}>
+                          <span style={{ fontSize: ".75rem" }}>
+                            Add to wishlist
+                            <HiHeart size="18" className="ml-2 mb-1" />
+                          </span>
+                        </Button>
+                      ) : (
+                        <Button onClick={() => RemoveWishlist(item.id, i)}>
+                          <span style={{ fontSize: ".8rem" }}>
+                            Remove
+                            <HiHeart size="18" className="ml-2 mb-1" />
+                          </span>
+                        </Button>
+                      )}
                     </Overlay>
 
                   </ImgOverlay>

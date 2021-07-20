@@ -7,9 +7,9 @@ import { Block } from "../../../../styles/pages/home-page";
 const Grid = ({ data, text }) => {
   let history = useHistory();
   const gridImg = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTugCX5kSC9m1XFVcK7BWoZY9HiycolFcoTQ&usqp=CAU",
-    "https://m.media-amazon.com/images/I/61R4wTQfJdL._AC_SX425_.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu5mYIH9y9ovhGwpiqquVjk2g6ivCHrnSO1g&usqp=CAU",
+    "https://res.cloudinary.com/dzvurs61r/image/upload/v1626785853/Grid1_a4knbf.jpg",
+    "https://res.cloudinary.com/dzvurs61r/image/upload/v1626785853/Grid2_woeinh.jpg",
+    "https://res.cloudinary.com/dzvurs61r/image/upload/v1626785853/Grid3_isnggj.jpg",
   ];
 
   function handleClick(category, slug) {
@@ -28,6 +28,7 @@ const Grid = ({ data, text }) => {
               <Block
                 style={{
                   backgroundImage: `url(${img})`,
+                  backgroundColor: "#d6c3e0",
                 }}
                 onClick={() =>
                   handleClick(data[index].category, data[index].slug)

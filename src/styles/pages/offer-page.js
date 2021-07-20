@@ -2,19 +2,19 @@ import { Col } from "react-bootstrap";
 import styled from "styled-components";
 
 export const Overlay = styled.div`
-  position: absolute; 
-  bottom: 0; 
+  position: absolute;
+  bottom: 0;
   background: rgb(0, 0, 0);
-  background: rgba(255, 255, 255, 255); 
-  color: #f1f1f1; 
+  background: rgba(255, 255, 255, 255);
+  color: #f1f1f1;
   width: 100%;
-  transition: .5s ease;
-  opacity:0;
+  transition: 0.5s ease;
+  opacity: 0;
   color: white;
   font-size: 20px;
   padding: 5px;
   text-align: center;
-  transition: .5s ease;
+  transition: 0.5s ease;
 `;
 
 export const Column = styled(Col)`
@@ -33,10 +33,11 @@ export const Column = styled(Col)`
 
 export const ImgOverlay = styled.div`
   position: relative;
-  :hover{
-    opacity:1;
-    ${Overlay}{
-      opacity:1;
+  :hover {
+    opacity: 1;
+    ${Overlay} {
+      opacity: 1;
     }
   }
-`
+`;
+

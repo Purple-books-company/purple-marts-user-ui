@@ -37,7 +37,7 @@ function Routes() {
       <ScrollToTop />
       <Header func={setLogOut} />
       <Switch>
-        <Route exact path="/" component={() => <Home login={logged} />} />
+        <Route exact path="/" component={() => <Home logged={logged} />} />
         <Route path="/category" component={Category} />
         <Route path="/products/:id" component={Products} />
         <Route path="/offers/:index" component={Offers} />
