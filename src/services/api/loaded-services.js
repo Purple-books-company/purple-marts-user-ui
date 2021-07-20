@@ -12,8 +12,8 @@ let customer;
 
 // Gets all the (get) requests
 async function getApi() {
-  await getCategory();
   await getHome();
+  await getCategory();
 }
 
 export function getCustomer() {
