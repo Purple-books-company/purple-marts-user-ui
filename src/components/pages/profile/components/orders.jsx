@@ -1,20 +1,19 @@
- import React, { useState } from "react";
-import {Container, Table, Row, Col , Card } from "react-bootstrap"; 
+import React, { useState } from "react";
+import { Table, Row, Col , Card } from "react-bootstrap"; 
 import {Tab, Para, StyleStatus , TabData} from '../../../../styles/pages/order-page'
 import data from "../../../../api/Orders.json"
 import {Slab} from '../../../../styles/themes/font-styles';
-import  SideNav  from '../SideNav';
 import {NavDiv, ProfileLink} from '../../../../styles/pages/profile-page';
 import { MdContentCopy , MdOpenInNew } from 'react-icons/md';
 import Clipboard from 'react-clipboard.js';
 
-function Order() {
+function Orders() {
     
     const [order, setOrder] = useState(data)
     
     const card = order.map((id) =>
         <Card className='mb-lg-2 mb-md-3'>
-            <ProfileLink to='../details'>
+            <ProfileLink to='../profile/details'>
             <Card.Header>
                 <Table style={{marginBottom:0}}>
                     <tbody>
@@ -82,7 +81,7 @@ function Order() {
 
     const tab = order.map((id) =>
         <div>
-            <ProfileLink to='../details'>
+            <ProfileLink to='../profile/details'>
                 <Row>
                     <Col xs={4}>
                         <Para>OrderRef</Para>
@@ -110,21 +109,17 @@ function Order() {
         </div>
     );
     return (
-        <Container fluid style={{ clear:'both', marginTop:'9%' }}>
-            <Row>
-                <SideNav />
-
-                <Col xs={10} id="as" className="d-none d-md-block">
-                    <NavDiv type='main'>
-                    <h4 style={{fontFamily:Slab}} >Order History</h4>
-                    <Tab>
-                        <h5 style={{fontFamily:Slab}}>Here are the orders you've placed since your account was created.</h5>
-                        {card}
-                    </Tab>
-                    <br />
-                    </NavDiv>
-                </Col>
-            </Row>
+        <>
+            <Col xs={10} id="as" className="d-none d-md-block">
+                <NavDiv type='main'>
+                <h4 style={{fontFamily:Slab}} >Order History</h4>
+                <Tab>
+                    <h5 style={{fontFamily:Slab}}>Here are the orders you've placed since your account was created.</h5>
+                    {card}
+                </Tab>
+                <br />
+                </NavDiv>
+            </Col>
             <div className="d-md-none">
                 <h5 style={{fontFamily:Slab, margin:'10px 0 0'}} >Order History</h5>
                 <Tab>
@@ -134,8 +129,8 @@ function Order() {
                 <br />
                 <br /><br />
             </div>
-        </Container>
+        </>
     );
 }
 
-export default Order;
+export default Orders;

@@ -60,7 +60,7 @@ const Footer = () => {
                 <TopList>
                   <AdList head="true">
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Partnership
@@ -68,7 +68,7 @@ const Footer = () => {
                   </AdList>
                   <AdList>
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Website
@@ -76,7 +76,7 @@ const Footer = () => {
                   </AdList>
                   <AdList>
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Social Media
@@ -84,7 +84,7 @@ const Footer = () => {
                   </AdList>
                   <AdList>
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Branding
@@ -96,8 +96,7 @@ const Footer = () => {
                 <TopList>
                   <AdList head="true">
                     <a
-                      href="#"
-                      className="text-muted"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       About
@@ -105,7 +104,7 @@ const Footer = () => {
                   </AdList>
                   <AdList>
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Our project
@@ -113,7 +112,7 @@ const Footer = () => {
                   </AdList>
                   <AdList>
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Career
@@ -125,7 +124,7 @@ const Footer = () => {
                 <TopList>
                   <AdList head="true">
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Support
@@ -133,7 +132,7 @@ const Footer = () => {
                   </AdList>
                   <AdList>
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Support Request
@@ -141,7 +140,7 @@ const Footer = () => {
                   </AdList>
                   <AdList>
                     <a
-                      href="#"
+                      href="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Contact
