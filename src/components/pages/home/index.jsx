@@ -30,13 +30,13 @@ function ImageBanners({ banner }) {
   );
 }
 
-export default function Home() {
+export default function Home({ login }) {
   const [home, setHome] = useState(null);
   let logged = localStorage.getItem("isLogged");
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [login]);
 
   const getData = async () => {
     await getApi();
@@ -57,9 +57,6 @@ export default function Home() {
             <Grid data={home.subCategory} text="Shop best selling items" />
           )}
           {home.banner[1] && <ImageBanners banner={home.banner[1]} />}
-          {home["Test Sale"] && (
-            <Sliders data={home["Test Sale"]} text="Mega sale" />
-          )}
 
           {home.offers &&
             home.offers.map((sale, index) => (

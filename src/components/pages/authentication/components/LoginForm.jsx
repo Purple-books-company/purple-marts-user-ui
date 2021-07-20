@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router";
 import { Button } from "../../../../styles/widgets/widgets";
 import { ApiPostService } from "../../../../services/api/api-services";
+import { getCustomer } from "../../../../services/api/loaded-services";
 
 function LoginForm({
   setShowModal,
@@ -45,6 +46,7 @@ function LoginForm({
       );
 
       if (res.success) {
+        getCustomer();
         setShowModal(false);
         history.push("/");
       } else setError(res.description);

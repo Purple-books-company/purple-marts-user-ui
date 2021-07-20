@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import RegisterForm from "./RegisterForm";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import {
   ModalImg,
   ModalContent,
@@ -17,21 +17,21 @@ export default function Modals({ showModal, setShowModal }) {
     setShowModal(false);
   };
 
-  const responseGoogle = (response) => {
-    let res = response.profileObj;
-    // refreshTokenSetup(response);
-    const payload = {
-      id: res.googleId,
-      photo: res.imageUrl,
-      email: res.email,
-      name: res.name,
-    };
-    // console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
-    if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload)) {
-      setShowModal(false);
-      alert(`Logged in successfully welcome ${res.name} 😍. `);
-    }
-  };
+  // const responseGoogle = (response) => {
+  //   let res = response.profileObj;
+  //   // refreshTokenSetup(response);
+  //   const payload = {
+  //     id: res.googleId,
+  //     photo: res.imageUrl,
+  //     email: res.email,
+  //     name: res.name,
+  //   };
+  //   // console.log(ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload));
+  //   if (ApiPostService(process.env.REACT_APP_GOOGLE_LOGIN, payload)) {
+  //     setShowModal(false);
+  //     alert(`Logged in successfully welcome ${res.name} 😍. `);
+  //   }
+  // };
 
   const [loginForm, setLoginForm] = useState(true);
 
@@ -78,7 +78,7 @@ export default function Modals({ showModal, setShowModal }) {
                     />
                   )}
 
-                  <GoogleLogin
+                  {/* <GoogleLogin
                     clientId={process.env.REACT_APP_CLIENT_ID}
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
@@ -88,7 +88,7 @@ export default function Modals({ showModal, setShowModal }) {
                     }
                     cookiePolicy={"single_host_origin"}
                     className="mt-2"
-                  />
+                  /> */}
                 </ModalContent>
               </Col>
             </Row>

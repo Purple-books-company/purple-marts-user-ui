@@ -26,7 +26,7 @@ const SideNav = () =>{
     return(
         <Col xs={2} className="d-none d-md-block">
             <NavDiv className='px-1 py-2'>
-                <img style={{ borderRadius: '50%' , width : '50px' , height : '50px' ,float:'left', margin:'0 1rem 0 0.5rem'}} src={userData.photo} />
+                <img alt='userpic' style={{ borderRadius: '50%' , width : '50px' , height : '50px' ,float:'left', margin:'0 1rem 0 0.5rem'}} src={userData.photo} />
                 <p style={{fontSize:'15px', marginBottom:'0'}}>Hello,</p>
                 <strong style={{color:'#7D0D80'}}> {userData.name} </strong>
                 <hr />
@@ -36,8 +36,8 @@ const SideNav = () =>{
                 <hr />
                 <h5 style={{color:'#7D0D80'}} className="pl-1 mx-1"><FaUserCog className="mx-1 mb-1" size='16' />Account Details</h5>
                 <ul style={{listStyleType:'none', paddingInlineStart:'1.4rem'}}>
-                    <li style={{padding:'14px 0'}}> <ProfileLink to='../profile/info'>Profile Information</ProfileLink> </li>
-                    <li> <ProfileLink to='../delivery'>Delivery Information</ProfileLink></li>
+                    <li style={{padding:'14px 0'}}> <ProfileLink to='../profile'>Profile Information</ProfileLink> </li>
+                    <li> <ProfileLink to='../profile/delivery'>Delivery Information</ProfileLink></li>
                 </ul>
             </NavDiv>
             <NavDiv className='px-1 py-3'>
