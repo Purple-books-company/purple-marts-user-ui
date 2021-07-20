@@ -16,6 +16,7 @@ import {
 import { HiHeart } from "react-icons/hi";
 import { retriveDetails } from "../../../../services/storage/details";
 
+
 const Layout = () => {
   let history = useHistory();
   let { index } = useParams();
@@ -79,8 +80,10 @@ const Layout = () => {
 
     if (!res.success) setSaleProducts(currentState);
   };
+
   return (
     <>
+
       {saleProducts ? (
         <>
           <Text align="center" style={{ backgroundColor: "#edeaee" }}>
@@ -125,6 +128,7 @@ const Layout = () => {
                         </Button>
                       )}
                     </Overlay>
+
                   </ImgOverlay>
                   <Row className="mx-1">
                     <Text

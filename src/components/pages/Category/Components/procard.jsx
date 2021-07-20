@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -8,6 +8,7 @@ import { fetchResult } from "../../../../services/api/loaded-services";
 import { LightShade } from "../../../../styles/themes/color-theme";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { TiMediaPlayOutline } from "react-icons/ti";
 import {
   Badge,
   Card,
@@ -25,42 +26,70 @@ import {
   Shoplist,
   Shopbyprice,
   Shopbysize,
-  Productpage
+  Productpage,
+  Text
 } from "../../../../styles/pages/category-styles";
 import { useParams } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 const Card1 = () => {
+  let history = useHistory();
+  const [page,setPage] = useState(1); 
   const [productData, setproductData] = useState([])
   const [radioPrice, SetRadioPrice] = useState("100to200");
   const [radioSize, SetRadioSize] = useState("XXL");
   const [loading, setloading] = useState(true);
+  const [noMore,setNoMore] = useState(false); 
   // const [toggleHeart, setToggleHeart] = useState(false);
 
-  async function fetchCategory(cat){
+  async function fetchCategory(cat, p){
     let pro=[];
-    pro = await fetchResult("productcategory",cat)
-    setproductData(pro)
+    pro = await fetchResult("productcategory",cat,p)
+    if(pro.length < 10)
+      setNoMore(true);
+    console.log("pagecat",p)
+    if(p === 1)
+      setproductData([...pro])
+    else{
+      let data = [...productData];
+      data = data.concat(pro);
+      setproductData([...data])
+    }
+    setPage(p+1)
     setloading(false);
     console.log("product",productData)
     console.log("casga",cat)
    }
-   async function fetchsubCategory(subcat){
+   async function fetchsubCategory(subcat,p){
     let pro=[];
-    pro = await fetchResult("productsubcategory",subcat)
-    setproductData(pro)
+    pro = await fetchResult("productsubcategory",subcat,p)
+    if(pro.length < 10)
+      setNoMore(true);
+    if(p === 1)
+      setproductData([...pro])
+    else{
+      let data = [...productData];
+      data = data.concat(pro);
+      setproductData([...data])
+    }
+    setPage(p+1)
+
     setloading(false);
-    console.log("product",productData)
-    console.log("casga",subcat)
-   }
+    console.log("product", productData)
+    console.log("casga", subcat)
+  }
   const params = useParams();
+
   console.log("paramsslug",params.slug);
   console.log("paramssubslug",params.subslug);
+
   useEffect(() => {
     // Fetch single product here
+    console.log("slufsihsivg",params,page,productData)
+    setNoMore(false);
     if(params.subslug === undefined || params.subslug==='All')
-      fetchCategory(params.slug)
+      fetchCategory(params.slug, 1)
     else
-      fetchsubCategory(params.subslug)
+      fetchsubCategory(params.subslug, 1)
     }, [params.slug,params.subslug]);
   const updatewish = async (id,wish) => {
     let item=productData;
@@ -73,47 +102,59 @@ const Card1 = () => {
       if(wishlistproduct.description.includes("doesn't")){
         toast("Already removed from Wishlist!",{
           style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
+
         });
       }
-      else if(wishlistproduct.description.includes("successfully")){
-        toast("Removed from Wishlist!",{
-          style:{backgroundColor:'plum',color:'white',width:'50%'}
+      else if (wishlistproduct.description.includes("successfully")) {
+        toast("Removed from Wishlist!", {
+          style: { backgroundColor: 'plum', color: 'white', width: '50%' }
         });
-        let a=item.find(e => e.id === id)
+        let a = item.find(e => e.id === id)
         a.wishlist = !a.wishlist;
-        console.log("uytdfgh",item)
+        console.log("uytdfgh", item)
         setproductData([...item])
+      }else if(wishlistproduct !==null && wishlistproduct.description==="" && wishlistproduct.customer===null){
+        history.push("/login");
       }
-      else{
-        toast.error("Error in Removing from Wishlist",{
-          style:{backgroundColor:'plum',color:'white',width:'50%'}
+      else {
+        toast.error("Error in Removing from Wishlist", {
+          style: { backgroundColor: 'plum', color: 'white', width: '50%' }
         });
       }
     }
-    else{
-      wishlistproduct = await fetchResult("addtowishlist",id)
-      console.log("wishlistproduct",wishlistproduct)
-      if(wishlistproduct.description.includes("Already")){
-        toast("Already in Wishlist!",{
-          style:{backgroundColor:`${LightShade}`,color:'white',width:'60%'}
+    else {
+      wishlistproduct = await fetchResult("addtowishlist", id)
+      console.log("wishlistproduct", wishlistproduct)
+      if (wishlistproduct.description.includes("Already")) {
+        toast("Already in Wishlist!", {
+          style: { backgroundColor: `${LightShade}`, color: 'white', width: '60%' }
         });
       }
-      else if(wishlistproduct.description.includes("created")){
-        toast("Added To Wishlist!",{
-          style:{backgroundColor:'plum',color:'white',width:'50%'}
+      else if (wishlistproduct.description.includes("created")) {
+        toast("Added To Wishlist!", {
+          style: { backgroundColor: 'plum', color: 'white', width: '50%' }
         });
-        let a=item.find(e => e.id === id)
+        let a = item.find(e => e.id === id)
         a.wishlist = !a.wishlist;
-        console.log("uytdfgh",item)
+        console.log("uytdfgh", item)
         setproductData([...item])
+      }else if(wishlistproduct !==null && wishlistproduct.description==="" && wishlistproduct.customer===null){
+        history.push("/login");
       }
-      else{
-        toast.error("Error in Adding to Wishlist",{
-          style:{backgroundColor:'plum',color:'white',width:'50%'}
+      else {
+        toast.error("Error in Adding to Wishlist", {
+          style: { backgroundColor: 'plum', color: 'white', width: '50%' }
         });
       }
     }
-    
+
+  }
+ 
+  const showmore = () => {
+    if(params.subslug === undefined || params.subslug==='All')
+      fetchCategory(params.slug, page)
+    else
+      fetchsubCategory(params.subslug, page)
   }
 
   const ShopbyPrice = () => (
@@ -268,6 +309,7 @@ const Card1 = () => {
   );
   return (
     <>
+
     <ToastContainer
                   position="bottom-center"
                   autoClose={5000}
@@ -302,7 +344,7 @@ const Card1 = () => {
         <CardProductBottomDetails className="product-bottom-details">
           ₹{item.buyingPrice}
           <CardProductOldprice>₹{item.originalPrice}</CardProductOldprice>
-          <CardProductOffer>{item.discount === 0 ? <CardWishlist style={{paddingLeft:'1.5rem'}}><AiOutlineShoppingCart/></CardWishlist>: item.discount+'%OFF'}</CardProductOffer>
+          <CardProductOffer>{item.discount === 0 ? <CardWishlist to={`/products/${item.id}`} style={{paddingLeft:'1.5rem'}}><AiOutlineShoppingCart/></CardWishlist>: item.discount+'%OFF'}</CardProductOffer>
           <CardWishlist onClick={() => updatewish(item.id,item.wishlist)}>
           <span>
           {item.wishlist ?
@@ -326,10 +368,28 @@ const Card1 = () => {
         </Shopbysize>
         {/* {listItems3} */}
       </div>
+      {!noMore ?
+        <Text
+        style={{textAlign:'center'}}
+        cursor="true"
+        case="capitalize"
+        space="0px"
+        thickness="500"
+        size="100%"
+        color="#282c3f"
+        onClick={showmore}
+        style={{ width:'max-content' }}
+        className="mb-5 p-1 m-auto"
+      >
+        <TiMediaPlayOutline size="22" className="mb-1" /> Show More
+      </Text> : <Text thickness="500" style={{textAlign:'center',paddingBottom:'5px'}}>No More Data</Text>
+
+      }
       
     </Productpage>
    }</>
+
   );
-          };
+};
 
 export default Card1;

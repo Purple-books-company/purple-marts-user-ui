@@ -3,6 +3,7 @@ import { Lora, Slab } from "../themes/font-styles";
 import { LightShade } from '../themes/color-theme'
 import {Carousel} from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import { Roboto } from "../themes/font-styles";
 export const Productpage = styled.div`
       @media(min-width:0px) and (max-width:568px){
           margin-top: 3em;
@@ -383,7 +384,7 @@ export const CardProductOffer = styled.div`
     }
 `;
 
-export const CardWishlist = styled.button`
+export const CardWishlist = styled(Link)`
      text-align:center;
      display:inline-block;
      padding-left:8px;
@@ -635,4 +636,53 @@ export const BackBtn = styled.button`
         font-size: smaller;
         width:30px;
     }
+`;
+
+export const Text = styled.div`
+  line-height: 1.8;
+  font-family: ${Roboto};
+  text-align: ${(props) => props.align || "start"};
+  letter-spacing: ${(props) => props.space || "5px"};
+  font-size: ${(props) => props.size || "110%"};
+  text-transform: ${(props) => props.case || "uppercase"};
+  color: ${(props) => props.color || "black"};
+  font-weight: ${(props) => props.thickness || "600"};
+
+  ${(props) =>
+    props.primary &&
+    css`
+      padding: 60px 0px;
+    `};
+
+  ${(props) =>
+    props.cursor &&
+    css`
+      border: 2px solid #d4d5d9;
+      border-radius: 4px;
+      :hover {
+        cursor: pointer;
+        border: 2px solid #282c3f;
+      }
+      @media screen and (max-width: 450px) {
+        border: none;
+      }
+    `};
+
+  ${(props) =>
+    props.tags &&
+    css`
+      display: block;
+      font-weight: 550;
+      margin: auto;
+      text-overflow: unset;
+      white-space: unset;
+      font-size: 18px;
+    `};
+
+  @media screen and (max-width: 450px) {
+    line-height: 1.3;
+    letter-spacing: ${(props) => props.space || "4px"};
+    font-size: 8px;
+    padding: 20px 10px;
+  }
 `;
