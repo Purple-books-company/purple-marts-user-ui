@@ -35,16 +35,15 @@ export default function Home({ login }) {
   let logged = localStorage.getItem("isLogged");
 
   useEffect(() => {
+    const getData = async () => {
+      await getApi();
+      let values;
+      values = await fetchResult("home");
+      setHome({ ...values });
+      // console.log(values);
+    };
     getData();
   }, [login]);
-
-  const getData = async () => {
-    await getApi();
-    let values;
-    values = await fetchResult("home");
-    setHome({ ...values });
-    // console.log(values);
-  };
 
   return (
     <>

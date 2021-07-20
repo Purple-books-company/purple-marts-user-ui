@@ -28,6 +28,7 @@ const Grid = ({ data, text }) => {
               <Block
                 style={{
                   backgroundImage: `url(${img})`,
+                  backgroundColor: "#d6c3e0",
                 }}
                 onClick={() =>
                   handleClick(data[index].category, data[index].slug)

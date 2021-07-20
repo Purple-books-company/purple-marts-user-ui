@@ -10,14 +10,14 @@ let userData = {};
 let personalDetails = {};
 let customer;
 
-export function getCustomer() {
-  customer = retriveDetails();
-}
-
 // Gets all the (get) requests
 async function getApi() {
   await getCategory();
   await getHome();
+}
+
+export function getCustomer() {
+  customer = retriveDetails();
 }
 
 async function postApi(value) {
