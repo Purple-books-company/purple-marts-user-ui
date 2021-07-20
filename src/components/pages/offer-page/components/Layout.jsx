@@ -4,11 +4,16 @@ import Loading from "../../../utils/loader";
 import { Link, useParams } from "react-router-dom";
 import { TiMediaPlayOutline } from "react-icons/ti";
 import { Container, Row } from "react-bootstrap";
-import { Text } from "../../../../styles/widgets/widgets";
+import { Text, Button } from "../../../../styles/widgets/widgets";
 import { fetchResult } from "../../../../services/api/loaded-services";
 import { ApiPostService } from "../../../../services/api/api-services";
 import { CardImg } from "../../../../styles/pages/home-page";
-import { Column } from "../../../../styles/pages/offer-page";
+import { Column, Overlay, ImgOverlay } from "../../../../styles/pages/offer-page";
+import { HiHeart } from 'react-icons/hi'
+import { toast } from "react-toastify";
+import { LightShade } from "../../../../styles/themes/color-theme";
+import { retriveDetails } from "../../../../services/storage/details";
+
 
 const Layout = () => {
   let history = useHistory();
@@ -39,10 +44,42 @@ const Layout = () => {
       setSaleProducts(home.offers[index]);
     }
     getProducts();
-  }, []);
+    console.log("sale", saleProducts)
+  }, [saleProducts]);
 
+  const AddWishlist = async (pid, index) => {
+    let user = await retriveDetails()
+    let res = await ApiPostService(process.env.REACT_APP_ADD_WISHLIST_URL, {
+      "customer": user.id,
+      "product": pid
+    })
+    if (res.sucess) {
+      setSaleProducts()
+      console.log("before", saleProducts)
+      setSaleProducts(prev => ({
+        ...prev,
+        [saleProducts.values[index].wishlist]: true
+      }))
+      console.log("after", saleProducts)
+    }
+  }
+
+  const RemoveWishlist = async (pid) => {
+    let user = await retriveDetails()
+    let res = await ApiPostService(process.env.REACT_APP_REMOVE_WISHLIST_URL + "/" + user.id + "/" + pid + "/")
+    if (res.sucess) {
+      setSaleProducts()
+      console.log("before", saleProducts)
+      setSaleProducts(prev => ({
+        ...prev,
+        [saleProducts.values[index].wishlist]: false
+      }))
+      console.log("after", saleProducts)
+    }
+  }
   return (
     <>
+
       {saleProducts ? (
         <>
           <Text align="center" style={{ backgroundColor: "#edeaee" }}>
@@ -50,7 +87,7 @@ const Layout = () => {
           </Text>
           <Container className="mt-5">
             <Row>
-              {saleProducts.values.map((item) => (
+              {saleProducts.values.map((item, i) => (
                 <Column
                   primary="true"
                   lg="2"
@@ -61,14 +98,36 @@ const Layout = () => {
                   data-bs-placement="right"
                   title={item.name}
                 >
-                  <CardImg
-                    imgheight="230px"
-                    className="mb-3"
-                    src={item.image}
-                    alt="Category"
-                    width="100%"
-                    onClick={() => history.push(`/products/${item.id}`)}
-                  />
+                  <ImgOverlay>
+                    <CardImg
+                      imgheight="230px"
+                      className="mb-3"
+                      src={item.image}
+                      alt="Category"
+                      width="100%"
+                      onClick={() => history.push(`/products/${item.id}`)}
+                    />
+                    <Overlay>
+                      {
+                        !item.wishlist ?
+                          <Button onClick={() => AddWishlist(item.id, i)}>
+                            <span style={{ fontSize: '.75rem' }} >
+                              Add to wishlist
+                              <HiHeart size="18" className="ml-2 mb-1" />
+                            </span>
+                          </Button>
+                          :
+
+                          <Button onClick={() => RemoveWishlist(item.id, i)}>
+                            <span style={{ fontSize: '.8rem' }} >
+                              Remove
+                              <HiHeart size="18" className="ml-2 mb-1" />
+                            </span>
+                          </Button>
+                      }
+                    </Overlay>
+
+                  </ImgOverlay>
                   <Row className="mx-1">
                     <Text
                       primary="true"

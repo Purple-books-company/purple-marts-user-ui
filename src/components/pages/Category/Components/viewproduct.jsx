@@ -1,11 +1,12 @@
-import React, {useState,useEffect} from 'react';
-import {FaArrowCircleUp} from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaArrowCircleUp } from 'react-icons/fa';
 import Card2 from "../../../utils/layout/productCard"
 // import SidebarNav from "./sidebarnav"
-import {TopButton} from "../../../../styles/pages/category-styles"
+import { TopButton } from "../../../../styles/pages/category-styles"
 import { useParams } from "react-router-dom";
 import { fetchResult } from '../../../../services/api/loaded-services';
 const Products = () => {
+
     const [visible, setVisible] = useState(false)
     const [data, setData]= useState({})
     const [loading,setLoading]= useState(true)
@@ -24,11 +25,13 @@ const Products = () => {
         top: 0, 
         behavior: 'smooth'
       });
+
   };
   const params = useParams();
   useEffect(() => {
-    console.log("proparams",params.id);
+    console.log("proparams", params.id);
     async function fetchdata() {
+
      let res = await fetchResult("singleproduct",params.id)
      setData(res);
      setLoading(false);
@@ -46,5 +49,5 @@ const Products = () => {
         </TopButton>    
         </div> );
 }
- 
+
 export default Products;
